@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<localization>
+	<entity id="nbitemperpage">
+		<locale lang="fr">nombre d'éléments par page</locale>
+		<locale lang="en">number of elements per page</locale>
+	</entity>
+	<entity id="nbitemperpage-help">
+		<locale lang="fr">nombre d'éléments par page</locale>
+		<locale lang="en">number of elements per page</locale>
+	</entity>
+	<entity id="showGravatars">
+		<locale lang="fr">Afficher l'avatar</locale>
+		<locale lang="en">show avatar</locale>
+		<locale lang="de">Avatar anzeigen</locale>
+	</entity>
+	<entity id="showGravatars-help">
+		<locale lang="fr">Afficher l'avatar (site www.gravatar.com)</locale>
+		<locale lang="en">show avatar (www.gravatar.com)</locale>
+		<locale lang="de">Avatar anzeigen (www.gravatar.com)</locale>
+	</entity>
+	<entity id="avatarsSize">
+		<locale lang="fr">taille de l'avatar</locale>
+		<locale lang="en">avatar size</locale>
+	</entity>
+	<entity id="avatarsSize-help">
+		<locale lang="fr">taille de l'avatar en pixels (l'avatar sera toujours carré)</locale>
+	</entity>
+	<entity id="showSignatures">
+		<locale lang="fr">afficher la signature</locale>
+	</entity>
+	<entity id="showSignatures-help">
+		<locale lang="fr">afficher la signature en dessous des messages (la signature est définie dans le profil du membre)</locale>
+	</entity>
+	
+	<entity id="metas.forumname">
+		<locale lang="fr">nom du forum</locale>
+		<locale lang="en">forum name</locale>
+	</entity>
+	<entity id="metas.threadname">
+		<locale lang="fr">nom du sujet</locale>
+		<locale lang="en">thread name</locale>
+	</entity>
+</localization>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<panel>
+	<section labeli18n="modules.forums.bo.doceditor.fieldsgroup.Titles">
+		<fieldinput name="titlesJSON" type="titlelist" />
+	</section>
+	<section labeli18n="modules.forums.bo.doceditor.fieldsgroup.Ranks">
+		<fieldinput name="ranksJSON" type="ranklist" />
+	</section>
+	<xul>
+		<javascript>
+			<field name="mAddNewTitleButton">null</field>
+			<field name="mAddNewRankButton">null</field>
+			
+			<constructor><![CDATA[
+				var button = this.getElementByAnonId('save_properties');
+				if (button) {button.hidden = true;}
+
+				button = this.getElementByAnonId('reset_properties');
+				if (button) {button.hidden = true;}
+
+				button = this.getElementByAnonId('next_error_property');
+				if (button) {button.hidden = true;}	
+
+				this.mAddNewTitleButton = this.addActionButton('&modules.forums.bo.actions.Create-title;', wToolkit.getIcon('add', 'small'));
+				var me = this;
+				this.mAddNewTitleButton.addEventListener('command', function(event) {me.onAddNewTitle();}, true);
+				
+				this.mAddNewRankButton = this.addActionButton('&modules.forums.bo.actions.Create-rank;', wToolkit.getIcon('add', 'small'));
+				var me = this;
+				this.mAddNewRankButton.addEventListener('command', function(event) {me.onAddNewRank();}, true);
+			]]></constructor>
+
+			<method name="onAddNewTitle">
+				<parameter name="event" />
+				<body><![CDATA[
+					var module = this.documentEditor.module;
+					module.createDocumentEditor('modules_forums_title', this.mDocumentId);
+				]]></body>
+			</method>
+
+			<method name="onAddNewRank">
+				<parameter name="event" />
+				<body><![CDATA[
+					var module = this.documentEditor.module;
+					module.createDocumentEditor('modules_forums_rank', this.mDocumentId);
+				]]></body>
+			</method>
+		</javascript>
+	</xul>
+</panel>

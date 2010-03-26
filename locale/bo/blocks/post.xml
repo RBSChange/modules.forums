@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<localization extend="modules.forums.bo.blocks.postlistbase">
+	<entity id="title">
+		<locale lang="fr">message</locale>
+		<locale lang="en">post</locale>
+	</entity>
+	<entity id="metas.postauthor">
+		<locale lang="fr">auteur du message</locale>
+		<locale lang="en">post author</locale>
+	</entity>
+	<entity id="metas.postshortdesc">
+		<locale lang="fr">description courte du message</locale>
+		<locale lang="en">post short description</locale>
+	</entity>
+</localization>

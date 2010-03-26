@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localization>
+	<entity id="fieldsgroup.metas">
+		<locale lang="fr">données utilisables dans les métas de page</locale>
+	</entity>
+	<entity id="property.path">
+		<locale lang="fr">chemin</locale>
+	</entity>
+	<entity id="property.nbthread">
+		<locale lang="fr">nombre de sujets</locale>
+	</entity>
+	<entity id="property.nbpost">
+		<locale lang="fr">nombre de messages</locale>
+	</entity>
+	<entity id="property.titles">
+		<locale lang="fr">titres</locale>
+	</entity>
+	<entity id="property.ranks">
+		<locale lang="fr">rangs</locale>
+	</entity>
+	<entity id="fieldsgroup.titles">
+		<locale lang="fr">titres</locale>
+	</entity>
+	<entity id="fieldsgroup.ranks">
+		<locale lang="fr">rangs</locale>
+	</entity>
+	<entity id="fieldsgroup.display-preferences">
+		<locale lang="fr">préférences d'affichage</locale>
+	</entity>
+</localization>

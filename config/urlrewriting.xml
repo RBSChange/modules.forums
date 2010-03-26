@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlrewriting>
+	<rules>
+		<rule documentModel="forum" viewMode="detail">
+			<template>/forums/$forumLabel-$id</template>
+			<parameters>
+				<parameter name="forumLabel" method="getLabel" />
+			</parameters>
+		</rule>
+
+		<rule documentModel="thread" viewMode="detail">
+			<template>/forums/$forumLabel/$threadLabel-$id</template>
+			<parameters>
+				<parameter name="forumLabel" method="getForumLabel" />
+				<parameter name="threadLabel" method="getLabel" />
+			</parameters>
+		</rule>
+
+		<rule documentModel="post" viewMode="detail">
+			<template>/forums/$forumLabel/$threadLabel/post-$id</template>
+			<parameters>
+				<parameter name="forumLabel" method="getForumLabel" />
+				<parameter name="threadLabel" method="getThreadLabel" />
+			</parameters>
+		</rule>
+		<rule documentModel="post" viewMode="detail" lang="fr">
+			<template>/forums/$forumLabel/$threadLabel/message-$id</template>
+			<parameters>
+				<parameter name="forumLabel" method="getForumLabel" />
+				<parameter name="threadLabel" method="getThreadLabel" />
+			</parameters>
+		</rule>
+
+		<rule documentModel="member" viewMode="detail">
+			<template>/member/$name-$id</template>
+			<parameters>
+				<parameter name="name" method="getLabel" />
+			</parameters>
+		</rule>
+		<rule documentModel="member" viewMode="detail" lang="fr">
+			<template>/membre/$name-$id</template>
+			<parameters>
+				<parameter name="name" method="getLabel" />
+			</parameters>
+		</rule>
+
+		<rule redirection="forums/DeletePost">
+			<template>/delete-post.html</template>
+		</rule>
+
+		<rule redirection="forums/CloseThread">
+			<template>/close-thread.html</template>
+		</rule>
+
+		<rule redirection="forums/OpenThread">
+			<template>/open-thread.html</template>
+		</rule>
+	</rules>
+</urlrewriting>

@@ -1,0 +1,24 @@
+treechildren::-moz-tree-image(modules_forums_websitefolder){
+	list-style-image: url(/icons/small/website-folder.png);
+}
+treechildren::-moz-tree-image(modules_forums_forum){
+	list-style-image: url(/icons/small/forum.png);
+}
+treechildren::-moz-tree-image(modules_forums_thread){
+	list-style-image: url(/icons/small/thread.png);
+}
+treechildren::-moz-tree-image(modules_forums_post){
+	list-style-image: url(/icons/small/post.png);
+}
+treechildren::-moz-tree-image(modules_forums_member){
+	list-style-image: url(/icons/small/member.png);
+}
+treechildren::-moz-tree-image(modules_forums_rank){
+	list-style-image: url(/icons/small/member-rank.png);
+}
+treechildren::-moz-tree-image(modules_forums_title){
+	list-style-image: url(/icons/small/member-title.png);
+}
+treechildren::-moz-tree-image(modules_forums_preferences){
+	list-style-image: url(/icons/small/forum.png);
+}

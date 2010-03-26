@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<localization>
+	<entity id="document-name">
+		<locale lang="fr">titre</locale>
+		<locale lang="en">title</locale>
+	</entity>
+	<entity id="label">
+		<locale lang="fr">nom</locale>
+		<locale lang="en">name</locale>
+	</entity>
+	<entity id="visual">
+		<locale lang="fr">visuel</locale>
+		<locale lang="en">visual</locale>
+	</entity>
+	<entity id="description">
+		<locale lang="fr">description</locale>
+		<locale lang="en">description</locale>
+	</entity>
+</localization>

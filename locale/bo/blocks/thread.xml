@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<localization extend="modules.forums.bo.blocks.postlistbase">
+	<entity id="title">
+		<locale lang="fr">liste des message d'un sujet</locale>
+		<locale lang="en">thread posts list</locale>
+	</entity>
+	<entity id="metas.threadshortdesc">
+		<locale lang="fr">description courte du sujet</locale>
+		<locale lang="en">thread short description</locale>
+	</entity>
+	<entity id="metas.threadkeywords">
+		<locale lang="fr">mots-clés du sujet</locale>
+		<locale lang="en">thread key-words</locale>
+	</entity>
+</localization>

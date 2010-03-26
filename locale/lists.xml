@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<localization>
+	<entity id="threadlevels.normal">
+		<locale lang="fr">normal</locale>
+		<locale lang="en">normal</locale>
+	</entity>
+	<entity id="threadlevels.sticky">
+		<locale lang="fr">fixe</locale>
+		<locale lang="en">sticky</locale>
+	</entity>
+	<entity id="threadlevels.announcement">
+		<locale lang="fr">annonce</locale>
+		<locale lang="en">announcement</locale>
+	</entity>
+	<entity id="threadlevels.global">
+		<locale lang="fr">annonce globale</locale>
+		<locale lang="en">Global announcement</locale>
+	</entity>
+</localization>

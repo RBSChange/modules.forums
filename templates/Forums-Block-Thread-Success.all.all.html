@@ -1,0 +1,44 @@
+<tal:block tal:define="global lnum"><tal:block change:translate="modules.forums.frontoffice.Num"/></tal:block>
+<tal:block metal:define-macro="goToPageForm">
+	<form tal:condition="php: postListInfo['paginator'].getPageCount() GT 1" method="get" action="" class="float-right">
+		<input type="text" class="textfield" name="forumsParam[page]" value="${postListInfo/paginator/getCurrentPageNumber}" size="4" onclick="if(this.value=='${lnum}')this.value='';"/>
+		<input type="submit" class="button" change:i18nattr="value &modules.forums.frontoffice.See-page;"/>
+	</form>
+</tal:block>
+
+<h2 change:h="">${thread/getForum/getLabelAsHtml} : ${thread/getLabelAsHtml}</h2>
+<div tal:condition="thread/isEditable" class="note" threadid="${thread/getId}">
+	<p tal:condition="not: thread/getPrivatenote"><a href="javascript:;" id="addprivatenote" class="link" change:translate="modules.forums.frontoffice.Add-note" /></p>
+	<tal:block tal:condition="thread/getPrivatenote">
+		<p>
+			<a href="javascript:;" id="showprivatenote" class="link" change:translate="modules.forums.frontoffice.View-note" />
+			<a href="javascript:;" id="hideprivatenote" class="link hidden" change:translate="modules.forums.frontoffice.Hide-note" />
+			<a href="javascript:;" id="modifprivatenote" class="link hidden" change:translate="modules.forums.frontoffice.Edit-note" />
+		</p>
+		<div class="hidden" id="privatenotevalue" tal:content="thread/displayPrivatenote"/>
+		<script type="text/javascript">var privateNote = '${thread/getJsPrivateNote}';</script>
+	</tal:block>
+</div>
+<em class="locked" tal:condition="thread/isLocked" change:translate="modules.forums.frontoffice.Closedthread" />
+
+<form metal:use-macro="goToPageForm" />
+
+<ul class="inline-menu">
+	<li tal:condition="not: thread/isLocked"><a change:link="tag functional_forums_post-new ; forumsParam[cmpref] thread/getId" change:translate="modules.forums.frontoffice.Newpost" /></li>
+	<li><a change:link="document thread/getForum" change:translate="modules.forums.frontoffice.Threadslist" /></li>
+	<li tal:define="forumListPage thread/getForum/getSiblingForumListPage" tal:condition="forumListPage"><a change:link="document forumListPage" change:translate="modules.forums.frontoffice.Forumslist" /></li>
+</ul>
+
+<tal:block change:include="module 'forums'; template 'Forums-Inc-PostList-Success'; type 'html'; postListInfo postListInfo" />
+
+<form metal:use-macro="goToPageForm" />
+
+<ul class="inline-menu">
+	<li tal:condition="not: thread/isLocked"><a change:link="tag functional_forums_post-new ; forumsParam[cmpref] thread/getId" change:translate="modules.forums.frontoffice.Newpost" /></li>
+	<li tal:condition="followUrl"><a class="link" tal:attributes="href followUrl" change:translate="modules.forums.frontoffice.Followthread" /></li>
+	<li tal:condition="unfollowUrl"><a class="link" tal:attributes="href unfollowUrl" change:translate="modules.forums.frontoffice.Cancelfollowthread" /></li>
+	<li tal:condition="thread/isClosable"><a class="link closeThread" change:link="module forums; action CloseThread; id thread/getId" change:translate="modules.forums.frontoffice.Closethread" /></li>
+	<li tal:condition="thread/isOpenable"><a class="link openThread" change:link="module forums; action OpenThread; id thread/getId" change:translate="modules.forums.frontoffice.Openthread" /></li>
+</ul>
+
+<tal:block change:block="" module="forums" name="RssMenu" parentref="${thread/getId}" />

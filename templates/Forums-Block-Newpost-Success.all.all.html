@@ -1,0 +1,29 @@
+<h2 change:h=""><tal:block change:translate="modules.forums.frontoffice.NewpostLabel" /> ${thread/getLabelAsHtml}</h2>
+
+<tal:block tal:condition="previewPostInfo">
+	<h3 change:h="" change:translate="modules.forums.frontoffice.Message-preview" />
+	<tal:block change:include="module 'forums'; template 'Forums-Inc-PostList-Success'; type 'html'; postListInfo previewPostInfo" />
+</tal:block>
+
+<h3 change:h="" change:translate="modules.forums.frontoffice.Message-input" />
+<form change:form="beanClass forums_persistentdocument_post; beanName post" class="cmxform post-form">
+	<div change:errors=""></div>
+	<tal:block change:field="name beanId" hidden="true" />
+	<tal:block change:field="name thread" hidden="true" value="${thread/getId}" />
+	<tal:block tal:condition="answerof" change:field="name answerof" hidden="true" value="${answerof/getId}" />
+	<ol>
+  		<li><label change:fieldlabel="name text" /> <input change:richtextinput="name text; editor bbcode" required="true" /></li>
+	</ol>
+	<p class="buttons">
+		<input class="button" name="preview" change:submit="label &modules.forums.frontoffice.form.Preview;" />
+		<input class="button" change:submit="label &modules.forums.frontoffice.form.Submit;" />
+	</p>
+</form>
+<tal:block tal:condition="answerof">
+	<h2 change:h=""><tal:block change:translate="modules.forums.frontoffice.Toanswerof" /> <a change:link="document answerof/getPostauthor" tal:content="answerof/getAuthorNameAsHtml" /></h2>
+	<tal:block change:include="module 'forums'; template 'Forums-Inc-PostList-Success'; type 'html'; postListInfo answerListInfo" />
+</tal:block>
+<tal:block tal:condition="not: answerof">
+	<h2 change:h=""><tal:block change:translate="modules.forums.frontoffice.Last-posts-in-thread" /></h2>
+	<tal:block change:include="module 'forums'; template 'Forums-Inc-PostList-Success'; type 'html'; postListInfo lastPostListInfo" />
+</tal:block>

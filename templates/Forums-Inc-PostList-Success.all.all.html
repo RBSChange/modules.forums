@@ -1,0 +1,86 @@
+<tal:block tal:define="global displayConfig postListInfo/displayConfig" />
+
+<ul class="message-list">
+	<tal:block tal:repeat="post postListInfo/paginator">
+		<li class="erased" tal:condition="post/wasDeleted" id="post-${post/getId}">
+			<em change:translate="modules.forums.frontoffice.Deletedpost" />
+		</li>
+		
+		<tal:block tal:condition="not: post/wasDeleted">
+			<li class="${php: repeat.post.start ? 'start' : ''} ${php: repeat.post.end ? 'last' : ''} ${php: repeat.post.odd ? 'odd' : 'even'}${php: post->getDeleteddate() ? ' tbv' : ''}" id="post-${post/getId}">
+				<div class="message-header">
+					<p class="float-right" tal:condition="not: displayConfig/hidePostLink">
+						<a change:link="document post">${post/getPostId}</a>
+						<tal:block tal:condition="post/isAnswer"><tal:block change:translate="modules.forums.frontoffice.answer-to" /> <a change:link="document post/getAnswerof">${post/getAnswerof/getPostId}</a> <tal:block change:translate="modules.forums.frontoffice.written-by" /> <a change:link="document post/getAnswerof/getPostauthor" tal:content="post/getAnswerOf/getAuthorNameAsHtml" /></tal:block>
+					</p>
+					<p>
+						<tal:block change:memberdate="value post/getCreationdate; mode 'long'" />
+					</p>						
+				</div>
+				
+				<div class="message-body">
+					<div class="author-information">
+						<tal:block tal:condition="displayConfig/showGravatars">
+							<img src="${php: post->getPostauthor()->getGravatarUrl(displayConfig['avatarsSize'])}" class="image" alt="" />
+							<br />
+						</tal:block>
+						<a change:link="document post/getPostauthor" tal:content="post/getAuthorNameAsHtml" />
+						<tal:block tal:repeat="title post/getPostAuthor/getPublishedTitleArray">
+							<br />
+							<strong change:translate="modules.forums.frontoffice.Member-titleLabel" /> ${title/getLabelAsHtml}
+							<tal:block tal:define="visual title/getVisual" tal:condition="visual/isPublished">
+								<br />
+								<img change:media="document visual" />
+							</tal:block>
+						</tal:block>
+						<tal:block tal:define="rank post/getPostAuthor/getRank" tal:condition="rank">
+							<br />
+							<strong change:translate="modules.forums.frontoffice.Member-rankLabel" /> ${rank/getLabelAsHtml}
+							<tal:block tal:define="visual rank/getVisual" tal:condition="visual/isPublished">
+								<br />
+								<img change:media="document visual" />
+							</tal:block>
+						</tal:block>		
+					</div>
+			
+					<div class="message-content">
+						${post/getTextAsHtml}
+						<p tal:condition="post/getEditeddate" class="action-log">
+							<em>
+								<tal:block change:translate="modules.forums.frontoffice.Editedby" /> <a change:link="document post/getEditedby">${post/getLastEdithorNameAsHtml}</a> <tal:block change:memberdate="value post/getEditeddate; mode 'long'" />
+							</em>
+						</p>
+						<p tal:condition="post/getDeleteddate" class="action-log">
+							<em>
+								<tal:block change:translate="modules.forums.frontoffice.Deletedby" /> <a change:link="document post/getDeletedby">${post/getSuppressorNameAsHtml}</a> <tal:block change:memberdate="value post/getDeleteddate; mode 'long'" />
+							</em>
+						</p>
+						<tal:block tal:condition="displayConfig/showSignatures">
+							<tal:block tal:condition="post/getPostauthor/getSignature">
+								<hr class="signature-separator" />
+								<div class="member-signature" tal:content="post/getPostauthor/getSignatureAsHtml" />
+							</tal:block>
+						</tal:block>
+					</div>
+				</div>
+		
+				<div class="message-footer">
+					<div class="ip-anchor">
+						<tal:block tal:condition="php: displayConfig['showActions'] && displayConfig['currentMember'] && displayConfig['currentMember'].isSuperModerator() && post.getIp()"><a class="link" href="http://www.db.ripe.net/whois?searchtext=${post/getIp}" target="_blank">${post/getIp}</a><span> | </span></tal:block>
+						<a class="link" href="#top" change:translate="&modules.forums.frontoffice.Top;" />
+					</div>
+					<div class="options-list" tal:condition="php: displayConfig['showActions'] && (!post->getDeleteddate() || post->isBanable())">
+						<tal:block tal:condition="not: post/getDeleteddate">
+							<tal:block tal:condition="not: post/getThread/isLocked"><a change:link="tag functional_forums_post-new ; forumsParam[cmpref] post/getThread/getId ; forumsParam[postid] post/getId" change:translate="modules.forums.frontoffice.Answer" /></tal:block>
+							<tal:block tal:condition="post/isEditable"><span tal:condition="not: post/getThread/isLocked" > | </span><a change:link="tag functional_forums_post-edit ; forumsParam[cmpref] post/getId" change:translate="modules.forums.frontoffice.Edit" /></tal:block>
+							<tal:block tal:condition="post/isDeletable"><span> | </span><a change:link="module forums; action DeletePost; id post/getId" class="link postDelete" change:translate="modules.forums.frontoffice.Delete" /></tal:block>
+						</tal:block>
+						<tal:block tal:condition="post/isBanable"><span> | </span><a class="link" change:actionlink="cmpref post/getId" block="forums_memberban" change:translate="modules.forums.frontoffice.Ban" /></tal:block>
+					</div>
+				</div>
+			</li>
+		</tal:block>
+	</tal:block>
+</ul>
+
+<div tal:condition="displayConfig/showPagination" change:paginator="postListInfo/paginator"/>

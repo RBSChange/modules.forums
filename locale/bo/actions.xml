@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localization>
+	<entity id="create_">
+		<locale lang="fr">créer</locale>
+		<locale lang="en">create</locale>
+	</entity>
+	<entity id="create-forum">
+		<locale lang="fr">créer un forum</locale>
+		<locale lang="en">create new forum</locale>
+	</entity>
+	<entity id="create-rank">
+		<locale lang="fr">créer un rang</locale>
+		<locale lang="en">create new rank</locale>
+	</entity>
+	<entity id="create-title">
+		<locale lang="fr">créer un titre</locale>
+		<locale lang="en">create new title</locale>
+	</entity>
+</localization>

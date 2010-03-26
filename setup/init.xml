@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<script>
+	<binding fileName="modules/list/persistentdocument/import/list_binding.xml" />
+	<binding fileName="modules/notification/persistentdocument/import/notification_binding.xml" />
+	<binding fileName="modules/task/persistentdocument/import/task_binding.xml" />
+	<binding fileName="modules/forums/persistentdocument/import/forums_binding.xml" />
+
+	<systemfolder module="list" relatedmodule="forums">
+		<dynamiclist listid="modules_forums/titlesbywebsiteid" label="Titres pour un site"
+			description="Liste des titres que peuvent recevoir les membres des forums d'un site donné." />
+			
+		<staticlist listid="modules_forums/threadlevels" label="Types de sujets"
+			description="Liste des types de sujet des forums.">
+			<staticitem label="&amp;modules.forums.lists.threadlevels.Normal;" value="10" />
+			<staticitem label="&amp;modules.forums.lists.threadlevels.Sticky;" value="20" />
+			<staticitem label="&amp;modules.forums.lists.threadlevels.Announcement;" value="30" />
+			<staticitem label="&amp;modules.forums.lists.threadlevels.Global;" value="40" />
+		</staticlist>
+		
+		<staticlist listid="modules_forums/dashboardwebsitestatisticscolums" 
+			label="Colonnes de statistiques"
+			description="Colones disponibles dnas le bloc du tableau de bord affichant les statistiques des forums d'un site web.">
+			<staticitem label="&amp;modules.forums.bo.blocks.dashboardgeneralstatistics.column-forums;" value="forums" />
+			<staticitem label="&amp;modules.forums.bo.blocks.dashboardgeneralstatistics.column-threads;" value="threads" />
+			<staticitem label="&amp;modules.forums.bo.blocks.dashboardgeneralstatistics.column-posts;" value="posts" />
+			<staticitem label="&amp;modules.forums.bo.blocks.dashboardgeneralstatistics.column-members;" value="members" />
+			<staticitem label="&amp;modules.forums.bo.blocks.dashboardgeneralstatistics.column-lastlogin;" value="lastlogin" />
+			<staticitem label="&amp;modules.forums.bo.blocks.dashboardgeneralstatistics.column-hasposted;" value="hasposted" />
+		</staticlist>
+		
+		<staticlistupdate listid="modules_users/editprofilepanels">
+			<staticitem label="&amp;modules.forums.frontoffice.Member-informations;" value="forums/EditMemberProfile" />
+		</staticlistupdate>
+	</systemfolder>
+
+	<systemfolder module="notification" relatedmodule="forums">
+		<notification
+				label="Bannissement du forum"
+				codename="modules_forums/ban"
+				availableparameters="PSEUDO,DATE,MOTIF"
+				subject="Bannissement temporaire du forum"
+				header=""
+				body="Bonjour {PSEUDO},&lt;br/&gt;Vous avez été banni du forum jusqu'au {DATE}&lt;br/&gt;Par conséquence vous ne pouvez plus participer aux forums jusqu'à cette date.&lt;br/&gt;&lt;br/&gt;{MOTIF}"
+				footer="" />
+		<notification
+				label="Suivi d'un sujet"
+				codename="modules_forums/follower"
+				availableparameters="PSEUDO,TOPIC,LINK,NUM"
+				subject="Nouveau message sur le forum"
+				header=""
+				body="Bonjour {PSEUDO},&lt;br/&gt;&lt;br/&gt;Vous avez choisi de suivre l'évolution du sujet {TOPIC} et il y a {NUM} nouveau(x) message(s).&lt;br/&gt;&lt;br/&gt;Vous pouvez le(s) lire en suivant {LINK}.&lt;br/&gt;&lt;br/&gt;Pour ne plus recevoir cet email il vous suffit d'arrêter le suivi sur le sujet."
+				footer="" />
+	</systemfolder>
+	
+	<systemfolder module="task" relatedmodule="forums">
+		<plannedtask label="Notifications de suivi des sujets des forums" systemtaskclassname="forums_SendNotificationsToFollowersTask" />
+	</systemfolder>
+</script>

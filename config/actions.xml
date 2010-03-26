@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions extends="generic">
+	<action name="createForum">
+		<parameter name="listWidget" />
+		<body><![CDATA[this.createDocumentEditor('modules_forums_forum', listWidget.getSelectedItems()[0].id);]]></body>
+	</action>
+</actions>

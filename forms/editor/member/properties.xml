@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<panel>
+	<section labeli18n="modules.uixul.bo.doceditor.fieldsgroup.Title">
+		<field name="label" disabled="true" hidehelp="true" />
+		<field name="displayname" />
+		<field name="signature" hidehelp="true" />
+		<field name="websiteUrl" hidehelp="true" />
+		<field name="country" hidehelp="true" />
+		<field name="title" type="checklist" listid="modules_forums/titlesbywebsiteid" />
+	</section>
+	<section labeli18n="modules.forums.bo.doceditor.fieldsgroup.Display-preferences">
+		<field name="shortDateFormat" />
+		<field name="longDateFormat" />
+	</section>
+	<xul>
+		<javascript>
+			<constructor><![CDATA[
+				this.extendMethod('fireInitializeComplete', this.fireInitializeCompleteExtend);
+			]]></constructor>
+
+			<method name="fireInitializeCompleteExtend">
+				<parameter name="result" />
+				<body><![CDATA[
+					try
+					{
+						var field = document.getAnonymousElementByAttribute(this, 'anonid', 'field_title');
+						wCore.debug('websiteId: '+result.contents.websiteId);
+						field.replaceItems({websiteId: result.contents.websiteId});
+					}
+					catch (e)
+					{
+						wCore.error("member.propertiespanel.fireInitializeCompleteExtend", [], e);
+					}
+				]]></body>
+			</method>
+		</javascript>
+	</xul>
+</panel>

@@ -1,0 +1,16 @@
+<ul class="inline-menu" metal:define-macro="inlineMenu">
+	<li><a change:link="document post/getThread" change:translate="modules.forums.frontoffice.View-thread" /></li>
+	<li><a href="${post/getPostUrlInThread}" class="link" change:translate="modules.forums.frontoffice.Locate-in-thread" /></li>
+</ul>
+
+<h2 change:h="" change:translate="modules.forums.frontoffice.Post-detail-title;postId post/getPostId" />
+
+<p class="normal" change:translate="modules.forums.frontoffice.Number-n-in-thread-x; number post/getNumber; thread post/getThread/getLabelAsHtml" />
+
+<form metal:use-macro="inlineMenu" />
+
+<tal:block change:include="module 'forums'; template 'Forums-Inc-PostList-Success'; type 'html'; postListInfo postListInfo" />
+
+<form metal:use-macro="inlineMenu" />
+
+<tal:block change:block="" module="forums" name="RssMenu" parentref="${post/getId}" />

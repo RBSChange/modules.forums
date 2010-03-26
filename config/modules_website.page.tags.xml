@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tags extends="generic">
+	<tag label="&amp;modules.forums.bo.tags.Forum-detail;" icon="forum">functional_forums_forum-detail</tag>
+	<tag label="&amp;modules.forums.bo.tags.Forum-list;" icon="list-block">functional_forums_forum-list</tag>
+	<tag label="&amp;modules.forums.bo.tags.Thread-detail;" icon="thread">functional_forums_thread-detail</tag>
+	<tag label="&amp;modules.forums.bo.tags.Newthread;" icon="add">functional_forums_thread-new</tag>
+	<tag label="&amp;modules.forums.bo.tags.Post-block;" icon="post">functional_forums_post-detail</tag>
+	<tag label="&amp;modules.forums.bo.tags.Newpost;" icon="add">functional_forums_post-new</tag>
+	<tag label="&amp;modules.forums.bo.tags.Editpost;" icon="edit">functional_forums_post-edit</tag>
+	<tag label="&amp;modules.forums.bo.tags.Member-detail;" icon="member">contextual_website_website_modules_forums_member</tag>
+	<tag label="&amp;modules.forums.bo.tags.Member-ban;" icon="member">contextual_website_website_modules_forums_memberban</tag>
+	<tag label="&amp;modules.forums.bo.tags.Memberlist-block;" icon="list-block">contextual_website_website_modules_forums_memberlist</tag>
+	<tag label="&amp;modules.forums.bo.tags.Editprofile-block;" icon="edit">contextual_website_website_modules_forums_editprofile</tag>
+</tags>

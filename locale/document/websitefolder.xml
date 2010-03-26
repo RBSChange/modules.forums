@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<localization extend="modules.generic.document.folder">
+  <entity id="document-name">
+    <locale lang="fr">websitefolder</locale>
+    <locale lang="en">websitefolder</locale>
+  </entity>
+  <entity id="website">
+    <locale lang="fr">[TO TRANSLATE] website</locale>
+    <locale lang="en">[TO TRANSLATE] website</locale>
+  </entity>
+  <entity id="website-help">
+    <locale lang="fr">[TO TRANSLATE] website-help</locale>
+    <locale lang="en">[TO TRANSLATE] website-help</locale>
+  </entity>
+  <entity id="rank">
+    <locale lang="fr">[TO TRANSLATE] rank</locale>
+    <locale lang="en">[TO TRANSLATE] rank</locale>
+  </entity>
+  <entity id="rank-help">
+    <locale lang="fr">[TO TRANSLATE] rank-help</locale>
+    <locale lang="en">[TO TRANSLATE] rank-help</locale>
+  </entity>
+  <entity id="title">
+    <locale lang="fr">[TO TRANSLATE] title</locale>
+    <locale lang="en">[TO TRANSLATE] title</locale>
+  </entity>
+  <entity id="title-help">
+    <locale lang="fr">[TO TRANSLATE] title-help</locale>
+    <locale lang="en">[TO TRANSLATE] title-help</locale>
+  </entity>
+</localization>

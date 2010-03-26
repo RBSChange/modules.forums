@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<localization>
+	<entity id="document-name">
+		<locale lang="fr">message</locale>
+		<locale lang="en">post</locale>
+	</entity>
+	<entity id="label">
+		<locale lang="fr">libellé</locale>
+		<locale lang="en">label</locale>
+	</entity>
+	<entity id="text">
+		<locale lang="fr">texte</locale>
+		<locale lang="en">text</locale>
+	</entity>
+	<entity id="postauthor">
+		<locale lang="fr">auteur</locale>
+		<locale lang="en">author</locale>
+	</entity>
+	<entity id="editedby">
+		<locale lang="fr">édité par</locale>
+		<locale lang="en">edited by</locale>
+	</entity>
+	<entity id="editeddate">
+		<locale lang="fr">date d'édition</locale>
+		<locale lang="en">edition date</locale>
+	</entity>
+	<entity id="deletedby">
+		<locale lang="fr">supprimé par</locale>
+		<locale lang="en">deleted by</locale>
+	</entity>
+	<entity id="deleteddate">
+		<locale lang="fr">date de suppression</locale>
+	</entity>
+	<entity id="number">
+		<locale lang="fr">numéro</locale>
+		<locale lang="en">number</locale>
+	</entity>
+	<entity id="ip">
+		<locale lang="fr">ip</locale>
+		<locale lang="en">ip</locale>
+	</entity>
+	<entity id="thread">
+		<locale lang="fr">sujet</locale>
+		<locale lang="en">thread</locale>
+	</entity>
+	<entity id="answerof">
+		<locale lang="fr">réponse à</locale>
+		<locale lang="en">answer of</locale>
+	</entity>
+	
+	<entity id="label-patern">
+		<locale lang="fr">message écrit par {author}</locale>
+	</entity>
+</localization>

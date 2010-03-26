@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<localization>
+	<entity id="document-name">
+		<locale lang="fr">ban</locale>
+		<locale lang="en">ban</locale>
+	</entity>
+	<entity id="label">
+		<locale lang="fr">libellé</locale>
+		<locale lang="en">label</locale>
+	</entity>
+	<entity id="member">
+		<locale lang="fr">membre</locale>
+		<locale lang="en">member</locale>
+	</entity>
+	<entity id="from">
+		<locale lang="fr">à partir du</locale>
+		<locale lang="en">from</locale>
+	</entity>
+	<entity id="to">
+		<locale lang="fr">jusqu'au</locale>
+		<locale lang="en">to</locale>
+	</entity>
+	<entity id="post">
+		<locale lang="fr">message</locale>
+		<locale lang="en">post</locale>
+	</entity>
+	<entity id="by">
+		<locale lang="fr">par</locale>
+		<locale lang="en">by</locale>
+	</entity>
+	<entity id="motif">
+		<locale lang="fr">motif</locale>
+		<locale lang="en">motif</locale>
+	</entity>
+</localization>

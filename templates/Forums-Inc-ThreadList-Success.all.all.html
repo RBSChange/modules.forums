@@ -1,0 +1,42 @@
+<table tal:condition="php: count(threads)" class="normal thread-list" cellspacing="0" cellpadding="0">
+	<thead>
+		<tr>
+			<th class="column-bullet" />
+			<th class="column-label" tal:content="threadColumnTitle" />
+			<th class="column-posts" change:translate="modules.forums.frontoffice.Answers" />
+			<th class="column-last-post" change:translate="modules.forums.frontoffice.Last-post" />
+		</tr>
+	</thead>
+	<tbody>
+		<tal:block tal:repeat="thread threads">
+			<tr tal:define="newCount thread/getNbnewpost ; postCount thread/getNbpost" class="row-${php: repeat.thread.odd ? '1' : '0'}">
+				<td class="column-bullet" >
+					<tal:block tal:condition="thread/isLocked">
+						<img tal:condition="php: newCount >= 1 && newCount == postCount" change:image="front/new-thread-locked.png" change:i18nattr="title &modules.forums.frontoffice.Is-new-thread-locked;" />
+						<img tal:condition="php: newCount == 1 && newCount != postCount" change:image="front/has-new-post-locked.png" change:i18nattr="title &modules.forums.frontoffice.Has-new-post-locked;" />
+						<img tal:condition="php: newCount > 1 && newCount != postCount" change:image="front/has-new-post-locked.png" change:i18nattr="title[count] newCount; title &modules.forums.frontoffice.Has-n-new-posts-locked;" />
+						<img tal:condition="not: newCount" change:image="front/has-no-new-post-locked.png" change:i18nattr="title &modules.forums.frontoffice.Has-no-new-post-locked;" />
+					</tal:block>
+					<tal:block tal:condition="not: thread/isLocked">
+						<img tal:condition="php: newCount >= 1 && newCount == postCount" change:image="front/new-thread.png" change:i18nattr="title &modules.forums.frontoffice.Is-new-thread;" />
+						<img tal:condition="php: newCount == 1 && newCount != postCount" change:image="front/has-new-post.png" change:i18nattr="title &modules.forums.frontoffice.Has-new-post;" />
+						<img tal:condition="php: newCount > 1 && newCount != postCount" change:image="front/has-new-post.png" change:i18nattr="title[count] newCount; title &modules.forums.frontoffice.Has-n-new-posts;" />
+						<img tal:condition="not: newCount" change:image="front/has-no-new-post.png" change:i18nattr="title &modules.forums.frontoffice.Has-no-new-post;" />
+					</tal:block>
+				</td>
+				<td class="column-label">
+					<strong tal:condition="php: thread.getLevel() == 20" change:translate="modules.forums.lists.threadlevels.StickyLabel" />
+					<strong tal:condition="php: thread.getLevel() == 30" change:translate="modules.forums.lists.threadlevels.AnnouncementLabel" />
+					<a tal:attributes="href thread/getUserUrl" class="link" tal:content="thread/getLabelAsHtml" />
+				</td>
+				<td class="column-posts" tal:content="php: postCount-1" />
+				<td class="column-last-post" tal:define="lastPost thread/getLastPost; lastPostAuthor lastPost/getPostAuthor">
+					<tal:block change:memberdate="value lastPost/getCreationdate; mode 'long'" />
+					<br />
+					<tal:block change:translate="modules.forums.frontoffice.by" /> <a change:link="document lastPostAuthor" tal:content="lastPostAuthor/getLabelAsHtml" />
+				</td>
+			</tr>
+		</tal:block>
+	</tbody>
+</table>
+<div tal:condition="showPagination" change:paginator="threads"/>

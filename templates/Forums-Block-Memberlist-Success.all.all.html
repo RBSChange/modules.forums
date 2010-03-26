@@ -1,0 +1,35 @@
+<h2 change:h="" change:translate="modules.forums.frontoffice.Member-list" />
+<table class="normal" cellspacing="0" cellpadding="0">
+	<thead>
+		<tr>
+			<th class="column-avatar" />
+			<th class="column-label" change:translate="modules.forums.frontoffice.Member-name" />
+			<th class="column-date" change:translate="modules.forums.frontoffice.Member-since" />
+			<th class="column-threads" change:translate="modules.forums.frontoffice.Threads" />
+			<th class="column-posts" change:translate="modules.forums.frontoffice.Posts" />
+			<th class="column-country" change:translate="modules.forums.frontoffice.Country" />
+		</tr>
+	</thead>
+	<tbody>
+		<tr tal:repeat="member paginator" class="row-${php: repeat.member.odd ? '1' : '0'}">
+			<td class="column-avatar"><img class="image" tal:attributes="src php: member->getGravatarUrl(32)" alt="" /></td>
+			<td class="column-label">
+				<a change:link="document member" tal:content="member/getLabelAsHtml" />
+				<tal:block tal:define="count member/getPublishedTitleCount" tal:condition="count">
+					<br />
+					<tal:block tal:condition="php: count == 1" change:translate="modules.forums.frontoffice.Member-titleLabel" />
+					<tal:block tal:condition="php: count > 1" change:translate="modules.forums.frontoffice.Member-titlesLabel" />
+					<tal:block tal:repeat="title member/getPublishedTitleArray">
+						<tal:block tal:condition="php: !repeat.title.start && repeat.title.end" change:translate="modules.forums.frontoffice.andSpaced" />
+						<strong>${title/getLabel}</strong><tal:block tal:condition="php: repeat.title.index LT (repeat.title.length - 2)">, </tal:block>
+					</tal:block>
+				</tal:block>			
+			</td>
+			<td class="column-date" change:memberdate="value member/getCreationdate; mode 'short'" />
+			<td class="column-threads" tal:content="member/getNbthread" />
+			<td class="column-posts" tal:content="member/getNbpost" />
+			<td class="column-country" tal:content="member/getCountry/getLabelAsHtml" />
+		</tr>
+	</tbody>
+</table>
+<tal:block change:paginator="paginator" />

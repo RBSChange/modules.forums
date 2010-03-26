@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://www.rbs.fr/schema/change-document/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/static/schema/change-document/1.0.xsd"
+	model-version="1.0" icon="message" has-url="true" indexable="true" backoffice-indexable="false" publish-on-day-change="false">
+	<properties>
+		<add name="text" type="LongString" min-occurs="1" />
+		<add name="postauthor" type="modules_forums/member" inverse="true" />
+		<add name="editedby" type="modules_forums/member" />
+		<add name="editeddate" type="DateTime" />
+		<add name="deletedby" type="modules_forums/member" />
+		<add name="deleteddate" type="DateTime" />
+		<add name="number" type="Integer" />
+		<add name="ip" type="String" db-size="20" />
+		<add name="thread" type="modules_forums/thread" min-occurs="1" tree-node="true" inverse="true" />
+		<add name="answerof" type="modules_forums/post" />
+	</properties>
+</document>

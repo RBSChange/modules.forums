@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://www.rbs.fr/schema/change-document/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/static/schema/change-document/1.0.xsd" model-version="1.0"
+	indexable="false" backoffice-indexable="false" has-url="false" publish-on-day-change="false">
+	<properties>
+		<add name="label" default-value="not-used" />
+		<add name="member" type="modules_forums/member" min-occurs="1" />
+		<add name="from" type="DateTime" />
+		<add name="to" type="DateTime" />
+		<add name="post" type="modules_forums/post" />
+		<add name="by" type="modules_forums/member" />
+		<add name="motif" type="LongString" />
+	</properties>
+</document>

@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localization>
+	<entity id="thislink">
+		<locale lang="fr">ce lien</locale>
+		<locale lang="en">this link</locale>
+	</entity>
+	<entity id="form.submit">
+		<locale lang="fr">valider</locale>
+		<locale lang="en">submit</locale>
+	</entity>
+	<entity id="forums">
+		<locale lang="fr">forums</locale>
+		<locale lang="en">forums</locale>
+	</entity>
+	<entity id="forum">
+		<locale lang="fr">forum</locale>
+		<locale lang="en">forum</locale>
+	</entity>
+	<entity id="numberthread">
+		<locale lang="fr">nombre sujets</locale>
+		<locale lang="en">number of threads</locale>
+	</entity>
+	<entity id="threads">
+		<locale lang="fr">sujets</locale>
+		<locale lang="en">threads</locale>
+	</entity>
+	<entity id="numberpost">
+		<locale lang="fr">nombre messages</locale>
+		<locale lang="en">number of posts</locale>
+	</entity>
+	<entity id="posts">
+		<locale lang="fr">messages</locale>
+		<locale lang="en">posts</locale>
+	</entity>
+	<entity id="answers">
+		<locale lang="fr">réponses</locale>
+		<locale lang="en">answers</locale>
+	</entity>
+	<entity id="forumslist">
+		<locale lang="fr">liste des forums</locale>
+		<locale lang="en">forums list</locale>
+	</entity>
+	<entity id="newthread">
+		<locale lang="fr">nouveau sujet</locale>
+		<locale lang="en">new post</locale>
+	</entity>
+	<entity id="subject">
+		<locale lang="fr">sujet</locale>
+		<locale lang="en">subject</locale>
+	</entity>
+	<entity id="newposts">
+		<locale lang="fr">nouveaux messages</locale>
+		<locale lang="en">new posts</locale>
+	</entity>
+	<entity id="has-new-post">
+		<locale lang="fr">un nouveau message</locale>
+	</entity>
+	<entity id="has-new-post-locked">
+		<locale lang="fr">un nouveau message (verrouillé)</locale>
+	</entity>
+	<entity id="has-n-new-posts">
+		<locale lang="fr">{count} nouveaux messages</locale>
+	</entity>
+	<entity id="has-n-new-posts-locked">
+		<locale lang="fr">{count} nouveaux messages (verrouillé)</locale>
+	</entity>
+	<entity id="has-no-new-post">
+		<locale lang="fr">aucun nouveau message</locale>
+	</entity>
+	<entity id="has-no-new-post-locked">
+		<locale lang="fr">aucun nouveau message (verrouillé)</locale>
+	</entity>
+	<entity id="is-new-thread">
+		<locale lang="fr">nouveau sujet</locale>
+	</entity>
+	<entity id="is-new-thread-locked">
+		<locale lang="fr">nouveau sujet (verrouillé)</locale>
+	</entity>
+	<entity id="numberposts">
+		<locale lang="fr">nombre de messages</locale>
+		<locale lang="en">number of posts</locale>
+	</entity>
+	<entity id="last-post">
+		<locale lang="fr">dernier message</locale>
+		<locale lang="en">last post</locale>
+	</entity>
+	<entity id="by">
+		<locale lang="fr">par</locale>
+		<locale lang="en">by</locale>
+	</entity>
+	<entity id="closedthread">
+		<locale lang="fr">sujet fermé !</locale>
+		<locale lang="en">thread closed!</locale>
+	</entity>
+	<entity id="newpost">
+		<locale lang="fr">nouveau message</locale>
+		<locale lang="en">new post</locale>
+	</entity>
+	<entity id="backtothreadslist">
+		<locale lang="fr">retour à la liste des sujets</locale>
+		<locale lang="en">back to threads list</locale>
+	</entity>
+	<entity id="threadslist">
+		<locale lang="fr">liste des sujets</locale>
+		<locale lang="en">threads list</locale>
+	</entity>
+	<entity id="backtoforumslist">
+		<locale lang="fr">retour à la liste des forums</locale>
+		<locale lang="en">back to forums lisst</locale>
+	</entity>
+	<entity id="num">
+		<locale lang="fr">n°</locale>
+		<locale lang="en">n°</locale>
+	</entity>
+	<entity id="see-page">
+		<locale lang="fr">voir la page</locale>
+		<locale lang="en">see page</locale>
+	</entity>
+	<entity id="deletedpost">
+		<locale lang="fr">message supprimé !</locale>
+		<locale lang="en">deleted post!</locale>
+	</entity>
+	<entity id="top">
+		<locale lang="fr">haut</locale>
+		<locale lang="en">top</locale>
+	</entity>
+	<entity id="editedby">
+		<locale lang="fr">édité par</locale>
+		<locale lang="en">edited by</locale>
+	</entity>
+	<entity id="deletedby">
+		<locale lang="fr">supprimé par</locale>
+		<locale lang="en">deleted by</locale>
+	</entity>
+	<entity id="confirmdeletepost">
+		<locale lang="fr">confirmer la suppression de ce message ?</locale>
+		<locale lang="en">confirm the deletion of this post?</locale>
+	</entity>
+	<entity id="confirmclosethread">
+		<locale lang="fr">confirmer la fermeture de ce sujet ?</locale>
+		<locale lang="en">confirm the close of this thread?</locale>
+	</entity>
+	<entity id="confirmopenthread">
+		<locale lang="fr">confirmer la réouverture de ce sujet ?</locale>
+		<locale lang="en">confirm the reopening of this thread?</locale>
+	</entity>
+	<entity id="answer">
+		<locale lang="fr">répondre</locale>
+		<locale lang="en">answer</locale>
+	</entity>
+	<entity id="edit">
+		<locale lang="fr">modifier</locale>
+		<locale lang="en">edit</locale>
+	</entity>
+	<entity id="delete">
+		<locale lang="fr">supprimer</locale>
+		<locale lang="en">delete</locale>
+	</entity>
+	<entity id="ban">
+		<locale lang="fr">bannir</locale>
+		<locale lang="en">ban</locale>
+	</entity>
+	<entity id="followthread">
+		<locale lang="fr">suivre ce sujet</locale>
+		<locale lang="en">follow this thread</locale>
+	</entity>
+	<entity id="cancelfollowthread">
+		<locale lang="fr">annuler le suivi du sujet</locale>
+		<locale lang="en">cancel follow of this thread</locale>
+	</entity>
+	<entity id="editthread">
+		<locale lang="fr">éditer le sujet</locale>
+		<locale lang="en">edit thread</locale>
+	</entity>
+	<entity id="closethread">
+		<locale lang="fr">fermer le sujet</locale>
+		<locale lang="en">close thread</locale>
+	</entity>
+	<entity id="openthread">
+		<locale lang="fr">ouvrir le sujet</locale>
+		<locale lang="en">open thread</locale>
+	</entity>
+	<entity id="editpost">
+		<locale lang="fr">éditer un message</locale>
+		<locale lang="en">edit post</locale>
+	</entity>
+	<entity id="text">
+		<locale lang="fr">texte</locale>
+		<locale lang="en">text</locale>
+	</entity>
+	<entity id="editthread">
+		<locale lang="fr">éditer un sujet</locale>
+		<locale lang="en">edit thread</locale>
+	</entity>
+	<entity id="newpost">
+		<locale lang="fr">nouveau message</locale>
+		<locale lang="en">new post</locale>
+	</entity>
+	<entity id="cancelbackthread">
+		<locale lang="fr">annuler et retourner au sujet</locale>
+		<locale lang="en">cancel and go back to thread</locale>
+	</entity>
+	<entity id="toanswerof">
+		<locale lang="fr">en réponse à</locale>
+		<locale lang="en">to answer to</locale>
+	</entity>
+	<entity id="newthread">
+		<locale lang="fr">nouveau sujet</locale>
+		<locale lang="en">new thread</locale>
+	</entity>
+	<entity id="nothread">
+		<locale lang="fr">il n'y a aucun sujet dans ce forum</locale>
+		<locale lang="en">there is no thread in this forum</locale>
+	</entity>
+	<entity id="in-thread">
+		<locale lang="fr">dans le sujet</locale>
+		<locale lang="en">in thread</locale>
+	</entity>
+	<entity id="in-forum">
+		<locale lang="fr">dans le forum</locale>
+		<locale lang="en">in forum</locale>
+	</entity>
+	<entity id="posts-of">
+		<locale lang="fr">messages du {type}</locale>
+		<locale lang="en">posts in {type}</locale>
+	</entity>
+	<entity id="threads-of">
+		<locale lang="fr">sujets du {type}</locale>
+		<locale lang="en">threads in {type}</locale>
+	</entity>
+
+	<!-- Members. -->
+	<entity id="profile-of">
+		<locale lang="fr">profil de {login}</locale>
+		<locale lang="en">profile of {login}</locale>
+	</entity>
+	<entity id="edit-profile">
+		<locale lang="fr">éditer mon profil</locale>
+		<locale lang="en">edit my profile</locale>
+	</entity>
+	<entity id="mail-sent">
+		<locale lang="fr">mail de validation envoyé</locale>
+		<locale lang="en">validation mail sent</locale>
+	</entity>
+	<entity id="must-validate-before">
+		<locale lang="fr">vous devez valider votre email avant le</locale>
+		<locale lang="en">you should validate your mail before</locale>
+	</entity>
+	<entity id="resend">
+		<locale lang="fr">renvoyer le mail de validation</locale>
+		<locale lang="en">resend validation mail</locale>
+	</entity>
+	<entity id="ban-until">
+		<locale lang="fr">vous êtes banni du forum jusqu'au</locale>
+		<locale lang="en">your are banned on forum until</locale>
+	</entity>
+	<entity id="member-since">
+		<locale lang="fr">membre depuis</locale>
+		<locale lang="en">member since</locale>
+	</entity>
+	<entity id="web-site">
+		<locale lang="fr">site internet</locale>
+		<locale lang="en">website</locale>
+	</entity>
+	<entity id="country">
+		<locale lang="fr">pays</locale>
+		<locale lang="en">country</locale>
+	</entity>
+	<entity id="post-count">
+		<locale lang="fr">nombre de messages</locale>
+		<locale lang="en">number of posts</locale>
+	</entity>
+	<entity id="thread-count">
+		<locale lang="fr">nombre de sujets</locale>
+		<locale lang="en">number of threads</locale>
+	</entity>
+	<entity id="ban-history-for">
+		<locale lang="fr">historique des bannissements pour</locale>
+		<locale lang="en">ban history for</locale>
+	</entity>
+	<entity id="message">
+		<locale lang="fr">message</locale>
+		<locale lang="en">message</locale>
+	</entity>
+	<entity id="from">
+		<locale lang="fr">du</locale>
+		<locale lang="en">from</locale>
+	</entity>
+	<entity id="to">
+		<locale lang="fr">au</locale>
+		<locale lang="en">to</locale>
+	</entity>
+	<entity id="banned-by">
+		<locale lang="fr">banni par</locale>
+		<locale lang="en">banned by</locale>
+	</entity>
+	<entity id="reason">
+		<locale lang="fr">motif</locale>
+		<locale lang="en">reason</locale>
+	</entity>
+	<entity id="member-list">
+		<locale lang="fr">liste des membres</locale>
+		<locale lang="en">members list</locale>
+	</entity>
+	<entity id="member-name">
+		<locale lang="fr">nom du membre</locale>
+		<locale lang="en">member name</locale>
+	</entity>
+
+	<entity id="restricted-access-must-login">
+		<locale lang="fr">vous devez vous connecter pour effectuer cette opération</locale>
+	</entity>
+	<entity id="you-not-have-access">
+		<locale lang="fr">vous n'êtes pas autorisé à effectuer cette opération</locale>
+	</entity>
+
+	<entity id="modifymyprofile">
+		<locale lang="fr">mise à jour de mon profil</locale>
+		<locale lang="en">update my profile</locale>
+	</entity>
+	<entity id="authdisplayname">
+		<locale lang="fr">(Afficher mon nom et mon prénom à la place de mon identifiant)</locale>
+	</entity>
+	<entity id="changeemail">
+		<locale lang="fr">(En cas de changement, un email de confirmation vous sera envoyé)</locale>
+		<locale lang="en">(In case of change, a confirmation mail will be sent)</locale>
+	</entity>
+	<entity id="neverdiffused">
+		<locale lang="fr">(Ne sera jamais diffusé)</locale>
+		<locale lang="en">(Will never be communicated)</locale>
+	</entity>
+	<entity id="iamdev">
+		<locale lang="fr">(Je serai notifié lors d'appels à la communauté pour les évolutions produit)</locale>
+		<locale lang="en">(I will be notified for community appeal to improve product)</locale>
+	</entity>
+	<entity id="needtovalid">
+		<locale lang="fr">(Obligatoire pour valider)</locale>
+		<locale lang="en">(Mandatory to valid)</locale>
+	</entity>
+	<entity id="changepass">
+		<locale lang="fr">changer mon mot de passe</locale>
+		<locale lang="en">change my password</locale>
+	</entity>
+	<entity id="cancelbacktoprofile">
+		<locale lang="fr">annuler et retourner à mon profil</locale>
+		<locale lang="en">cancel and back to my profile</locale>
+	</entity>
+	<entity id="backtoprofile">
+		<locale lang="fr">retourner à mon profil</locale>
+		<locale lang="en">back to my profile</locale>
+	</entity>
+	<entity id="backtoprofileedit">
+		<locale lang="fr">retourner à l'édition de mon profil</locale>
+		<locale lang="en">back to my profile edition</locale>
+	</entity>
+	<entity id="yes">
+		<locale lang="fr">oui</locale>
+		<locale lang="en">yes</locale>
+	</entity>
+	<entity id="no">
+		<locale lang="fr">non</locale>
+		<locale lang="en">no</locale>
+	</entity>
+	<entity id="submit">
+		<locale lang="fr">enregistrer</locale>
+		<locale lang="en">no</locale>
+	</entity>
+	<entity id="banned-reason-message">
+		<locale lang="fr">suite au message</locale>
+		<locale lang="en">no</locale>
+	</entity>
+	<entity id="editprofile.tab-generalities">
+		<locale lang="fr">informations générales</locale>
+	</entity>
+	<entity id="editprofile.tab-signature">
+		<locale lang="fr">signature</locale>
+	</entity>
+	<entity id="last-posts-in-thread">
+		<locale lang="fr">derniers messages du sujet</locale>
+		<locale lang="fr">last post in thread</locale>
+	</entity>
+	
+	<entity id="add-note">
+		<locale lang="fr">ajouter une note</locale>
+	</entity>
+	<entity id="view-note">
+		<locale lang="fr">voir la note</locale>
+	</entity>
+	<entity id="hide-note">
+		<locale lang="fr">masquer la note</locale>
+	</entity>
+	<entity id="edit-note">
+		<locale lang="fr">modifier la note</locale>
+	</entity>
+	
+	<entity id="post-detail-title">
+		<locale lang="fr">détail du message {postId}</locale>
+	</entity>
+	<entity id="locate-in-thread">
+		<locale lang="fr">localiser le message dans le sujet</locale>
+	</entity>
+	<entity id="view-thread">
+		<locale lang="fr">voir le sujet depuis le début</locale>
+	</entity>
+	<entity id="written-by">
+		<locale lang="fr">écrit par</locale>
+		<locale lang="en">written by</locale>
+	</entity>
+	<entity id="answer-to">
+		<locale lang="fr">en réponse à</locale>
+		<locale lang="en">answer to</locale>
+	</entity>
+	<entity id="number-n-in-thread-x">
+		<locale lang="fr">message numéro {number} dans le sujet &lt;em&gt;{thread}&lt;/em&gt;.</locale>
+	</entity>
+	<entity id="rss-menu-title">
+		<locale lang="fr">abonnez-vous aux flux RSS</locale>
+	</entity>
+	<entity id="unknown">
+		<locale lang="fr">inconnu</locale>
+	</entity>
+	<entity id="form.preview">
+		<locale lang="fr">prévisualiser</locale>
+	</entity>
+	<entity id="message-preview">
+		<locale lang="fr">prévisualisation du message</locale>
+	</entity>
+	<entity id="message-input">
+		<locale lang="fr">saisie du message</locale>
+	</entity>
+	
+	<entity id="logged-as-and-baned">
+		<locale lang="fr">vous êtes connecté en tant que {name} or ce membre est banni jusuqu'à la date suivante</locale>
+	</entity>
+	<entity id="logged-as">
+		<locale lang="fr">Vous êtes connecté en tant que {name}.</locale>
+	</entity>
+	<entity id="forum-member-ban">
+		<locale lang="fr">bannir un membre du forum</locale>
+	</entity>
+	<entity id="member-title">
+		<locale lang="fr">titre</locale>
+	</entity>
+	<entity id="member-titles">
+		<locale lang="fr">titres</locale>
+	</entity>
+	<entity id="member-rank">
+		<locale lang="fr">rang</locale>
+	</entity>
+	<entity id="member-informations">
+		<locale lang="fr">profil forums</locale>
+	</entity>
+	<entity id="and">
+		<locale lang="fr">et</locale>
+	</entity>
+	<entity id="short-date-format">
+		<locale lang="fr">d/m/Y</locale>
+		<locale lang="en">m/d/Y</locale>
+	</entity>
+	<entity id="long-date-format">
+		<locale lang="fr">d/m/Y H:i</locale>
+		<locale lang="en">m/d/Y H:i</locale>
+	</entity>
+	<entity id="default-value">
+		<locale lang="fr">valeur par défaut</locale>
+		<locale lang="en">default value</locale>
+	</entity>
+	<entity id="mark-all-as-read">
+		<locale lang="fr">marquer tous les messages comme lus</locale>
+	</entity>
+	<entity id="register">
+		<locale lang="fr">inscription</locale>
+		<locale lang="en">register</locale>
+	</entity>
+	<entity id="log-in">
+		<locale lang="fr">connexion</locale>
+		<locale lang="en">log in</locale>
+	</entity>
+</localization>

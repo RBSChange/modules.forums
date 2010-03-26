@@ -1,0 +1,20 @@
+<tal:block change:loadhandler="forums_MemberbanLoadHandler" />
+<h2 change:h="" change:translate="modules.forums.frontoffice.Forum-member-ban" />
+<form change:form="beanClass forums_persistentdocument_ban; beanName ban">
+	<div change:errors=""></div>
+	<tal change:field="name beanId" hidden="true" />
+	<tal change:field="name member" value="${post/getPostauthor/getId}" hidden="true"/>
+	<tal change:field="name post" value="${post/getId}" hidden="true"/>
+	<tal change:hiddeninput="name postid" value="${post/getId}"/>
+	<ol>
+		<li><label change:translate="modules.forums.document.ban.MemberLabel" /> <a change:link="document post/getPostauthor" tal:content="post/getAuthorNameAsHtml"/></li>
+		<li><label change:translate="modules.forums.document.ban.PostLabel" /> ${post/getPostIdLink}</li>
+		<li><input change:field="name to" required="true"/></li>
+		<li><label change:fieldlabel="name motif" change:translate="modules.forums.document.ban.MotifLabel" required="true" /> <input change:richtextinput="name motif; editor bbcode" /></li>
+	</ol>
+	<p class="cleaner">
+		<input class="float-right button btn-green" change:submit="label &modules.forums.frontoffice.form.Submit;"/>
+	</p>
+</form>
+
+<tal:block change:include="module 'forums'; template 'Forums-Inc-BanList-Success'; type 'html'; member post/getPostauthor" />

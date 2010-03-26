@@ -1,0 +1,6 @@
+#wmodule_forums cfield[fieldtype="titlelist"]{
+	-moz-binding: url(binding:modules.forums.cForumsEditor#cTitleList);
+}
+#wmodule_forums cfield[fieldtype="ranklist"]{
+	-moz-binding: url(binding:modules.forums.cForumsEditor#cRankList);
+}

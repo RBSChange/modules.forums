@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<localization>
+	<entity id="title">
+		<locale lang="fr">liste des membres</locale>
+		<locale lang="en">members list</locale>
+	</entity>
+	<entity id="nbitemperpage">
+		<locale lang="fr">nombre d'éléments par page</locale>
+		<locale lang="en">number of elements per page</locale>
+	</entity>
+	<entity id="nbitemperpage-help">
+		<locale lang="fr">nombre d'éléments par page</locale>
+		<locale lang="en">number of elements per page</locale>
+	</entity>
+</localization>

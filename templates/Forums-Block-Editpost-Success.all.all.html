@@ -1,0 +1,25 @@
+<tal:block change:loadhandler="forums_EditpostLoadHandler" />
+<h2 change:h="" change:translate="modules.forums.frontoffice.Editpost" />
+
+<tal:block tal:condition="previewPostInfo">
+	<h3 change:h="" change:translate="modules.forums.frontoffice.Message-preview" />
+	<tal:block change:include="module 'forums'; template 'Forums-Inc-PostList-Success'; type 'html'; postListInfo previewPostInfo" />
+</tal:block>
+
+<h3 change:h="" change:translate="modules.forums.frontoffice.Message-input" />
+<form change:form="beanClass forums_persistentdocument_post; beanName post" class="cmxform post-form">
+	<div change:errors=""></div>
+	<input change:field="name beanId" hidden="true" />
+	<input change:field="name thread.id" hidden="true" />
+	<ol>
+		<tal:block tal:condition="post/isFirstPostInThread">
+			<li><input change:field="name thread.label" /></li>
+			<li change:permission="perm forums.Moderate; nodeId post/getId; mode front"><input change:field="name thread.level" nopreamble="true" /></li>
+		</tal:block>
+		<li><label change:fieldlabel="name text" /> <input change:richtextinput="name text; editor bbcode" /></li>
+	</ol>
+	<p class="buttons">
+		<input class="button" name="preview" change:submit="label &modules.forums.frontoffice.form.Preview;" />
+		<input class="button" change:submit="label &modules.forums.frontoffice.form.Submit;"/>
+	</p>
+</form>
