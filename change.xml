@@ -15,5 +15,11 @@
 				<version>3.0.2</version>
 			</versions>
 		</dependency>
+		<dependency>
+			<name>change-module/zone</name>
+			<versions>
+				<version>3.0.2</version>
+			</versions>
+		</dependency>
 	</dependencies>
 </change>
