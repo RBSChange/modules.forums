@@ -1,9 +1,8 @@
 <?php
 define("WEBEDIT_HOME", realpath('.'));
-if (!file_exists(WEBEDIT_HOME . DIRECTORY_SEPARATOR . 'webapp' . DIRECTORY_SEPARATOR . 'www' . DIRECTORY_SEPARATOR . 'site_is_disabled'))
+require_once WEBEDIT_HOME . '/framework/Framework.php';
+if (!file_exists(f_util_FileUtils::buildWebeditPath('site_is_disabled')))
 {
-	require_once WEBEDIT_HOME . DIRECTORY_SEPARATOR . 'framework' . DIRECTORY_SEPARATOR . 'Framework.php';
-	
 	Controller::newInstance("controller_ChangeController");
 	$rq = RequestContext::getInstance();
 	$rq->setLang($rq->getDefaultLang());
