@@ -27,4 +27,27 @@
 	<entity id="fieldsgroup.display-preferences">
 		<locale lang="fr">préférences d'affichage</locale>
 	</entity>
+	
+	<entity id="cForumsEditor.label">
+		<locale lang="fr">libellé</locale>
+		<locale lang="fr">label</locale>
+	</entity>
+	<entity id="cForumsEditor.actions">
+		<locale lang="fr">actions</locale>
+		<locale lang="fr">actions</locale>
+	</entity>
+	<entity id="cForumsEditor.confirm-delete-title">
+		<locale lang="fr">êtes vous sur de vouloir supprimer ce titre ?</locale>
+	</entity>
+	<entity id="cForumsEditor.confirm-delete-rank">
+		<locale lang="fr">êtes vous sur de vouloir supprimer ce rang ?</locale>
+	</entity>
+	<entity id="cForumsEditor.threshold-min">
+		<locale lang="fr">à partir de</locale>
+		<locale lang="en">from</locale>
+	</entity>
+	<entity id="cForumsEditor.threshold-max">
+		<locale lang="fr">jusqu'à</locale>
+		<locale lang="en">to</locale>
+	</entity>
 </localization>
