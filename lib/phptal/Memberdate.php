@@ -68,6 +68,7 @@ class PHPTAL_Php_Attribute_CHANGE_memberdate extends ChangeTalAttribute
 		{
 			$member = forums_MemberService::getInstance()->getCurrentMember();
 			$getter = 'get'.ucfirst($mode).'DateFormat';
+			$format = null;
 			if ($member !== null && f_util_ClassUtils::methodExists($member, $getter))
 			{
 				$format = f_util_ClassUtils::callMethodOn($member, $getter);
