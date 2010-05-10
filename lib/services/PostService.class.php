@@ -53,6 +53,16 @@ class forums_PostService extends f_persistentdocument_DocumentService
 	}
 	
 	/**
+	 * @param forums_persistentdocument_post $document
+	 * @param string $bockName
+	 * @return array with entries 'module' and 'template'. 
+	 */
+	public function getSolrserachResultItemTemplate($document, $bockName)
+	{
+		return array('module' => 'forums', 'template' => 'Forums-Inc-PostResultDetail');
+	}
+	
+	/**
 	 * @param f_persistentdocument_PersistentDocument $parent
 	 * @return rss_FeedWriter
 	 */

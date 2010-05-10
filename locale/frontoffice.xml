@@ -24,6 +24,10 @@
 		<locale lang="fr">sujets</locale>
 		<locale lang="en">threads</locale>
 	</entity>
+	<entity id="thread">
+		<locale lang="fr">sujet</locale>
+		<locale lang="en">thread</locale>
+	</entity>
 	<entity id="numberpost">
 		<locale lang="fr">nombre messages</locale>
 		<locale lang="en">number of posts</locale>
