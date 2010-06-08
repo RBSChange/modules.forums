@@ -1,6 +1,10 @@
 <?php
-define("WEBEDIT_HOME", realpath('.'));
-require_once WEBEDIT_HOME . '/framework/Framework.php';
+if (!defined('WEBEDIT_HOME'))
+{
+	define('WEBEDIT_HOME', realpath('.'));
+	require_once WEBEDIT_HOME . '/framework/Framework.php';
+}
+
 if (!file_exists(f_util_FileUtils::buildWebeditPath('site_is_disabled')))
 {
 	Controller::newInstance("controller_ChangeController");
