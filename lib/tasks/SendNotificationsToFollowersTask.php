@@ -11,6 +11,6 @@ class forums_SendNotificationsToFollowersTask extends task_SimpleSystemTask
 	protected function execute()
 	{
 		$batchPath = 'modules/forums/lib/bin/SendNotificationsToFollowersBatch.php';
-		$result = f_util_System::execHTTPScript($batchPath);
+		f_util_System::execHTTPScript($batchPath);
 	}
 }
