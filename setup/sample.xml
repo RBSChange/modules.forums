@@ -34,7 +34,7 @@
 	<title byLabel="Modérateur" visual-refid="visual-mod" website-refid="website" id="title-mod" />
 	<title byLabel="Super-modérateur" visual-refid="visual-smod" website-refid="website" id="title-smod" />	
 		
-	<website byTag="default_modules_website_default-website" template="tplTwo">
+	<website byTag="default_modules_website_default-website" template="webfactory/tplTwo">
 		<member id="mod1" user-refid="usera" publicationstatus="ACTIVE" title-refids="title-mod" />
 		<member id="mod2" user-refid="userb" publicationstatus="ACTIVE" displayname="true" title-refids="title-smod" />
 		<member id="member1" user-refid="user1" publicationstatus="ACTIVE" displayname="true" />
