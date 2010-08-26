@@ -120,7 +120,7 @@ class forums_RankService extends f_persistentdocument_DocumentService
 	 * @param Integer $parentNodeId Parent node ID where to save the document.
 	 * @return void
 	 */
-	protected function postSave($document, $parentNodeId = null)
+	protected function postSave($document, $parentNodeId)
 	{
 		if ($document->getWebsite() === null)
 		{

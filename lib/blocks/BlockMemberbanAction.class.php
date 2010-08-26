@@ -27,7 +27,7 @@ class forums_BlockMemberbanAction extends website_TaggerBlockAction
 		
 		$agaviUser = Controller::getInstance()->getContext()->getUser();
 		$agaviUser->setAttribute('illegalAccessPage', $_SERVER["REQUEST_URI"]);
-		$this->forward('users', 'Authentication');
+		return $this->forward('users', 'Authentication');
 	}
 	
 	/**

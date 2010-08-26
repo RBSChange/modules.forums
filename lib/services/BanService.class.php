@@ -76,7 +76,7 @@ class forums_BanService extends f_persistentdocument_DocumentService
 	 * @param Integer $parentNodeId Parent node ID where to save the document.
 	 * @return void
 	 */
-	protected function preInsert($document, $parentNodeId = null)
+	protected function preInsert($document, $parentNodeId)
 	{
 		$document->setFrom(date_Calendar::now()->toString());
 		$document->setBy(forums_MemberService::getInstance()->getCurrentMember());
@@ -87,7 +87,7 @@ class forums_BanService extends f_persistentdocument_DocumentService
 	 * @param Integer $parentNodeId Parent node ID where to save the document.
 	 * @return void
 	 */
-	protected function postInsert($document, $parentNodeId = null)
+	protected function postInsert($document, $parentNodeId)
 	{
 		$member = $document->getMember();
 		$member->setBan($document->getTo());

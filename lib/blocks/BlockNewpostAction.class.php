@@ -6,17 +6,14 @@
 class forums_BlockNewpostAction extends forums_BlockPostListBaseAction
 {
 	/**
-	 * @see website_BlockAction::execute()
-	 *
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
-	 * @return String
 	 */
 	public function initialize($request, $response)
 	{
 		if ($this->isInBackoffice())
 		{
-			return website_BlockView::NONE;
+			return;
 		}
 
 		$doc = $this->getDocumentParameter();
