@@ -4,7 +4,7 @@
 		<div class="content-block"><div class="content" change:translate="&modules.dashboard.dashboard.DummyContent;">...</div></div>
 	</tal:block>
 	<tal:block tal:condition="not:forEdition">
-		<p><strong change:translate="modules.forums.bo.blocks.dashboardgeneralstatistics.Statistics-for-website" /> 
+		<p><strong change:translate="modules.forums.bo.blocks.dashboardgeneralstatistics.Statistics-for-website"></strong> 
 		<select onchange="var widget = Dashboard.getWidgetByNode(this); widget.parameters['forumsParam[websiteId]'] = this.options[this.selectedIndex].value; widget.refresh();">
 			<tal:block tal:repeat="website websites">
 				<option tal:condition="php: websiteId == website.getId()" selected="selected" value="${website/getId}">${website/getLabel}</option>
@@ -12,7 +12,7 @@
 			</tal:block>
 		</select></p>
 		
-		<h2 change:translate="modules.forums.bo.blocks.dashboardgeneralstatistics.Global-statistics" />
+		<h2 change:translate="modules.forums.bo.blocks.dashboardgeneralstatistics.Global-statistics"></h2>
 		<table width="100%">
 			<thead>
 				<tr>
@@ -32,7 +32,7 @@
 			</tbody>
 		</table>
 		
-		<h2 change:translate="modules.forums.bo.blocks.dashboardgeneralstatistics.Monthly-statistics" />
+		<h2 change:translate="modules.forums.bo.blocks.dashboardgeneralstatistics.Monthly-statistics"></h2>
 		<table width="100%" tal:condition="widget/lines">
 			<thead>
 				<tr>

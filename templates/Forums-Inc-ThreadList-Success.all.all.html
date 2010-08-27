@@ -25,18 +25,18 @@
 					</tal:block>
 				</td>
 				<td class="column-label">
-					<strong tal:condition="php: thread.getLevel() == 20" change:translate="modules.forums.lists.threadlevels.StickyLabel" />
-					<strong tal:condition="php: thread.getLevel() == 30" change:translate="modules.forums.lists.threadlevels.AnnouncementLabel" />
-					<a tal:attributes="href thread/getUserUrl" class="link" tal:content="thread/getLabelAsHtml" />
+					<strong tal:condition="php: thread.getLevel() == 20" change:translate="modules.forums.lists.threadlevels.StickyLabel"></strong>
+					<strong tal:condition="php: thread.getLevel() == 30" change:translate="modules.forums.lists.threadlevels.AnnouncementLabel"></strong>
+					<a tal:attributes="href thread/getUserUrl" class="link">${thread/getLabelAsHtml}</a>
 				</td>
 				<td class="column-posts" tal:content="php: postCount-1" />
 				<td class="column-last-post" tal:define="lastPost thread/getLastPost; lastPostAuthor lastPost/getPostAuthor">
 					<tal:block change:memberdate="value lastPost/getCreationdate; mode 'long'" />
 					<br />
-					<tal:block change:translate="modules.forums.frontoffice.by" /> <a change:link="document lastPostAuthor" tal:content="lastPostAuthor/getLabelAsHtml" />
+					<tal:block change:translate="modules.forums.frontoffice.by" /> <a change:link="document lastPostAuthor">${lastPostAuthor/getLabelAsHtml}</a>
 				</td>
 			</tr>
 		</tal:block>
 	</tbody>
 </table>
-<div tal:condition="showPagination" change:paginator="threads"/>
+<tal:block tal:condition="showPagination" change:paginator="threads"/>

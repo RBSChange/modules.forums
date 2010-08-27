@@ -1,12 +1,12 @@
 <tal:block change:loadhandler="forums_NewthreadLoadHandler" />
-<h2 change:h="" change:translate="modules.forums.frontoffice.Newthread" />
+<h2 change:h="" change:translate="modules.forums.frontoffice.Newthread"></h2>
 
 <tal:block tal:condition="previewPostInfo">
-	<h3 change:h="" change:translate="modules.forums.frontoffice.Message-preview" />
+	<h3 change:h="" change:translate="modules.forums.frontoffice.Message-preview"></h3>
 	<tal:block change:include="module 'forums'; template 'Forums-Inc-PostList-Success'; type 'html'; postListInfo previewPostInfo" />
 </tal:block>
 
-<h3 change:h="" change:translate="modules.forums.frontoffice.Message-input" />
+<h3 change:h="" change:translate="modules.forums.frontoffice.Message-input"></h3>
 <form change:form="beanClass forums_persistentdocument_thread; beanName thread" class="cmxform post-form">
 	<div change:errors=""></div>
 	<tal change:field="name beanId" hidden="true" />
@@ -14,7 +14,7 @@
 	<ol>
 		<li><input change:field="name label" /></li>
 		<li change:permission="perm forums.Moderate; nodeId forum/getId; mode front"><input change:field="name level" nopreamble="true" /></li>
-		<li><label change:fieldlabel="" name="firstPost.text" /> <input change:richtextinput="name firstPost.text; editor bbcode" required="true" /></li>
+		<li><label change:fieldlabel="" name="firstPost.text"></label> <input change:richtextinput="name firstPost.text; editor bbcode" required="true" /></li>
 	</ol>
 	<p class="buttons">
 		<input class="button" name="preview" change:submit="label &modules.forums.frontoffice.form.Preview;" />

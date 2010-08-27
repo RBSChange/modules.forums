@@ -1,6 +1,6 @@
 <form change:form="beanClass forums_persistentdocument_member; beanName member" class="cmxform">
-	<ul change:errors="" />
-	<ul change:messages="" />
+	<ul change:errors=""></ul>
+	<ul change:messages=""></ul>
 	<input change:field="name beanId" hidden="true" />	
 	<ol>
 		<li>
@@ -14,7 +14,7 @@
 			<p class="help-text">
 				<tal:block change:translate="modules.forums.document.member.Shortdateformat-help" />
 				<br />
-				<tal:block change:translate="modules.forums.frontoffice.Default-valueLabel" /> <strong change:translate="modules.forums.frontoffice.short-date-format" />
+				<tal:block change:translate="modules.forums.frontoffice.Default-valueLabel" /> <strong change:translate="modules.forums.frontoffice.short-date-format"></strong>
 			</p>
 		</li>
 		<li>
@@ -22,10 +22,10 @@
 			<p class="help-text">
 				<tal:block change:translate="modules.forums.document.member.Longdateformat-help" />
 				<br />
-				<tal:block change:translate="modules.forums.frontoffice.Default-valueLabel" /> <strong change:translate="modules.forums.frontoffice.long-date-format" />
+				<tal:block change:translate="modules.forums.frontoffice.Default-valueLabel" /> <strong change:translate="modules.forums.frontoffice.long-date-format"></strong>
 			</p>
 		</li>
-		<li><label change:fieldlabel="name signature" /> <input change:richtextinput="name signature ; editor bbcode" /></li>
+		<li><label change:fieldlabel="name signature"></label> <input change:richtextinput="name signature ; editor bbcode" /></li>
 	</ol>
 	<p class="buttons">
 		<input change:submit="label &modules.users.frontoffice.editprofil.SubmitButton;" class="button" name="save" />

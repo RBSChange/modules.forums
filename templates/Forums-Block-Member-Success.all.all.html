@@ -1,11 +1,11 @@
-<a tal:condition="member/isMe" change:link="tag contextual_website_website_modules_users_edit-profil" class="button float-right" change:translate="modules.forums.frontoffice.Edit" />
-<a tal:condition="php: !member.isMe() && member.isEditable()" change:link="tag contextual_website_website_modules_forums_editprofile ; forumsParam[cmpref] member/getId" class="button float-right" change:translate="modules.forums.frontoffice.Edit" />
-<h2 change:h="" change:translate="modules.forums.frontoffice.Profile-of;login member/getLabelAsHtml" />
+<a tal:condition="member/isMe" change:link="tag contextual_website_website_modules_users_edit-profil" class="button float-right" change:translate="modules.forums.frontoffice.Edit"></a>
+<a tal:condition="php: !member.isMe() && member.isEditable()" change:link="tag contextual_website_website_modules_forums_editprofile ; forumsParam[cmpref] member/getId" class="button float-right" change:translate="modules.forums.frontoffice.Edit"></a>
+<h2 change:h="" change:translate="modules.forums.frontoffice.Profile-of;login member/getLabelAsHtml"></h2>
 
 <tal:block tal:condition="member/isme">
-	<div tal:condition="mailsended"><em class="notification" change:translate="modules.forums.frontoffice.Mail-sent" /></div>
+	<div tal:condition="mailsended"><em class="notification" change:translate="modules.forums.frontoffice.Mail-sent"></em></div>
 	<tal:block tal:condition="member/getEndpublicationdate">
-		<em class="notification"><tal:block change:translate="&modules.forums.frontoffice.Must-validate-before" /> <tal:block change:memberdate="value member/getEndpublicationdate; mode 'short'" /> - <a tal:define="url php: array('changeParam[resend]'=>1)" change:currentPagelink="url" change:translate="modules.forums.frontoffice.Resend" /></em>
+		<em class="notification"><tal:block change:translate="&modules.forums.frontoffice.Must-validate-before" /> <tal:block change:memberdate="value member/getEndpublicationdate; mode 'short'" /> - <a tal:define="url php: array('changeParam[resend]'=>1)" change:currentPagelink="url" change:translate="modules.forums.frontoffice.Resend"></a></em>
 	</tal:block>
 	<em tal:condition="member/getBan" class="notification"><tal:block change:translate="modules.forums.frontoffice.Ban-until" /> <tal:block change:memberdate="value member/getBan; mode 'short'" /></em>
 </tal:block>
@@ -26,8 +26,8 @@
 							<strong>${title/getLabel}</strong><tal:block tal:condition="php: repeat.title.index LT (repeat.title.length - 2)">, </tal:block>
 					</tal:block>
 					</li>
-					<li><tal:block change:translate="modules.forums.frontoffice.Member-sinceLabel" /> <strong change:memberdate="value member/getCreationdate; mode 'short'" /></li>
-					<li tal:condition="member/getWebsiteUrl"><tal:block change:translate="modules.forums.frontoffice.Web-siteLabel" /> <strong><a class="link" tal:attributes="href member/getWebsiteUrl" target="_blank" tal:content="member/getShortWebsiteUrl" /></strong></li>
+					<li><tal:block change:translate="modules.forums.frontoffice.Member-sinceLabel" /> <strong change:memberdate="value member/getCreationdate; mode 'short'"></strong></li>
+					<li tal:condition="member/getWebsiteUrl"><tal:block change:translate="modules.forums.frontoffice.Web-siteLabel" /> <strong><a class="link" tal:attributes="href member/getWebsiteUrl" target="_blank">${member/getShortWebsiteUrl}</a></strong></li>
 					<li tal:condition="member/getCountry"><tal:block change:translate="modules.forums.frontoffice.CountryLabel" /> <strong>${member/getCountry/getLabelAsHtml}</strong></li>
 				</ul>
 			</div>
@@ -45,8 +45,8 @@
 </div>
 
 <tal:block tal:condition="member/getSignature">
-	<h3 change:h="" change:translate="modules.forums.document.member.Signature" />
-	<div class="member-signature" tal:content="member/getSignatureAsHtml" />
+	<h3 change:h="" change:translate="modules.forums.document.member.Signature"></h3>
+	<div class="member-signature">${member/getSignatureAsHtml}</div>
 </tal:block>
 
 <tal:block change:include="module 'forums'; template 'Forums-Inc-BanList-Success'; type 'html'; member member; removeMemberLink 'true'" />

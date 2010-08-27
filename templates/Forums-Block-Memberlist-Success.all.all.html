@@ -1,4 +1,4 @@
-<h2 change:h="" change:translate="modules.forums.frontoffice.Member-list" />
+<h2 change:h="" change:translate="modules.forums.frontoffice.Member-list"></h2>
 <table class="normal" cellspacing="0" cellpadding="0">
 	<thead>
 		<tr>
@@ -14,7 +14,7 @@
 		<tr tal:repeat="member paginator" class="row-${php: repeat.member.odd ? '1' : '0'}">
 			<td class="column-avatar"><img class="image" tal:attributes="src php: member->getGravatarUrl(32)" alt="" /></td>
 			<td class="column-label">
-				<a change:link="document member" tal:content="member/getLabelAsHtml" />
+				<a change:link="document member">${member/getLabelAsHtml}</a>
 				<tal:block tal:define="count member/getPublishedTitleCount" tal:condition="count">
 					<br />
 					<tal:block tal:condition="php: count == 1" change:translate="modules.forums.frontoffice.Member-titleLabel" />

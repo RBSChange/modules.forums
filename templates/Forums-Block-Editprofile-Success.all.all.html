@@ -1,11 +1,11 @@
-<h2 change:h="" change:translate="modules.forums.frontoffice.Modifymyprofile" />
+<h2 change:h="" change:translate="modules.forums.frontoffice.Modifymyprofile"></h2>
 <form change:form="beanClass forums_persistentdocument_member; beanName member" class="cmxform">
 	<div change:errors=""></div>
 	<input change:field="name beanId" hidden="true" />
 	<div change:tabs="id editProfileForm">
 		<div change:tab="name generalities; label &modules.forums.frontoffice.editprofile.Tab-generalities;">
 			<ol>
-				<li><label class="label" change:translate="modules.forums.document.member.LabelLabel" /> ${member/getLabelAsHtml}</li>
+				<li><label class="label" change:translate="modules.forums.document.member.LabelLabel"></label> ${member/getLabelAsHtml}</li>
 				<li><input change:field="name user.title" /></li>
 				<li><input change:field="name user.firstname" /></li>
 				<li><input change:field="name user.lastname" /></li>
@@ -29,11 +29,11 @@
 	<ol>
 		<li>
 			<input change:passwordinput="" name="checkpassword" required="true" label="&modules.forums.document.member.PasswordLabel;" />
-			<p class="help-text"><tal:block change:translate="modules.forums.frontoffice.Needtovalid" /> - <a change:link="tag contextual_website_website_modules_users_change-password" change:translate="modules.forums.frontoffice.Changepass" /></p>
+			<p class="help-text"><tal:block change:translate="modules.forums.frontoffice.Needtovalid" /> - <a change:link="tag contextual_website_website_modules_users_change-password" change:translate="modules.forums.frontoffice.Changepass"></a></p>
 		</li>
 	</ol>	
 	<p class="buttons">
 		<input change:submit="label &modules.forums.frontoffice.Submit;" class="button"/>
-		<a change:link="document member" class="button" change:translate="modules.forums.frontoffice.Cancelbacktoprofile"/>
+		<a change:link="document member" class="button" change:translate="modules.forums.frontoffice.Cancelbacktoprofile"></a>
 	</p>
 </form>
