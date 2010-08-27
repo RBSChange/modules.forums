@@ -224,13 +224,43 @@
 		<locale lang="fr">dans le forum</locale>
 		<locale lang="en">in forum</locale>
 	</entity>
+	
 	<entity id="posts-of">
 		<locale lang="fr">messages du {type}</locale>
 		<locale lang="en">posts in {type}</locale>
 	</entity>
+	<entity id="posts-of-website">
+		<locale lang="fr">messages du site</locale>
+		<locale lang="en">posts in website</locale>
+	</entity>
+	<entity id="posts-of-topic">
+		<locale lang="fr">messages de la rubrique</locale>
+		<locale lang="en">posts in topic</locale>
+	</entity>
+	<entity id="posts-of-forum">
+		<locale lang="fr">messages du forum</locale>
+		<locale lang="en">posts in forum</locale>
+	</entity>
+	<entity id="posts-of-thread">
+		<locale lang="fr">messages du sujet</locale>
+		<locale lang="en">posts in thread</locale>
+	</entity>
+	
 	<entity id="threads-of">
 		<locale lang="fr">sujets du {type}</locale>
 		<locale lang="en">threads in {type}</locale>
+	</entity>
+	<entity id="threads-of-website">
+		<locale lang="fr">sujets du site</locale>
+		<locale lang="en">threads in website</locale>
+	</entity>
+	<entity id="threads-of-topic">
+		<locale lang="fr">sujets de la rubrique</locale>
+		<locale lang="en">threads in topic</locale>
+	</entity>
+	<entity id="threads-of-forum">
+		<locale lang="fr">sujets du forum</locale>
+		<locale lang="en">threads in forum</locale>
 	</entity>
 
 	<!-- Members. -->

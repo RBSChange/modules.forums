@@ -81,10 +81,10 @@ class forums_BlockRssMenuAction extends website_BlockAction
 	{
 		if ($parent !== null)
 		{
-			$modelLabel = f_Locale::translate($parent->getPersistentModel()->getLabel());
+			$modelName = f_Locale::translate($parent->getPersistentModel()->getDocumentName());
 			foreach ($forTypes as $type)
 			{
-				$title = f_Locale::translate('&modules.forums.frontoffice.'.ucfirst($type).'s-ofLabel;', array('type' => f_Locale::translate($modelLabel))) . ' ' . $parent->getLabelAsHtml();
+				$title = f_Locale::translate('&modules.forums.frontoffice.' . ucfirst($type) . 's-of-' . $modelName . 'Label;') . ' ' . $parent->getLabelAsHtml();
 				$this->getContext()->addRssFeed($title, LinkHelper::getActionUrl('forums', 'ViewFeed', array('parentref' => $parent->getId(), 'docType' => 'post')));
 				$this->links[] = array('title' => $title, 'parentref' => $parent->getId(), 'docType' => $type, 'recursive' => $recursive);
 			}

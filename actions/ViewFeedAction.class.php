@@ -63,7 +63,8 @@ class forums_ViewFeedAction extends f_action_BaseAction
 	 */
 	private function setHeaders($feedWriter, $parent, $docType)
 	{
-		$title = f_Locale::translate('&modules.forums.frontoffice.'.ucfirst($docType).'s-ofLabel;', array('type' => f_Locale::translate($parent->getPersistentModel()->getLabel()))) . ' ' . $parent->getLabel();
+		$modelName = $parent->getPersistentModel()->getDocumentName();
+		$title = f_Locale::translate('&modules.forums.frontoffice.' . ucfirst($docType).'s-of-' . $modelName . 'Label;') . ' ' . $parent->getLabelAsHtml();
 		$feedWriter->setTitle($title);
 		if (f_util_ClassUtils::methodExists($parent, 'getDescriptionAsHtml'))
 		{
