@@ -39,7 +39,7 @@ class forums_BlockEditMemberProfileAction extends website_BlockAction
     /**
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
-	 * @param users_persistentdocument_websitefrontenduser $user
+	 * @param forums_persistentdocument_member $member
 	 * @return String
 	 */
 	public function executeSave($request, $response, forums_persistentdocument_member $member)
@@ -53,9 +53,9 @@ class forums_BlockEditMemberProfileAction extends website_BlockAction
 	
 	/**
 	 * @param f_mvc_Request $request
-	 * @param users_persistentdocument_websitefrontenduser $user
+	 * @param forums_persistentdocument_member $member
 	 */
-	public function validateSaveInput($request, $user)
+	public function validateSaveInput($request, $member)
 	{
 		$val = BeanUtils::getBeanValidationRules('forums_persistentdocument_member', null, array('label', 'user'));
 		return $this->processValidationRules($val, $request, $member);
