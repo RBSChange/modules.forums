@@ -60,6 +60,11 @@ class forums_BlockEditpostAction extends forums_BlockPostListBaseAction
 		return array_merge(BeanUtils::getBeanValidationRules('forums_persistentdocument_post', null, array('label')), BeanUtils::getSubBeanValidationRules('forums_persistentdocument_post', 'thread', null, null));
 	}
 	
+	public function submitNeedTransaction()
+    {
+    	return true;
+    }
+	
 	/**
 	 * @see website_BlockAction::execute()
 	 *
@@ -76,7 +81,11 @@ class forums_BlockEditpostAction extends forums_BlockPostListBaseAction
 		{
 			$post->getThread()->save();
 		}
-				
+		$tm = f_persistentdocument_TransactionManager::getInstance();		
+		while ($tm->hasTransaction())
+		{
+			$tm->commit();
+		}
 		$url = $post->getPostUrlInThread();
 		HttpController::getInstance()->redirectToUrl($url);
 	}

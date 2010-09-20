@@ -63,6 +63,11 @@ class forums_BlockEditprofileAction extends website_TaggerBlockAction
 		return $ok;
 	}
 	
+	public function submitNeedTransaction()
+    {
+    	return true;
+    }
+    
 	/**
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
@@ -77,6 +82,11 @@ class forums_BlockEditprofileAction extends website_TaggerBlockAction
 			forums_MemberService::getInstance()->sendReactivationMail($member);
 		}
 		$member->save();
+		$tm = f_persistentdocument_TransactionManager::getInstance();		
+		while ($tm->hasTransaction())
+		{
+			$tm->commit();
+		}
 		$url = LinkHelper::getDocumentUrl($member);
 		$this->redirectToUrl($url);
 	}

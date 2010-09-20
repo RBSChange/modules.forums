@@ -33,33 +33,43 @@ class forums_BlockThreadAction extends forums_BlockPostListBaseAction
 		{
 			return website_BlockView::NONE;
 		}
-		
 		$thread = $this->getDocumentParameter();
 		if ($thread === null || !($thread instanceof forums_persistentdocument_thread) || !$thread->isPublished())
 		{
 			return website_BlockView::NONE;
 		}
 				
-		$nbItemPerPage = $thread->getForum()->getNbPostPerPage();
-		
-		if ($request->hasParameter('privatenote') && $thread->isEditable())
-		{
-			$thread->setPrivatenote($request->getParameter('privatenote'));
-			$thread->setPrivatenoteby(forums_MemberService::getInstance()->getCurrentMember());
-			$thread->save();
+		if ($request->hasParameter('privatenote') || $request->hasNonEmptyParameter('follow') || $request->hasNonEmptyParameter('unfollow'))
+		{	
+			$tm = f_persistentdocument_TransactionManager::getInstance();
+			try
+			{
+				$tm->beginTransaction();
+				if ($request->hasParameter('privatenote') && $thread->isEditable())
+				{
+					$thread->setPrivatenote($request->getParameter('privatenote'));
+					$thread->setPrivatenoteby(forums_MemberService::getInstance()->getCurrentMember());
+					$thread->save();
+				}
+				
+				if ($request->hasNonEmptyParameter('follow'))
+				{
+					$thread->addFollowers(forums_MemberService::getInstance()->getCurrentMember());
+					$thread->save();
+				}
+				if ($request->hasNonEmptyParameter('unfollow'))
+				{
+					$thread->removeFollowers(forums_MemberService::getInstance()->getCurrentMember());
+					$thread->save();
+				}
+				$tm->commit();
+			}
+			catch (Exception $e)
+			{
+				$tm->rollBack($e);
+				throw $e;
+			}
 		}
-		
-		if ($request->hasNonEmptyParameter('follow'))
-		{
-			$thread->addFollowers(forums_MemberService::getInstance()->getCurrentMember());
-			$thread->save();
-		}
-		if ($request->hasNonEmptyParameter('unfollow'))
-		{
-			$thread->removeFollowers(forums_MemberService::getInstance()->getCurrentMember());
-			$thread->save();
-		}
-		
 		$request->setAttribute('thread', $thread);
 		
 		if ($thread->isEditable())
@@ -67,6 +77,7 @@ class forums_BlockThreadAction extends forums_BlockPostListBaseAction
 			$this->getContext()->addScript('modules.forums.lib.js.privatenote');
 		}
 		
+		$nbItemPerPage = $thread->getForum()->getNbPostPerPage();
 		$page = $request->getParameter('page');
 		if (!is_numeric($page) || $page < 1 || $page > ceil($thread->getNbpost() / $nbItemPerPage))
 		{

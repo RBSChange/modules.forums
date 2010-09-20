@@ -133,10 +133,10 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	 */
 	public function getJsPrivateNote()
 	{
-		$txt = str_replace("'", "\\'", $this->getPrivatenoteAsHtml());
+		$txt = str_replace("'", "\\'", $this->getPrivatenote());
 		$txt = str_replace("\n", '\n', $txt);
 		$txt = str_replace("\r", "", $txt);
-		return $txt;
+		return f_util_HtmlUtils::textToHtml($txt);
 	}
 	
 	/**
