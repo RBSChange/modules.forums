@@ -25,7 +25,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	 */
 	private function getFullTextForIndexation()
 	{
-		return website_BBCodeService::getInstance()->toText($this->getTextAsHtml());
+		return website_BBCodeService::getInstance()->toText($this->getText());
 	}
 	
 	/**
