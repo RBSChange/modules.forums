@@ -116,6 +116,23 @@ class forums_MemberService extends f_persistentdocument_DocumentService
 	}
 	
 	/**
+	 * @param String $label
+	 * @param Integer $websiteId
+	 * @return forums_persistentdocument_member
+	 */
+	public function getByLabel($label, $websiteId = null)
+	{
+		if ($websiteId === null)
+		{
+			$website = website_WebsiteModuleService::getInstance()->getCurrentWebsite();
+			$websiteId = $website->getId();
+		}
+		$query = $this->createQuery()->add(Restrictions::eq('label', $label));
+		$query->add(Restrictions::eq('user.websiteid', $websiteId));
+		return $query->findUnique(); 
+	}
+	
+	/**
 	 * @param Integer $userId
 	 * @return Integer
 	 */
@@ -247,7 +264,7 @@ class forums_MemberService extends f_persistentdocument_DocumentService
 	 */
 	public function refreshLabel($member)
 	{
-		if ($member->getUser() !== null)
+		if ($member->getUser() !== null && $member->getLabel() === null)
 		{
 			$member->setLabel(($member->getDisplayname()) ? (f_util_StringUtils::ucfirst($member->getUser()->getFirstname()) . ' ' . f_util_StringUtils::ucfirst($member->getUser()->getLastname())) : $member->getUser()->getLogin());
 		}

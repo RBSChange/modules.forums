@@ -348,24 +348,26 @@
 		<locale lang="fr">vous n'êtes pas autorisé à effectuer cette opération</locale>
 	</entity>
 
-	<entity id="modifymyprofile">
-		<locale lang="fr">mise à jour de mon profil</locale>
-		<locale lang="en">update my profile</locale>
+	<entity id="modifyprofile">
+		<locale lang="fr">mise à jour du profil d'un membre</locale>
 	</entity>
 	<entity id="authdisplayname">
-		<locale lang="fr">(Afficher mon nom et mon prénom à la place de mon identifiant)</locale>
+		<locale lang="fr">(Afficher votre nom et votre prénom dans votre profil public)</locale>
+	</entity>
+	<entity id="authdisplayname-other">
+		<locale lang="fr">(Afficher son nom et son prénom dans son profil public)</locale>
 	</entity>
 	<entity id="changeemail">
 		<locale lang="fr">(En cas de changement, un email de confirmation vous sera envoyé)</locale>
 		<locale lang="en">(In case of change, a confirmation mail will be sent)</locale>
 	</entity>
+	<entity id="changeemail-other">
+		<locale lang="fr">(En cas de changement, un email de confirmation lui sera envoyé)</locale>
+		<locale lang="en">(In case of change, a confirmation mail will be sent)</locale>
+	</entity>
 	<entity id="neverdiffused">
 		<locale lang="fr">(Ne sera jamais diffusé)</locale>
 		<locale lang="en">(Will never be communicated)</locale>
-	</entity>
-	<entity id="iamdev">
-		<locale lang="fr">(Je serai notifié lors d'appels à la communauté pour les évolutions produit)</locale>
-		<locale lang="en">(I will be notified for community appeal to improve product)</locale>
 	</entity>
 	<entity id="needtovalid">
 		<locale lang="fr">(Obligatoire pour valider)</locale>
@@ -509,5 +511,17 @@
 	<entity id="log-in">
 		<locale lang="fr">connexion</locale>
 		<locale lang="en">log in</locale>
+	</entity>
+	<entity id="passwordwrong">
+		<locale lang="fr">Les deux mots de passe ne correspondent pas.</locale>
+	</entity>
+	<entity id="label-already-used">
+		<locale lang="fr">Ce pseudonyme est déjà utilisé.</locale>
+	</entity>
+	<entity id="firstname">
+		<locale lang="fr">prénom</locale>
+	</entity>
+	<entity id="lastname">
+		<locale lang="fr">nom</locale>
 	</entity>
 </localization>

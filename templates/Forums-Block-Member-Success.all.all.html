@@ -18,6 +18,10 @@
 			</div>
 			<div class="member-info">
 				<ul>
+					<tal:block tal:condition="member/getDisplayName">
+						<li><tal:block change:translate="modules.forums.frontoffice.FirstnameLabel" /> <strong>${member/getUser/getFirstnameAsHtml}</strong></li>
+						<li><tal:block change:translate="modules.forums.frontoffice.LastnameLabel" /> <strong>${member/getUser/getlastnameAsHtml}</strong></li>
+					</tal:block>
 					<li tal:define="count member/getPublishedTitleCount" tal:condition="count">
 						<tal:block tal:condition="php: count == 1" change:translate="modules.forums.frontoffice.Member-titleLabel" />
 						<tal:block tal:condition="php: count > 1" change:translate="modules.forums.frontoffice.Member-titlesLabel" />

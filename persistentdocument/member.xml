@@ -3,6 +3,9 @@
 	xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/static/schema/change-document/1.0.xsd" model-version="1.0"
 	icon="member" indexable="true" publish-on-day-change="false">
 	<properties>
+		<add name="label">
+			<constraints>pseudonym:true</constraints>
+		</add>
 		<add name="user" type="modules_users/websitefrontenduser" min-occurs="1" inverse="true" />
 		<add name="displayname" type="Boolean" default-value="false" />
 		<add name="signature" type="LongString" />

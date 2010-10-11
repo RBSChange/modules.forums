@@ -5,14 +5,14 @@
 		<locale lang="en">member</locale>
 	</entity>
 	<entity id="label">
-		<locale lang="fr">nom affiché</locale>
+		<locale lang="fr">pseudonyme</locale>
 		<locale lang="fr">displayed name</locale>
 	</entity>
 	<entity id="displayname">
 		<locale lang="fr">afficher le nom</locale>
 	</entity>
 	<entity id="displayname-help">
-		<locale lang="fr">Afficher le nom et le prénom à la place de l'identifiant.</locale>
+		<locale lang="fr">Afficher le nom et le prénom dans le profil public</locale>
 	</entity>
 	<entity id="websiteUrl">
 		<locale lang="fr">site web</locale>

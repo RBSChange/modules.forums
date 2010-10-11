@@ -57,7 +57,7 @@ class forums_BlockEditMemberProfileAction extends website_BlockAction
 	 */
 	public function validateSaveInput($request, $member)
 	{
-		$val = BeanUtils::getBeanValidationRules('forums_persistentdocument_member', null, array('label', 'user'));
+		$val = BeanUtils::getBeanValidationRules('forums_persistentdocument_member', null, array('user'));
 		return $this->processValidationRules($val, $request, $member);
 	}
 }
