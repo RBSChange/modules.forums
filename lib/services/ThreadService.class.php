@@ -152,31 +152,16 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 	 */
 	public function sendToFollowers()
 	{
-		$ns = notification_NotificationService::getInstance();
-		$notif = $ns->getNotificationByCodeName('modules_forums/follower');
-		
+		$batchPath = 'modules/forums/lib/bin/SendNotificationsToFollowersBatch.php';
 		$threads = $this->createQuery()->add(Restrictions::isNotNull('tofollow'))->find();
-		$sentMails = 0;
 		foreach ($threads as $thread)
 		{
-			$num = 1 + ($thread->getNbpost() - $thread->getTofollow()->getNumber());
-			foreach ($thread->getFollowersArray() as $member)
+			$result = f_util_System::execHTTPScript($batchPath, array($thread->getId()));
+			// Log fatal errors...
+			if ($result != 'OK')
 			{
-				if ($member->getUser()->isPublished())
-				{
-					$recipients = new mail_MessageRecipients();
-					$recipients->setTo($member->getEmail());
-					$replace = array('PSEUDO' => $member->getLabel(), 'TOPIC' => $thread->getLabel(), 'NUM' => $num, 'LINK' => '<a class="link" href="' . $thread->getTofollow()->getPostUrlInThread() . '">' . f_Locale::translate('&modules.forums.frontoffice.thislink;') . '</a>');
-					$ns->send($notif, $recipients, $replace, null);
-					$sentMails++;
-				}
-				else
-				{
-					$thread->removeFollowers($member);
-				}
+				Framework::error(__METHOD__ . ' ' . $batchPath . ' an error occured: "' . $result . '"');
 			}
-			$thread->setTofollow(null);
-			$thread->save();
 		}
 	}
 	
