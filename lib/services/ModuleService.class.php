@@ -149,7 +149,7 @@ class forums_ModuleService extends ModuleBaseService
 	 * @param String $orderStatus
 	 * @return Mixed
 	 */
-	private function findProjectedTotal($website, $websiteField, $service, $fromDate, $toDate, $dateToCompare)
+	private function findProjectedTotal($website, $websiteField, $service, $fromDate = null, $toDate = null, $dateToCompare = null)
 	{
 		$dbFormat = 'Y-m-d H:i:s';
 		$query = $service->createQuery();
