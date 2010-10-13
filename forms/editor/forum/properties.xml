@@ -8,6 +8,7 @@
 			shorthelp="&amp;modules.forums.document.forum.Mount-parent-help;" />
 		<field name="locked" />
 		<field name="nbPostPerPage" />
+		<field name="excludeFromRss" />
 	</section>
 	<section labeli18n="modules.forums.bo.doceditor.fieldsgroup.Metas">
 		<field name="metatitle" class="with-counter" rows="2" />

@@ -50,7 +50,7 @@ class forums_ViewFeedAction extends f_action_BaseAction
 		
 		$feedWriter = $documentService->getRSSFeedWriterByParent($parent, $recursive);
 		
-		// Set the link, title and description of the feed
+		// Set the link, title and description of the feed.
 		$this->setHeaders($feedWriter, $parent, $docType);
 		$this->setContentType('text/xml');
 		echo $feedWriter->toString();

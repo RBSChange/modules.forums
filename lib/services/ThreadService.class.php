@@ -194,12 +194,13 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 	{
 		$query = $this->createQuery();
 		$query->add(Restrictions::published());
+		$subQuery1 = $query->createCriteria('forum');
+		$subQuery1->add(Restrictions::eq('excludeFromRss', false));
 		if ($parent instanceof forums_persistentdocument_forum)
 		{
 			if ($recursive)
 			{
 				$parent = $parent->getTopic();
-				$subQuery1 = $query->createCriteria('forum');
 				$subQuery2 = $subQuery1->createCriteria('topic');
 				$subQuery2->add(Restrictions::orExp(Restrictions::eq('id', $parent->getId()), Restrictions::descendentOf($parent->getId())));
 			}
@@ -210,7 +211,6 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 		}
 		else if ($parent instanceof website_persistentdocument_website || $parent instanceof website_persistentdocument_topic)
 		{
-			$subQuery1 = $query->createCriteria('forum');
 			if ($recursive)
 			{
 				$subQuery2 = $subQuery1->createCriteria('topic');

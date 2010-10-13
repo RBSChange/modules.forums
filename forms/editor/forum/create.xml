@@ -7,5 +7,7 @@
 			moduleselector="website" required="true" labeli18n="modules.forums.document.forum.Mount-parent"
 			shorthelp="&amp;modules.forums.document.forum.Mount-parent-help;" />
 		<field name="locked" />
+		<field name="nbPostPerPage" />
+		<field name="excludeFromRss" />
 	</section>
 </panel>

@@ -30,6 +30,12 @@
 	<entity id="mount-parent-help">
 		<locale lang="fr">rubrique ou site dans lequel ce forum doit apparaître.</locale>
 	</entity>
+	<entity id="excludeFromRss">
+		<locale lang="fr">exclure des flux RSS</locale>
+	</entity>
+	<entity id="excludeFromRss-help">
+		<locale lang="fr">Permet d'exclure des flux RSS générés sur le site l'ensemble des sujets et messages de ce forum.</locale>
+	</entity>
 
 	<entity id="metatitle">
 		<locale lang="fr">nom</locale>

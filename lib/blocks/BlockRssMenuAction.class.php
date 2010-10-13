@@ -56,6 +56,12 @@ class forums_BlockRssMenuAction extends website_BlockAction
 			$website = $doc;
 		}
 		
+		// Handle forum exclusion.
+		if ($forum instanceof forums_persistentdocument_forum && $forum->getExcludeFromRss())
+		{
+			return website_BlockView::NONE;
+		}
+		
 		// Add RSS feeds.
 		$this->addRssFeed($thread, 'false', array('post'));
 		$this->addRssFeed($forum, 'false');
