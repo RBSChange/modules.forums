@@ -93,7 +93,7 @@
 			</page>
 				
 			<topic byLabel="Membres" id="members">
-				<page label="Liste des membres" isIndexPage="true" navigationVisibility="hidden">
+				<page label="Liste des membres" isIndexPage="true" navigationVisibility="hidden" indexingstatus="false">
 					<tag name="contextual_website_website_modules_forums_memberlist" />
 					<changecontent for="content-block">
 						<changeblock type="modules_forums_memberlist" />
