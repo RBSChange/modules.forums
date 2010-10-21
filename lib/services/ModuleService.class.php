@@ -4,6 +4,10 @@
  */
 class forums_ModuleService extends ModuleBaseService
 {
+	const EXTBOOL_FALSE = 0;
+	const EXTBOOL_TRUE = 1;
+	const EXTBOOL_INHERIT = 2;
+	
 	/**
 	 * Singleton
 	 * @var forums_ModuleService
@@ -163,5 +167,79 @@ class forums_ModuleService extends ModuleBaseService
 		}
 		$query->add(Restrictions::eq($websiteField, $website->getId()));
 		return f_util_ArrayUtils::firstElement($query->setProjection(Projections::rowCount('projection'))->findColumn('projection'));
+	}
+	
+	/**
+	 * @param f_peristentdocument_PersistentDocument $container
+	 * @param array $attributes
+	 * @param string $script
+	 * @return array
+	 */
+	public function getStructureInitializationAttributes($container, $attributes, $script)
+	{
+		switch ($script)
+		{
+			case 'forumgroupDefaultStructure':
+				return $this->getForumgroupStructureInitializationAttributes($container, $attributes, $script);
+				
+			case 'membersDefaultStructure' :
+				return $this->getMembersStructureInitializationAttributes($container, $attributes, $script);
+			
+			default:
+				throw new BaseException('Unknown structure initialization script: '.$script, 'modules.brand.bo.actions.Unknown-structure-initialization-script', array('script' => $script));
+		}
+	}
+	
+	/**
+	 * @param f_peristentdocument_PersistentDocument $container
+	 * @param array $attributes
+	 * @param string $script
+	 * @return array
+	 */
+	public function getForumgroupStructureInitializationAttributes($container, $attributes, $script)
+	{
+		// Check container.
+		if (!$container instanceof forums_persistentdocument_forumgroup)
+		{
+			throw new BaseException('Invalid forum group', 'modules.forums.bo.actions.Invalid-forumgroup');
+		}
+		
+		$node = TreeService::getInstance()->getInstanceByDocument($container->getTopic());
+		if (count($node->getChildren('modules_website/page')) > 0)
+		{
+			throw new BaseException('This forum group already contains pages', 'modules.forums.bo.actions.Forumgroup-already-contains-pages');
+		}
+		
+		// Set atrtibutes.
+		$attributes['byDocumentId'] = $container->getTopic()->getId();
+		return $attributes;
+	}
+	
+	/**
+	 * @param f_peristentdocument_PersistentDocument $container
+	 * @param array $attributes
+	 * @param string $script
+	 * @return array
+	 */
+	public function getMembersStructureInitializationAttributes($container, $attributes, $script)
+	{
+		// Check container.
+		if (!$container instanceof forums_persistentdocument_websitefolder)
+		{
+			throw new BaseException('Invalid website folder', 'modules.forums.bo.actions.Invalid-websitefolder');
+		}
+		
+		$website = $container->getWebsite();
+		if (TagService::getInstance()->hasDocumentByContextualTag('contextual_website_website_modules_forums_memberlist', $website) || 
+			TagService::getInstance()->hasDocumentByContextualTag('contextual_website_website_modules_forums_member', $website) ||
+			TagService::getInstance()->hasDocumentByContextualTag('contextual_website_website_modules_forums_editprofile', $website) ||
+			TagService::getInstance()->hasDocumentByContextualTag('contextual_website_website_modules_forums_memberban', $website))
+		{
+			throw new BaseException('This website already contains member pages', 'modules.forums.bo.actions.Website-already-contains-member-page');
+		}
+		
+		// Set atrtibutes.
+		$attributes['byDocumentId'] = $website->getId();
+		return $attributes;
 	}
 }

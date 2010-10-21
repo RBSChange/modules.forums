@@ -237,9 +237,16 @@
 		<locale lang="fr">messages de la rubrique</locale>
 		<locale lang="en">posts in topic</locale>
 	</entity>
+	<entity id="posts-of-systemtopic">
+		<locale lang="fr">messages de la rubrique</locale>
+		<locale lang="en">posts in topic</locale>
+	</entity>
 	<entity id="posts-of-forum">
 		<locale lang="fr">messages du forum</locale>
 		<locale lang="en">posts in forum</locale>
+	</entity>
+	<entity id="posts-of-forumgroup">
+		<locale lang="fr">messages de groupe de forums</locale>
 	</entity>
 	<entity id="posts-of-thread">
 		<locale lang="fr">messages du sujet</locale>
@@ -257,6 +264,13 @@
 	<entity id="threads-of-topic">
 		<locale lang="fr">sujets de la rubrique</locale>
 		<locale lang="en">threads in topic</locale>
+	</entity>
+	<entity id="threads-of-systemtopic">
+		<locale lang="fr">sujets de la rubrique</locale>
+		<locale lang="en">threads in topic</locale>
+	</entity>
+	<entity id="threads-of-forumgroup">
+		<locale lang="fr">sujets du groupe de forums</locale>
 	</entity>
 	<entity id="threads-of-forum">
 		<locale lang="fr">sujets du forum</locale>

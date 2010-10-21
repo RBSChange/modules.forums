@@ -25,3 +25,6 @@ treechildren::-moz-tree-image(modules_forums_preferences){
 treechildren::-moz-tree-image(modules_forums_ban){
 	list-style-image: url(/changeicons/small/document.png);
 }
+treechildren::-moz-tree-image(modules_forums_forumgroup){
+	list-style-image: url(/changeicons/small/folders-stack.png);
+}

@@ -15,10 +15,10 @@
 		</model>
 		<model name="modules_forums/websitefolder">
 			<children>
-				<child model="modules_forums/forum" />
+				<child model="modules_forums/forumgroup" />
 			</children>
 			<drops>
-				<drop model="modules_forums/forum" action="move" />
+				<drop model="modules_forums/forumgroup" action="move" />
 			</drops>
 			<columns>
 				<column name="path" label="Path" flex="5" />
@@ -26,16 +26,47 @@
 			<contextactions>
 				<contextaction name="edit" />
 				<contextaction name="openTreeNodeOrder" />
-				<contextaction name="createForum" />
+				<groupactions name="createWebsitefolder_">
+					<contextaction name="createForumgroup" />
+					<contextaction name="initMembersDefaultStructure" />
+				</groupactions>
 			</contextactions>
 		</model>
-		<model name="modules_forums/forum">
+		<model name="modules_forums/forumgroup">
+			<children>
+				<child model="modules_forums/forum" />
+			</children>
+			<drops>
+				<drop model="modules_forums/forum" action="move" />
+			</drops>
 			<contextactions>
 				<contextaction name="edit" />
 				<contextaction name="delete" />
 				<contextaction name="activate" />
 				<contextaction name="deactivated" />
 				<contextaction name="reactivate" />
+				<contextaction name="openTreeNodeOrder" />
+				<groupactions name="createForumgroup_">
+					<contextaction name="createForum" />
+					<contextaction name="initForumgroupDefaultStructure" />
+				</groupactions>
+			</contextactions>
+		</model>
+		<model name="modules_forums/forum">
+			<children>
+				<child model="modules_forums/forum" />
+			</children>
+			<drops>
+				<drop model="modules_forums/forum" action="move" />
+			</drops>
+			<contextactions>
+				<contextaction name="edit" />
+				<contextaction name="delete" />
+				<contextaction name="activate" />
+				<contextaction name="deactivated" />
+				<contextaction name="reactivate" />
+				<contextaction name="openTreeNodeOrder" />
+				<contextaction name="createForum" />
 			</contextactions>
 		</model>
 	</models>
@@ -60,5 +91,10 @@
 		<action name="openTreeNodeOrder" single="true" permission="Order" icon="sort" label="&amp;modules.uixul.bo.actions.Set-children-order;"/>
 		<action name="create_" actions="createForum" icon="add" />
 		<action name="createForum" single="true" permission="Insert_forum" group="create_" icon="add" label="&amp;modules.forums.bo.actions.Create-forum;" />
+		<action name="createForumgroup" single="true" permission="Insert_forum" group="create_" icon="add" label="&amp;modules.forums.bo.actions.Create-forumgroup;" />
+		<action name="initForumgroupDefaultStructure" single="true" permission="InitDefaultStructure" />
+		<action name="initMembersDefaultStructure" single="true" permission="InitDefaultStructure" />
+		<action name="createForumgroup_" icon="add" />
+		<action name="createWebsitefolder_" icon="add" />
 	</actions>
 </perspective>

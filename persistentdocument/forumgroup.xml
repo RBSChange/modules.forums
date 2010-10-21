@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://www.rbs.fr/schema/change-document/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/static/schema/change-document/1.0.xsd"
+	model-version="1.0" icon="folders-stack" indexable="true" table-name="m_forums_doc_forum">
+	<properties>
+		<add name="description" type="XHTMLFragment" localized="true" />
+		<add name="topic" type="modules_website/systemtopic" min-occurs="1" inverse="true" cascade-delete="true" />
+		<add name="website" type="modules_website/website" min-occurs="1" inverse="true" />
+		<add name="metatitle" type="LongString" localized="true" />
+		<add name="metadescription" type="LongString" localized="true" />
+		<add name="metakeywords" type="LongString" localized="true" />
+		<add name="lockedMode" type="Integer" default-value="0" from-list="modules_forums/modeslimited" />
+		<add name="locked" type="Boolean" default-value="false" />
+		<add name="excludeFromRssMode" type="Integer" default-value="0" from-list="modules_forums/modeslimited" />
+		<add name="excludeFromRss" type="Boolean" />
+	</properties>
+</document>

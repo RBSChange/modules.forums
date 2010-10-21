@@ -36,4 +36,12 @@ class forums_WebsitefolderScriptDocumentElement extends import_ScriptDocumentEle
 			}
 		}
 	}
+	
+	/**
+	 * @param import_ScriptExecuteElement $scriptExecute
+	 */
+	public function setDocumentIdAttributeWithWebsite($scriptExecute)
+	{
+		$this->script->setAttribute('byDocumentId', $this->getPersistentDocument()->getWebsite()->getId());
+	}
 }

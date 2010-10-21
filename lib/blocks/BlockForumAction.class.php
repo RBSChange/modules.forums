@@ -17,7 +17,7 @@ class forums_BlockForumAction extends website_BlockAction
 			$description = ($doc->getMetadescription()) ? $doc->getMetadescription() : f_util_StringUtils::shortenString(f_util_StringUtils::htmlToText($doc->getDescriptionAsHtml()), 100);
 			return array('forumname' => $label, 'forumshortdesc' => $description, 'forumkeywords' => $doc->getKeywords());
 		}
-		return array();
+		return array('forumname' => null, 'forumshortdesc' => null, 'forumkeywords' => null);
 	}
 
 	/**
@@ -35,7 +35,7 @@ class forums_BlockForumAction extends website_BlockAction
 		}
 
 		$forum = $this->getDocumentParameter();
-		if ($forum === null)
+		if (!$forum instanceof forums_persistentdocument_forum)
 		{
 			return website_BlockView::NONE;
 		}
