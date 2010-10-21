@@ -1,6 +1,5 @@
 <tal:block tal:condition="links">
-	<h2 change:h="" change:translate="modules.forums.frontoffice.Rss-menu-title"></h2>
-	
+	<h3 change:h="" change:translate="modules.forums.frontoffice.Rss-menu-title"></h3>
 	<ul>
 		<li tal:repeat="link links">
 			<img change:icon="rss/small" style="vertical-align: middle" /> <a change:link="module forums; action ViewFeed; parentref link/parentref; docType link/docType; recursive link/recursive">${link/title}</a>

@@ -106,8 +106,8 @@ class forums_persistentdocument_member extends forums_persistentdocument_memberb
 		{
 			$website = website_WebsiteModuleService::getInstance()->getCurrentWebsite();
 		}
-		$forlder = forums_WebsitefolderService::getInstance()->getByWebsite($website);
-		return forums_ModuleService::getInstance()->hasPermissionOnId($this, 'modules_forums.Banuser', $forlder->getId());
+		$folder = forums_WebsitefolderService::getInstance()->getByWebsite($website);
+		return forums_ModuleService::getInstance()->hasPermissionOnId($this, 'modules_forums.Banuser', $folder->getId());
 	}
 	
 	/**

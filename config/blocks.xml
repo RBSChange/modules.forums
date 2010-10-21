@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <blocks>
+	<block type="modules_forums_forumDetail" icon="forum" label="&amp;modules.forums.bo.blocks.forumdetail.Title;">
+		<parameters>
+			<parameter name="nbitemperpage" type="Integer" default-value="20" />
+		</parameters>
+		<metas>
+			<meta name="forumname" allow="title,description" />
+			<meta name="forumshortdesc" allow="title,description" />
+			<meta name="forumkeywords" allow="keywords" />
+		</metas>
+	</block>
 	<block type="modules_forums_forum" icon="forum" label="&amp;modules.forums.bo.blocks.forum.Title;">
 		<parameters>
 			<parameter name="nbitemperpage" type="Integer" default-value="20" />
@@ -10,11 +20,7 @@
 			<meta name="forumkeywords" allow="keywords" />
 		</metas>
 	</block>
-	<block type="modules_forums_forumcontextuallist" icon="list-block" label="&amp;modules.forums.bo.blocks.forumcontextuallist.Title;">
-		<parameters>
-			<parameter name="nbitemperpage" type="Integer" default-value="20" />
-		</parameters>
-	</block>
+	<block type="modules_forums_forumcontextuallist" icon="list-block" label="&amp;modules.forums.bo.blocks.forumcontextuallist.Title;" />
 	<block type="modules_forums_thread" icon="thread" label="&amp;modules.forums.bo.blocks.thread.Title;">
 		<parameters>
 			<parameter name="showGravatars" type="Boolean" default-value="true" />
@@ -96,11 +102,13 @@
 	<block type="modules_forums_editprofile" icon="edit" label="&amp;modules.forums.bo.blocks.editprofile.Title;" />
 	<block type="modules_forums_memberban" icon="document" label="&amp;modules.forums.bo.blocks.memberban.Title;" />
 	<!-- Dashboard blocks. -->
-	<block type="modules_forums_DashboardGeneralStatistics" icon="statistics" dashboard="true" label="&amp;modules.forums.bo.blocks.DashboardGeneralStatistics.Title;">
+	<block type="modules_forums_DashboardGeneralStatistics" icon="statistics" dashboard="true"
+		label="&amp;modules.forums.bo.blocks.DashboardGeneralStatistics.Title;">
 		<parameters>
 			<parameter name="website" type="modules_website/website" min-occurs="1" />
 			<parameter name="usecharts" type="Boolean" default-value="true" />
-			<parameter name="columns" type="String" default-value="newThreads,newPosts,newMembers" max-occurs="-1" from-list="modules_forums/dashboardwebsitestatisticscolums" fieldtype="checklist" />
+			<parameter name="columns" type="String" default-value="newThreads,newPosts,newMembers" max-occurs="-1"
+				from-list="modules_forums/dashboardwebsitestatisticscolums" fieldtype="checklist" />
 		</parameters>
 	</block>
 </blocks>

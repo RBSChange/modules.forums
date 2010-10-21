@@ -3,7 +3,7 @@
  * forums_ForumService
  * @package forums
  */
-class forums_ForumService extends f_persistentdocument_DocumentService
+class forums_ForumService extends forums_ForumgroupService
 {
 	/**
 	 * @var forums_ForumService
@@ -84,60 +84,17 @@ class forums_ForumService extends f_persistentdocument_DocumentService
 		$query->createCriteria('thread')->add(Restrictions::eq('forum', $forum));
 		return f_util_ArrayUtils::firstElement($query->find());
 	}
-	
+
 	/**
-	 * @param Integer $parentId
-	 * @return f_persistentdocument_PersistentDocument[]
-	 */
-	public function getByTopicParentId($parentId)
-	{
-		$query = $this->createQuery()->add(Restrictions::published());
-		$query->createCriteria('topic')->add(Restrictions::childOf($parentId));
-		return $query->find();
-	}
-	
-	/**
-	 * @param catalog_persistentdocument_shop $document
+	 * @param forums_persistentdocument_forum $document
 	 * @param Integer $parentNodeId Parent node ID where to save the document (optionnal => can be null !).
-	 * @return void
+	 * @return f_persistentdocument_PersistentDocument topic or website
 	 */
-	protected function preSave($document, $parentNodeId = null)
+	protected function getMountParent($document, $parentNodeId)
 	{
-		parent::preSave($document, $parentNodeId);
-		
-		// Check parent type.
-		$parent = $document->getMountParent();
-		if ($parent === null)
-		{
-			throw new BaseException('Forums must have a mount parent!', 'modules.forums.document.forum.exception.Mount-parent-required');
-		}
-		else if (!($parent instanceof website_persistentdocument_topic) && !($parent instanceof website_persistentdocument_website))
-		{
-			throw new BaseException('Forums parent must be a topic or a website!', 'modules.forums.document.forum.exception.Mount-parent-bad-type');
-		}
-		
-		// Generate or move the topic.
-		$topic = $document->getTopic();
-		if ($topic === null)
-		{
-			$topic = website_SystemtopicService::getInstance()->getNewDocumentInstance();
-			$topic->setReferenceId($document->getId());
-			$topic->setLabel($document->getLabel());
-			$topic->setDescription($document->getDescription());
-			$topic->setPublicationstatus('DRAFT');
-			$topic->save($parent->getId());
-			$document->setTopic($topic);
-			$document->setWebsite(DocumentHelper::getDocumentInstance($topic->getDocumentService()->getWebsiteId($topic)));
-		}
-		else if ($parent !== $this->getParentOf($topic))
-		{
-			if ($document->setWebsite()->getId() !== $topic->getDocumentService()->getWebsiteId($topic))
-			{
-				throw new BaseException('You can only move a forum inside the same website!', 'modules.forums.document.forum.exception.Cant-move-to-another-website');
-			}
-			$topic->getDocumentService()->moveTo($topic, $parent->getId());
-		}
+		return $this->getForumgroupParent($document, $parentNodeId)->getTopic();
 	}
+		
 	/**
 	 * @param forums_persistentdocument_forum $document
 	 * @param Integer $parentNodeId Parent node ID where to save the document.
@@ -152,68 +109,27 @@ class forums_ForumService extends f_persistentdocument_DocumentService
 	}
 	
 	/**
-	 * @param catalog_persistentdocument_shop $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document.
-	 * @return void
-	 */
-	protected function postInsert($document, $parentNodeId = null)
-	{
-		parent::postInsert($document, $parentNodeId);
-		
-		$topic = $document->getTopic();
-		$topic->setReferenceId($document->getId());
-		$topic->save();
-		$topic->activate();
-	}
-	
-	/**
-	 * @param catalog_persistentdocument_shop $document
-	 * @param String $oldPublicationStatus
-	 * @param array<"cause" => String, "modifiedPropertyNames" => array, "oldPropertyValues" => array> $params
-	 * @return void
-	 */
-	protected function publicationStatusChanged($document, $oldPublicationStatus, $params)
-	{
-		// Status transit from ACTIVE to PUBLICATED.
-		if ($document->isPublished())
-		{
-			$document->getTopic()->activate();
-		}
-		// Status transit from PUBLICATED to ACTIVE.
-		else if ($oldPublicationStatus == 'PUBLICATED')
-		{
-			$document->getTopic()->deactivate();
-		}
-	}
-	
-	/**
 	 * @param forums_persistentdocument_forum $document
-	 * @return integer
+	 * @param Integer $destId
 	 */
-	public function getWebsiteId($document)
+	protected function onDocumentMoved($document, $destId)
 	{
-		$topic = $document->getTopic();
-		return $topic->getDocumentService()->getWebsiteId($topic);
-	}
-	
-	/**
-	 * @param forums_persistentdocument_forum $document
-	 * @return website_persistentdocument_page or null
-	 */
-	public function getDisplayPage($document)
-	{
-		$document = DocumentHelper::getByCorrection($document);
-		
-		$model = $document->getPersistentModel();
-		if ($model->hasURL() && $document->isPublished())
+		$destination = DocumentHelper::getDocumentInstance($destId);
+		if ($destination instanceof forums_persistentdocument_forumgroup)
 		{
 			$topic = $document->getTopic();
-			$page = website_PageService::getInstance()->createQuery()->add(Restrictions::childOf($topic->getId()))->add(Restrictions::published())->add(Restrictions::hasTag('functional_forums_forum-detail'))->findUnique();
-			return $page;
+			$destinationTopic = $destination->getTopic();
+			if ($topic->getDocumentService()->getParentOf($topic) !== $destinationTopic)
+			{
+				$this->moveTo($topic, $destinationTopic->getId());
+			}
 		}
-		return null;
+		else
+		{
+			throw new Exception('A forum must be a chid of a forumgroup!');
+		}
 	}
-	
+
 	/**
 	 * @param forums_persistentdocument_forum $document
 	 * @param string $forModuleName

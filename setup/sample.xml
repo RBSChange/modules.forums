@@ -5,6 +5,8 @@
 	<binding fileName="modules/media/persistentdocument/import/media_binding.xml" />
 	<binding fileName="modules/forums/persistentdocument/import/forums_binding.xml" />
 
+	<attribute name="template" default="true">webfactory/tplTwo</attribute>
+
 	<rootfolder module="media">
 		<folder byLabel="Medias de l'exemple de forum">
 			<media path="modules/forums/setup/media/sample/new.png" byLabel="Nouveau" id="visual-new" />
@@ -32,101 +34,15 @@
 	<rank byLabel="Avancé" thresholdMin="10" visual-refid="visual-silver" website-refid="website" />
 	<rank byLabel="Expert" thresholdMin="20" visual-refid="visual-gold" website-refid="website" />
 	<title byLabel="Modérateur" visual-refid="visual-mod" website-refid="website" id="title-mod" />
-	<title byLabel="Super-modérateur" visual-refid="visual-smod" website-refid="website" id="title-smod" />	
-		
-	<website byTag="default_modules_website_default-website" template="webfactory/tplTwo">
+	<title byLabel="Super-modérateur" visual-refid="visual-smod" website-refid="website" id="title-smod" />
+	
+	<website byTag="default_modules_website_default-website" id="website">
 		<member id="mod1" user-refid="usera" publicationstatus="ACTIVE" title-refids="title-mod" />
 		<member id="mod2" user-refid="userb" publicationstatus="ACTIVE" displayname="true" title-refids="title-smod" />
 		<member id="member1" user-refid="user1" publicationstatus="ACTIVE" displayname="true" />
 		<member id="member2" user-refid="user2" publicationstatus="ACTIVE" displayname="true" signature="\o/" />
 		<member id="member3" user-refid="user3" publicationstatus="ACTIVE" displayname="true" />
 		<member id="member4" user-refid="user4" publicationstatus="ACTIVE" signature="Ma signature." />
-		
-		<topic byLabel="Forums de discussion" id="forums">
-			<page label="Liste des forums" id="forumsIndex" isIndexPage="true" navigationVisibility="hidden" indexingstatus="false">
-				<tag name="functional_forums_forum-list" />
-				<changecontent for="content-block">
-					<changeblock type="modules_forums_forumcontextuallist" />
-				</changecontent>
-			</page>
-
-			<page label="Forum" navigationVisibility="hidden" indexingstatus="false" metatitle="Forum {forums_forum.forumname}" description="Forum {forums_forum.forumname} : {forums_forum.forumshortdesc}" keywords="{forums_forum.forumkeywords}">
-				<tag name="functional_forums_forum-detail" />
-				<changecontent for="content-block">
-					<changeblock type="modules_forums_forum" __nbitemperpage="10" />
-				</changecontent>
-			</page>
-			
-			<page label="Sujet" navigationVisibility="hidden" indexingstatus="false" metatitle="{forums_thread.threadname} : forum {forums_thread.forumname}" description="Discussion {forums_thread.threadname} sur le forum {forums_thread.forumname}" keywords="{forums_thread.threadkeywords}">
-				<tag name="functional_forums_thread-detail" />
-				<changecontent for="content-block">
-					<changeblock type="modules_forums_thread" />
-				</changecontent>
-			</page>
-			
-			<page label="Message" navigationVisibility="hidden" indexingstatus="false" metatitle="Message par {forums_post.postauthor} : sujet {forums_post.threadname}" description="{forums_post.postshortdesc}">
-				<tag name="functional_forums_post-detail" />
-				<changecontent for="content-block">
-					<changeblock type="modules_forums_post" />
-				</changecontent>
-			</page>
-			
-			<page label="Nouveau sujet" navigationVisibility="hidden" indexingstatus="false" metatitle="Forum {forums_newthread.forumname} : nouveau sujet">
-				<tag name="functional_forums_thread-new" />
-				<changecontent for="content-block">
-					<changeblock type="modules_forums_newthread" />
-				</changecontent>
-			</page>
-			
-			<page label="Nouveau message" navigationVisibility="hidden" indexingstatus="false" metatitle="Sujet {forums_newpost.threadname} : nouveau message">
-				<tag name="functional_forums_post-new" />
-				<changecontent for="content-block">
-					<changeblock type="modules_forums_newpost" />
-				</changecontent>
-			</page>
-			
-			<page label="Édition d'un message" navigationVisibility="hidden" indexingstatus="false" metatitle="Édition d'un message dans {forums_editpost.threadname}">
-				<tag name="functional_forums_post-edit" />
-				<changecontent for="content-block">
-					<changeblock type="modules_forums_editpost" />
-				</changecontent>
-			</page>
-		</topic>
-		<topic byLabel="Membres des forums" id="members">
-			<page label="Liste des membres" isIndexPage="true" navigationVisibility="hidden" indexingstatus="false">
-				<tag name="contextual_website_website_modules_forums_memberlist" />
-				<changecontent for="content-block">
-					<changeblock type="modules_forums_memberlist" />
-				</changecontent>
-			</page>
-			
-			<page label="Membre" navigationVisibility="hidden" indexingstatus="false" metatitle="{forums_member.login} - Profil du membre" description="Profil de {forums_member.login} - membre depuis {forums_member.registrationdate}" keywords="profil, membre, {forums_member.login}">
-				<tag name="contextual_website_website_modules_forums_member" />
-				<changecontent for="content-block">
-					<changeblock type="modules_forums_member" />
-				</changecontent>
-			</page>
-			
-			<page label="Modifier le profil d'un membre" navigationVisibility="hidden" indexingstatus="false">
-				<tag name="contextual_website_website_modules_forums_editprofile" />
-				<changecontent for="content-block">
-					<changeblock type="modules_forums_editprofile" />
-				</changecontent>
-			</page>
-			
-			<page label="Bannir un membre" navigationVisibility="hidden" indexingstatus="false">
-				<tag name="contextual_website_website_modules_forums_memberban" />
-				<changecontent for="content-block">
-					<changeblock type="modules_forums_memberban" />
-				</changecontent>
-			</page>
-		</topic>
-		<menus>
-			<menu byTag="contextual_website_website_menu-main">
-				<menuitempage pageid="forums" />
-				<menuitempage pageid="members" />
-			</menu>
-		</menus>
 	</website>
 
 	<rootfolder module="forums">
@@ -134,141 +50,152 @@
 			<permissions>
 				<frontendpermission module="forums" role="SuperModerator" user-refid="userb" />
 			</permissions>
-			<forum label="BlaBla général" mountParent-refid="forums" nbPostPerPage="10" publicationstatus="ACTIVE" description="Discutons de tout et de rien">
+			<execute method="setDocumentIdAttributeWithWebsite" />
+			<binding fileName="modules/forums/setup/membersDefaultStructure.xml" />
+			<forumgroup label="Forums" mountParent-refid="website" publicationstatus="ACTIVE">
 				<permissions>
 					<frontendpermission module="forums" role="SuperModerator" user-refid="userb" />
 					<frontendpermission module="forums" role="Moderator" user-refid="usera" />
 				</permissions>
-				<thread label="Règles à respecter" threadauthor-refid="mod2" level="40">
-					<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-				</thread>
-				<thread label="Bienvenue dans le forum Blabla général" threadauthor-refid="mod2" level="30">
-					<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-				</thread>
-				<thread label="Best-of" threadauthor-refid="mod1" level="20">
-					<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-				</thread>
-				<thread label="F.A.Q." threadauthor-refid="mod2" level="20">
-					<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-				</thread>
-				<thread label="Suspendisse diam mauris 1" threadauthor-refid="member1">
-					<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-				</thread>
-				<thread label="Suspendisse diam mauris 2" threadauthor-refid="member1">
-					<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-				</thread>
-				<thread label="Suspendisse diam mauris 3" threadauthor-refid="member1">
-					<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-				</thread>
-				<thread label="Suspendisse diam mauris 4" threadauthor-refid="member1">
-					<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-				</thread>
-				<thread label="Suspendisse diam mauris 5" threadauthor-refid="member1">
-					<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-				</thread>
-				<thread label="Suspendisse diam mauris 6" threadauthor-refid="member1">
-					<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-				</thread>
-				<thread label="Suspendisse diam mauris 7" threadauthor-refid="member1">
-					<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-				</thread>
-				<thread label="Suspendisse diam mauris 8" threadauthor-refid="member1">
-					<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-				</thread>
-				<thread label="Suspendisse diam mauris 9" threadauthor-refid="member1">
-					<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-				</thread>
-				<thread label="Suspendisse diam mauris 10" threadauthor-refid="member1">
-					<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-				</thread>
-				<thread label="Suspendisse diam mauris 11" threadauthor-refid="member1">
-					<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-				</thread>
-				<thread label="Suspendisse diam mauris 12" threadauthor-refid="member1">
-					<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-				</thread>
-				<thread label="Suspendisse diam mauris, tincidunt in" threadauthor-refid="member2">
-					<post postauthor-refid="member2" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="member3" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="mod1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="member2" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="member4" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-				</thread>
-				<thread label="Spharetra eu, tincidunt in" threadauthor-refid="member1">
-					<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="member3" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="mod1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-				</thread>
-				<thread label="Morbi ac nisl. Pellentesque" threadauthor-refid="member1">
-					<post postauthor-refid="member1" text="Pellentesque nisl urna, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="member3" text="Pellentesque nisl urna, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="member4" text="Pellentesque pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="member1" text="Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="member2" text="Pellentesque, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="member3" text="Pellentesque nisl nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="member4" text="Pellentesque eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="member1" text="Pellentesque nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="member2" text="Pellentesque nisl urna, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="member1" text="Pellentesque nisl urna, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="member2" text="Pellentesque nisl urna, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="member1" text="Pellentesque nisl urna, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="member2" text="Pellentesque pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="member1" text="Pellentesque eget, sagittis lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="member4" text="Pellentesque sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="member2" text="Pellentesque pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="mod1" text="Pellentesque nisl nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-				</thread>
-			</forum>
-			<forum label="Présentation" mountParent-refid="forums" nbPostPerPage="10" publicationstatus="ACTIVE" description="C'est ici que les nouveaux arrivants sont invités à se présenter">
-			</forum>
-			<forum label="News du Forum" mountParent-refid="forums" nbPostPerPage="10" publicationstatus="ACTIVE" description="Ici vous seront présenté, les nouveautés, les améliorations, les maintenances">
-				<thread label="Tincidunt in" threadauthor-refid="member1">
-					<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-				</thread>
-			</forum>
-			<forum label="Boîte à idées - Vos suggestions" mountParent-refid="forums" nbPostPerPage="10" publicationstatus="ACTIVE" description="Déposez ici vos idées de forums, sujets, rubriques, catégories ... Afin de faire avancer le forum dans votre sens">
-				<permissions>
-					<frontendpermission module="forums" role="SuperModerator" user-refid="userb" />
-					<frontendpermission module="forums" role="Moderator" user-refid="usera" />
-				</permissions>
-				<thread label="Diam mauris, in" threadauthor-refid="member2">
-					<post postauthor-refid="member2" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="mod1" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-				</thread>
-				<thread label="Dsagittis nec" threadauthor-refid="member3">
-					<post postauthor-refid="member3" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="mod1" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-				</thread>
-				<thread label="Dacinia eget, in " threadauthor-refid="member4">
-					<post postauthor-refid="member4" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-					<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-				</thread>
-			</forum>
+				<execute method="setDocumentIdAttributeWithTopic" />
+				<binding fileName="modules/forums/setup/forumgroupDefaultStructure.xml" />
+				<forum label="BlaBla général" nbPostPerPage="10" publicationstatus="ACTIVE" description="Discutons de tout et de rien">
+					<thread label="Règles à respecter" threadauthor-refid="mod2" level="40">
+						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+					</thread>
+					<thread label="Bienvenue dans le forum Blabla général" threadauthor-refid="mod2" level="30">
+						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+					</thread>
+					<thread label="Best-of" threadauthor-refid="mod1" level="20">
+						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+					</thread>
+					<thread label="F.A.Q." threadauthor-refid="mod2" level="20">
+						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+					</thread>
+					<thread label="Suspendisse diam mauris 1" threadauthor-refid="member1">
+						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+					</thread>
+					<thread label="Suspendisse diam mauris 2" threadauthor-refid="member1">
+						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+					</thread>
+					<thread label="Suspendisse diam mauris 3" threadauthor-refid="member1">
+						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+					</thread>
+					<thread label="Suspendisse diam mauris 4" threadauthor-refid="member1">
+						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+					</thread>
+					<thread label="Suspendisse diam mauris 5" threadauthor-refid="member1">
+						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+					</thread>
+					<thread label="Suspendisse diam mauris 6" threadauthor-refid="member1">
+						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+					</thread>
+					<thread label="Suspendisse diam mauris 7" threadauthor-refid="member1">
+						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+					</thread>
+					<thread label="Suspendisse diam mauris 8" threadauthor-refid="member1">
+						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+					</thread>
+					<thread label="Suspendisse diam mauris 9" threadauthor-refid="member1">
+						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+					</thread>
+					<thread label="Suspendisse diam mauris 10" threadauthor-refid="member1">
+						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+					</thread>
+					<thread label="Suspendisse diam mauris 11" threadauthor-refid="member1">
+						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+					</thread>
+					<thread label="Suspendisse diam mauris 12" threadauthor-refid="member1">
+						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+					</thread>
+					<thread label="Suspendisse diam mauris, tincidunt in" threadauthor-refid="member2">
+						<post postauthor-refid="member2" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member3" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member2" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member4" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+					</thread>
+					<thread label="Spharetra eu, tincidunt in" threadauthor-refid="member1">
+						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member3" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+					</thread>
+					<thread label="Morbi ac nisl. Pellentesque" threadauthor-refid="member1">
+						<post postauthor-refid="member1" text="Pellentesque nisl urna, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member3" text="Pellentesque nisl urna, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member4" text="Pellentesque pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" text="Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member2" text="Pellentesque, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member3" text="Pellentesque nisl nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member4" text="Pellentesque eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" text="Pellentesque nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member2" text="Pellentesque nisl urna, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" text="Pellentesque nisl urna, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member2" text="Pellentesque nisl urna, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" text="Pellentesque nisl urna, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member2" text="Pellentesque pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" text="Pellentesque eget, sagittis lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member4" text="Pellentesque sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member2" text="Pellentesque pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod1" text="Pellentesque nisl nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+					</thread>
+				</forum>
+				<forum label="Présentation" nbPostPerPage="10" publicationstatus="ACTIVE" description="C'est ici que les nouveaux arrivants sont invités à se présenter">
+				</forum>
+				<forum label="News du Forum" nbPostPerPage="10" publicationstatus="ACTIVE" description="Ici vous seront présenté, les nouveautés, les améliorations, les maintenances">
+					<thread label="Tincidunt in" threadauthor-refid="member1">
+						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+					</thread>
+				</forum>
+				<forum label="Boîte à idées - Vos suggestions" nbPostPerPage="10" publicationstatus="ACTIVE" description="Déposez ici vos idées de forums, sujets, rubriques, catégories ... Afin de faire avancer le forum dans votre sens">
+					<thread label="Diam mauris, in" threadauthor-refid="member2">
+						<post postauthor-refid="member2" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod1" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+					</thread>
+					<thread label="Dsagittis nec" threadauthor-refid="member3">
+						<post postauthor-refid="member3" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod1" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+					</thread>
+					<thread label="Dacinia eget, in " threadauthor-refid="member4">
+						<post postauthor-refid="member4" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+					</thread>
+				</forum>
+			</forumgroup>
 		</websitefolder>
 	</rootfolder>
 	
-	<execute method="setPageRefAsIndex" on-refid="forumsIndex" />
+	<website byTag="default_modules_website_default-website">
+		<topic byLabel="Membres" id="members" />
+		<systemtopic byLabel="Forums" id="forums" />
+		<menus>
+			<menu byTag="contextual_website_website_menu-main">
+				<menuitempage pageid="forums" />
+				<menuitempage pageid="members" />
+			</menu>
+		</menus>
+	</website>
 </script>

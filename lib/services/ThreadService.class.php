@@ -166,11 +166,19 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 	}
 	
 	/**
+	 * @param website_persistentdocument_website $website
 	 * @return forums_persistentdocument_thread[]
 	 */
-	public function getGlobalAnnoucements()
+	public function getGlobalAnnoucements($website = null)
 	{
-		return $this->createQuery()->add(Restrictions::eq('level', self::LEVEL_GLOBAL))->add(Restrictions::published())->addOrder(Order::desc('lastpostdate'))->find();
+		if ($website === null)
+		{
+			$website = website_WebsiteModuleService::getInstance()->getCurrentWebsite();
+		}
+		$query = $this->createQuery()->add(Restrictions::eq('level', self::LEVEL_GLOBAL));
+		$query->createCriteria('forum')->add(Restrictions::eq('website', $website));
+		$query->add(Restrictions::published())->addOrder(Order::desc('lastpostdate'));
+		return $query->find();
 	}
 	
 	/**

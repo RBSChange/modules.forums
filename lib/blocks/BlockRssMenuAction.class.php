@@ -34,7 +34,7 @@ class forums_BlockRssMenuAction extends website_BlockAction
 			$topic = null;
 			$website = $forum->getWebsite();
 		}
-		else if ($doc instanceof forums_persistentdocument_forum)
+		else if ($doc instanceof forums_persistentdocument_forumgroup)
 		{
 			$thread = null;
 			$forum = $doc;
@@ -57,7 +57,7 @@ class forums_BlockRssMenuAction extends website_BlockAction
 		}
 		
 		// Handle forum exclusion.
-		if ($forum instanceof forums_persistentdocument_forum && $forum->getExcludeFromRss())
+		if ($forum instanceof forums_persistentdocument_forumgroup && $forum->isExcludedFromRss())
 		{
 			return website_BlockView::NONE;
 		}

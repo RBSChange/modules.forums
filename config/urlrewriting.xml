@@ -7,6 +7,12 @@
 				<parameter name="forumLabel" method="getLabel" />
 			</parameters>
 		</rule>
+		<rule documentModel="forumgroup" viewMode="detail">
+			<template>/forums-categories/$forumLabel-$id</template>
+			<parameters>
+				<parameter name="forumLabel" method="getLabel" />
+			</parameters>
+		</rule>
 
 		<rule documentModel="thread" viewMode="detail">
 			<template>/forums/$forumLabel/$threadLabel-$id</template>

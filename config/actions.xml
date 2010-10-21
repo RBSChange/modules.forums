@@ -4,4 +4,46 @@
 		<parameter name="listWidget" />
 		<body><![CDATA[this.createDocumentEditor('modules_forums_forum', listWidget.getSelectedItems()[0].id);]]></body>
 	</action>
+	<action name="createForumgroup">
+		<parameter name="listWidget" />
+		<body><![CDATA[this.createDocumentEditor('modules_forums_forumgroup', listWidget.getSelectedItems()[0].id);]]></body>
+	</action>
+	<action name="initForumgroupDefaultStructure">
+		<parameter name="listWidget" />
+		<body><![CDATA[
+			try
+			{
+				var documentId = listWidget.getSelectedItems()[0].id;
+				var topicId = listWidget.getSelectedItems()[0].topicId;
+				var lang = this.getContextLang();
+				var callback = function (attributes) {
+					return wCore.executeJSON('website', 'InitializeStructure', { cmpref: documentId, moduleName: 'forums', scriptName: 'forumgroupDefaultStructure', attributes: attributes, lang: lang }, null, true);
+				};
+				getController().openModalDialog(this, 'InitializeStructure', { documentId: documentId, pageContainerId: topicId, module: this, callback: callback });
+			}
+			catch (e)
+			{
+				wCore.error('catalog.initDefaultStructure', [], e);
+			}
+		]]></body>
+	</action>
+	<action name="initMembersDefaultStructure">
+		<parameter name="listWidget" />
+		<body><![CDATA[
+			try
+			{
+				var documentId = listWidget.getSelectedItems()[0].id;
+				var topicId = listWidget.getSelectedItems()[0].websiteId;
+				var lang = this.getContextLang();
+				var callback = function (attributes) {
+					return wCore.executeJSON('website', 'InitializeStructure', { cmpref: documentId, moduleName: 'forums', scriptName: 'membersDefaultStructure', attributes: attributes, lang: lang }, null, true);
+				};
+				getController().openModalDialog(this, 'InitializeStructure', { documentId: documentId, pageContainerId: topicId, module: this, callback: callback });
+			}
+			catch (e)
+			{
+				wCore.error('catalog.initDefaultStructure', [], e);
+			}
+		]]></body>
+	</action>
 </actions>

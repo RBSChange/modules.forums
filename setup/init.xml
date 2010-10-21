@@ -31,25 +31,30 @@
 		<staticlistupdate listid="modules_users/editprofilepanels">
 			<staticitem label="&amp;modules.forums.frontoffice.Member-informations;" value="forums/EditMemberProfile" />
 		</staticlistupdate>
+		
+		<staticlist listid="modules_forums/modeslimited" label="Mode Oui/non">
+			<staticitem label="&amp;modules.forums.lists.modes.No;" value="0" />
+			<staticitem label="&amp;modules.forums.lists.modes.Yes;" value="1" />
+		</staticlist>
+		
+		<staticlist listid="modules_forums/modesextended" label="Mode Oui/non/hérité">
+			<staticitem label="&amp;modules.forums.lists.modes.No;" value="0" />
+			<staticitem label="&amp;modules.forums.lists.modes.Yes;" value="1" />
+			<staticitem label="&amp;modules.forums.lists.modes.Inherit;" value="2" />
+		</staticlist>
 	</systemfolder>
 
 	<systemfolder module="notification" relatedmodule="forums">
-		<notification
-				label="Bannissement du forum"
-				codename="modules_forums/ban"
-				availableparameters="PSEUDO,DATE,MOTIF"
-				subject="Bannissement temporaire du forum"
-				header=""
-				body="Bonjour {PSEUDO},&lt;br/&gt;Vous avez été banni du forum jusqu'au {DATE}&lt;br/&gt;Par conséquence vous ne pouvez plus participer aux forums jusqu'à cette date.&lt;br/&gt;&lt;br/&gt;{MOTIF}"
-				footer="" />
-		<notification
-				label="Suivi d'un sujet"
-				codename="modules_forums/follower"
-				availableparameters="PSEUDO,TOPIC,LINK,NUM"
-				subject="Nouveau message sur le forum"
-				header=""
-				body="Bonjour {PSEUDO},&lt;br/&gt;&lt;br/&gt;Vous avez choisi de suivre l'évolution du sujet {TOPIC} et il y a {NUM} nouveau(x) message(s).&lt;br/&gt;&lt;br/&gt;Vous pouvez le(s) lire en suivant {LINK}.&lt;br/&gt;&lt;br/&gt;Pour ne plus recevoir cet email il vous suffit d'arrêter le suivi sur le sujet."
-				footer="" />
+		<attribute name="body">
+			<![CDATA[Bonjour {PSEUDO},<br/>Vous avez été banni du forum jusqu'au {DATE}<br/>Par conséquence vous ne pouvez plus participer aux forums jusqu'à cette date.<br/><br/>{MOTIF}]]>
+		</attribute>
+		<notification label="Bannissement du forum" codename="modules_forums/ban"	availableparameters="PSEUDO,DATE,MOTIF"
+				subject="Bannissement temporaire du forum" header="" body-attr="" footer="" />
+		<attribute name="body">
+			<![CDATA[Bonjour {PSEUDO},<br/><br/>Vous avez choisi de suivre l'évolution du sujet {TOPIC} et il y a {NUM} nouveau(x) message(s).<br/><br/>Vous pouvez le(s) lire en suivant {LINK}.<br/><br/>Pour ne plus recevoir cet email il vous suffit d'arrêter le suivi sur le sujet.]]>
+		</attribute>
+		<notification label="Suivi d'un sujet" codename="modules_forums/follower" availableparameters="PSEUDO,TOPIC,LINK,NUM"
+				subject="Nouveau message sur le forum" header="" body-attr="" footer="" />
 	</systemfolder>
 	
 	<systemfolder module="task" relatedmodule="forums">

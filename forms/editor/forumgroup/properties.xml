@@ -3,9 +3,11 @@
 	<section labeli18n="modules.uixul.bo.doceditor.fieldsgroup.Title">
 		<field name="label" hidehelp="true" />
 		<field name="description" hidehelp="true" />
+		<field name="mountParentId" type="document" allow="modules_website_website,[modules_website_topic]"
+			moduleselector="website" required="true" labeli18n="modules.forums.document.forum.Mount-parent"
+			shorthelp="&amp;modules.forums.document.forum.Mount-parent-help;" />
 		<field name="lockedMode" />
 		<field name="excludeFromRssMode" />
-		<field name="nbPostPerPage" />
 	</section>
 	<section labeli18n="modules.forums.bo.doceditor.fieldsgroup.Metas">
 		<field name="metatitle" class="with-counter" rows="2" />

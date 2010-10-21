@@ -4,9 +4,26 @@
 		<locale lang="fr">créer</locale>
 		<locale lang="en">create</locale>
 	</entity>
+	<entity id="createForumgroup_">
+		<locale lang="fr">créer</locale>
+		<locale lang="en">create</locale>
+	</entity>
+	<entity id="createWebsitefolder_">
+		<locale lang="fr">créer</locale>
+		<locale lang="en">create</locale>
+	</entity>
+	<entity id="initforumgroupdefaultstructure">
+		<locale lang="fr">créer les pages par défaut</locale>
+	</entity>
+	<entity id="initmembersdefaultstructure">
+		<locale lang="fr">initialiser la rubrique membres</locale>
+	</entity>
 	<entity id="create-forum">
 		<locale lang="fr">créer un forum</locale>
 		<locale lang="en">create new forum</locale>
+	</entity>
+	<entity id="create-forumgroup">
+		<locale lang="fr">créer un groupe de forums</locale>
 	</entity>
 	<entity id="create-rank">
 		<locale lang="fr">créer un rang</locale>
@@ -15,5 +32,17 @@
 	<entity id="create-title">
 		<locale lang="fr">créer un titre</locale>
 		<locale lang="en">create new title</locale>
+	</entity>
+	<entity id="forumgroup-already-contains-pages">
+		<locale lang="fr">Ce groupe de forums contient déjà des pages.</locale>
+	</entity>
+	<entity id="invalid-forumgroup">
+		<locale lang="fr">Cette action ne peut être effectuée que sur un groupe de forums.</locale>
+	</entity>
+	<entity id="invalid-websitefolder">
+		<locale lang="fr">Cette action ne peut être effectuée que sur un dossier de site.</locale>
+	</entity>
+	<entity id="website-already-contains-member-page">
+		<locale lang="fr">Ce site contient déjà des pages de la rubrique membres.</locale>
 	</entity>
 </localization>

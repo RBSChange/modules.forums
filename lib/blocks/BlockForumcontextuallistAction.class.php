@@ -17,6 +17,12 @@ class forums_BlockForumcontextuallistAction extends website_BlockAction
 			return website_BlockView::NONE;
 		}
 		
+		$forums = $this->getDocumentList($request, $response);
+		if (count($forums) < 1)
+		{
+			return website_BlockView::NONE;
+		}
+		
 		$member = forums_MemberService::getInstance()->getCurrentMember();
 		$request->setAttribute('member', $member);
 		
@@ -26,28 +32,19 @@ class forums_BlockForumcontextuallistAction extends website_BlockAction
 			$member->markAllPostsAsRead();
 		}
 
-		// Set the paginator.
-		$paginator = new paginator_Paginator('forums',
-			$request->getParameter(paginator_Paginator::REQUEST_PARAMETER_NAME, 1),
-			$this->getDocumentList($request, $response),
-			$this->getNbItemPerPage($request, $response)
-		);
-
 		$request->setAttribute('parent', $this->getContext()->getParent());
-		$request->setAttribute('paginator', $paginator);
+		$request->setAttribute('forums', $forums);
 		$request->setAttribute('page', $this->getContext()->getPersistentPage());
 		
+		// @deprecated This paginator will be removed in 3.5.
+		$paginator = new paginator_Paginator('forums',
+			$request->getParameter(paginator_Paginator::REQUEST_PARAMETER_NAME, 1),
+			$forums,
+			1000
+		);
+		$request->setAttribute('paginator', $paginator);
+		
 		return website_BlockView::SUCCESS;
-	}
-	
-	/**
-	 * @param f_mvc_Request $request
-	 * @param f_mvc_Response $response
-	 * @return Integer default 10
-	 */
-	private function getNbItemPerPage($request, $response)
-	{
-		return $this->getConfiguration()->getNbitemperpage();
 	}
 
 	/**
@@ -57,9 +54,16 @@ class forums_BlockForumcontextuallistAction extends website_BlockAction
 	 */
 	private function getDocumentList($request, $response)
 	{
-		// Get the parent document instance.
-        $parent = $this->getContext()->getParent();
+		$parent = $this->getContext()->getParent();
 		$request->setAttribute('parent', $parent);
+		if ($parent instanceof website_persistentdocument_systemtopic)
+		{
+			$parentReference = $parent->getReference();
+			if ($parentReference instanceof forums_persistentdocument_forumgroup)
+			{
+				$request->setAttribute('forumgroup', $parentReference);
+			}
+		}
 		return forums_ForumService::getInstance()->getByTopicParentId($parent->getId());
 	}
 }
