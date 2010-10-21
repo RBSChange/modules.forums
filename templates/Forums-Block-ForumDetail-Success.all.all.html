@@ -23,7 +23,7 @@
 	
 	<tal:block tal:condition="php: count(threadsPaginator)">
 		<tal:block tal:define="global threadColumnTitle"><tal:block change:translate="modules.forums.frontoffice.Subject" /></tal:block>
-		<tal:block change:include="module 'forums'; template 'Forums-Inc-ThreadList-Success'; type 'html'; threads paginator; threadColumnTitle threadColumnTitle; showPagination 'true'" />
+		<tal:block change:include="module 'forums'; template 'Forums-Inc-ThreadList-Success'; type 'html'; threads threadsPaginator; threadColumnTitle threadColumnTitle; showPagination 'true'" />
 	</tal:block>
 	<p tal:condition="php: !count(threadsPaginator)" class="normal" change:translate="modules.forums.frontoffice.Nothread"></p>
 </tal:block>

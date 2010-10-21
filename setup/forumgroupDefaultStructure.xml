@@ -5,7 +5,7 @@
 	<attribute name="template" default="true">webfactory/tplTwo</attribute>
 	
 	<systemtopic byDocumentId-attr="">
-		<page label="Liste des forums" isIndexPage="true" navigationVisibility="hidden" indexingstatus="false" metatitle="Forum {forums_forumDetail.forumname}" description="Forum {forums_forumDetail.forumname} : {forums_forumDetail.forumshortdesc}" keywords="{forums_forumDetail.forumkeywords}">
+		<page label="Forum" isIndexPage="true" navigationVisibility="hidden" indexingstatus="false" metatitle="Forum {forums_forumDetail.forumname}" description="Forum {forums_forumDetail.forumname} : {forums_forumDetail.forumshortdesc}" keywords="{forums_forumDetail.forumkeywords}">
 			<tag name="functional_forums_forum-detail" />
 			<tag name="functional_forums_forum-list" />
 			<changecontent for="content-block">

@@ -41,7 +41,7 @@ class forums_BlockForumDetailAction extends website_BlockAction
 		$forums = forums_ForumService::getInstance()->getByTopicParentId($parent->getId());
 		$request->setAttribute('forums', $forums);
 		
-		if ($forumgroup instanceof forums_peristentdocument_forum)
+		if ($forumgroup instanceof forums_persistentdocument_forum)
 		{
 			$threads = forums_ThreadService::getInstance()->getByForum($forumgroup);
 			$paginator = new paginator_Paginator('forums', $request->getParameter('page', 1), $threads, $this->getNbItemPerPage($request, $response));
