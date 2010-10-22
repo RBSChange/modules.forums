@@ -148,4 +148,53 @@ class forums_persistentdocument_forumgroup extends forums_persistentdocument_for
 	{
 		return $this->getExcludeFromRss();
 	}
+	
+	/**
+	 * @return forums_persistentdocument_forumgroup[]
+	 */
+	public function getSubForums()
+	{
+		return forums_ForumgroupService::getInstance()->getByTopicParentId($this->getTopic()->getId());
+	}
+	
+	/**
+	 * @return forums_persistentdocument_post
+	 */
+	public function getLastPostRecursive()
+	{
+		return $this->getDocumentService()->getLastPostRecursive($this);
+	}
+	
+	/**
+	 * @var array
+	 */
+	private $infosRecursive;
+	
+	/**
+	 * @param mixed $name
+	 */
+	protected function getInfosRecursive($name)
+	{
+		if ($this->infosRecursive === null)
+		{
+			$this->infosRecursive = $this->getDocumentService()->getInfosRecursive($this);
+		}
+		return isset($this->infosRecursive[$name]) ? $this->infosRecursive[$name] : null;
+	}
+	
+	/**
+	 * @return integer
+	 */
+	public function getNbthreadRecursive()
+	{
+		return $this->getInfosRecursive('nbthreadrecursive');
+	}
+	
+	/**
+	 * @return integer
+	 */
+	public function getNbpostRecursive()
+	{
+		return $this->getInfosRecursive('nbpostrecursive');
+	}
 }

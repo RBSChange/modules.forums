@@ -538,4 +538,7 @@
 	<entity id="lastname">
 		<locale lang="fr">nom</locale>
 	</entity>
+	<entity id="sub-forums">
+		<locale lang="fr">sous-forums</locale>
+	</entity>
 </localization>

@@ -11,14 +11,29 @@
 	<tbody>
 		<tr tal:repeat="forum forums" class="row-${php: repeat.forum.odd ? '1' : '0'}">
 			<td class="column-bullet" tal:define="newCount forum/getNbnewpost">
-				<img tal:condition="php: newCount == 1" change:image="front/has-new-post.png" change:i18nattr="title &modules.forums.frontoffice.Has-new-post;" />
-				<img tal:condition="php: newCount > 1" change:image="front/has-new-post.png" change:i18nattr="title[count] newCount; title &modules.forums.frontoffice.Has-n-new-posts;" />
-				<img tal:condition="not: newCount" change:image="front/has-no-new-post.png" change:i18nattr="title &modules.forums.frontoffice.Has-no-new-post;" />
+				<img tal:condition="php: newCount == 1" change:img="front/has-new-post.png" change:i18nattr="title &modules.forums.frontoffice.Has-new-post;" />
+				<img tal:condition="php: newCount > 1" change:img="front/has-new-post.png" change:i18nattr="title[count] newCount; title &modules.forums.frontoffice.Has-n-new-posts;" />
+				<img tal:condition="not: newCount" change:img="front/has-no-new-post.png" change:i18nattr="title &modules.forums.frontoffice.Has-no-new-post;" />
 			</td>
-			<td class="column-label"><a change:link="document forum">${forum/getLabelAsHtml}</a></td>
-			<td class="column-threads" tal:content="forum/getNbthread" />
-			<td class="column-posts" tal:content="forum/getNbpost" />
-			<td class="column-last-post" tal:define="lastPost forum/getLastPost; lastPostAuthor lastPost/getPostAuthor">
+			<td class="column-label" tal:define="subforums forum/getSubForums">
+				<a change:link="document forum">${forum/getLabelAsHtml}</a>
+				<div class="sub-forums" tal:condition="subforums">
+					<span change:translate="modules.forums.frontoffice.Sub-forumsLabel;"></span>
+					<ul>
+						<li tal:repeat="subforum subforums">
+							<tal:block tal:define="newCountSub subforum/getNbnewpost">
+								<img tal:condition="php: newCountSub == 1" change:img="front/has-new-post.png" change:i18nattr="title &modules.forums.frontoffice.Has-new-post;" />
+								<img tal:condition="php: newCountSub > 1" change:img="front/has-new-post.png" change:i18nattr="title[count] newCountSub; title &modules.forums.frontoffice.Has-n-new-posts;" />
+								<img tal:condition="not: newCountSub" change:img="front/has-no-new-post.png" change:i18nattr="title &modules.forums.frontoffice.Has-no-new-post;" />
+							</tal:block>
+							<a change:link="document subforum">${subforum/getLabelAsHtml}</a>
+						</li>
+					</ul>
+				</div>
+			</td>
+			<td class="column-threads">${forum/getNbthreadRecursive}</td>
+			<td class="column-posts">${forum/getNbpostRecursive}</td>
+			<td class="column-last-post" tal:define="lastPost forum/getLastPostRecursive; lastPostAuthor lastPost/getPostAuthor">
 				<tal:block tal:condition="lastPost">
 					<tal:block change:memberdate="value lastPost/getCreationdate; mode 'long'" />
 					<br />

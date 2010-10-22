@@ -13,7 +13,6 @@
 	<h3 change:h="" change:translate="modules.forums.frontoffice.Threads"></h3>
 	<ul class="inline-menu">
 		<li tal:condition="not: forumgroup/isLocked"><a change:link="tag functional_forums_thread-new ; forumsParam[cmpref] forumgroup/getId" change:translate="modules.forums.frontoffice.Newthread"></a></li>
-		<li tal:define="forumListPage forumgroup/getSiblingForumListPage" tal:condition="forumListPage"><a change:link="document forumListPage" change:translate="modules.forums.frontoffice.Forumslist"></a></li>
 	</ul>
 	
 	<tal:block tal:condition="php: count(globalAnnoucements)">

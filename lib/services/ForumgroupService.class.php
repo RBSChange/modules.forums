@@ -148,6 +148,33 @@ class forums_ForumgroupService extends f_persistentdocument_DocumentService
 		}
 		throw new Exception('Bad parent type: ' . get_class($parent));
 	}
+
+	/**
+	 * @param forums_persistentdocument_forum $forum
+	 * @return forums_persistentdocument_post
+	 */
+	public function getLastPostRecursive($forum)
+	{
+		$query = forums_PostService::getInstance()->createQuery()
+			->add(Restrictions::isNull('deleteddate'))
+			->addOrder(Order::desc('document_creationdate'))
+			->setFirstResult(0)->setMaxResults(1);
+		$criteria = $query->createCriteria('thread')->createCriteria('forum');
+		$criteria->add(Restrictions::orExp(Restrictions::eq('id', $forum->getId()), Restrictions::descendentOf($forum->getId())));
+		return f_util_ArrayUtils::firstElement($query->find());
+	}
+	
+	/**
+	 * @param forums_persistentdocument_forum $forum
+	 * @return forums_persistentdocument_post
+	 */
+	public function getInfosRecursive($forum)
+	{
+		$query = forums_ForumService::getInstance()->createQuery();
+		$query->add(Restrictions::orExp(Restrictions::eq('id', $forum->getId()), Restrictions::descendentOf($forum->getId())));
+		$query->setProjection(Projections::sum('nbpost', 'nbpostrecursive'), Projections::sum('nbthread', 'nbthreadrecursive'));
+		return f_util_ArrayUtils::firstElement($query->find());
+	}
 	
 	/**
 	 * @param forums_persistentdocument_forumgroup $document

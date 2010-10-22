@@ -183,6 +183,11 @@
 {
 	min-width: 30px;
 	text-align: center;
+	vertical-align: middle;
+}
+.modules-forums .column-bullet img
+{
+	vertical-align: middle;
 }
 .modules-forums .column-avatar
 {
@@ -210,6 +215,24 @@
 	white-space: nowrap;
 	min-width: 100px;
 	text-align: center;
+}
+.modules-forums .sub-forums
+{
+	margin-top: 3px;
+	font-size: 0.9em;
+}
+.modules-forums .sub-forums ul
+{
+	display: inline;
+}
+.modules-forums .sub-forums li
+{
+	display: inline-block;
+	margin-left: 15px;
+}
+.modules-forums .sub-forums img
+{
+	vertical-align: middle;
 }
 
 /** TODO: generalize it in cmxform default styles? */
