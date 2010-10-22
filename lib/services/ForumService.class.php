@@ -145,4 +145,26 @@ class forums_ForumService extends forums_ForumgroupService
 
 		return $data;
 	}
+	
+	/**
+	 * @param forums_persistentdocument_forum $document
+	 * @return website_persistentdocument_page or null
+	 */
+	public function getDisplayPage($document)
+	{
+		$document = DocumentHelper::getByCorrection($document);
+		
+		$model = $document->getPersistentModel();
+		if ($model->hasURL() && $document->isPublished())
+		{
+			$topic = $document->getTopic();
+			$page = website_PageService::getInstance()->createQuery()
+				->add(Restrictions::childOf($topic->getId()))
+				->add(Restrictions::published())
+				->add(Restrictions::hasTag('functional_forums_forum-detail'))
+				->findUnique();
+			return $page;
+		}
+		return null;
+	}
 }

@@ -259,12 +259,14 @@ class forums_ForumgroupService extends f_persistentdocument_DocumentService
 		$document = DocumentHelper::getByCorrection($document);
 		
 		$model = $document->getPersistentModel();
-		Framework::fatal('toto');
 		if ($model->hasURL() && $document->isPublished())
 		{
-			Framework::fatal('toto');
 			$topic = $document->getTopic();
-			$page = website_PageService::getInstance()->createQuery()->add(Restrictions::childOf($topic->getId()))->add(Restrictions::published())->add(Restrictions::hasTag('functional_forums_forum-detail'))->findUnique();
+			$page = website_PageService::getInstance()->createQuery()
+				->add(Restrictions::childOf($topic->getId()))
+				->add(Restrictions::published())
+				->add(Restrictions::hasTag('functional_forums_forum-list'))
+				->findUnique();
 			return $page;
 		}
 		return null;

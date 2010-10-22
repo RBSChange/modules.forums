@@ -64,6 +64,6 @@ class forums_BlockForumcontextuallistAction extends website_BlockAction
 				$request->setAttribute('forumgroup', $parentReference);
 			}
 		}
-		return forums_ForumService::getInstance()->getByTopicParentId($parent->getId());
+		return forums_ForumgroupService::getInstance()->getByTopicParentId($parent->getId());
 	}
 }
