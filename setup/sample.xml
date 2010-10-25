@@ -72,6 +72,43 @@
 					<thread label="F.A.Q." threadauthor-refid="mod2" level="20">
 						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
 					</thread>
+					<thread label="Test des BBCodes" threadauthor-refid="member1" level="20">
+						<attribute name="postText">
+							<![CDATA[Gras, italique, souligné, barré, lien : 
+[code]Texte en [b]gras[/b], [i]italique[/i], [u]souligné[/u], [s]barré[/s], [url="http://rbschange.fr"]lien[/url].[/code]
+[quote]Texte en [b]gras[/b], [i]italique[/i], [u]souligné[/u], [s]barré[/s], [url="http://rbschange.fr"]lien[/url].[/quote]
+Images :
+[code]Sans title/alt :
+[img]http://wiki.rbschange.fr/media/logo.png[/img]
+Avec title/alt :
+[img="http://wiki.rbschange.fr/media/logo.png"]Logo[/img][/code]
+[quote]Sans title/alt :
+[img="http://wiki.rbschange.fr/media/logo.png"][/img]
+Avec title/alt :
+[img="http://wiki.rbschange.fr/media/logo.png"]Logo[/img][/quote]
+Code et citations :
+[code][quote]Citation sans auteur[/quote]
+[quote=Toto]Citation avec auteur[/quote]
+[quote]Citations imbriquées [quote]... 1[/quote] sans auteur [quote=Tata]... 2[/quote][/quote]
+[quote=Toto]Citations imbriquées [quote=Titi]... 1[/quote] avec auteur [quote=Tata]... 2[/quote][/quote]
+[code]Code sans [b]interprétation[/b] des [i]BBCodes[/i].[/code][/code]
+[quote][quote]Citation sans auteur[/quote]
+[quote=Toto]Citation avec auteur[/quote]
+[quote]Citations imbriquées [quote]... 1[/quote] sans auteur [quote=Tata]... 2[/quote][/quote]
+[quote=Toto]Citations imbriquées [quote=Titi]... 1[/quote] avec auteur [quote=Tata]... 2[/quote][/quote]
+[code]Code sans [b]interprétation[/b] des [i]BBCodes[/i].[/code][/quote]
+Alignements :
+[code][align=left]Aligné à gauche[/align]
+[align=justify]Justifié[/align]
+[align=center]Centré[/align]
+[align=right]Aligné à droite[/align][/code]
+[quote][align=left]Aligné à gauche[/align]
+[align=justify]Justifié[/align]
+[align=center]Centré[/align]
+[align=right]Aligné à droite[/align][/quote]]]>
+						</attribute>
+						<post postauthor-refid="member1" text-attr="postText" />
+					</thread>
 					<thread label="Suspendisse diam mauris 1" threadauthor-refid="member1">
 						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
 					</thread>
