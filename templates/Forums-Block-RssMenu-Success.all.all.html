@@ -2,7 +2,7 @@
 	<h3 change:h="" change:translate="modules.forums.frontoffice.Rss-menu-title"></h3>
 	<ul>
 		<li tal:repeat="link links">
-			<img change:icon="rss/small" style="vertical-align: middle" /> <a change:link="module forums; action ViewFeed; parentref link/parentref; docType link/docType; recursive link/recursive">${link/title}</a>
+			<img change:img="icon/small/rss.png" style="vertical-align: middle" /> <a change:link="module forums; action ViewFeed; parentref link/parentref; docType link/docType; recursive link/recursive">${link/title}</a>
 		</li>
 	</ul>
 </tal:block>
