@@ -10,10 +10,10 @@ class forums_patch_0301 extends patch_BasePatch
 	 */
 	public function execute()
 	{
-		$newPath = f_util_FileUtils::buildWebeditPath('modules/forums/persistentdocument/forum.xml');
-		$newModel = generator_PersistentModel::loadModelFromString(f_util_FileUtils::read($newPath), 'forums', 'forum');
+		$newPath = f_util_FileUtils::buildWebeditPath('modules/forums/persistentdocument/forumgroup.xml');
+		$newModel = generator_PersistentModel::loadModelFromString(f_util_FileUtils::read($newPath), 'forums', 'forumgroup');
 		$newProp = $newModel->getPropertyByName('excludeFromRss');
-		f_persistentdocument_PersistentProvider::getInstance()->addProperty('forums', 'forum', $newProp);
+		f_persistentdocument_PersistentProvider::getInstance()->addProperty('forums', 'forumgroup', $newProp);
 	}
 
 	/**
