@@ -18,7 +18,7 @@ class forums_OpenThreadAction extends f_action_BaseAction
 			{
 				$thread->setLocked(false);
 				$thread->save();
-				$link = LinkHelper::getUrl($thread);
+				$link = LinkHelper::getDocumentUrl($thread);
 				HttpController::getInstance()->redirectToUrl($link);
 			}
 		}

@@ -95,11 +95,11 @@ class forums_BlockThreadAction extends forums_BlockPostListBaseAction
 		
 		if ($thread->canFollow())
 		{
-			$request->setAttribute('followUrl', LinkHelper::getUrl($thread, null, array('forumsParam[page]' => $page, 'forumsParam[follow]' => 1)));
+			$request->setAttribute('followUrl', LinkHelper::getDocumentUrl($thread, null, array('forumsParam[page]' => $page, 'forumsParam[follow]' => 1)));
 		}
 		else if ($thread->canUnfollow())
 		{
-			$request->setAttribute('unfollowUrl', LinkHelper::getUrl($thread, null, array('forumsParam[page]' => $page, 'forumsParam[unfollow]' => 1)));
+			$request->setAttribute('unfollowUrl', LinkHelper::getDocumentUrl($thread, null, array('forumsParam[page]' => $page, 'forumsParam[unfollow]' => 1)));
 		}
 
 		// Post list info.

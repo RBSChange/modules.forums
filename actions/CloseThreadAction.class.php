@@ -17,7 +17,7 @@ class forums_CloseThreadAction extends f_action_BaseAction
 			{
 				$thread->setLocked(true);
 				$thread->save();
-				$link = LinkHelper::getUrl($thread);
+				$link = LinkHelper::getDocumentUrl($thread);
 				HttpController::getInstance()->redirectToUrl($link);
 			}
 		}

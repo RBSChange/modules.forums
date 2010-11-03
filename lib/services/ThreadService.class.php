@@ -143,7 +143,7 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 				}
 			}
 		}
-		return LinkHelper::getUrl($thread);
+		return LinkHelper::getDocumentUrl($thread);
 	}
 
 	/**

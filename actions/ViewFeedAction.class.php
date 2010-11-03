@@ -74,7 +74,7 @@ class forums_ViewFeedAction extends f_action_BaseAction
 		{
 			$feedWriter->setDescription('');
 		}
-		$feedWriter->setLink(LinkHelper::getUrl($parent));
+		$feedWriter->setLink(LinkHelper::getDocumentUrl($parent));
 	}
 	
 	public function isSecure()

@@ -38,7 +38,7 @@ class forums_BlockMemberAction extends website_BlockAction
 
 		if($request->getParameter('resend') && $member->getEndpublicationdate() !== null && $member->isme())
 		{
-			change_MemberService::getInstance()->sendReactivationMail($member);
+			forums_MemberService::getInstance()->sendReactivationMail($member);
 			$request->setAttribute('mailsended', true);
 		}
 

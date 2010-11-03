@@ -202,7 +202,7 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	 */
 	public function getRSSGuid()
 	{
-		return LinkHelper::getUrl($this);
+		return LinkHelper::getDocumentUrl($this);
 	}
 	
 	/**
