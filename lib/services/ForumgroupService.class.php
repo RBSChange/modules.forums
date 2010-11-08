@@ -89,7 +89,7 @@ class forums_ForumgroupService extends f_persistentdocument_DocumentService
 		}
 		else if ($parent !== $this->getParentOf($topic))
 		{
-			if ($document->getWebsite()->getId() !== $topic->getDocumentService()->getWebsiteId($topic))
+			if ($document->getWebsite()->getId() != $parent->getDocumentService()->getWebsiteId($parent))
 			{
 				throw new BaseException('You can only move a forum inside the same website!', 'modules.forums.document.forum.exception.Cant-move-to-another-website');
 			}
