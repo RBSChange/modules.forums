@@ -15,6 +15,13 @@ class validation_PseudonymValidator extends validation_UniqueValidator
 		{
 			return;
 		}
+			
+		// For frontend validation: set the current member.
+		// For backend validation, the isValid method already set the document.
+		if ($this->document === null)
+		{
+			$this->document = forums_MemberService::getInstance()->getCurrentMember();
+		}
 		
 		// Validate label unicity by website.		
 		$member = forums_MemberService::getInstance()->getByLabel($field->getValue(), $this->getWebsiteId());
