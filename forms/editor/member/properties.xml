@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <panel>
 	<section labeli18n="modules.uixul.bo.doceditor.fieldsgroup.Title">
-		<field name="label" disabled="true" hidehelp="true" />
+		<field name="label" hidehelp="true" />
 		<field name="displayname" />
 		<field name="signature" hidehelp="true" />
 		<field name="websiteUrl" hidehelp="true" />
