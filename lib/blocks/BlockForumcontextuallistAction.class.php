@@ -38,7 +38,7 @@ class forums_BlockForumcontextuallistAction extends website_BlockAction
 		
 		// @deprecated This paginator will be removed in 3.5.
 		$paginator = new paginator_Paginator('forums',
-			$request->getParameter(paginator_Paginator::REQUEST_PARAMETER_NAME, 1),
+			$request->getParameter(paginator_Paginator::PAGEINDEX_PARAMETER_NAME, 1),
 			$forums,
 			1000
 		);

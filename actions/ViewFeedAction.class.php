@@ -82,7 +82,7 @@ class forums_ViewFeedAction extends f_action_BaseAction
 		return false;
 	}
 	
-	protected function suffixSecureActionByDocument()
+	protected function isDocumentAction()
 	{
 		return false;
 	}
