@@ -2,4 +2,14 @@
 <i18n baseKey="m.forums.bo.useractionlogger" lcid="fr_FR">
   <key id="savepermissions-forumgroup">savepermissions.forumgroup {lang} {documentlabel}</key>
   <key id="log-savepermissions-forumgroup">log savepermissions forumgroup</key>
+  <key id="insert-forumgroup">insert.forumgroup {lang} {documentlabel}</key>
+  <key id="log-insert-forumgroup">log insert forumgroup</key>
+  <key id="activate-forumgroup">activate.forumgroup {lang} {documentlabel}</key>
+  <key id="log-activate-forumgroup">log activate forumgroup</key>
+  <key id="deactivated-forumgroup">deactivated.forumgroup {lang} {documentlabel}</key>
+  <key id="log-deactivated-forumgroup">log deactivated forumgroup</key>
+  <key id="reactivate-forumgroup">reactivate.forumgroup {lang} {documentlabel}</key>
+  <key id="log-reactivate-forumgroup">log reactivate forumgroup</key>
+  <key id="delete-forumgroup">delete.forumgroup {documentlabel} {lang}</key>
+  <key id="log-delete-forumgroup">log delete forumgroup</key>
 </i18n>
