@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.forums.document.websitefolder" lcid="fr_FR">
+  <include id="m.generic.document.folder"/>
+  <key id="document-name">websitefolder</key>
+  <key id="website">[TO TRANSLATE] website</key>
+  <key id="website-help">[TO TRANSLATE] website-help</key>
+  <key id="rank">[TO TRANSLATE] rank</key>
+  <key id="rank-help">[TO TRANSLATE] rank-help</key>
+  <key id="title">[TO TRANSLATE] title</key>
+  <key id="title-help">[TO TRANSLATE] title-help</key>
+</i18n>

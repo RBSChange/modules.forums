@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<localization extend="modules.forums.bo.blocks.postlistbase">
-	<entity id="title">
-		<locale lang="fr">nouveau sujet</locale>
-		<locale lang="en">new thread</locale>
-	</entity>
-</localization>

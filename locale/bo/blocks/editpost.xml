@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<localization extend="modules.forums.bo.blocks.postlistbase">
-	<entity id="title">
-		<locale lang="fr">éditer un message</locale>
-		<locale lang="en">edit post</locale>
-	</entity>
-</localization>

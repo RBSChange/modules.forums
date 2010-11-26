@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.forums.document.member" lcid="fr_FR">
+  <key id="document-name">membre</key>
+  <key id="label">pseudonyme</key>
+  <key id="displayname">afficher le nom</key>
+  <key id="displayname-help">Afficher le nom et le prénom dans le profil public</key>
+  <key id="websiteurl">site web</key>
+  <key id="signature">signature</key>
+  <key id="rank">rang</key>
+  <key id="title">titre</key>
+  <key id="title-help">Titres du membre affichés dans les messages, les profils et la liste des membres. Ces titres ne sont qu'affichés et n'influent en aucune manière sur les permissions du membre.</key>
+  <key id="country">pays</key>
+  <key id="password">mot de passe</key>
+  <key id="confirmpassword">confirmer le mot de passe</key>
+  <key id="startpublicationdate">début de publication</key>
+  <key id="startpublicationdate-help">A partir de cette date, le document sera publié. Si le champ est vide, la publication du document commencera dès maintenant.</key>
+  <key id="endpublicationdate">fin de publication</key>
+  <key id="endpublicationdate-help">A partir de cette date, le document ne sera plus publié. Si le champ est vide, le document restera indéfiniment publié.</key>
+  <key id="shortdateformat">format de dates court</key>
+  <key id="shortdateformat-help">Format de dates court (appliqué notamment sur les dates d'inscription des membres). La syntaxe est celle utilisée par la fonction PHP date().</key>
+  <key id="longdateformat">format de dates long</key>
+  <key id="longdateformat-help">Format de dates long (appliqué notamment sur les dates relatives aux sujets et messages). La syntaxe est celle utilisée par la fonction PHP date().</key>
+</i18n>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.forums.bo.general.column" lcid="en_GB">
+  <key id="threads">threads</key>
+  <key id="posts">posts</key>
+  <key id="path">path</key>
+  <key id="website">website</key>
+</i18n>

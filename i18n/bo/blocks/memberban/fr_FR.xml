@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.forums.bo.blocks.memberban" lcid="fr_FR">
+  <key id="title">bannir un membre</key>
+</i18n>

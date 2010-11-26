@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.forums.lists.modes" lcid="en_GB">
+  <key id="no">no</key>
+  <key id="yes">yes</key>
+  <key id="inherit">inherits</key>
+</i18n>

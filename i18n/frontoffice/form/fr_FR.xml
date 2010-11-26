@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.forums.frontoffice.form" lcid="fr_FR">
+  <key id="submit">valider</key>
+  <key id="preview">prévisualiser</key>
+</i18n>

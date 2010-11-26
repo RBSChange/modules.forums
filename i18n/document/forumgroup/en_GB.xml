@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.forums.document.forumgroup" lcid="en_GB">
+  <key id="label">name</key>
+  <key id="label-help">name</key>
+  <key id="description">description</key>
+  <key id="lockedmode">forum locked</key>
+  <key id="lockedmode-help">forum locked for writing</key>
+  <key id="locked">forum locked</key>
+  <key id="locked-help">forum locked for writing</key>
+  <key id="metatitle">name</key>
+  <key id="metadescription">description</key>
+  <key id="metakeywords">keywords</key>
+</i18n>

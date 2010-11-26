@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.forums.bo.blocks.postlistbase" lcid="en_GB">
+  <key id="nbitemperpage">number of elements per page</key>
+  <key id="nbitemperpage-help">number of elements per page</key>
+  <key id="showgravatars">show avatar</key>
+  <key id="showgravatars-help">show avatar (www.gravatar.com)</key>
+  <key id="avatarssize">avatar size</key>
+</i18n>

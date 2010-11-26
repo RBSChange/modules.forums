@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.forums.document.forum" lcid="fr_FR">
+  <include id="m.forums.document.forumgroup"/>
+  <key id="document-name">forum</key>
+  <key id="nbpostperpage">messages par page</key>
+  <key id="nbpostperpage-help">nombre de message par page affichés dans les sujets. Attention, modifier cette valeur sur un forum contenant déjà des sujets peut suire à son référencement.</key>
+</i18n>

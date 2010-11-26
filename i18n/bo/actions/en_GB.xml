@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.forums.bo.actions" lcid="en_GB">
+  <key id="create_">create</key>
+  <key id="createforumgroup_">create</key>
+  <key id="createwebsitefolder_">create</key>
+  <key id="create-forum">create new forum</key>
+  <key id="create-rank">create new rank</key>
+  <key id="create-title">create new title</key>
+</i18n>

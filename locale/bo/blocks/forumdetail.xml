@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<localization extend="modules.forums.bo.blocks.forum">
-	<entity id="title">
-		<locale lang="fr">détail d'un forum</locale>
-		<locale lang="en">forum details</locale>
-	</entity>
-</localization>

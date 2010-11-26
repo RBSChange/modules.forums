@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.forums.bo.doceditor.fieldsgroup" lcid="fr_FR">
+  <key id="metas">données utilisables dans les métas de page</key>
+  <key id="titles">titres</key>
+  <key id="ranks">rangs</key>
+  <key id="display-preferences">préférences d'affichage</key>
+</i18n>
