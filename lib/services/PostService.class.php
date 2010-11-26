@@ -133,8 +133,10 @@ class forums_PostService extends f_persistentdocument_DocumentService
 		parent::preInsert($document, $parentNodeId);
 		
 		$document->setInsertInTree(false);
-		
-		$document->setIp(forums_ModuleService::getInstance()->getIp());
+		if ($document->getIp() === null)
+		{
+			$document->setIp(forums_ModuleService::getInstance()->getIp());
+		}
 		if ($document->getPostauthor() === null)
 		{
 			$document->setPostauthor(forums_MemberService::getInstance()->getCurrentMember());
