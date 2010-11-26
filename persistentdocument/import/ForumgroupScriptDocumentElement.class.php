@@ -28,16 +28,4 @@ class forums_ForumgroupScriptDocumentElement extends import_ScriptDocumentElemen
 	{
 		$this->script->setAttribute('byDocumentId', $this->getPersistentDocument()->getTopic()->getId());
 	}
-	
-	public function endProcess()
-	{
-		$document = $this->getPersistentDocument();		
-		foreach ($this->script->getChildren($this) as $child)
-		{
-			if ($child instanceof users_PermissionsScriptDocumentElement)
-			{
-				$child->setPermissions($document);
-			}
-		}
-	}
 }

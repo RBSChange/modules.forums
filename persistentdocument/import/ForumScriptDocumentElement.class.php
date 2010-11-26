@@ -25,16 +25,4 @@ class forums_ForumScriptDocumentElement extends import_ScriptDocumentElement
 	{
 		return f_persistentdocument_PersistentDocumentModel::getInstanceFromDocumentModelName('modules_forums/forum');
 	}
-	
-	public function endProcess()
-	{
-		$document = $this->getPersistentDocument();		
-		foreach ($this->script->getChildren($this) as $child)
-		{
-			if ($child instanceof users_PermissionsScriptDocumentElement)
-			{
-				$child->setPermissions($document);
-			}
-		}
-	}
 }

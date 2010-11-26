@@ -24,19 +24,7 @@ class forums_WebsitefolderScriptDocumentElement extends import_ScriptDocumentEle
 	{
 		return f_persistentdocument_PersistentDocumentModel::getInstanceFromDocumentModelName('modules_forums/websitefolder');
 	}
-	
-	public function endProcess()
-	{
-		$document = $this->getPersistentDocument();		
-		foreach ($this->script->getChildren($this) as $child)
-		{
-			if ($child instanceof users_PermissionsScriptDocumentElement)
-			{
-				$child->setPermissions($document);
-			}
-		}
-	}
-	
+		
 	/**
 	 * @param import_ScriptExecuteElement $scriptExecute
 	 */
