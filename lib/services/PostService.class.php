@@ -68,8 +68,8 @@ class forums_PostService extends f_persistentdocument_DocumentService
 	 */
 	public function getRSSFeedWriterByParent($parent, $recursive = false)
 	{
-		$query = $this->createQuery();
-		$query->add(Restrictions::published());
+		$query = $this->createQuery()->add(Restrictions::published())
+			->add(Restrictions::isNull("deleteddate"));
 		$subQuery1 = $query->createCriteria('thread');
 		$subQuery2 = $subQuery1->createCriteria('forum');
 		$subQuery2->add(Restrictions::eq('excludeFromRss', false));
