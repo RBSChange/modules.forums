@@ -91,7 +91,7 @@ class forums_BlockRssMenuAction extends website_BlockAction
 			foreach ($forTypes as $type)
 			{
 				$title = f_Locale::translate('&modules.forums.frontoffice.' . ucfirst($type) . 's-of-' . $modelName . 'Label;') . ' ' . $parent->getLabelAsHtml();
-				$this->getContext()->addRssFeed($title, LinkHelper::getActionUrl('forums', 'ViewFeed', array('parentref' => $parent->getId(), 'docType' => 'post')));
+				$this->getContext()->addRssFeed($title, LinkHelper::getActionUrl('forums', 'ViewFeed', array('parentref' => $parent->getId(), 'docType' => $type, 'recursive' => $recursive)));
 				$this->links[] = array('title' => $title, 'parentref' => $parent->getId(), 'docType' => $type, 'recursive' => $recursive);
 			}
 		}

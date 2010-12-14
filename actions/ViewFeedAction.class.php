@@ -66,7 +66,11 @@ class forums_ViewFeedAction extends f_action_BaseAction
 		$modelName = $parent->getPersistentModel()->getDocumentName();
 		$title = f_Locale::translate('&modules.forums.frontoffice.' . ucfirst($docType).'s-of-' . $modelName . 'Label;') . ' ' . $parent->getLabelAsHtml();
 		$feedWriter->setTitle($title);
-		if (f_util_ClassUtils::methodExists($parent, 'getDescriptionAsHtml'))
+		if (f_util_ClassUtils::methodExists($parent, 'getRSSDescription'))
+		{
+			$feedWriter->setDescription(f_util_StringUtils::htmlToText($parent->getRSSDescription()));
+		}
+		elseif (f_util_ClassUtils::methodExists($parent, 'getDescriptionAsHtml'))
 		{
 			$feedWriter->setDescription(f_util_StringUtils::htmlToText($parent->getDescriptionAsHtml()));
 		}

@@ -194,7 +194,12 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	 */
 	public function getRSSDescription()
 	{
-		return $this->getFirstPost()->getTextAsHtml();
+		$firstPost = $this->getFirstPost();
+		if ($firstPost->getDeleteddate() === null)
+		{ 
+			return $firstPost->getTextAsHtml();	
+		}
+		return "";
 	}
 	
 	/**
