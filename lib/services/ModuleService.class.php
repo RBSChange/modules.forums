@@ -27,16 +27,12 @@ class forums_ModuleService extends ModuleBaseService
 	}
 	
 	/**
+	 * @deprecated
 	 * @return String
 	 */
 	public function getIp()
 	{
-		$ip = isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : null;
-		if (f_util_StringUtils::isEmpty($ip))
-		{
-			$ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null;
-		}
-		return $ip;
+		return RequestContext::getInstance()->getClientIp();
 	}
 	
 	/**
