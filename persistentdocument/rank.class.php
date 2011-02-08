@@ -5,11 +5,4 @@
  */
 class forums_persistentdocument_rank extends forums_persistentdocument_rankbase 
 {
-	/**
-	 * @param string $actionType
-	 * @param array $formProperties
-	 */
-//	public function addFormProperties($propertiesNames, &$formProperties)
-//	{	
-//	}
 }
