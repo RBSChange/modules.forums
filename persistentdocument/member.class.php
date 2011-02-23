@@ -7,7 +7,6 @@ class forums_persistentdocument_member extends forums_persistentdocument_memberb
 {
 	/**
 	 * Get the indexable document
-	 *
 	 * @return indexer_IndexedDocument
 	 */
 	public function getIndexedDocument()
@@ -280,14 +279,5 @@ class forums_persistentdocument_member extends forums_persistentdocument_memberb
 	public function getSignatureAsHtml()
 	{
 		return website_BBCodeService::getInstance()->toHtml($this->getSignature());
-	}
-	
-	/**
-	 * @param string $actionType
-	 * @param array $formProperties
-	 */
-	public function addFormProperties($propertiesNames, &$formProperties)
-	{	
-		$formProperties['websiteId'] = $this->getWebsite()->getId();
 	}
 }

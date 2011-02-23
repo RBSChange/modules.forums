@@ -298,4 +298,20 @@ class forums_ForumgroupService extends f_persistentdocument_DocumentService
 		}
 		return null;
 	}
+	
+	/**
+	 * @param forums_persistentdocument_forumgroup $document
+	 * @param string $moduleName
+	 * @param string $treeType
+	 * @param array<string, string> $nodeAttributes
+	 */	
+	public function addTreeAttributes($document, $moduleName, $treeType, &$nodeAttributes)
+	{
+		$topic = $document->getTopic();
+		$nodeAttributes['topicId'] = $topic->getId();
+	    if ($treeType == 'wlist')
+		{
+	    	$nodeAttributes['path'] = $document->getDocumentService()->getPathOf($topic);
+		}
+	}
 }

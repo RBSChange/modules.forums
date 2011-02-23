@@ -69,14 +69,4 @@ class forums_persistentdocument_websitefolder extends forums_persistentdocument_
 	{
 		return JsonService::getInstance()->encode($this->getRanksInfo());
 	}
-
-	/**
-	 * @param string $moduleName
-	 * @param string $treeType
-	 * @param array<string, string> $nodeAttributes
-	 */	
-	protected function addTreeAttributes($moduleName, $treeType, &$nodeAttributes)
-	{
-		$nodeAttributes['websiteId'] = $this->getWebsite()->getId();
-	}
 }

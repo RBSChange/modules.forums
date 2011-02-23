@@ -93,20 +93,6 @@ class forums_persistentdocument_forumgroup extends forums_persistentdocument_for
 	}
 	
 	/**
-	 * @param string $moduleName
-	 * @param string $treeType
-	 * @param array<string, string> $nodeAttributes
-	 */	
-	protected function addTreeAttributes($moduleName, $treeType, &$nodeAttributes)
-	{
-	    if ($treeType == 'wlist')
-		{
-	    	$nodeAttributes['path'] = $this->getDocumentService()->getPathOf($this->getTopic());
-		}
-		$nodeAttributes['topicId'] = $this->getTopic()->getId();
-	}
-	
-	/**
 	 * @return website_persistentdocument_page
 	 */
 	public function getSiblingForumListPage()

@@ -304,4 +304,14 @@ class forums_MemberService extends f_persistentdocument_DocumentService
 	{
 		return $document->getUser()->getWebsiteid();
 	}
+		
+	/**
+	 * @param forums_persistentdocument_member $document
+	 * @param string $actionType
+	 * @param array $formProperties
+	 */
+	public function addFormProperties($document, $propertiesNames, &$formProperties)
+	{	
+		$formProperties['websiteId'] = $document->getWebsite()->getId();
+	}
 }
