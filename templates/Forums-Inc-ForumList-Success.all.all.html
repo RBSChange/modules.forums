@@ -2,51 +2,55 @@
 	<thead>
 		<tr>
 			<th class="column-bullet" />
-			<th class="column-label" change:translate="modules.forums.frontoffice.Forum" />
-			<th class="column-threads" change:translate="modules.forums.frontoffice.Threads" />
-			<th class="column-posts" change:translate="modules.forums.frontoffice.Posts" />
-			<th class="column-last-post" change:translate="modules.forums.frontoffice.Last-post" />
+			<th class="column-label">${trans: m.forums.frontoffice.forum,ucf}</th>
+			<th class="column-threads">${trans: m.forums.frontoffice.threads,ucf}</th>
+			<th class="column-posts">${trans: m.forums.frontoffice.posts,ucf}</th>
+			<th class="column-last-post">${trans: m.forums.frontoffice.last-post,ucf}</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr tal:repeat="forum forums" class="row-${php: repeat.forum.odd ? '1' : '0'}">
-			<td class="column-bullet" tal:define="newCount forum/getNbnewpost">
-				<img tal:condition="php: newCount == 1" change:img="front/has-new-post.png" change:i18nattr="title &modules.forums.frontoffice.Has-new-post;" />
-				<img tal:condition="php: newCount > 1" change:img="front/has-new-post.png" change:i18nattr="title[count] newCount; title &modules.forums.frontoffice.Has-n-new-posts;" />
-				<img tal:condition="not: newCount" change:img="front/has-no-new-post.png" change:i18nattr="title &modules.forums.frontoffice.Has-no-new-post;" />
-			</td>
-			<td class="column-label" tal:define="subforums forum/getSubForums">
-				<a change:link="document forum">${forum/getLabelAsHtml}</a>
-				<div class="sub-forums" tal:condition="subforums">
-					<span change:translate="modules.forums.frontoffice.Sub-forumsLabel;"></span>
-					<ul>
-						<li tal:repeat="subforum subforums">
-							<tal:block tal:define="newCountSub subforum/getNbnewpost">
-								<img tal:condition="php: newCountSub == 1" change:img="front/has-new-post.png" change:i18nattr="title &modules.forums.frontoffice.Has-new-post;" />
-								<img tal:condition="php: newCountSub > 1" change:img="front/has-new-post.png" change:i18nattr="title[count] newCountSub; title &modules.forums.frontoffice.Has-n-new-posts;" />
-								<img tal:condition="not: newCountSub" change:img="front/has-no-new-post.png" change:i18nattr="title &modules.forums.frontoffice.Has-no-new-post;" />
+		<tal:block tal:repeat="forum forums">
+			<tr tal:condition="forum/isVisible" class="row-${php: repeat.forum.odd ? '1' : '0'}">
+				<td class="column-bullet" tal:define="newCount forum/getNbnewpost">
+					<img tal:condition="php: newCount == 1" change:img="front/has-new-post.png" title="${trans: m.forums.frontoffice.has-new-post,ucf}" />
+					<img tal:condition="php: newCount > 1" change:img="front/has-new-post.png" title="${trans: m.forums.frontoffice.has-n-new-posts,ucf,count=newCount}" />
+					<img tal:condition="not: newCount" change:img="front/has-no-new-post.png" title="${trans: m.forums.frontoffice.has-no-new-post,ucf}" />
+				</td>
+				<td class="column-label" tal:define="subforums forum/getSubForums">
+					<a change:link="document forum">${forum/getLabelAsHtml}</a>
+					<div class="sub-forums" tal:condition="subforums">
+						<span>${trans: m.forums.frontoffice.sub-forums,ucf,lab}</span>
+						<ul>
+							<tal:block tal:repeat="subforum subforums">
+								<li tal:condition="subforum/isVisible">
+									<tal:block tal:define="newCountSub subforum/getNbnewpost">
+										<img tal:condition="php: newCountSub == 1" change:img="front/has-new-post.png" title="${trans: m.forums.frontoffice.has-new-post,ucf}" />
+										<img tal:condition="php: newCountSub > 1" change:img="front/has-new-post.png" title="${trans: m.forums.frontoffice.has-n-new-posts,ucf,count=newCountSub}" />
+										<img tal:condition="not: newCountSub" change:img="front/has-no-new-post.png" title="${trans: m.forums.frontoffice.has-no-new-post,ucf}" />
+									</tal:block>
+									<a change:link="document subforum">${subforum/getLabelAsHtml}</a>
+								</li>
 							</tal:block>
-							<a change:link="document subforum">${subforum/getLabelAsHtml}</a>
-						</li>
-					</ul>
-				</div>
-			</td>
-			<td class="column-threads">${forum/getNbthreadRecursive}</td>
-			<td class="column-posts">${forum/getNbpostRecursive}</td>
-			<td class="column-last-post" tal:define="lastPost forum/getLastPostRecursive; lastPostAuthor lastPost/getPostAuthor">
-				<tal:block tal:condition="lastPost">
-					<tal:block change:memberdate="value lastPost/getCreationdate; mode 'long'" />
-					<br />
-					<tal:block change:translate="modules.forums.frontoffice.by" /> <a change:link="document lastPostAuthor">${lastPostAuthor/getLabelAsHtml}</a>
-				</tal:block>
-			</td>
-		</tr>
+						</ul>
+					</div>
+				</td>
+				<td class="column-threads">${forum/getNbthreadRecursive}</td>
+				<td class="column-posts">${forum/getNbpostRecursive}</td>
+				<td class="column-last-post" tal:define="lastPost forum/getLastPostRecursive; lastPostAuthor lastPost/getPostAuthor">
+					<tal:block tal:condition="lastPost">
+						<tal:block change:memberdate="value lastPost/getCreationdate; mode 'long'" />
+						<br />
+						${trans: m.forums.frontoffice.by} <a change:link="document lastPostAuthor">${lastPostAuthor/getLabelAsHtml}</a>
+					</tal:block>
+				</td>
+			</tr>
+		</tal:block>
 	</tbody>
 </table>
 
 <ul class="inline-menu">
-	<li tal:condition="not: member"><a change:link="tag contextual_website_website_modules_users_register" change:translate="modules.forums.frontoffice.Register"></a></li>
-	<li tal:condition="not: member"><a change:link="tag contextual_website_website_modules_users_register" change:translate="modules.forums.frontoffice.Log-in"></a></li>
-	<li tal:condition="member"><a change:link="tag contextual_website_website_modules_users_edit-profil" change:translate="modules.forums.frontoffice.Edit-profile"></a></li>
-	<li tal:condition="member"><a change:actionlink="document page; markAllPostsRead 'true'" class="link" change:translate="modules.forums.frontoffice.Mark-all-as-read"></a></li>
+	<li tal:condition="not: member"><a change:link="tag contextual_website_website_modules_users_register">${trans: m.forums.frontoffice.register,ucf}</a></li>
+	<li tal:condition="not: member"><a change:link="tag contextual_website_website_modules_users_register">${trans: m.forums.frontoffice.log-in,ucf}</a></li>
+	<li tal:condition="member"><a change:link="tag contextual_website_website_modules_users_edit-profil">${trans: m.forums.frontoffice.edit-profile,ucf}</a></li>
+	<li tal:condition="member"><a change:actionlink="document page; markAllPostsRead 'true'" class="link">${trans: m.forums.frontoffice.mark-all-as-read,ucf}</a></li>
 </ul>

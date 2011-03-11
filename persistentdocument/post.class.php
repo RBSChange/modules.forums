@@ -37,12 +37,24 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	}
 	
 	/**
+	 * @return boolean
+	 */
+	public function isVisible()
+	{
+		return $this->getForum()->isVisible();
+	}
+	
+	/**
 	 * @return Boolean
 	 */
 	public function isEditable()
 	{
 		$member = forums_MemberService::getInstance()->getCurrentMember();
-		if (forums_ModuleService::getInstance()->hasPermission($member, 'modules_forums.Moderate', $this))
+		if (!$this->isVisible())
+		{
+			return false;
+		}
+		else if (forums_ModuleService::getInstance()->hasPermission($member, 'modules_forums.Moderate', $this))
 		{
 			return true;
 		}
@@ -63,7 +75,11 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	public function isDeletable()
 	{
 		$member = forums_MemberService::getInstance()->getCurrentMember();
-		if (forums_ModuleService::getInstance()->hasPermission($member, 'modules_forums.Moderate', $this))
+		if (!$this->isVisible())
+		{
+			return false;
+		}
+		else if (forums_ModuleService::getInstance()->hasPermission($member, 'modules_forums.Moderate', $this))
 		{
 			return true;
 		}

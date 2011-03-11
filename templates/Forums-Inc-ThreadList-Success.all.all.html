@@ -1,10 +1,10 @@
 <table tal:condition="php: count(threads)" class="normal thread-list" cellspacing="0" cellpadding="0">
 	<thead>
 		<tr>
-			<th class="column-bullet" />
-			<th class="column-label" tal:content="threadColumnTitle" />
-			<th class="column-posts" change:translate="modules.forums.frontoffice.Answers" />
-			<th class="column-last-post" change:translate="modules.forums.frontoffice.Last-post" />
+			<th class="column-bullet"></th>
+			<th class="column-label">${threadColumnTitle}</th>
+			<th class="column-posts">${trans: m.forums.frontoffice.answers,ucf}</th>
+			<th class="column-last-post">${trans: m.forums.frontoffice.last-post,ucf}</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -12,28 +12,28 @@
 			<tr tal:define="newCount thread/getNbnewpost ; postCount thread/getNbpost" class="row-${php: repeat.thread.odd ? '1' : '0'}">
 				<td class="column-bullet" >
 					<tal:block tal:condition="thread/isLocked">
-						<img tal:condition="php: newCount >= 1 && newCount == postCount" change:img="front/new-thread-locked.png" change:i18nattr="title &modules.forums.frontoffice.Is-new-thread-locked;" />
-						<img tal:condition="php: newCount == 1 && newCount != postCount" change:img="front/has-new-post-locked.png" change:i18nattr="title &modules.forums.frontoffice.Has-new-post-locked;" />
-						<img tal:condition="php: newCount > 1 && newCount != postCount" change:img="front/has-new-post-locked.png" change:i18nattr="title[count] newCount; title &modules.forums.frontoffice.Has-n-new-posts-locked;" />
-						<img tal:condition="not: newCount" change:img="front/has-no-new-post-locked.png" change:i18nattr="title &modules.forums.frontoffice.Has-no-new-post-locked;" />
+						<img tal:condition="php: newCount >= 1 && newCount == postCount" change:img="front/new-thread-locked.png" title="${trans: m.forums.frontoffice.is-new-thread-locked,ucf}" />
+						<img tal:condition="php: newCount == 1 && newCount != postCount" change:img="front/has-new-post-locked.png" title="${trans: m.forums.frontoffice.has-new-post-locked,ucf}" />
+						<img tal:condition="php: newCount > 1 && newCount != postCount" change:img="front/has-new-post-locked.png" title="${trans: m.forums.frontoffice.has-n-new-posts-locked,ucf,count=newCount}" />
+						<img tal:condition="not: newCount" change:img="front/has-no-new-post-locked.png" title="${trans: m.forums.frontoffice.has-no-new-post-locked,ucf}" />
 					</tal:block>
 					<tal:block tal:condition="not: thread/isLocked">
-						<img tal:condition="php: newCount >= 1 && newCount == postCount" change:img="front/new-thread.png" change:i18nattr="title &modules.forums.frontoffice.Is-new-thread;" />
-						<img tal:condition="php: newCount == 1 && newCount != postCount" change:img="front/has-new-post.png" change:i18nattr="title &modules.forums.frontoffice.Has-new-post;" />
-						<img tal:condition="php: newCount > 1 && newCount != postCount" change:img="front/has-new-post.png" change:i18nattr="title[count] newCount; title &modules.forums.frontoffice.Has-n-new-posts;" />
-						<img tal:condition="not: newCount" change:img="front/has-no-new-post.png" change:i18nattr="title &modules.forums.frontoffice.Has-no-new-post;" />
+						<img tal:condition="php: newCount >= 1 && newCount == postCount" change:img="front/new-thread.png" title="${trans: m.forums.frontoffice.is-new-thread,ucf}" />
+						<img tal:condition="php: newCount == 1 && newCount != postCount" change:img="front/has-new-post.png" title="${trans: m.forums.frontoffice.has-new-post,ucf}" />
+						<img tal:condition="php: newCount > 1 && newCount != postCount" change:img="front/has-new-post.png" title="${trans: m.forums.frontoffice.has-n-new-posts,ucf,count=newCount}" />
+						<img tal:condition="not: newCount" change:img="front/has-no-new-post.png" title="${trans: m.forums.frontoffice.has-no-new-post,ucf}" />
 					</tal:block>
 				</td>
 				<td class="column-label">
-					<strong tal:condition="php: thread.getLevel() == 20" change:translate="modules.forums.lists.threadlevels.StickyLabel"></strong>
-					<strong tal:condition="php: thread.getLevel() == 30" change:translate="modules.forums.lists.threadlevels.AnnouncementLabel"></strong>
+					<strong tal:condition="php: thread.getLevel() == 20">${trans: m.forums.lists.threadlevels.sticky,ucf,lab}</strong>
+					<strong tal:condition="php: thread.getLevel() == 30">${trans: m.forums.lists.threadlevels.announcement,ucf,lab}</strong>
 					<a tal:attributes="href thread/getUserUrl" class="link">${thread/getLabelAsHtml}</a>
 				</td>
 				<td class="column-posts" tal:content="php: postCount-1" />
 				<td class="column-last-post" tal:define="lastPost thread/getLastPost; lastPostAuthor lastPost/getPostAuthor">
 					<tal:block change:memberdate="value lastPost/getCreationdate; mode 'long'" />
 					<br />
-					<tal:block change:translate="modules.forums.frontoffice.by" /> <a change:link="document lastPostAuthor">${lastPostAuthor/getLabelAsHtml}</a>
+					${trans: m.forums.frontoffice.by} <a change:link="document lastPostAuthor">${lastPostAuthor/getLabelAsHtml}</a>
 				</td>
 			</tr>
 		</tal:block>

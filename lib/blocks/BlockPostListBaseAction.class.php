@@ -3,7 +3,7 @@
  * forums_BlockPostListBaseAction
  * @package modules.forums
  */
-abstract class forums_BlockPostListBaseAction extends website_BlockAction
+abstract class forums_BlockPostListBaseAction extends forums_BaseBlockAction
 {
 	/**
 	 * @var Integer

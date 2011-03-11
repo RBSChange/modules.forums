@@ -1,4 +1,4 @@
-<h2 change:h="" tal:condition="not:forumgroup" change:translate="modules.forums.frontoffice.Forums"></h2>
+<h2 change:h="" tal:condition="not:forumgroup">${trans: m.forums.frontoffice.forums,ucf}</h2>
 <tal:block tal:condition="forumgroup">
 	<h2 change:h="">${forumgroup/getLabelAsHtml}</h2>
 	<div tal:condition="forumgroup/getDescription">${forumgroup/getDescriptionAsHtml}</div>

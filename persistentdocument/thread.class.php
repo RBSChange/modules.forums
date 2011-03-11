@@ -14,12 +14,20 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	}
 	
 	/**
+	 * @return boolean
+	 */
+	public function isVisible()
+	{
+		return $this->getForum()->isVisible();
+	}
+	
+	/**
 	 * @return Boolean
 	 */
 	public function isWriteable()
 	{
 		$member = forums_MemberService::getInstance()->getCurrentMember();
-		if ($member === null || $member->isBanned())
+		if (!$this->isVisible() || $member === null || $member->isBanned())
 		{
 			return false;
 		}
@@ -48,6 +56,10 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	public function isEditable()
 	{
 		$member = forums_MemberService::getInstance()->getCurrentMember();
+		if (!$this->isVisible())
+		{
+			return false;
+		}
 		if (forums_ModuleService::getInstance()->hasPermission($member, 'modules_forums.Moderate', $this))
 		{
 			return true;

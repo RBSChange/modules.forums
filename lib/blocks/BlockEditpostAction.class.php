@@ -33,15 +33,12 @@ class forums_BlockEditpostAction extends forums_BlockPostListBaseAction
 		}
 		
 		$post = $this->getDocumentParameter();
-		if ($post->isEditable())
+		if (!$post->isEditable())
 		{
-			return $this->getInputViewName();
+			return $this->getForbiddenView();
 		}
 		
-		$agaviUser = Controller::getInstance()->getContext()->getUser();
-		$agaviUser->setAttribute('illegalAccessPage', $_SERVER["REQUEST_URI"]);
-		$request->setAttribute('member', forums_MemberService::getInstance()->getCurrentMember());
-		return $this->getTemplateByFullName('modules_forums', 'Forums-Block-Generic-Forbidden');
+		return $this->getInputViewName();
 	}
 
 	/**
@@ -59,7 +56,10 @@ class forums_BlockEditpostAction extends forums_BlockPostListBaseAction
 	{
 		return array_merge(BeanUtils::getBeanValidationRules('forums_persistentdocument_post', null, array('label')), BeanUtils::getSubBeanValidationRules('forums_persistentdocument_post', 'thread', null, null));
 	}
-	
+
+	/**
+	 * @return boolean 
+	 */
 	public function submitNeedTransaction()
     {
     	return true;
@@ -74,6 +74,11 @@ class forums_BlockEditpostAction extends forums_BlockPostListBaseAction
 	 */
 	public function executeSubmit($request, $response, forums_persistentdocument_post $post)
 	{
+		if (!$post->isEditable())
+		{
+			return $this->getForbiddenView();
+		}
+		
 		$post->setEditedby(forums_MemberService::getInstance()->getCurrentMember());
 		$post->setEditeddate(date_Calendar::now()->toString());
 		$post->save();
@@ -95,8 +100,7 @@ class forums_BlockEditpostAction extends forums_BlockPostListBaseAction
 	 */
 	public function getPreviewInputValidationRules()
 	{
-		$rules = array_merge(BeanUtils::getBeanValidationRules('forums_persistentdocument_post', null, array('label')), BeanUtils::getSubBeanValidationRules('forums_persistentdocument_post', 'thread', null, null));
-		return $rules;
+		return array_merge(BeanUtils::getBeanValidationRules('forums_persistentdocument_post', null, array('label')), BeanUtils::getSubBeanValidationRules('forums_persistentdocument_post', 'thread', null, null));
 	}
 	
 	/**
@@ -108,6 +112,11 @@ class forums_BlockEditpostAction extends forums_BlockPostListBaseAction
 	 */
 	public function executePreview($request, $response, forums_persistentdocument_post $post)
 	{
+		if (!$post->isEditable())
+		{
+			return $this->getForbiddenView();
+		}
+		
 		if	($post->getAnswerof() !== null && $post->getAnswerof()->getThread()->getId() != $post->getThread()->getId())
 		{
 			$post->setAnswerof(null);

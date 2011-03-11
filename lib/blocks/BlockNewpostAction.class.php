@@ -41,8 +41,6 @@ class forums_BlockNewpostAction extends forums_BlockPostListBaseAction
 	}
 
 	/**
-	 * @see website_BlockAction::execute()
-	 *
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
 	 * @return String
@@ -55,16 +53,13 @@ class forums_BlockNewpostAction extends forums_BlockPostListBaseAction
 		}
 
 		$thread = $this->getDocumentParameter();
-		if ($thread->isWriteable())
+		if (!$thread->isWriteable())
 		{
-			$this->setRequestAttributes($request);			
-			return $this->getInputViewName();
+			return $this->getForbiddenView();
 		}
 		
-		$agaviUser = Controller::getInstance()->getContext()->getUser();
-		$agaviUser->setAttribute('illegalAccessPage', $_SERVER["REQUEST_URI"]);
-		$request->setAttribute('member', forums_MemberService::getInstance()->getCurrentMember());
-		return $this->getTemplateByFullName('modules_forums', 'Forums-Block-Generic-Forbidden');
+		$this->setRequestAttributes($request);			
+		return $this->getInputViewName();
 	}
 
 	/**
@@ -111,14 +106,18 @@ class forums_BlockNewpostAction extends forums_BlockPostListBaseAction
 	}
 
 	/**
-	 * @see website_BlockAction::execute()
-	 *
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
 	 * @return String
 	 */
 	public function executeSubmit($request, $response, forums_persistentdocument_post $post)
 	{
+		$thread = $post->getThread();
+		if (!$thread->isWriteable())
+		{
+			return $this->getForbiddenView();
+		}
+		
 		if	($post->getAnswerof() !== null && $post->getAnswerof()->getThread()->getId() != $post->getThread()->getId())
 		{
 			$post->setAnswerof(null);
@@ -139,14 +138,18 @@ class forums_BlockNewpostAction extends forums_BlockPostListBaseAction
 	}
 	
 	/**
-	 * @see website_BlockAction::execute()
-	 *
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
 	 * @return String
 	 */
 	public function executePreview($request, $response, forums_persistentdocument_post $post)
 	{
+		$thread = $post->getThread();
+		if (!$thread->isWriteable())
+		{
+			return $this->getForbiddenView();
+		}
+		
 		if	($post->getAnswerof() !== null && $post->getAnswerof()->getThread()->getId() != $post->getThread()->getId())
 		{
 			$post->setAnswerof(null);

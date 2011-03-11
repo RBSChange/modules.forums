@@ -3,7 +3,7 @@
  * forums_BlockEditMemberProfileAction
  * @package modules.forums.lib.blocks
  */
-class forums_BlockEditMemberProfileAction extends website_BlockAction
+class forums_BlockEditMemberProfileAction extends forums_BaseBlockAction
 {
 	/**
 	 * @see website_BlockAction::execute()
@@ -31,6 +31,9 @@ class forums_BlockEditMemberProfileAction extends website_BlockAction
 		return website_BlockView::INPUT;
     }
     
+    /**
+     * @return boolean
+     */
     public function saveNeedTransaction()
     {
     	return true;
@@ -44,6 +47,12 @@ class forums_BlockEditMemberProfileAction extends website_BlockAction
 	 */
 	public function executeSave($request, $response, forums_persistentdocument_member $member)
 	{
+		$currentMember = forums_MemberService::getInstance()->getCurrentMember();
+		if ($currentMember->getId() !== $member->getId())
+		{
+			return $this->getForbiddenView();
+		}
+		
 		$member->save();
 		
 		$this->addMessage(f_Locale::translate('&modules.users.frontoffice.Informations-updated;'));
