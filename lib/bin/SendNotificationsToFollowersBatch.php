@@ -15,7 +15,7 @@ $rq = RequestContext::getInstance();
 $rq->setLang($rq->getDefaultLang());
 
 $ns = notification_NotificationService::getInstance();
-$notif = $ns->getNotificationByCodeName('modules_forums/follower');
+$notif = $ns->getByCodeName('modules_forums/follower');
 $thread = DocumentHelper::getDocumentInstance($threadId, 'modules_forums/thread');
 $num = 1 + ($thread->getNbpost() - $thread->getTofollow()->getNumber());
 foreach ($thread->getFollowersArray() as $member)

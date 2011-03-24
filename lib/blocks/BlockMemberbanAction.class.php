@@ -69,7 +69,7 @@ class forums_BlockMemberbanAction extends website_TaggerBlockAction
 	private function sendBan($ban)
 	{
 		$ns = notification_NotificationService::getInstance();
-		$notif = $ns->getNotificationByCodeName('modules_forums/ban');
+		$notif = $ns->getByCodeName('modules_forums/ban');
 		$recipients = new mail_MessageRecipients();
 		$recipients->setTo($ban->getMember()->getEmail());
 		$d = date_Converter::convertDateToLocal(date_Calendar::getInstance($ban->getTo()));
