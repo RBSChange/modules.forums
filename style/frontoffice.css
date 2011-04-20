@@ -1,5 +1,6 @@
 .modules-forums ul.message-list{
 	margin-bottom: 16px;
+	list-style-type: none;
 }
 .modules-forums ul.message-list li{
 	background: url(/media/frontoffice/pixel2.gif) repeat-y 191px 0px;
@@ -254,4 +255,9 @@
 	overflow-y: auto;
 	margin-bottom: 15px;
 }
+
+.modules-forums-RssMenu ul{
+	list-style-type: none;
+}
+
 @import url(/modules/forums/style/frontoffice.trident.5.css);
