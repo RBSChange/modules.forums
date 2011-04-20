@@ -3,7 +3,7 @@
 }
 .modules-forums ul.message-list li{
 	background: url(/media/frontoffice/pixel2.gif) repeat-y 191px 0px;
-	background-color: #fff/*@var troddbgcolor*/;
+	background-color: #fff;
 	border: 1px solid #e4e2da;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
@@ -11,14 +11,15 @@
 }
 .modules-forums ul.message-list li.odd{
 	background: url(/media/frontoffice/pixel2.gif) #faf9f7 repeat-y 191px 0px;
-	background-color: #eee/*@var trevenbgcolor*/;
+	background-color: #eee;
 }
 .modules-forums ul.message-list li.tbv{
 	background: url(/media/frontoffice/pixel3.gif) repeat-y 191px 0px;
 	background-color: #b6cf4d;
 	color: #fff;
 }
-.modules-forums ul.message-list li.erased, .modules-forums em.locked{
+.modules-forums ul.message-list li.erased,
+.modules-forums em.locked{
 	border: 1px solid #b23030;
 	color: #b23030;
 	background: #ffe7e7;
@@ -33,7 +34,8 @@
 	border: 1px solid #d3d2ce;
 	background: #f5f4f0;
 }
-.modules-forums em.locked, .modules-forums .note{
+.modules-forums em.locked,
+.modules-forums .note{
 	padding: 8px 12px;
 	margin-bottom: 16px;
 	-moz-border-radius: 10px;
@@ -99,7 +101,7 @@
 .modules-forums ul.message-list li.last.tbv{
 	-moz-border-radius-bottomleft: 10px;
 	-webkit-border-bottom-left-radius: 10px;
-	-moz-border-radius-bottomright: 10x;
+	-moz-border-radius-bottomright: 10px;
 	-webkit-border-bottom-right-radius: 10px;
 }
 .modules-forums ul.inline-menu{
@@ -131,7 +133,8 @@
 .modules-forums .message-header a.link{
 	color: #666;
 }
-.modules-forums .message-header, .modules-forums .member-signature{
+.modules-forums .message-header,
+.modules-forums .member-signature{
 	font-size: 0.85em;
 }
 .modules-forums hr.signature-separator{
@@ -143,7 +146,8 @@
 	margin-top: 15px;
 	text-align: right;
 }
-.modules-forums .post-form input.textfield, .modules-forums .post-form textarea{
+.modules-forums .post-form input.textfield,
+.modules-forums .post-form textarea{
 	width: 64%;
 }
 .modules-forums .post-form
@@ -189,7 +193,8 @@
 	min-width: 40px;
 	text-align: center;
 }
-.modules-forums .column-bullet img, .modules-forums .column-avatar img
+.modules-forums .column-bullet img,
+.modules-forums .column-avatar img
 {
 	vertical-align: middle;
 }
@@ -197,7 +202,8 @@
 {
 	width: 100%;
 }
-.modules-forums .column-posts, .modules-forums .column-threads
+.modules-forums .column-posts,
+.modules-forums .column-threads
 {
 	white-space: nowrap;
 	min-width: 75px;
@@ -209,7 +215,8 @@
 	min-width: 150px;
 	text-align: center;
 }
-.modules-forums .column-date, .modules-forums .column-country
+.modules-forums .column-date,
+.modules-forums .column-country
 {
 	white-space: nowrap;
 	min-width: 100px;
