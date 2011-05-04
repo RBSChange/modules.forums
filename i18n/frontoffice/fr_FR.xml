@@ -113,7 +113,7 @@
   <key id="view-thread">voir le sujet depuis le début</key>
   <key id="written-by">écrit par</key>
   <key id="answer-to">en réponse à</key>
-  <key id="number-n-in-thread-x">message numéro {number} dans le sujet &lt;em&gt;{thread}&lt;/em&gt;.</key>
+  <key id="number-n-in-thread-x" format="html"><![CDATA[message numéro {number} dans le sujet <em>{thread}</em>.]]></key>
   <key id="rss-menu-title">abonnez-vous aux flux RSS</key>
   <key id="unknown">inconnu</key>
   <key id="message-preview">prévisualisation du message</key>

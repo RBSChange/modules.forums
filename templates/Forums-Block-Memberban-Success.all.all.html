@@ -1,19 +1,19 @@
 <tal:block change:loadhandler="forums_MemberbanLoadHandler" />
-<h2 change:h="" change:translate="modules.forums.frontoffice.Forum-member-ban"></h2>
-<form change:form="beanClass forums_persistentdocument_ban; beanName ban">
+<h2 change:h="">${trans:m.forums.frontoffice.forum-member-ban,ucf}</h2>
+<form change:form="beanClass forums_persistentdocument_ban; beanName ban" class="cmxform post-form">
 	<div change:errors=""></div>
-	<tal change:field="name beanId" hidden="true" />
-	<tal change:field="name member" value="${post/getPostauthor/getId}" hidden="true"/>
-	<tal change:field="name post" value="${post/getId}" hidden="true"/>
-	<tal change:hiddeninput="name postid" value="${post/getId}"/>
+	<input change:field="name beanId" hidden="true" />
+	<input change:field="name member" value="${post/getPostauthor/getId}" hidden="true"/>
+	<input change:field="name post" value="${post/getId}" hidden="true"/>
+	<input change:hiddeninput="name postid" value="${post/getId}"/>
 	<ol>
-		<li><label change:translate="modules.forums.document.ban.MemberLabel"></label> <a change:link="document post/getPostauthor">${post/getAuthorNameAsHtml}</a></li>
-		<li><label change:translate="modules.forums.document.ban.PostLabel"></label> ${post/getPostIdLink}</li>
+		<li><label>${trans:m.forums.document.ban.member,ucf,lab}</label> <a change:link="document post/getPostauthor">${post/getAuthorNameAsHtml}</a></li>
+		<li><label>${trans:m.forums.document.ban.post,ucf,lab}</label> ${post/getPostIdLink}</li>
 		<li><input change:field="name to" required="true"/></li>
-		<li><label change:fieldlabel="name motif" change:translate="modules.forums.document.ban.MotifLabel" required="true"></label> <input change:richtextinput="name motif; editor bbcode" /></li>
+		<li><label change:fieldlabel="name motif" required="true">${trans:m.forums.document.ban.motif,ucf}</label> <input change:richtextinput="name motif; editor bbcode" /></li>
 	</ol>
-	<p class="cleaner">
-		<input class="float-right button btn-green" change:submit="label &modules.forums.frontoffice.form.Submit;"/>
+	<p class="buttons">
+		<input class="button" change:submit="labeli18n m.forums.frontoffice.form.submit"/>
 	</p>
 </form>
 

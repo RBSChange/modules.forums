@@ -151,6 +151,9 @@
 .modules-forums .post-form textarea{
 	width: 64%;
 }
+.modules-forums .post-form input.textfield.dp-applied{
+	width: 140px;
+}
 .modules-forums .post-form
 {
 	border: 1px solid #e4e2da;

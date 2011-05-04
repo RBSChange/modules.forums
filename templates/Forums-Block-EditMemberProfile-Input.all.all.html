@@ -6,29 +6,29 @@
 		<li><input change:field="name label" /></li>
 		<li>
 			<input change:field="name displayname" />
-			<p class="help-text" change:translate="modules.forums.frontoffice.Authdisplayname" />
+			<p class="help-text">${trans:m.forums.frontoffice.authdisplayname,ucf}</p>
 		</li>
 		<li><input change:field="name country" /></li>
 		<li><input change:field="name websiteUrl" size="40" /></li>
 		<li>
 			<input change:field="name shortDateFormat" size="40" />
 			<p class="help-text">
-				<tal:block change:translate="modules.forums.document.member.Shortdateformat-help" />
+				${trans:m.forums.document.member.shortdateformat-help,ucf}
 				<br />
-				<tal:block change:translate="modules.forums.frontoffice.Default-valueLabel" /> <strong change:translate="modules.forums.frontoffice.short-date-format"></strong>
+				${trans:m.forums.frontoffice.default-value,ucf,lab} <strong>${trans:m.forums.frontoffice.short-date-format}</strong>
 			</p>
 		</li>
 		<li>
 			<input change:field="name longDateFormat" size="40" />
 			<p class="help-text">
-				<tal:block change:translate="modules.forums.document.member.Longdateformat-help" />
+				${trans:m.forums.document.member.longdateformat-help,ucf}
 				<br />
-				<tal:block change:translate="modules.forums.frontoffice.Default-valueLabel" /> <strong change:translate="modules.forums.frontoffice.long-date-format"></strong>
+				${trans:m.forums.frontoffice.default-value,ucf,lab} <strong>${trans:m.forums.frontoffice.long-date-format}</strong>
 			</p>
 		</li>
 		<li><label change:fieldlabel="name signature"></label> <input change:richtextinput="name signature ; editor bbcode" /></li>
 	</ol>
 	<p class="buttons">
-		<input change:submit="label &modules.users.frontoffice.editprofil.SubmitButton;" class="button" name="save" />
+		<input change:submit="labeli18n m.users.frontoffice.editprofil.submitbutton" class="button" name="save" />
 	</p>
 </form>

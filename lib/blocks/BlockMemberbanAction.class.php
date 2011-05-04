@@ -6,8 +6,6 @@
 class forums_BlockMemberbanAction extends website_TaggerBlockAction
 {
 	/**
-	 * @see website_BlockAction::execute()
-	 *
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
 	 * @return String
@@ -47,8 +45,6 @@ class forums_BlockMemberbanAction extends website_TaggerBlockAction
 	}
 	
 	/**
-	 * @see website_BlockAction::execute()
-	 *
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
 	 * @return String
@@ -69,12 +65,14 @@ class forums_BlockMemberbanAction extends website_TaggerBlockAction
 	private function sendBan($ban)
 	{
 		$ns = notification_NotificationService::getInstance();
-		$notif = $ns->getByCodeName('modules_forums/ban');
-		$recipients = new mail_MessageRecipients();
-		$recipients->setTo($ban->getMember()->getEmail());
-		$d = date_Converter::convertDateToLocal(date_Calendar::getInstance($ban->getTo()));
-		$date = $d->getYear() . '-' . $d->getMonth() . '-' . $d->getDay();
-		$params = array('PSEUDO' => $ban->getMember()->getLabel(), 'DATE' => $date, 'MOTIF' => $ban->display());
-		$ns->send($notif, $recipients, $params, null);
+		$member = $ban->getMember();
+		$ms = $member->getDocumentService();
+		$notif = $ns->getConfiguredByCodeName('modules_forums/ban', $ms->getWebsiteId($member), $member->getLang());
+		if ($notif instanceof notification_persistentdocument_notification)
+		{
+			$user = $member->getUser();
+			$callback = array($ban->getDocumentService(), 'getNotificationParameters');
+			$user->getDocumentService()->sendNotificationToUserCallback($notif, $user, $callback, $ban);
+		}
 	}
 }

@@ -93,4 +93,17 @@ class forums_BanService extends f_persistentdocument_DocumentService
 		$member->setBan($document->getTo());
 		$member->save();
 	}
+	
+	/**
+	 * @param forums_persistentdocument_ban $ban
+	 * @return array
+	 */
+	public function getNotificationParameters($ban)
+	{
+		$parameters = array();
+		$parameters['DATE'] = date_DateFormat::format(date_Calendar::getInstance($ban->getUITo()), date_DateFormat::getDateFormat());
+		$parameters['MOTIF'] = $ban->display();		
+		$parameters['PSEUDO'] = $ban->getMember()->getLabelAsHtml();
+		return $parameters;
+	}
 }

@@ -339,4 +339,29 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 
 		return $data;
 	}
+	
+	/**
+	 * @param array $params
+	 * @return array
+	 */
+	public function getNotificationParameters($params)
+	{
+		$parameters = array();
+		
+		$thread = $params['thread'];		
+		$parameters['TOPIC'] = $thread->getLabelAsHtml();
+		$parameters['LINK'] = '<a class="link" href="' . $thread->getTofollow()->getPostUrlInThread() . '">' . f_Locale::translate('&modules.forums.frontoffice.thislink;') . '</a>';
+		
+		if (isset($params['member']) && $params['member'] instanceof forums_persistentdocument_member)
+		{
+			$member = $params['member'];
+			$parameters['PSEUDO'] = $member->getLabelAsHtml();
+		}
+		
+		if (isset($params['specificParams']) && is_array($params['specificParams']))
+		{
+			$parameters = array_merge($parameters, $params['specificParams']);
+		}
+		return $parameters;
+	}
 }

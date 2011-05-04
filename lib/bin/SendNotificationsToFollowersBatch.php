@@ -15,21 +15,25 @@ $rq = RequestContext::getInstance();
 $rq->setLang($rq->getDefaultLang());
 
 $ns = notification_NotificationService::getInstance();
-$notif = $ns->getByCodeName('modules_forums/follower');
 $thread = DocumentHelper::getDocumentInstance($threadId, 'modules_forums/thread');
+$ds = $thread->getDocumentService();
+$notif = $ns->getConfiguredByCodeName('modules_forums/follower', $ds->getWebsiteId($thread), $thread->getLang());
 $num = 1 + ($thread->getNbpost() - $thread->getTofollow()->getNumber());
-foreach ($thread->getFollowersArray() as $member)
+if ($notif instanceof notification_persistentdocument_notification)
 {
-	if ($member->getUser()->isPublished())
+	foreach ($thread->getFollowersArray() as $member)
 	{
-		$recipients = new mail_MessageRecipients();
-		$recipients->setTo($member->getEmail());
-		$replace = array('PSEUDO' => $member->getLabel(), 'TOPIC' => $thread->getLabel(), 'NUM' => $num, 'LINK' => '<a class="link" href="' . $thread->getTofollow()->getPostUrlInThread() . '">' . f_Locale::translate('&modules.forums.frontoffice.thislink;') . '</a>');
-		$ns->send($notif, $recipients, $replace, null);
-	}
-	else
-	{
-		$thread->removeFollowers($member);
+		$user = $member->getUser();
+		if ($user->isPublished())
+		{
+			$callback = array($ds, 'getNotificationParameters');
+			$params = array('thread' => $thread, 'member' => $member, 'specificParams' => array('NUM' => $num));
+			$user->getDocumentService()->sendNotificationToUserCallback($notif, $user, $callback, $params);
+		}
+		else
+		{
+			$thread->removeFollowers($member);
+		}
 	}
 }
 $thread->setTofollow(null);

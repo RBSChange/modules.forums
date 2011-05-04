@@ -1,12 +1,12 @@
 <tal:block change:loadhandler="forums_NewthreadLoadHandler" />
-<h2 change:h="" change:translate="modules.forums.frontoffice.Newthread"></h2>
+<h2 change:h="">${trans:m.forums.frontoffice.newthread,ucf}</h2>
 
 <tal:block tal:condition="previewPostInfo">
-	<h3 change:h="" change:translate="modules.forums.frontoffice.Message-preview"></h3>
+	<h3 change:h="">${trans:m.forums.frontoffice.message-preview,ucf}</h3>
 	<tal:block change:include="module 'forums'; template 'Forums-Inc-PostList-Success'; type 'html'; postListInfo previewPostInfo" />
 </tal:block>
 
-<h3 change:h="" change:translate="modules.forums.frontoffice.Message-input"></h3>
+<h3 change:h="">${trans:m.forums.frontoffice.message-input,ucf}</h3>
 <form change:form="beanClass forums_persistentdocument_thread; beanName thread" class="cmxform post-form">
 	<div change:errors=""></div>
 	<tal change:field="name beanId" hidden="true" />
@@ -17,7 +17,7 @@
 		<li><label change:fieldlabel="" name="firstPost.text"></label> <input change:richtextinput="name firstPost.text; editor bbcode" required="true" /></li>
 	</ol>
 	<p class="buttons">
-		<input class="button" name="preview" change:submit="label &modules.forums.frontoffice.form.Preview;" />
-		<input class="button" change:submit="label &modules.forums.frontoffice.form.Submit;"/>
+		<input class="button" name="preview" change:submit="labeli18n m.forums.frontoffice.form.preview" />
+		<input class="button" change:submit="labeli18n m.forums.frontoffice.form.submit"/>
 	</p>
 </form>

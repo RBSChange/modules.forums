@@ -1,13 +1,13 @@
-<a tal:condition="member/isMe" change:link="tag contextual_website_website_modules_users_edit-profil" class="button float-right" change:translate="modules.forums.frontoffice.Edit"></a>
-<a tal:condition="php: !member.isMe() && member.isEditable()" change:link="tag contextual_website_website_modules_forums_editprofile ; forumsParam[cmpref] member/getId" class="button float-right" change:translate="modules.forums.frontoffice.Edit"></a>
-<h2 change:h="" change:translate="modules.forums.frontoffice.Profile-of;login member/getLabelAsHtml"></h2>
+<a tal:condition="member/isMe" change:link="tag contextual_website_website_modules_users_edit-profil" class="button float-right">${trans:m.forums.frontoffice.edit,ucf}</a>
+<a tal:condition="php: !member.isMe() && member.isEditable()" change:link="tag contextual_website_website_modules_forums_editprofile ; forumsParam[cmpref] member/getId" class="button float-right">${trans:m.forums.frontoffice.edit,ucf}</a>
+<h2 change:h="">${trans:m.forums.frontoffice.profile-of,ucf,login=member/getLabelAsHtml}</h2>
 
 <tal:block tal:condition="member/isme">
-	<div tal:condition="mailsended"><em class="notification" change:translate="modules.forums.frontoffice.Mail-sent"></em></div>
+	<div tal:condition="mailsended"><em class="notification">${trans:m.forums.frontoffice.mail-sent}</em></div>
 	<tal:block tal:condition="member/getEndpublicationdate">
-		<em class="notification"><tal:block change:translate="&modules.forums.frontoffice.Must-validate-before" /> <tal:block change:memberdate="value member/getEndpublicationdate; mode 'short'" /> - <a tal:define="url php: array('changeParam[resend]'=>1)" change:currentPagelink="url" change:translate="modules.forums.frontoffice.Resend"></a></em>
+		<em class="notification">${trans:m.forums.frontoffice.must-validate-before,ucf} <tal:block change:memberdate="value member/getEndpublicationdate; mode 'short'" /> - <a tal:define="url php: array('changeParam[resend]'=>1)" change:currentPagelink="url">${trans:m.forums.frontoffice.resend,ucf}</a></em>
 	</tal:block>
-	<em tal:condition="member/getBan" class="notification"><tal:block change:translate="modules.forums.frontoffice.Ban-until" /> <tal:block change:memberdate="value member/getBan; mode 'short'" /></em>
+	<em tal:condition="member/getBan" class="notification">${trans:m.forums.frontoffice.ban-until,ucf} <tal:block change:memberdate="value member/getBan; mode 'short'" /></em>
 </tal:block>
 
 <div class="member-idcard">
@@ -19,29 +19,29 @@
 			<div class="member-info">
 				<ul>
 					<tal:block tal:condition="member/getDisplayName">
-						<li><tal:block change:translate="modules.forums.frontoffice.FirstnameLabel" /> <strong>${member/getUser/getFirstnameAsHtml}</strong></li>
-						<li><tal:block change:translate="modules.forums.frontoffice.LastnameLabel" /> <strong>${member/getUser/getlastnameAsHtml}</strong></li>
+						<li>${trans:m.forums.frontoffice.firstname,ucf,lab} <strong>${member/getUser/getFirstnameAsHtml}</strong></li>
+						<li>${trans:m.forums.frontoffice.lastname,ucf,lab} <strong>${member/getUser/getlastnameAsHtml}</strong></li>
 					</tal:block>
 					<li tal:define="count member/getPublishedTitleCount" tal:condition="count">
-						<tal:block tal:condition="php: count == 1" change:translate="modules.forums.frontoffice.Member-titleLabel" />
-						<tal:block tal:condition="php: count > 1" change:translate="modules.forums.frontoffice.Member-titlesLabel" />
+						<tal:block tal:condition="php: count == 1">${trans:m.forums.frontoffice.member-title,ucf,lab}</tal:block>
+						<tal:block tal:condition="php: count > 1">${trans:m.forums.frontoffice.member-titles,ucf,lab}</tal:block>
 						<tal:block tal:repeat="title member/getPublishedTitleArray">
-							<tal:block tal:condition="php: !repeat.title.start && repeat.title.end" change:translate="modules.forums.frontoffice.and" />
-							<strong>${title/getLabel}</strong><tal:block tal:condition="php: repeat.title.index LT (repeat.title.length - 2)">, </tal:block>
+							<tal:block tal:condition="php: !repeat.title.start && repeat.title.end">${trans:m.forums.frontoffice.and}</tal:block>
+							<strong>${title/getLabelAsHtml}</strong><tal:block tal:condition="php: repeat.title.index LT (repeat.title.length - 2)">, </tal:block>
 					</tal:block>
 					</li>
-					<li><tal:block change:translate="modules.forums.frontoffice.Member-sinceLabel" /> <strong change:memberdate="value member/getCreationdate; mode 'short'"></strong></li>
-					<li tal:condition="member/getWebsiteUrl"><tal:block change:translate="modules.forums.frontoffice.Web-siteLabel" /> <strong><a class="link" tal:attributes="href member/getWebsiteUrl" target="_blank">${member/getShortWebsiteUrl}</a></strong></li>
-					<li tal:condition="member/getCountry"><tal:block change:translate="modules.forums.frontoffice.CountryLabel" /> <strong>${member/getCountry/getLabelAsHtml}</strong></li>
+					<li>${trans:m.forums.frontoffice.member-since,ucf,lab} <strong change:memberdate="value member/getCreationdate; mode 'short'"></strong></li>
+					<li tal:condition="member/getWebsiteUrl">${trans:m.forums.frontoffice.web-site,ucf,lab} <strong><a class="link" tal:attributes="href member/getWebsiteUrl" target="_blank">${member/getShortWebsiteUrl}</a></strong></li>
+					<li tal:condition="member/getCountry">${trans:m.forums.frontoffice.country,ucf,lab} <strong>${member/getCountry/getLabelAsHtml}</strong></li>
 				</ul>
 			</div>
 		</div>
 		<div class="column-50 margin-left">
 			<div class="member-counts" tal:condition="php: member.getNbpost() || member.getNbthread()">
 				<ul tal:define="nbpost member/getNbpost ; nbthread member/getNbthread">
-					<li tal:define="rank member/getRank" tal:condition="rank"><tal:block change:translate="modules.forums.frontoffice.Member-rankLabel" /> <strong>${rank/getLabel}</strong></li>
-					<li><tal:block change:translate="modules.forums.frontoffice.Post-countLabel" /> <strong>${nbpost}</strong></li>
-					<li><tal:block change:translate="modules.forums.frontoffice.Thread-countLabel" /> <strong>${nbthread}</strong></li>
+					<li tal:define="rank member/getRank" tal:condition="rank">${trans:m.forums.frontoffice.member-rank,ucf,lab} <strong>${rank/getLabel}</strong></li>
+					<li>${trans:m.forums.frontoffice.post-count,ucf,lab} <strong>${nbpost}</strong></li>
+					<li>${trans:m.forums.frontoffice.thread-count,ucf,lab} <strong>${nbthread}</strong></li>
 				</ul>
 			</div>
 		</div>
@@ -49,7 +49,7 @@
 </div>
 
 <tal:block tal:condition="member/getSignature">
-	<h3 change:h="" change:translate="modules.forums.document.member.Signature"></h3>
+	<h3 change:h="">${trans:m.forums.document.member.signature,ucf}</h3>
 	<div class="member-signature">${member/getSignatureAsHtml}</div>
 </tal:block>
 

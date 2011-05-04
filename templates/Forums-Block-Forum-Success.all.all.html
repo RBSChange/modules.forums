@@ -1,18 +1,18 @@
 <h2 change:h="">${forum/getLabelAsHtml}</h2>
 <div tal:condition="forum/getDescription">${forum/getDescriptionAsHtml}</div>
 <ul class="inline-menu">
-	<li tal:condition="not: forum/isLocked"><a change:link="tag functional_forums_thread-new ; forumsParam[cmpref] forum/getId" change:translate="modules.forums.frontoffice.Newthread"></a></li>
+	<li tal:condition="not: forum/isLocked"><a change:link="tag functional_forums_thread-new ; forumsParam[cmpref] forum/getId">${trans:m.forums.frontoffice.newthread,ucf}</a></li>
 </ul>
 
 <tal:block tal:condition="php: count(globalAnnoucements)">
-	<tal:block tal:define="global threadColumnTitle"><tal:block change:translate="modules.forums.lists.threadlevels.Global" /></tal:block>
+	<tal:block tal:define="global threadColumnTitle">${trans:m.forums.lists.threadlevels.global,ucf}</tal:block>
 	<tal:block change:include="module 'forums'; template 'Forums-Inc-ThreadList-Success'; type 'html'; threads globalAnnoucements; threadColumnTitle threadColumnTitle; showPagination 'false'" />
 </tal:block>
 
 <tal:block tal:condition="php: count(paginator)">
-	<tal:block tal:define="global threadColumnTitle"><tal:block change:translate="modules.forums.frontoffice.Subject" /></tal:block>
+	<tal:block tal:define="global threadColumnTitle">${trans:m.forums.frontoffice.subject,ucf}</tal:block>
 	<tal:block change:include="module 'forums'; template 'Forums-Inc-ThreadList-Success'; type 'html'; threads paginator; threadColumnTitle threadColumnTitle; showPagination 'true'" />
 </tal:block>
-<p tal:condition="php: !count(paginator)" change:translate="modules.forums.frontoffice.Nothread" />
+<p tal:condition="php: !count(paginator)">${trans:m.forums.frontoffice.Nothread,ucf}</p>
 
 <tal:block change:block="" module="forums" name="RssMenu" parentref="${forum/getId}" />
