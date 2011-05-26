@@ -10,6 +10,6 @@ class forums_SendNotificationsToFollowersTask extends task_SimpleSystemTask
 	 */
 	protected function execute()
 	{
-		forums_ThreadService::getInstance()->sendToFollowers();
+		forums_ThreadService::getInstance()->sendToFollowers($this->plannedTask);
 	}
 }

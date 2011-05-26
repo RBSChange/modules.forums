@@ -1,16 +1,5 @@
 <?php
-if (!defined("WEBEDIT_HOME"))
-{
-	define("WEBEDIT_HOME", realpath('.'));
-	require_once WEBEDIT_HOME . "/framework/Framework.php";
-	$threadId = $_SERVER['argv'][1];
-}
-else
-{
-	$threadId = $_POST['argv'][0];
-}
-
-Controller::newInstance("controller_ChangeController");
+$threadId = $_POST['argv'][0];
 $rq = RequestContext::getInstance();
 $rq->setLang($rq->getDefaultLang());
 
@@ -38,5 +27,4 @@ if ($notif instanceof notification_persistentdocument_notification)
 }
 $thread->setTofollow(null);
 $thread->save();
-
 echo 'OK';

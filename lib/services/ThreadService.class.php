@@ -147,21 +147,37 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 	}
 
 	/**
-	 * @param forums_persistentdocument_thread $thread
-	 * @param forums_persistentdocument_post $post
+	 * @param task_persistentdocument_plannedtask $plannedTask
 	 */
-	public function sendToFollowers()
+	public function sendToFollowers($plannedTask = null)
 	{
+		$errors = array();
 		$batchPath = 'modules/forums/lib/bin/SendNotificationsToFollowersBatch.php';
 		$threads = $this->createQuery()->add(Restrictions::isNotNull('tofollow'))->find();
 		foreach ($threads as $thread)
 		{
+			if ($plannedTask instanceof task_persistentdocument_plannedtask)
+			{
+				$plannedTask->ping();
+			}
 			$result = f_util_System::execHTTPScript($batchPath, array($thread->getId()));
 			// Log fatal errors...
 			if ($result != 'OK')
 			{
-				Framework::error(__METHOD__ . ' ' . $batchPath . ' an error occured: "' . $result . '"');
+				if ($plannedTask instanceof task_persistentdocument_plannedtask)
+				{
+					$errors[] = $result;
+				}
+				else
+				{
+					Framework::error(__METHOD__ . ' ' . $batchPath . ' an error occured: "' . $result . '"');
+				}
 			}
+		}
+		
+		if (count($errors))
+		{
+			throw new Exception(implode("\n", $errors));
 		}
 	}
 	
