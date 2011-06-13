@@ -197,6 +197,23 @@ class forums_ForumgroupService extends f_persistentdocument_DocumentService
 	
 	/**
 	 * @param forums_persistentdocument_forumgroup $document
+	 * @param Integer $parentNodeId Parent node ID where to save the document (optionnal => can be null !).
+	 * @return void
+	 */
+	protected function postUpdate($document, $parentNodeId)
+	{
+		// Update related topics.
+		if ($document->isPropertyModified('description') || $document->isPropertyModified('label'))
+		{
+			$topic = $document->getTopic();
+			$topic->setLabel($document->getLabel());
+			$topic->setDescription($document->getDescription());
+			$topic->save();
+		}
+	}
+	
+	/**
+	 * @param forums_persistentdocument_forumgroup $document
 	 * @param string $propertyName
 	 */
 	private function refreshPropertyOnChildren($document, $propertyName)
