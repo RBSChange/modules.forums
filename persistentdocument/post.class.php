@@ -11,10 +11,21 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	 */
 	public function getIndexedDocument()
 	{
+		if ($this->getDeleteddate() !== null)
+		{
+			return null;
+		}
 		$indexedDoc = new indexer_IndexedDocument();
 		$indexedDoc->setId($this->getId());
 		$indexedDoc->setDocumentModel('modules_forums/post');
-		$indexedDoc->setLabel($this->getLabel());
+		if ($this->isFirstPostInThread())
+		{
+			$indexedDoc->setLabel($this->getThreadLabel());	
+		}
+		else
+		{
+			$indexedDoc->setLabel($this->getLabel());	
+		}
 		$indexedDoc->setLang($this->getLang());
 		$indexedDoc->setText($this->getFullTextForIndexation());
 		return $indexedDoc;
