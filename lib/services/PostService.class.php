@@ -90,6 +90,12 @@ class forums_PostService extends f_persistentdocument_DocumentService
 				$subQuery1->add(Restrictions::eq('forum', $parent));
 			}
 		}
+		else if ($parent instanceof forums_persistentdocument_forumgroup)
+		{
+			$parent = $parent->getTopic();
+			$subQuery3 = $subQuery2->createCriteria('topic');
+			$subQuery3->add(Restrictions::descendentOf($parent->getId()));
+		}
 		else if ($parent instanceof website_persistentdocument_website || $parent instanceof website_persistentdocument_topic)
 		{
 			if ($recursive)

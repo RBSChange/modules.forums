@@ -217,6 +217,12 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 				$query->add(Restrictions::eq('forum', $parent));
 			}
 		}
+		else if ($parent instanceof forums_persistentdocument_forumgroup)
+		{
+			$parent = $parent->getTopic();
+			$subQuery2 = $subQuery1->createCriteria('topic');
+			$subQuery2->add(Restrictions::descendentOf($parent->getId()));
+		}
 		else if ($parent instanceof website_persistentdocument_website || $parent instanceof website_persistentdocument_topic)
 		{
 			if ($recursive)
