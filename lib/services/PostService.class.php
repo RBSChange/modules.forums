@@ -179,6 +179,37 @@ class forums_PostService extends f_persistentdocument_DocumentService
 		{
 			$document->setText(website_BBCodeService::getInstance()->fixContent($document->getText()));
 		}
+		
+		if ($document->isPropertyModified('deleteddate'))
+		{
+			$document->deleteddateModified = true;
+		}
+	}
+	
+	/**
+	 * @param forums_persistentdocument_post $document
+	 * @param Integer $parentNodeId Parent node ID where to save the document.
+	 * @return void
+	 */
+	protected function postUpdate($document, $parentNodeId = null)
+	{
+		parent::postUpdate($document, $parentNodeId);
+		
+		if (isset($document->deleteddateModified))
+		{
+			$thread = $document->getThread();
+			$lastPost = $thread->getDocumentService()->getLastPost($thread);
+			if ($lastPost !== null)
+			{
+				$thread->setLastPostDate($lastPost->getCreationdate());
+			}
+			else
+			{
+				$thread->setLastPostDate(null);
+			}
+			$this->pp->updateDocument($thread);
+			unset($document->deleteddateModified);
+		}
 	}
 	
 	/**
