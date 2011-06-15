@@ -14,6 +14,9 @@
 						<tal:block tal:condition="post/isAnswer">${trans: m.forums.frontoffice.answer-to} <a change:link="document post/getAnswerof">${post/getAnswerof/getPostId}</a> ${trans: m.forums.frontoffice.written-by} <a change:link="document post/getAnswerof/getPostauthor">${post/getAnswerOf/getAuthorNameAsHtml}</a></tal:block>
 					</p>
 					<p>
+						<img tal:condition="post/isPostOld" title="${trans:m.forums.frontoffice.post,ucf}" change:img="front/has-no-new-post.png" />
+						<img tal:condition="post/isPostSemiNew" title="${trans:m.forums.frontoffice.post,ucf}" change:img="front/has-no-new-post.png" />
+						<img tal:condition="post/isPostNew" title="${trans:m.forums.frontoffice.new-post,ucf}" change:img="front/has-new-post.png" />
 						<tal:block change:memberdate="value post/getCreationdate; mode 'long'" />
 					</p>						
 				</div>
@@ -71,7 +74,10 @@
 					</div>
 					<div class="options-list" tal:condition="php: displayConfig['showActions'] && (!post->getDeleteddate() || post->isBanable())">
 						<tal:block tal:condition="not: post/getDeleteddate">
-							<tal:block tal:condition="not: post/getThread/isLocked"><a change:link="tag functional_forums_post-new ; forumsParam[cmpref] post/getThread/getId ; forumsParam[postid] post/getId">${trans: m.forums.frontoffice.answer,ucf}</a></tal:block>
+							<tal:block tal:condition="not: post/getThread/isLocked">
+								<a change:link="tag functional_forums_post-new ; forumsParam[cmpref] post/getThread/getId ; forumsParam[postid] post/getId">${trans: m.forums.frontoffice.answer,ucf}</a>
+								<span> | </span><a change:link="tag functional_forums_post-new ; forumsParam[cmpref] post/getThread/getId ; forumsParam[postid] post/getId ; forumsParam[quote] 'true'">${trans:m.forums.frontoffice.quote,ucf}</a>
+							</tal:block>
 							<tal:block tal:condition="post/isEditable"><span tal:condition="not: post/getThread/isLocked" > | </span><a change:link="tag functional_forums_post-edit ; forumsParam[cmpref] post/getId">${trans: m.forums.frontoffice.edit,ucf}</a></tal:block>
 							<tal:block tal:condition="post/isDeletable"><span> | </span><a change:link="module forums; action DeletePost; id post/getId" class="link postDelete">${trans: m.forums.frontoffice.delete,ucf}</a></tal:block>
 						</tal:block>

@@ -33,6 +33,7 @@
 					<li>${trans:m.forums.frontoffice.member-since,ucf,lab} <strong change:memberdate="value member/getCreationdate; mode 'short'"></strong></li>
 					<li tal:condition="member/getWebsiteUrl">${trans:m.forums.frontoffice.web-site,ucf,lab} <strong><a class="link" tal:attributes="href member/getWebsiteUrl" target="_blank">${member/getShortWebsiteUrl}</a></strong></li>
 					<li tal:condition="member/getCountry">${trans:m.forums.frontoffice.country,ucf,lab} <strong>${member/getCountry/getLabelAsHtml}</strong></li>
+					<li tal:condition="enablePrivateMessaging"><a change:link="tag contextual_website_website_modules_privatemessaging_newthread; privatemessagingParam[receivers] member/getLabelAsHtml">${trans:m.privatemessaging.fo.start-new-private-conversation,ucf}</a></li>
 				</ul>
 			</div>
 		</div>

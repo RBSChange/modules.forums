@@ -161,46 +161,67 @@ class forums_MemberService extends f_persistentdocument_DocumentService
 		$row = comment_CommentService::getInstance()->createQuery()->add(Restrictions::eq('authorid', $userId))->setProjection(Projections::rowCount('nb'))->findUnique();
 		return $row['nb'];
 	}
-	
+		
 	/**
 	 * @param forums_persistentdocument_member $member
 	 * @param forums_persistentdocument_post $post
 	 */
 	public function setPostAsReadForMember($member, $post)
 	{
-		$postDate = $post->getCreationdate();
-		if ($postDate > $this->getAllReadDate($member))
+		try
 		{
-			try
+			$this->tm->beginTransaction();
+			
+			$allReadDate = $this->getAllReadDate($member);
+			
+			// By thread...
+			$track = $member->getTrackingByThread();
+			$thread = $post->getThread();
+			$threadId = $thread->getId();
+			$postDate = $post->getCreationdate();
+			if (!isset($track[$threadId]))
 			{
-				$this->tm->beginTransaction();
-				
-				// By thread...
-				$track = $member->getTrackingByThread();
-				$thread = $post->getThread();
-				$threadId = $thread->getId();
+				$member->setTempLastReadDateByThreadId($threadId, $allReadDate);
+			}
+			else if ($track[$threadId] < $postDate)
+			{
+				$member->setTempLastReadDateByThreadId($threadId, $track[$threadId]);
+			}
+			if ($postDate > $allReadDate)
+			{
 				if (!isset($track[$threadId]) || $track[$threadId] < $postDate)
 				{
 					$track[$threadId] = $postDate;
 				}
-				$member->setTrackingByThread($track);
-				
-				// By forum...
-				$track = $member->getTrackingByForum();
-				$forumId = $thread->getForum()->getId();
+			}
+			else if (isset($track[$threadId]) && $track[$threadId] <= $allReadDate)
+			{
+				unset($track[$threadId]);
+			}
+			$member->setTrackingByThread($track);
+			
+			// By forum...
+			$track = $member->getTrackingByForum();
+			$forumId = $thread->getForum()->getId();
+			if ($postDate > $allReadDate)
+			{
 				if (!isset($track[$forumId]) || $track[$forumId] < $postDate)
 				{
 					$track[$forumId] = $postDate;
 				}
-				$member->setTrackingByForum($track);
-				
-				$this->pp->updateDocument($member);
-				$this->tm->commit();
 			}
-			catch (Exception $e)
+			else if (isset($track[$forumId]) && $track[$forumId] <= $allReadDate)
 			{
-				$this->tm->rollBack($e);
+				unset($track[$forumId]);
 			}
+			$member->setTrackingByForum($track);
+			
+			$this->pp->updateDocument($member);
+			$this->tm->commit();
+		}
+		catch (Exception $e)
+		{
+			$this->tm->rollBack($e);
 		}
 	}
 	

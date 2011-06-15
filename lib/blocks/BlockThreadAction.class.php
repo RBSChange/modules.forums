@@ -8,7 +8,7 @@ class forums_BlockThreadAction extends forums_BlockPostListBaseAction
 	/**
 	 * @return array<String, String>
 	 */
-	function getMetas()
+	public function getMetas()
 	{
 		$doc = $this->getDocumentParameter();
 		if ($doc instanceof forums_persistentdocument_thread)
@@ -21,13 +21,11 @@ class forums_BlockThreadAction extends forums_BlockPostListBaseAction
 	}
 	
 	/**
-	 * @see website_BlockAction::execute()
-	 *
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
 	 * @return String
 	 */
-	function execute($request, $response)
+	public function execute($request, $response)
 	{
 		if ($this->isInBackoffice())
 		{
@@ -111,5 +109,91 @@ class forums_BlockThreadAction extends forums_BlockPostListBaseAction
 		$this->getContext()->addScript('modules.forums.lib.js.forums');
 		
 		return website_BlockView::SUCCESS;
+	}
+	
+	/**
+	 * @param f_mvc_Request $request
+	 * @param f_mvc_Response $response
+	 * @return String
+	 */
+	public function executeChooseforum($request, $response)
+	{
+		if ($this->isInBackoffice())
+		{
+			return website_BlockView::NONE;
+		}
+		
+		$thread = $this->getDocumentParameter();
+		if ($thread === null || !($thread instanceof forums_persistentdocument_thread) || !$thread->isPublished())
+		{
+			return website_BlockView::NONE;
+		}
+		$request->setAttribute('thread', $thread);
+		
+		if (!$this->canModerate($thread))
+		{
+			$this->addError(LocaleService::getInstance()->transFO('m.forums.frontoffice.you-dont-have-permission', array('ucf')));
+			return website_BlockView::ERROR;
+		}
+		
+		$website = $thread->getForum()->getWebsite();
+		$forums = forums_ForumService::getInstance()->createQuery()->add(Restrictions::published())
+			->add(Restrictions::eq('website', $website))
+			->add(Restrictions::ne('id', $website->getId()))
+			->find();
+		$request->setAttribute('forums', $forums);
+		
+		return 'Chooseforum';
+	}
+	
+	/**
+	 * @param f_mvc_Request $request
+	 * @param f_mvc_Response $response
+	 * @return String
+	 */
+	public function executeMove($request, $response)
+	{
+		if ($this->isInBackoffice())
+		{
+			return website_BlockView::NONE;
+		}
+		
+		$thread = $this->getDocumentParameter();
+		if ($thread === null || !($thread instanceof forums_persistentdocument_thread) || !$thread->isPublished())
+		{
+			return website_BlockView::NONE;
+		}
+		
+		if (!$this->canModerate($thread))
+		{
+			$this->addError(LocaleService::getInstance()->transFO('m.forums.frontoffice.you-dont-have-permission', array('ucf')));
+			return website_BlockView::ERROR;
+		}
+		
+		$forum = forums_persistentdocument_forum::getInstanceById($request->getParameter('forumId'));
+		$website = $thread->getForum()->getWebsite();
+		if ($website != $forum->getWebsite)
+		{
+			$thread->setForum($forum);
+			$thread->save();
+		}
+		else 
+		{
+			$this->addError(LocaleService::getInstance()->transFO('m.forums.frontoffice.invalid-forum', array('ucf')));
+			return website_BlockView::ERROR;
+		}
+		
+		$this->redirectToUrl(LinkHelper::getDocumentUrl($forum));
+		return website_BlockView::NONE;
+	}
+	
+	/**
+	 * @param forums_persistentdocument_thread
+	 * @return boolean
+	 */
+	private function canModerate($thread)
+	{
+		$member = forums_MemberService::getInstance()->getCurrentMember();
+		return forums_ModuleService::getInstance()->hasPermission($member, 'modules_forums.Moderate', $thread);
 	}
 }

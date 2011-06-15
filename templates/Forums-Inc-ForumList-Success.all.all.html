@@ -48,9 +48,9 @@
 	</tbody>
 </table>
 
-<ul class="inline-menu">
+<ul class="inline-menu" tal:condition="not: hideMemberActions">
 	<li tal:condition="not: member"><a change:link="tag contextual_website_website_modules_users_register">${trans: m.forums.frontoffice.register,ucf}</a></li>
 	<li tal:condition="not: member"><a change:link="tag contextual_website_website_modules_users_register">${trans: m.forums.frontoffice.log-in,ucf}</a></li>
 	<li tal:condition="member"><a change:link="tag contextual_website_website_modules_users_edit-profil">${trans: m.forums.frontoffice.edit-profile,ucf}</a></li>
-	<li tal:condition="member"><a change:actionlink="document page; markAllPostsRead 'true'" class="link">${trans: m.forums.frontoffice.mark-all-as-read,ucf}</a></li>
+	<li tal:condition="member"><a change:link="module forums; action MarkAllPostsRead; backUrl currentUrl">${trans: m.forums.frontoffice.mark-all-as-read,ucf}</a></li>
 </ul>

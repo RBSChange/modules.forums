@@ -1,0 +1,11 @@
+<h2 change:h="">${thread/getForum/getLabelAsHtml} : ${thread/getLabelAsHtml}</h2>
+
+<p class="normal" change:translate="modules.forumsextended.frontoffice.Choose-forum"></p>
+
+<form change:form="" method="get" action="">
+	<input type="hidden" name="forumsParam[cmpref]" value="${thread/getId}" />
+	<select name="forumsParam[forumId]">
+		<option tal:repeat="forum forums" value="${forum/getId}">${forum/getLabelAsHtml}</option>
+	</select>
+	<input change:submit="labeli18n m.forums.frontoffice.move-thread" class="button" name="move" />
+</form>

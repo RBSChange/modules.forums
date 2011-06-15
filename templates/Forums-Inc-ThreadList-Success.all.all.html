@@ -28,6 +28,9 @@
 					<strong tal:condition="php: thread.getLevel() == 20">${trans: m.forums.lists.threadlevels.sticky,ucf,lab}</strong>
 					<strong tal:condition="php: thread.getLevel() == 30">${trans: m.forums.lists.threadlevels.announcement,ucf,lab}</strong>
 					<a tal:attributes="href thread/getUserUrl" class="link">${thread/getLabelAsHtml}</a>
+					<p tal:condition="thread/hasPages" class="mini-pagination">
+						[ ${trans:m.forums.frontoffice.go-to-page,ucf,lab} ${thread/getPagination} ]
+					</p>
 				</td>
 				<td class="column-posts">${php: postCount-1}</td>
 				<td class="column-last-post" tal:define="lastPost thread/getLastPost; lastPostAuthor lastPost/getPostAuthor">
@@ -39,4 +42,4 @@
 		</tal:block>
 	</tbody>
 </table>
-<tal:block tal:condition="showPagination" change:paginator="threads"/>
+<tal:block tal:condition="showPagination" change:paginator="threads" />

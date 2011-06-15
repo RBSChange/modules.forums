@@ -222,11 +222,17 @@ class forums_persistentdocument_member extends forums_persistentdocument_memberb
 	
 	/**
 	 * @param Integer $forumId
+	 * @return string
 	 */
 	public function getLastReadDateByForumId($forumId)
 	{
 		$track = $this->getTrackingByForum();
-		return (isset($track[$forumId])) ? $track[$forumId] : null;
+		if (isset($track[$forumId]) && $track[$forumId])
+		{
+			return $track[$forumId];
+		}
+		$member = forums_MemberService::getInstance()->getCurrentMember();
+		return forums_MemberService::getInstance()->getAllReadDate($member);
 	}
 	
 	/**
@@ -266,11 +272,35 @@ class forums_persistentdocument_member extends forums_persistentdocument_memberb
 	
 	/**
 	 * @param Integer $threadId
+	 * @return string
 	 */
 	public function getLastReadDateByThreadId($threadId)
 	{
+		if (isset($this->tempLastReadDateByThreadId[$threadId]))
+		{
+			return $this->tempLastReadDateByThreadId[$threadId];
+		}
 		$track = $this->getTrackingByThread();
-		return (isset($track[$threadId])) ? $track[$threadId] : null;
+		if (isset($track[$threadId]) && $track[$threadId])
+		{
+			return $track[$threadId];
+		}
+		$member = forums_MemberService::getInstance()->getCurrentMember();
+		return forums_MemberService::getInstance()->getAllReadDate($member);
+	}
+	
+	/**
+	 * @var array
+	 */
+	private $tempLastReadDateByThreadId = array();
+	
+	/**
+	 * @param integer $threadId
+	 * @param string $date
+	 */
+	public function setTempLastReadDateByThreadId($threadId, $date)
+	{
+		$this->tempLastReadDateByThreadId[$threadId] = $date;
 	}
 	
 	/**

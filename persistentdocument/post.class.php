@@ -140,7 +140,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 		{
 			return $member->getLabelAsHtml();
 		}
-		return f_Locale::translate('&modules.forums.frontoffice.Unknown;');
+		return LocaleService::getInstance()->transFO('m.forums.frontoffice.unknown', array('ucf'));
 	}
 	
 	/**
@@ -153,7 +153,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 		{
 			return $member->getLabelAsHtml();
 		}
-		return f_Locale::translate('&modules.forums.frontoffice.Unknown;');
+		return LocaleService::getInstance()->transFO('m.forums.frontoffice.unknown', array('ucf'));
 	}
 	
 	/**
@@ -166,7 +166,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 		{
 			return $member->getLabelAsHtml();
 		}
-		return f_Locale::translate('&modules.forums.frontoffice.Unknown;');
+		return LocaleService::getInstance()->transFO('m.forums.frontoffice.unknown', array('ucf'));
 	}
 	
 	/**
@@ -296,13 +296,103 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	{
 		return ceil($this->getNumber() / $postPerPage);
 	}
+	
+	/**
+	 * @return boolean
+	 */
+	public function isPostNew()
+	{
+		return $this->getPostNewStatus() == 'new';
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function isPostSemiNew()
+	{
+		return $this->getPostNewStatus() == 'seminew';
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function isPostOld()
+	{
+		return $this->getPostNewStatus() == 'old';
+	}
+	
+	/**
+	 * @return var new|seminew|old
+	 */
+	private $newStatus;
+	
+	/**
+	 * @return string new|seminew|old
+	 */
+	private function getPostNewStatus()
+	{
+		if ($this->newStatus === null)
+		{
+			$this->newStatus = $this->calculatePostNewStatus();
+		}
+		return $this->newStatus;
+	}
+
+	/**
+	 * @return string new|seminew|old
+	 */
+	private function calculatePostNewStatus()
+	{
+		$ms = forums_MemberService::getInstance();
+		$member = $ms->getCurrentMember();
+		$globalLast = $ms->getAllReadDate($member);
+	
+		// A post without a thread is always new (preview).
+		if ($this->getThread() === null)
+		{
+			return 'new';
+		}
+		
+		// New?
+		$last = null;
+		if ($member !== null)
+		{
+			$last = $member->getLastReadDateByThreadId($this->getThread()->getId());
+		}
+		if ($last === null)
+		{
+			$last = $globalLast;
+		}
+		if ($this->getCreationdate() > $last)
+		{
+			return 'new';
+		}
+		
+		// Semi-new?
+		$last = null;
+		if ($member !== null)
+		{
+			$last = $member->getMeta('m.forums.lastSessionStart');
+		}
+		if ($last === null)
+		{
+			$last = $globalLast;
+		}
+		if ($this->getCreationdate() > $last)
+		{
+			return 'seminew';
+		}
+		
+		// Old.
+		return 'old';
+	}
 		
 	/**
 	 * @return String
 	 */
 	public function getRSSLabel()
 	{
-		return $this->getLabel() . ' - ' . f_Locale::translate('&modules.forums.frontoffice.in-threadLabel;') . ' ' . $this->getThread()->getLabel();
+		return $this->getLabel() . ' - ' . LocaleService::getInstance()->transFO('m.forums.frontoffice.in-thread', array('lab')) . ' ' . $this->getThread()->getLabel();
 	}
 	
 	/**

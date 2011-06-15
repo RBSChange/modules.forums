@@ -8,7 +8,7 @@ class forums_BlockMemberAction extends website_BlockAction
 	/**
 	 * @return array<String, String>
 	 */
-	function getMetas()
+	public function getMetas()
 	{
 		$doc = $this->getDocumentParameter();
 		if ($doc instanceof forums_persistentdocument_member)
@@ -20,13 +20,11 @@ class forums_BlockMemberAction extends website_BlockAction
 	}
 
 	/**
-	 * @see website_BlockAction::execute()
-	 *
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
 	 * @return String
 	 */
-	function execute($request, $response)
+	public function execute($request, $response)
 	{
 		if ($this->isInBackoffice())
 		{
@@ -41,7 +39,19 @@ class forums_BlockMemberAction extends website_BlockAction
 			forums_MemberService::getInstance()->sendReactivationMail($member);
 			$request->setAttribute('mailsended', true);
 		}
+		
+		$request->setAttribute('enablePrivateMessaging', $this->enablePrivateMessaging());
 
 		return website_BlockView::SUCCESS;
+	}
+	
+	/**
+	 * @return boolean
+	 */
+	protected function enablePrivateMessaging()
+	{
+		$website = website_WebsiteModuleService::getInstance()->getCurrentWebsite();
+		$tag = 'contextual_website_website_modules_privatemessaging_newthread';
+		return TagService::getInstance()->getDocumentByContextualTag($tag, $website, false) != null;
 	}
 }

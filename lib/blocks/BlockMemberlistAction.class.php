@@ -10,7 +10,7 @@ class forums_BlockMemberlistAction extends website_TaggerBlockAction
 	 * @param f_mvc_Response $response
 	 * @return String
 	 */
-	function execute($request, $response)
+	public function execute($request, $response)
 	{
 		if ($this->isInBackoffice())
 		{

@@ -64,7 +64,7 @@ class forums_ViewFeedAction extends f_action_BaseAction
 	private function setHeaders($feedWriter, $parent, $docType)
 	{
 		$modelName = $parent->getPersistentModel()->getDocumentName();
-		$title = f_Locale::translate('&modules.forums.frontoffice.' . ucfirst($docType).'s-of-' . $modelName . 'Label;') . ' ' . $parent->getLabelAsHtml();
+		$title = LocaleService::getInstance()->transFO('m.forums.frontoffice.' . $docType .'s-of-' . $modelName, array('ucf', 'lab')) . ' ' . $parent->getLabelAsHtml();
 		$feedWriter->setTitle($title);
 		if (f_util_ClassUtils::methodExists($parent, 'getRSSDescription'))
 		{

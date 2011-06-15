@@ -43,6 +43,12 @@ class forums_MemberListener
 			if ($member !== null)
 			{
 				$member->getDocumentService()->cleanTracking($member);
+				if ($member->hasMeta('m.forums.sessionStart'))
+				{
+					$member->setMeta('m.forums.lastSessionStart', $member->getMeta('m.forums.sessionStart'));
+				}
+				$member->setMeta('m.forums.sessionStart', $user->getLastlogin());
+				$member->saveMeta();
 			}
 		}
 	}

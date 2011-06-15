@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/static/schema/change-document/1.0.xsd" model-version="1.0"
 	icon="thread" indexable="false" backoffice-indexable="false" publish-on-day-change="false">
 	<properties>
-		<add name="forum" type="modules_forums/forum" min-occurs="1" tree-node="true" inverse="true" />
+		<add name="forum" type="modules_forums/forum" min-occurs="1" tree-node="true" inverse="true" preserve-old-value="true" />
 		<add name="level" type="Integer" from-list="modules_forums/threadlevels" default-value="10" min-occurs="1" />
 		<add name="firstPost" type="modules_forums/post" />
 		<add name="threadauthor" type="modules_forums/member" />

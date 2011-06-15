@@ -39,6 +39,7 @@
 	<li tal:condition="unfollowUrl"><a class="link" tal:attributes="href unfollowUrl">${trans:m.forums.frontoffice.cancelfollowthread,ucf}</a></li>
 	<li tal:condition="thread/isClosable"><a class="link closeThread" change:link="module forums; action CloseThread; id thread/getId">${trans:m.forums.frontoffice.closethread,ucf}</a></li>
 	<li tal:condition="thread/isOpenable"><a class="link openThread" change:link="module forums; action OpenThread; id thread/getId">${trans:m.forums.frontoffice.openthread,ucf}</a></li>
+	<li tal:condition="thread/canModerate"><a class="link" change:actionlink="action 'ChooseForum'; cmpref thread/getId">${trans:m.forums.frontoffice.move-thread,ucf}</a></li>
 </ul>
 
 <tal:block change:block="" module="forums" name="RssMenu" parentref="${thread/getId}" />

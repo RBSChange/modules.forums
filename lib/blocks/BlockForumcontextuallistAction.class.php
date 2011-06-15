@@ -10,7 +10,7 @@ class forums_BlockForumcontextuallistAction extends website_BlockAction
 	 * @param f_mvc_Response $response
 	 * @return String
 	 */
-	function execute($request, $response)
+	public function execute($request, $response)
 	{
 		if ($this->isInBackoffice())
 		{
@@ -26,23 +26,19 @@ class forums_BlockForumcontextuallistAction extends website_BlockAction
 		$member = forums_MemberService::getInstance()->getCurrentMember();
 		$request->setAttribute('member', $member);
 		
+		$handleMemberActions = $this->getConfiguration()->getShowGlobalMemberActions();
+		$request->setAttribute('hideMemberActions', !$handleMemberActions);
+		$request->setAttribute('currentUrl', LinkHelper::getCurrentUrl());
+		
 		// Mark all posts as read if asked.
-		if ($member !== null && $request->hasParameter('markAllPostsRead'))
+		if ($handleMemberActions && $member !== null && $request->hasParameter('markAllPostsRead'))
 		{
 			$member->markAllPostsAsRead();
 		}
-
+		
 		$request->setAttribute('parent', $this->getContext()->getParent());
 		$request->setAttribute('forums', $forums);
 		$request->setAttribute('page', $this->getContext()->getPersistentPage());
-		
-		// @deprecated This paginator will be removed in 3.5.
-		$paginator = new paginator_Paginator('forums',
-			$request->getParameter(paginator_Paginator::PAGEINDEX_PARAMETER_NAME, 1),
-			$forums,
-			1000
-		);
-		$request->setAttribute('paginator', $paginator);
 		
 		return website_BlockView::SUCCESS;
 	}

@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <blocks>
-	<block type="modules_forums_forumDetail" icon="forum" label="&amp;modules.forums.bo.blocks.forumdetail.Title;">
+	<block type="modules_forums_forumDetail" icon="forum">
+		<parameters>
+			<parameter name="nbitemperpage" type="Integer" default-value="20" />
+			<parameter name="showGlobalMemberActions" type="Boolean" default-value="true" />
+		</parameters>
+		<metas>
+			<meta name="forumname" allow="title,description" />
+			<meta name="forumshortdesc" allow="title,description" />
+			<meta name="forumkeywords" allow="keywords" />
+		</metas>
+	</block>
+	<block type="modules_forums_forum" icon="forum">
 		<parameters>
 			<parameter name="nbitemperpage" type="Integer" default-value="20" />
 		</parameters>
@@ -10,18 +21,12 @@
 			<meta name="forumkeywords" allow="keywords" />
 		</metas>
 	</block>
-	<block type="modules_forums_forum" icon="forum" label="&amp;modules.forums.bo.blocks.forum.Title;">
+	<block type="modules_forums_forumcontextuallist" icon="list-block">
 		<parameters>
-			<parameter name="nbitemperpage" type="Integer" default-value="20" />
-		</parameters>
-		<metas>
-			<meta name="forumname" allow="title,description" />
-			<meta name="forumshortdesc" allow="title,description" />
-			<meta name="forumkeywords" allow="keywords" />
-		</metas>
+			<parameter name="showGlobalMemberActions" type="Boolean" default-value="true" />
+		</parameters>	
 	</block>
-	<block type="modules_forums_forumcontextuallist" icon="list-block" label="&amp;modules.forums.bo.blocks.forumcontextuallist.Title;" />
-	<block type="modules_forums_thread" icon="thread" label="&amp;modules.forums.bo.blocks.thread.Title;">
+	<block type="modules_forums_thread" icon="thread">
 		<parameters>
 			<parameter name="showGravatars" type="Boolean" default-value="true" />
 			<parameter name="avatarsSize" type="Integer" default-value="64" />
@@ -35,7 +40,7 @@
 			<meta name="threadkeywords" allow="keywords" />
 		</metas>
 	</block>
-	<block type="modules_forums_newthread" icon="add" label="&amp;modules.forums.bo.blocks.newthread.Title;">
+	<block type="modules_forums_newthread" icon="add">
 		<parameters>
 			<parameter name="nbitemperpage" type="Integer" default-value="1" hidden="true" />
 			<parameter name="showGravatars" type="Boolean" default-value="true" />
@@ -47,7 +52,7 @@
 			<meta name="forumname" allow="title,description" />
 		</metas>
 	</block>
-	<block type="modules_forums_post" icon="post" label="&amp;modules.forums.bo.blocks.post.Title;">
+	<block type="modules_forums_post" icon="post">
 		<parameters>
 			<parameter name="nbitemperpage" type="Integer" default-value="1" hidden="true" />
 			<parameter name="showGravatars" type="Boolean" default-value="true" />
@@ -62,7 +67,7 @@
 			<meta name="postshortdesc" allow="title,description" />
 		</metas>
 	</block>
-	<block type="modules_forums_newpost" icon="add" label="&amp;modules.forums.bo.blocks.newpost.Title;">
+	<block type="modules_forums_newpost" icon="add">
 		<parameters>
 			<parameter name="nbitemperpage" type="Integer" default-value="20" />
 			<parameter name="showGravatars" type="Boolean" default-value="true" />
@@ -75,7 +80,7 @@
 			<meta name="forumname" allow="title,description" />
 		</metas>
 	</block>
-	<block type="modules_forums_editpost" icon="edit" label="&amp;modules.forums.bo.blocks.editpost.Title;">
+	<block type="modules_forums_editpost" icon="edit">
 		<parameters>
 			<parameter name="nbitemperpage" type="Integer" default-value="1" hidden="true" />
 			<parameter name="showGravatars" type="Boolean" default-value="true" />
@@ -88,22 +93,22 @@
 			<meta name="forumname" allow="title,description" />
 		</metas>
 	</block>
-	<block type="modules_forums_member" icon="member" label="&amp;modules.forums.bo.blocks.member.Title;">
+	<block type="modules_forums_member" icon="member">
 		<metas>
 			<meta name="login" allow="title,description,keywords" />
 			<meta name="registrationdate" allow="title,description" />
 		</metas>
 	</block>
-	<block type="modules_forums_memberlist" icon="list-block" label="&amp;modules.forums.bo.blocks.memberlist.Title;">
+	<block type="modules_forums_memberlist" icon="list-block">
 		<parameters>
 			<parameter name="nbitemperpage" type="Integer" default-value="20" />
 		</parameters>
 	</block>
-	<block type="modules_forums_editprofile" icon="edit" label="&amp;modules.forums.bo.blocks.editprofile.Title;" />
-	<block type="modules_forums_memberban" icon="document" label="&amp;modules.forums.bo.blocks.memberban.Title;" />
+	<block type="modules_forums_editprofile" icon="edit"  />
+	<block type="modules_forums_memberban" icon="document" />
+	<block type="modules_forums_RssMenu" hidden="true" />
 	<!-- Dashboard blocks. -->
-	<block type="modules_forums_DashboardGeneralStatistics" icon="statistics" dashboard="true"
-		label="&amp;modules.forums.bo.blocks.DashboardGeneralStatistics.Title;">
+	<block type="modules_forums_DashboardGeneralStatistics" icon="statistics" dashboard="true">
 		<parameters>
 			<parameter name="website" type="modules_website/website" min-occurs="1" />
 			<parameter name="usecharts" type="Boolean" default-value="true" />

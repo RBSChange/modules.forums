@@ -16,14 +16,15 @@ class forums_BlockNewpostAction extends forums_BlockPostListBaseAction
 			return;
 		}
 
+		$ls = LocaleService::getInstance();
 		$doc = $this->getDocumentParameter();
 		if ($request->hasNonEmptyParameter('postid'))
 		{
-			$this->getContext()->setNavigationtitle(f_Locale::translate('&modules.forums.meta.Answerpost;').' '.$doc->getLabel());
+			$this->getContext()->setNavigationtitle($ls->transFO('m.forums.meta.answerpost', array('ucf')).' '.$doc->getLabel());
 		}
 		else
 		{
-			$this->getContext()->setNavigationtitle(f_Locale::translate('&modules.forums.meta.Newpostin;').' '.$doc->getLabel());
+			$this->getContext()->setNavigationtitle($ls->transFO('m.forums.meta.newpostin', array('ucf')).' '.$doc->getLabel());
 		}
 	}
 	
@@ -43,9 +44,10 @@ class forums_BlockNewpostAction extends forums_BlockPostListBaseAction
 	/**
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
+	 * @param forums_persistentdocument_post $post
 	 * @return String
 	 */
-	public function execute($request, $response)
+	public function execute($request, $response, forums_persistentdocument_post $post)
 	{
 		if ($this->isInBackoffice())
 		{
@@ -56,6 +58,13 @@ class forums_BlockNewpostAction extends forums_BlockPostListBaseAction
 		if (!$thread->isWriteable())
 		{
 			return $this->getForbiddenView();
+		}
+		
+		if ($request->getParameter('quote') == 'true' && !$request->getParameter('text') && $request->getParameter('postid'))
+		{
+			$quotedPost = forums_persistentdocument_post::getInstanceById($request->getParameter('postid'));
+			$post->setText('[quote="' . $quotedPost->getAuthorNameAsHtml() . '"]' . $quotedPost->getText() . '[/quote]');
+			$request->setAttribute('post', $post);
 		}
 		
 		$this->setRequestAttributes($request);			

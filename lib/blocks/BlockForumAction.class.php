@@ -8,7 +8,7 @@ class forums_BlockForumAction extends website_BlockAction
 	/**
 	 * @return array<String, String>
 	 */
-	function getMetas()
+	public function getMetas()
 	{
 		$doc = $this->getDocumentParameter();
 		if ($doc instanceof forums_persistentdocument_forum)
@@ -21,13 +21,11 @@ class forums_BlockForumAction extends website_BlockAction
 	}
 
 	/**
-	 * @see website_BlockAction::execute()
-	 *
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
 	 * @return String
 	 */
-	function execute($request, $response)
+	public function execute($request, $response)
 	{
 		if ($this->isInBackoffice())
 		{
@@ -40,7 +38,7 @@ class forums_BlockForumAction extends website_BlockAction
 			return website_BlockView::NONE;
 		}
 		$request->setAttribute('forum', $forum);
-
+	
 		$threads = forums_ThreadService::getInstance()->getByForum($forum);
 		$paginator = new paginator_Paginator('forums', $request->getParameter('page', 1), $threads, $this->getNbItemPerPage($request, $response));
 		

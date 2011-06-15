@@ -176,6 +176,58 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 		}
 		return false;
 	}
+	
+	/**
+	 * @return boolean
+	 */
+	public function hasPages()
+	{
+		return $this->getNbpost() > $this->getForum()->getNbPostPerPage();
+	}
+	
+	/**
+	 * @return string
+	 */
+	public function getPagination()
+	{
+		$pageCount = ceil($this->getNbpost() / $this->getForum()->getNbPostPerPage());
+		
+		if ($pageCount < 2)
+		{
+			return null;
+		}
+		
+		$pagination = '<a class="link" href="' . LinkHelper::getDocumentUrl($this, null, array('forumsParam[page]' => 1)) . '">1</a>';
+		if ($pageCount <= 5)
+		{
+			for ($page = 2; $page <= $pageCount; $page++)
+			{
+				$pagination .= ', <a class="link" href="' . LinkHelper::getDocumentUrl($this, null, array('forumsParam[page]' => $page)) . '">' . $page . '</a>';
+			}
+		}
+		else 
+		{
+			$pagination .= ' ... <a class="link" href="' . LinkHelper::getDocumentUrl($this, null, array('forumsParam[page]' => ($pageCount - 3))) . '">' . ($pageCount - 3) . '</a>';
+			for ($page = $pageCount - 2; $page <= $pageCount; $page++)
+			{
+				$pagination .= ', <a class="link" href="' . LinkHelper::getDocumentUrl($this, null, array('forumsParam[page]' => $page)) . '">' . $page . '</a>';
+			}
+		}
+		return $pagination;
+	}
+	
+	/**
+	 * @return boolean
+	 */
+	public function canModerate()
+	{
+		$member = forums_MemberService::getInstance()->getCurrentMember();
+		if (forums_ModuleService::getInstance()->hasPermission($member, 'modules_forums.Moderate', $this))
+		{
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * @return String

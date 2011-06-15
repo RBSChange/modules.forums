@@ -322,6 +322,70 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 	
 	/**
 	 * @param forums_persistentdocument_thread $document
+	 * @param Integer $parentNodeId Parent node ID where to save the document.
+	 * @return void
+	 */
+	public function postUpdate($document, $parentNodeId = null)
+	{
+		if ($document->isPropertyModified('forum'))
+		{
+			// Refresh old forum...
+			$oldId = $document->getForumOldValueId();
+			if ($oldId)
+			{
+				try 
+				{
+					$forum = DocumentHelper::getDocumentInstance($oldId);
+					$this->refreshCounts($forum);
+				}
+				catch (Exception $e)
+				{
+					// The forum doesn't exist any more.
+				}
+			}
+			
+			// Refresh new forum...
+			$forum = $document->getForum();
+			if ($forum !== null)
+			{
+				$this->refreshCounts($forum);
+			}
+		}
+	}
+	
+	/**
+	 * @param forums_persistentdocument_forum $forum
+	 */
+	public function refreshCounts($forum)
+	{
+		try
+		{
+			$this->tm->beginTransaction();
+			
+			// Thread count...
+			$query = forums_ThreadService::getInstance()->createQuery()->add(Restrictions::eq('forum', $forum));
+			$query->setProjection(Projections::rowCount('count'));
+			$count = f_util_ArrayUtils::firstElement($query->findColumn('count'));
+			$forum->setNbthread($count);
+			
+			// Post count...
+			$query = forums_PostService::getInstance()->createQuery();
+			$query->createCriteria('thread')->add(Restrictions::eq('forum', $forum));
+			$query->setProjection(Projections::rowCount('count'));
+			$count = f_util_ArrayUtils::firstElement($query->findColumn('count'));
+			$forum->setNbpost($count);
+			
+			$this->pp->updateDocument($forum);
+			$this->tm->commit();
+		}
+		catch (Exception $e)
+		{
+			$this->tm->rollBack($e);
+		}
+	}
+	
+	/**
+	 * @param forums_persistentdocument_thread $document
 	 * @return integer
 	 */
 	public function getWebsiteId($document)

@@ -6,13 +6,11 @@
 class forums_BlockRssMenuAction extends website_BlockAction
 {
 	/**
-	 * @see website_BlockAction::execute()
-	 *
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
 	 * @return String
 	 */
-	function execute($request, $response)
+	public function execute($request, $response)
 	{
 		if ($this->isInBackoffice())
 		{
@@ -90,7 +88,7 @@ class forums_BlockRssMenuAction extends website_BlockAction
 			$modelName = f_Locale::translate($parent->getPersistentModel()->getDocumentName());
 			foreach ($forTypes as $type)
 			{
-				$title = f_Locale::translate('&modules.forums.frontoffice.' . ucfirst($type) . 's-of-' . $modelName . 'Label;') . ' ' . $parent->getLabelAsHtml();
+				$title = LocaleService::getInstance()->getInstance()->transFO('m.forums.frontoffice.' . $type . 's-of-' . $modelName, array('ucf', 'lab')) . ' ' . $parent->getLabelAsHtml();
 				$this->getContext()->addRssFeed($title, LinkHelper::getActionUrl('forums', 'ViewFeed', array('parentref' => $parent->getId(), 'docType' => $type, 'recursive' => $recursive)));
 				$this->links[] = array('title' => $title, 'parentref' => $parent->getId(), 'docType' => $type, 'recursive' => $recursive);
 			}

@@ -8,7 +8,7 @@ class forums_BlockForumDetailAction extends website_BlockAction
 	/**
 	 * @return array<String, String>
 	 */
-	function getMetas()
+	public function getMetas()
 	{
 		$doc = $this->getDocumentParameter();
 		if ($doc instanceof forums_persistentdocument_forumgroup)
@@ -21,13 +21,11 @@ class forums_BlockForumDetailAction extends website_BlockAction
 	}
 
 	/**
-	 * @see website_BlockAction::execute()
-	 *
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
 	 * @return String
 	 */
-	function execute($request, $response)
+	public function execute($request, $response)
 	{
 		if ($this->isInBackoffice())
 		{
@@ -50,7 +48,20 @@ class forums_BlockForumDetailAction extends website_BlockAction
 			// Global announcements.
 			$request->setAttribute('globalAnnoucements', forums_ThreadService::getInstance()->getGlobalAnnoucements());
 		}
-
+		
+		$member = forums_MemberService::getInstance()->getCurrentMember();
+		$request->setAttribute('member', $member);
+		
+		$handleMemberActions = $this->getConfiguration()->getShowGlobalMemberActions();
+		$request->setAttribute('hideMemberActions', !$handleMemberActions);
+		$request->setAttribute('currentUrl', LinkHelper::getCurrentUrl());
+		
+		// Mark all posts as read if asked.
+		if ($handleMemberActions && $member !== null && $request->hasParameter('markAllPostsRead'))
+		{
+			$member->markAllPostsAsRead();
+		}
+				
 		return website_BlockView::SUCCESS;
 	}
 	
