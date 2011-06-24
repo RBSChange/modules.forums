@@ -36,7 +36,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	 */
 	private function getFullTextForIndexation()
 	{
-		return website_BBCodeService::getInstance()->toText($this->getText());
+		return f_util_StringUtils::htmlToText($this->getTextAsHtml());
 	}
 	
 	/**
@@ -181,14 +181,6 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 		
 		$member = forums_MemberService::getInstance()->getCurrentMember();
 		return !forums_ModuleService::getInstance()->hasPermission($member, 'modules_forums.Moderate', $this);
-	}
-	
-	/**
-	 * @return String
-	 */
-	public function getTextAsHtml()
-	{
-		return website_BBCodeService::getInstance()->toHtml($this->getText());
 	}
 		
 	/**
@@ -417,5 +409,32 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	public function getRSSDate()
 	{
 		return $this->getCreationdate();
+	}
+	
+	/**
+	 * @return String
+	 */
+	public function getTextAsHtml()
+	{
+		$parser = new website_BBCodeParser();
+		return $parser->convertXmlToHtml($this->getText());
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getTextAsBBCode()
+	{
+		$parser = new website_BBCodeParser();
+		return $parser->convertXmlToBBCode($this->getText());
+	}
+
+	/**
+	 * @param string $bbcode
+	 */
+	public function setTextAsBBCode($bbcode)
+	{
+		$parser = new website_BBCodeParser();
+		$this->setText($parser->convertBBCodeToXml($bbcode, 'default'));
 	}
 }

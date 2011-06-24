@@ -162,7 +162,7 @@ class forums_PostService extends f_persistentdocument_DocumentService
 			$replacements = array(
 				'author' => ($document->getPostauthor() !== null) ? $document->getPostauthor()->getLabel() : '[...]'
 			);
-			$document->setLabel(f_Locale::translate('&modules.forums.document.post.Label-patern;', $replacements));
+			$document->setLabel(LocaleService::getInstance()->transFO('m.forums.document.post.label-patern', array('ucf'), $replacements));
 		}
 	}
 	
@@ -174,11 +174,6 @@ class forums_PostService extends f_persistentdocument_DocumentService
 	protected function preSave($document, $parentNodeId = null)
 	{
 		parent::preSave($document, $parentNodeId);
-		
-		if ($document->isPropertyModified('text'))
-		{
-			$document->setText(website_BBCodeService::getInstance()->fixContent($document->getText()));
-		}
 		
 		if ($document->isPropertyModified('deleteddate'))
 		{

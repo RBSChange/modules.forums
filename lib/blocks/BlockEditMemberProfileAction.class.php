@@ -55,7 +55,7 @@ class forums_BlockEditMemberProfileAction extends forums_BaseBlockAction
 		
 		$member->save();
 		
-		$this->addMessage(f_Locale::translate('&modules.users.frontoffice.Informations-updated;'));
+		$this->addMessage(LocaleService::getInstance()->transFO('m.users.frontoffice.informations-updated', array('ucf')));
 		
 		return website_BlockView::INPUT;
 	}

@@ -436,7 +436,7 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 		
 		$thread = $params['thread'];		
 		$parameters['TOPIC'] = $thread->getLabelAsHtml();
-		$parameters['LINK'] = '<a class="link" href="' . $thread->getTofollow()->getPostUrlInThread() . '">' . f_Locale::translate('&modules.forums.frontoffice.thislink;') . '</a>';
+		$parameters['LINK'] = '<a class="link" href="' . $thread->getTofollow()->getPostUrlInThread() . '">' . LocaleService::getInstance()->transFO('m.forums.frontoffice.thislink') . '</a>';
 		
 		if (isset($params['member']) && $params['member'] instanceof forums_persistentdocument_member)
 		{

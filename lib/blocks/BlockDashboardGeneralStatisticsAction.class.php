@@ -54,7 +54,7 @@ class forums_BlockDashboardGeneralStatisticsAction extends dashboard_BlockDashbo
 				$producer = new forums_WebsiteBasicStatisticsProducer();
 				$chart = new f_chart_BarChart($producer->getDataTable(array('websiteId' => $websiteId, 'mode' => $columnName)));
 				$chart->setGrid(new f_chart_Grid(0, 20));
-				$charts[] = array('chart' => $chart, 'title' => f_Locale::translate("&modules.forums.bo.blocks.dashboardgeneralstatistics.Column-$columnName;"));
+				$charts[] = array('chart' => $chart, 'title' => LocaleService::getInstance()->transBO("m.forums.bo.blocks.dashboardgeneralstatistics.column-$columnName", array('ucf')));
 			}			
 			$request->setAttribute('charts', $charts);
 		}

@@ -38,11 +38,11 @@
 	
 	<website byTag="default_modules_website_default-website" id="website">
 		<member id="mod1" user-refid="usera" publicationstatus="ACTIVE" title-refids="title-mod" />
-		<member id="mod2" user-refid="userb" publicationstatus="ACTIVE" displayname="true" title-refids="title-smod" />
+		<member id="mod2" user-refid="userb" publicationstatus="ACTIVE" displayname="true" title-refids="title-smod" signatureAsBBCode="[b]Bla[/b], [i]bla[/i] et [big]bla[/big]." />
 		<member id="member1" user-refid="user1" publicationstatus="ACTIVE" displayname="true" />
-		<member id="member2" user-refid="user2" publicationstatus="ACTIVE" displayname="true" signature="\o/" />
+		<member id="member2" user-refid="user2" publicationstatus="ACTIVE" displayname="true" signatureAsBBCode="\o/" />
 		<member id="member3" user-refid="user3" publicationstatus="ACTIVE" displayname="true" />
-		<member id="member4" user-refid="user4" publicationstatus="ACTIVE" signature="Ma signature." />
+		<member id="member4" user-refid="user4" publicationstatus="ACTIVE" signatureAsBBCode="Ma signature." />
 	</website>
 
 	<rootfolder module="forums">
@@ -61,164 +61,176 @@
 				<binding fileName="modules/forums/setup/forumgroupDefaultStructure.xml" />
 				<forum label="BlaBla général" nbPostPerPage="10" publicationstatus="ACTIVE" description="Discutons de tout et de rien">
 					<thread label="Règles à respecter" threadauthor-refid="mod2" level="40">
-						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod2" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
 					</thread>
 					<thread label="Bienvenue dans le forum Blabla général" threadauthor-refid="mod2" level="30">
-						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod2" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
 					</thread>
 					<thread label="Best-of" threadauthor-refid="mod1" level="20">
-						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod2" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
 					</thread>
 					<thread label="F.A.Q." threadauthor-refid="mod2" level="20">
-						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod2" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
 					</thread>
 					<thread label="Test des BBCodes" threadauthor-refid="member1" level="20">
-						<attribute name="postText">
-							<![CDATA[Gras, italique, souligné, barré, lien : 
-[code]Texte en [b]gras[/b], [i]italique[/i], [u]souligné[/u], [s]barré[/s], [url="http://rbschange.fr"]lien[/url].[/code]
+						<bbcodeattribute name="postText">
+							<![CDATA[[b]Gras, italique, souligné, barré, lien : [/b]
+[quote][nobb]Texte en [b]gras[/b], [i]italique[/i], [u]souligné[/u], [s]barré[/s], [url="http://rbschange.fr"]lien[/url].[/nobb][/quote]
 [quote]Texte en [b]gras[/b], [i]italique[/i], [u]souligné[/u], [s]barré[/s], [url="http://rbschange.fr"]lien[/url].[/quote]
-Images :
-[code]Sans title/alt :
+[b]Indice, exposant, petit, grand, abréviation :[/b]
+[quote][nobb]Du texte avec [sub]indice[/sub] et [sup]exposant[/sup]... [small]petit[/small] ou [big]grand[/big]... [abbr="Content management system"]CMS[/abbr] ![/code][/nobb][/quote]
+[quote]Du texte avec [sub]indice[/sub] et [sup]exposant[/sup]... [small]petit[/small] ou [big]grand[/big]... [abbr="Content management system"]CMS[/abbr] ![/quote]
+[b]Barre horizontale :[/b]
+[quote][nobb]Bla bla[hr /]bla bla...[/nobb][/quote]
+[quote]Bla bla[hr/]bla bla...[/quote]
+[b]Images :[/b]
+[quote][nobb]Sans title/alt :
 [img]http://wiki.rbschange.fr/media/logo.png[/img]
 Avec title/alt :
-[img="http://wiki.rbschange.fr/media/logo.png"]Logo[/img][/code]
+[img="http://wiki.rbschange.fr/media/logo.png"]Logo[/img][/nobb][/quote]
 [quote]Sans title/alt :
 [img="http://wiki.rbschange.fr/media/logo.png"][/img]
 Avec title/alt :
 [img="http://wiki.rbschange.fr/media/logo.png"]Logo[/img][/quote]
-Code et citations :
-[code][quote]Citation sans auteur[/quote]
-[quote=Toto]Citation avec auteur[/quote]
-[quote]Citations imbriquées [quote]... 1[/quote] sans auteur [quote=Tata]... 2[/quote][/quote]
-[quote=Toto]Citations imbriquées [quote=Titi]... 1[/quote] avec auteur [quote=Tata]... 2[/quote][/quote]
-[code]Code sans [b]interprétation[/b] des [i]BBCodes[/i].[/code][/code]
+[b]Code et citations :[/b]
+[quote][nobb][quote]Citation sans auteur[/quote]
+[quote="Toto"]Citation avec auteur[/quote]
+[quote]Citations imbriquées [quote]... 1[/quote] sans auteur [quote="Tata"]... 2[/quote][/quote]
+[quote="Toto"]Citations imbriquées [quote="Titi"]... 1[/quote] avec auteur [quote="Tata"]... 2[/quote][/quote]
+[code]Code sans [b]interprétation[/b] des [i]BBCodes[/i].[/code][/nobb][/quote]
 [quote][quote]Citation sans auteur[/quote]
-[quote=Toto]Citation avec auteur[/quote]
-[quote]Citations imbriquées [quote]... 1[/quote] sans auteur [quote=Tata]... 2[/quote][/quote]
-[quote=Toto]Citations imbriquées [quote=Titi]... 1[/quote] avec auteur [quote=Tata]... 2[/quote][/quote]
+[quote="Toto"]Citation avec auteur[/quote]
+[quote]Citations imbriquées [quote]... 1[/quote] sans auteur [quote="Tata"]... 2[/quote][/quote]
+[quote="Toto"]Citations imbriquées [quote="Titi"]... 1[/quote] avec auteur [quote="Tata"]... 2[/quote][/quote]
 [code]Code sans [b]interprétation[/b] des [i]BBCodes[/i].[/code][/quote]
-Alignements :
-[code][align=left]Aligné à gauche[/align]
-[align=justify]Justifié[/align]
-[align=center]Centré[/align]
-[align=right]Aligné à droite[/align][/code]
-[quote][align=left]Aligné à gauche[/align]
-[align=justify]Justifié[/align]
-[align=center]Centré[/align]
-[align=right]Aligné à droite[/align][/quote]]]>
-						</attribute>
+[b]Alignements :[/b]
+[quote][nobb][align="left"]Aligné à gauche[/align]
+[align="justify"]Justifié[/align]
+[align="center"]Centré[/align]
+[align="right"]Aligné à droite[/align][/nobb][/quote]
+[quote][align="left"]Aligné à gauche[/align]
+[align="justify"]Justifié[/align]
+[align="center"]Centré[/align]
+[align="right"]Aligné à droite[/align][/quote]
+[b]Couleurs :[/b]
+[quote][nobb][color="#f22"]Code couleur sur 3 chiffres[/color], [color="#26d923"]code couleur sur 6 chiffres[/color], [color="blue"]nom html de la couleur[/color][/nobb][/quote]
+[quote][color="#f22"]Code couleur sur 3 chiffres[/color], [color="#26d923"]code couleur sur 6 chiffres[/color], [color="blue"]nom html de la couleur[/color][/quote]
+[b]Listes :[/b]
+[quote][nobb][list][item]Item 1[/item][item]Item 2[list][item]Item 2.1[/item][item]Item 2.2[/item][item]Item 2.3[/item][/list][/item][item]Item 3[/item][/list][/nobb][/quote]
+[quote][list][item]Item 1[/item][item]Item 2[list][item]Item 2.1[/item][item]Item 2.2[/item][item]Item 2.3[/item][/list][/item][item]Item 3[/item][/list][/quote]]]>
+						</bbcodeattribute>
 						<post postauthor-refid="member1" text-attr="postText" />
 					</thread>
 					<thread label="Suspendisse diam mauris 1" threadauthor-refid="member1">
-						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
 					</thread>
 					<thread label="Suspendisse diam mauris 2" threadauthor-refid="member1">
-						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
 					</thread>
 					<thread label="Suspendisse diam mauris 3" threadauthor-refid="member1">
-						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
 					</thread>
 					<thread label="Suspendisse diam mauris 4" threadauthor-refid="member1">
-						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
 					</thread>
 					<thread label="Suspendisse diam mauris 5" threadauthor-refid="member1">
-						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
 					</thread>
 					<thread label="Suspendisse diam mauris 6" threadauthor-refid="member1">
-						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
 					</thread>
 					<thread label="Suspendisse diam mauris 7" threadauthor-refid="member1">
-						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
 					</thread>
 					<thread label="Suspendisse diam mauris 8" threadauthor-refid="member1">
-						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
 					</thread>
 					<thread label="Suspendisse diam mauris 9" threadauthor-refid="member1">
-						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
 					</thread>
 					<thread label="Suspendisse diam mauris 10" threadauthor-refid="member1">
-						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
 					</thread>
 					<thread label="Suspendisse diam mauris 11" threadauthor-refid="member1">
-						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
 					</thread>
 					<thread label="Suspendisse diam mauris 12" threadauthor-refid="member1">
-						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
 					</thread>
 					<thread label="Suspendisse diam mauris, tincidunt in" threadauthor-refid="member2">
-						<post postauthor-refid="member2" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="member3" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="mod1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="member2" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="member4" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member2" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod2" textAsBBCode="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod2" textAsBBCode="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member3" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod1" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member2" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod2" textAsBBCode="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member4" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
 					</thread>
 					<thread label="Spharetra eu, tincidunt in" threadauthor-refid="member1">
-						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="member3" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="mod1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod2" textAsBBCode="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member3" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod1" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
 					</thread>
 					<thread label="Morbi ac nisl. Pellentesque" threadauthor-refid="member1">
-						<post postauthor-refid="member1" text="Pellentesque nisl urna, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="member3" text="Pellentesque nisl urna, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="member4" text="Pellentesque pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="member1" text="Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="member2" text="Pellentesque, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="member3" text="Pellentesque nisl nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="member4" text="Pellentesque eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="member1" text="Pellentesque nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="member2" text="Pellentesque nisl urna, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="member1" text="Pellentesque nisl urna, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="member2" text="Pellentesque nisl urna, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="member1" text="Pellentesque nisl urna, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="member2" text="Pellentesque pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="member1" text="Pellentesque eget, sagittis lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="member4" text="Pellentesque sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="member2" text="Pellentesque pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="mod1" text="Pellentesque nisl nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" textAsBBCode="Pellentesque nisl urna, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod2" textAsBBCode="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member3" textAsBBCode="Pellentesque nisl urna, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member4" textAsBBCode="Pellentesque pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" textAsBBCode="Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod2" textAsBBCode="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member2" textAsBBCode="Pellentesque, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member3" textAsBBCode="Pellentesque nisl nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member4" textAsBBCode="Pellentesque eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" textAsBBCode="Pellentesque nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod2" textAsBBCode="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member2" textAsBBCode="Pellentesque nisl urna, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" textAsBBCode="Pellentesque nisl urna, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member2" textAsBBCode="Pellentesque nisl urna, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" textAsBBCode="Pellentesque nisl urna, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member2" textAsBBCode="Pellentesque pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" textAsBBCode="Pellentesque eget, sagittis lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod2" textAsBBCode="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member4" textAsBBCode="Pellentesque sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member2" textAsBBCode="Pellentesque pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod2" textAsBBCode="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod1" textAsBBCode="Pellentesque nisl nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
 					</thread>
 				</forum>
 				<forum label="Présentation" nbPostPerPage="10" publicationstatus="ACTIVE" description="C'est ici que les nouveaux arrivants sont invités à se présenter">
 				</forum>
 				<forum label="News du Forum" nbPostPerPage="10" publicationstatus="ACTIVE" description="Ici vous seront présenté, les nouveautés, les améliorations, les maintenances">
 					<thread label="Tincidunt in" threadauthor-refid="member1">
-						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
 					</thread>
 				</forum>
 				<forum label="Boîte à idées - Vos suggestions" nbPostPerPage="10" publicationstatus="ACTIVE" description="Déposez ici vos idées de forums, sujets, rubriques, catégories ... Afin de faire avancer le forum dans votre sens">
 					<thread label="Diam mauris, in" threadauthor-refid="member2">
-						<post postauthor-refid="member2" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="mod1" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member2" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod2" textAsBBCode="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod1" textAsBBCode="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" textAsBBCode="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod2" textAsBBCode="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
 					</thread>
 					<thread label="Dsagittis nec" threadauthor-refid="member3">
-						<post postauthor-refid="member3" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="mod1" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="mod2" text="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member3" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod2" textAsBBCode="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" textAsBBCode="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod1" textAsBBCode="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="mod2" textAsBBCode="Pellentesque nisl urna, lacinia eget, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
 					</thread>
 					<thread label="Dacinia eget, in " threadauthor-refid="member4">
-						<post postauthor-refid="member4" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
-						<post postauthor-refid="member1" text="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member4" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
+						<post postauthor-refid="member1" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
 					</thread>
 				</forum>
 			</forumgroup>

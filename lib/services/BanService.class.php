@@ -102,7 +102,7 @@ class forums_BanService extends f_persistentdocument_DocumentService
 	{
 		$parameters = array();
 		$parameters['DATE'] = date_DateFormat::format(date_Calendar::getInstance($ban->getUITo()), date_DateFormat::getDateFormat());
-		$parameters['MOTIF'] = $ban->display();		
+		$parameters['MOTIF'] = $ban->getMotifAsHtml();		
 		$parameters['PSEUDO'] = $ban->getMember()->getLabelAsHtml();
 		return $parameters;
 	}

@@ -135,9 +135,28 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	/**
 	 * @return String
 	 */
-	public function displayPrivatenote()
+	public function getPrivatenoteAsHtml()
 	{
-		return website_BBCodeService::getInstance()->toHtml($this->getPrivatenote()) . '<br /><br />' . f_Locale::translate('&modules.forums.frontoffice.By;') . ' ' . $this->getPrivatenotebyLabelAsHtml();
+		$parser = new website_BBCodeParser();
+		return $parser->convertXmlToHtml($this->getPrivatenote());
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getPrivatenoteAsBBCode()
+	{
+		$parser = new website_BBCodeParser();
+		return $parser->convertXmlToBBCode($this->getPrivatenote());
+	}
+
+	/**
+	 * @param string $bbcode
+	 */
+	public function setPrivatenoteAsBBCode($bbcode)
+	{
+		$parser = new website_BBCodeParser();
+		$this->setPrivatenote($parser->convertBBCodeToXml($bbcode, 'default'));
 	}
 	
 	/**
@@ -145,7 +164,7 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	 */
 	public function getJsPrivateNote()
 	{
-		$txt = str_replace("'", "\\'", $this->getPrivatenote());
+		$txt = str_replace("'", "\\'", $this->getPrivatenoteAsBBCode());
 		$txt = str_replace("\n", '\n', $txt);
 		$txt = str_replace("\r", "", $txt);
 		return f_util_HtmlUtils::textToHtml($txt);
@@ -234,7 +253,7 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	 */
 	public function getKeywords()
 	{
-		return str_replace(' ', ', ', $this->getLabel()).', '.f_Locale::translate('&modules.forums.meta.forum;');
+		return str_replace(' ', ', ', $this->getLabel()).', '.LocaleService::getInstance()->transFO('m.forums.meta.forum');
 	}
 	
 	/**
@@ -250,7 +269,7 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	 */
 	public function getRSSLabel()
 	{
-		return $this->getLabelAsHtml() . ' - ' . f_Locale::translate('&modules.forums.frontoffice.in-forumLabel;') . ' ' . $this->getForum()->getLabelAsHtml();
+		return $this->getLabelAsHtml() . ' - ' . LocaleService::getInstance()->transFO('m.forums.frontoffice.in-forum', array('lab')) . ' ' . $this->getForum()->getLabelAsHtml();
 	}
 	
 	/**
@@ -295,6 +314,7 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	 */
 	public function getPostFeedLabel()
 	{
-		return f_Locale::translate('&modules.forums.frontoffice.Posts-ofLabel;', array('type' => f_Locale::translate($this->getPersistentModel()->getLabel()))) . ' ' . $this->getLabel();
+		$ls = LocaleService::getInstance();
+		return $ls->transFO('m.forums.frontoffice.posts-of', array('lab', 'ucf'), array('type' => $ls->transFO($this->getPersistentModel()->getLabelKey()))) . ' ' . $this->getLabel();
 	}
 }

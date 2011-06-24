@@ -85,7 +85,7 @@ class forums_BlockRssMenuAction extends website_BlockAction
 	{
 		if ($parent !== null)
 		{
-			$modelName = f_Locale::translate($parent->getPersistentModel()->getDocumentName());
+			$modelName = $parent->getPersistentModel()->getDocumentName();
 			foreach ($forTypes as $type)
 			{
 				$title = LocaleService::getInstance()->getInstance()->transFO('m.forums.frontoffice.' . $type . 's-of-' . $modelName, array('ucf', 'lab')) . ' ' . $parent->getLabelAsHtml();

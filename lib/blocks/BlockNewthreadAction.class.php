@@ -37,7 +37,6 @@ class forums_BlockNewthreadAction extends forums_BlockPostListBaseAction
 		{
 			return $this->getForbiddenView();
 		}
-		
 		return $this->getInputViewName();
 	}
 	
@@ -46,6 +45,7 @@ class forums_BlockNewthreadAction extends forums_BlockPostListBaseAction
 	 */
 	public function getInputViewName()
 	{
+		
 		return website_BlockView::SUCCESS;
 	}
 	
@@ -104,7 +104,6 @@ class forums_BlockNewthreadAction extends forums_BlockPostListBaseAction
 		
 		$post = $thread->getFirstPost();
 		$post->setThread($thread);
-		$post->setText(website_BBCodeService::getInstance()->fixContent($post->getText()));
 		$post->setPostauthor(forums_MemberService::getInstance()->getCurrentMember());
 		$post->setCreationdate(date_Calendar::getInstance()->toString());
 		$request->setAttribute('thread', $thread);

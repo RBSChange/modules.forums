@@ -301,8 +301,6 @@ class forums_MemberService extends f_persistentdocument_DocumentService
 		parent::preSave($document, $parentNodeId);
 		
 		$this->refreshLabel($document);
-		
-		$document->setSignature(website_BBCodeService::getInstance()->fixContent($document->getSignature()));
 	}
 
 	/**

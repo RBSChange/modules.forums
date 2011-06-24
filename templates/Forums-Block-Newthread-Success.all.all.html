@@ -14,7 +14,7 @@
 	<ol>
 		<li><input change:field="name label" /></li>
 		<li change:permission="perm forums.Moderate; nodeId forum/getId; mode front"><input change:field="name level" nopreamble="true" /></li>
-		<li><label change:fieldlabel="" name="firstPost.text"></label> <input change:richtextinput="name firstPost.text; editor bbcode" required="true" /></li>
+		<li><input change:bbcodeinput="name firstPost.textAsBBCode" labeled="true" required="true" /></li>
 	</ol>
 	<p class="buttons">
 		<input class="button" name="preview" change:submit="labeli18n m.forums.frontoffice.form.preview" />

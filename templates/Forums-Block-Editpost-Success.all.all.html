@@ -16,7 +16,7 @@
 			<li><input change:field="name thread.label" /></li>
 			<li change:permission="perm forums.Moderate; nodeId post/getId; mode front"><input change:field="name thread.level" nopreamble="true" /></li>
 		</tal:block>
-		<li><label change:fieldlabel="name text"></label> <input change:richtextinput="name text; editor bbcode" /></li>
+		<li><input change:bbcodeinput="name textAsBBCode" labeled="true" required="true" /></li>
 	</ol>
 	<p class="buttons">
 		<input class="button" name="preview" change:submit="labeli18n m.forums.frontoffice.form.preview" />

@@ -75,7 +75,7 @@ class PHPTAL_Php_Attribute_CHANGE_memberdate extends ChangeTalAttribute
 			}
 			if (!$format)
 			{
-				$format = f_Locale::translate('&modules.forums.frontoffice.'.strtolower($mode).'-date-format;');
+				$format = LocaleService::getInstance()->transFO('m.forums.frontoffice.'.strtolower($mode).'-date-format');
 			}
 			self::$formats[$mode] = $format;
 		}

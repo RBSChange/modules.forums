@@ -34,7 +34,7 @@ class forums_persistentdocument_member extends forums_persistentdocument_memberb
 		{
 			$fullText .= ' ' . $title->getLabel();
 		}
-		$fullText .= ' ' . website_BBCodeService::getInstance()->toText($this->getSignature());
+		$fullText .= ' ' . $this->getSignatureAsHtml();
 		return f_util_StringUtils::htmlToText($fullText);
 	}
 	
@@ -232,7 +232,7 @@ class forums_persistentdocument_member extends forums_persistentdocument_memberb
 			return $track[$forumId];
 		}
 		$member = forums_MemberService::getInstance()->getCurrentMember();
-		return forums_MemberService::getInstance()->getAllReadDate($member);
+		return $member->getDocumentService()->getAllReadDate($member);
 	}
 	
 	/**
@@ -286,7 +286,7 @@ class forums_persistentdocument_member extends forums_persistentdocument_memberb
 			return $track[$threadId];
 		}
 		$member = forums_MemberService::getInstance()->getCurrentMember();
-		return forums_MemberService::getInstance()->getAllReadDate($member);
+		return $member->getDocumentService()->getAllReadDate($member);
 	}
 	
 	/**
@@ -308,6 +308,25 @@ class forums_persistentdocument_member extends forums_persistentdocument_memberb
 	 */
 	public function getSignatureAsHtml()
 	{
-		return website_BBCodeService::getInstance()->toHtml($this->getSignature());
+		$parser = new website_BBCodeParser();
+		return $parser->convertXmlToHtml($this->getSignature());
+	}
+	
+	/**
+	 * @return string
+	 */
+	public function getSignatureAsBBCode()
+	{
+		$parser = new website_BBCodeParser();
+		return $parser->convertXmlToBBCode($this->getSignature());
+	}
+
+	/**
+	 * @param string $bbcode
+	 */
+	public function setSignatureAsBBCode($bbcode)
+	{
+		$parser = new website_BBCodeParser();
+		$this->setSignature($parser->convertBBCodeToXml($bbcode, 'default'));
 	}
 }

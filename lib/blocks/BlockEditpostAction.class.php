@@ -19,8 +19,6 @@ class forums_BlockEditpostAction extends forums_BlockPostListBaseAction
 	}
 	
 	/**
-	 * @see website_BlockAction::execute()
-	 *
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
 	 * @return String
@@ -66,8 +64,6 @@ class forums_BlockEditpostAction extends forums_BlockPostListBaseAction
     }
 	
 	/**
-	 * @see website_BlockAction::execute()
-	 *
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
 	 * @return String
@@ -104,8 +100,6 @@ class forums_BlockEditpostAction extends forums_BlockPostListBaseAction
 	}
 	
 	/**
-	 * @see website_BlockAction::execute()
-	 *
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
 	 * @return String
@@ -121,7 +115,6 @@ class forums_BlockEditpostAction extends forums_BlockPostListBaseAction
 		{
 			$post->setAnswerof(null);
 		}
-		$post->setText(website_BBCodeService::getInstance()->fixContent($post->getText()));
 		$request->setAttribute('post', $post);
 		
 		$postListInfo = array();

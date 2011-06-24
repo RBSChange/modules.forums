@@ -45,7 +45,7 @@ class forums_BlockThreadAction extends forums_BlockPostListBaseAction
 				$tm->beginTransaction();
 				if ($request->hasParameter('privatenote') && $thread->isEditable())
 				{
-					$thread->setPrivatenote($request->getParameter('privatenote'));
+					$thread->setPrivatenoteAsBBCode($request->getParameter('privatenote'));
 					$thread->setPrivatenoteby(forums_MemberService::getInstance()->getCurrentMember());
 					$thread->save();
 				}

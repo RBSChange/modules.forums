@@ -1,6 +1,6 @@
 <h2 change:h="">${thread/getForum/getLabelAsHtml} : ${thread/getLabelAsHtml}</h2>
 
-<p class="normal" change:translate="modules.forumsextended.frontoffice.Choose-forum"></p>
+<p class="normal">${trans:m.forumsextended.frontoffice.choose-forum,ucf}</p>
 
 <form change:form="" method="get" action="">
 	<input type="hidden" name="forumsParam[cmpref]" value="${thread/getId}" />

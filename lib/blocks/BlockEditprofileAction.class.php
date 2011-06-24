@@ -55,7 +55,7 @@ class forums_BlockEditprofileAction extends forums_BaseBlockAction
 		if (!users_UserService::getInstance()->checkIdentity($member->getUser(), $request->getParameter('checkpassword')))
 		{
 			$ok = false;
-			$this->addError(f_Locale::translate('&modules.forums.frontoffice.Passwordwrong;'));
+			$this->addError(LocaleService::getInstance()->transFO('m.forums.frontoffice.passwordwrong', array('ucf')));
 		}
 		return $ok;
 	}

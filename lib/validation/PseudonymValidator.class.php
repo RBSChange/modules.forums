@@ -37,7 +37,7 @@ class validation_PseudonymValidator extends validation_UniqueValidator
 	 */
 	protected function getMessage()
 	{
-		return f_Locale::translate('&modules.forums.frontoffice.Label-already-used;');
+		return LocaleService::getInstance()->transFO('m.forums.frontoffice.label-already-used', array('ucf'));
 	}
 	
 	/**

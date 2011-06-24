@@ -36,7 +36,7 @@ class forums_persistentdocument_forumgroup extends forums_persistentdocument_for
 		{
 			return $this->getMetakeywords();
 		}
-		return str_replace(' ', ', ', $this->getLabel()).', '.f_Locale::translate('&modules.forums.meta.forum;');
+		return str_replace(' ', ', ', $this->getLabel()).', '.LocaleService::getInstance()->transFO('m.forums.meta.forum');
 	}
 
 	/**

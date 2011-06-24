@@ -15,7 +15,7 @@
 			<a href="javascript:;" id="hideprivatenote" class="link hidden">${trans:m.forums.frontoffice.hide-note,ucf}</a>
 			<a href="javascript:;" id="modifprivatenote" class="link hidden">${trans:m.forums.frontoffice.edit-note,ucf}</a>
 		</p>
-		<div class="hidden" id="privatenotevalue">${thread/displayPrivatenote}</div>
+		<div class="hidden" id="privatenotevalue">${thread/getPrivatenoteAsHtml}</div>
 		<script type="text/javascript">var privateNote = '${thread/getJsPrivateNote}';</script>
 	</tal:block>
 </div>
