@@ -12,14 +12,20 @@ class forums_patch_0350 extends patch_BasePatch
 	{
 		$pp = f_persistentdocument_PersistentProvider::getInstance();
 		$tm = f_persistentdocument_TransactionManager::getInstance();
+		$parser = new website_BBCodeParser();
 		
 		try 
 		{
 			$tm->beginTransaction();
-			foreach (forums_PostService::getInstance()->createQuery()->find() as $post)
+			foreach (forums_PostService::getInstance()->createQuery()->find() as $doc)
 			{
-				$post->setTextAsBBCode($post->getText());
-				$pp->updateDocument($post);
+				$text = $doc->getText();
+				if (f_util_StringUtils::beginsWith($text, '<div data-profile="'))
+				{
+					$text = $parser->convertXmlToBBCode($text);
+				}
+				$doc->setTextAsBBCode($text);
+				$pp->updateDocument($doc);
 			}
 			$tm->commit();
 		}
@@ -31,10 +37,15 @@ class forums_patch_0350 extends patch_BasePatch
 		try 
 		{
 			$tm->beginTransaction();
-			foreach (forums_MemberService::getInstance()->createQuery()->find() as $member)
+			foreach (forums_MemberService::getInstance()->createQuery()->find() as $doc)
 			{
-				$member->setSignatureAsBBCode($member->getSignature());
-				$pp->updateDocument($member);
+				$text = $doc->getSignature();
+				if (f_util_StringUtils::beginsWith($text, '<div data-profile="'))
+				{
+					$text = $parser->convertXmlToBBCode($text);
+				}
+				$doc->setSignatureAsBBCode($text);
+				$pp->updateDocument($doc);
 			}
 			$tm->commit();
 		}
@@ -46,10 +57,15 @@ class forums_patch_0350 extends patch_BasePatch
 		try 
 		{
 			$tm->beginTransaction();
-			foreach (forums_ThreadService::getInstance()->createQuery()->find() as $thread)
+			foreach (forums_ThreadService::getInstance()->createQuery()->find() as $doc)
 			{
-				$thread->setPrivatenoteAsBBCode($thread->getPrivatenote());
-				$pp->updateDocument($thread);
+				$text = $doc->getPrivatenote();
+				if (f_util_StringUtils::beginsWith($text, '<div data-profile="'))
+				{
+					$text = $parser->convertXmlToBBCode($text);
+				}
+				$doc->setPrivatenoteAsBBCode($text);
+				$pp->updateDocument($doc);
 			}
 			$tm->commit();
 		}
@@ -61,10 +77,15 @@ class forums_patch_0350 extends patch_BasePatch
 		try 
 		{
 			$tm->beginTransaction();
-			foreach (forums_BanService::getInstance()->createQuery()->find() as $ban)
+			foreach (forums_BanService::getInstance()->createQuery()->find() as $doc)
 			{
-				$ban->setMotifAsBBCode($ban->getMotif());
-				$pp->updateDocument($ban);
+				$text = $doc->getMotif();
+				if (f_util_StringUtils::beginsWith($text, '<div data-profile="'))
+				{
+					$text = $parser->convertXmlToBBCode($text);
+				}
+				$doc->setMotifAsBBCode($text);
+				$pp->updateDocument($doc);
 			}
 			$tm->commit();
 		}

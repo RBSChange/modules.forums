@@ -156,7 +156,7 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	public function setPrivatenoteAsBBCode($bbcode)
 	{
 		$parser = new website_BBCodeParser();
-		$this->setPrivatenote($parser->convertBBCodeToXml($bbcode, 'default'));
+		$this->setPrivatenote($parser->convertBBCodeToXml($bbcode, $parser->getModuleProfile('forums')));
 	}
 	
 	/**

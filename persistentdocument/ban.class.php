@@ -29,6 +29,6 @@ class forums_persistentdocument_ban extends forums_persistentdocument_banbase
 	public function setMotifAsBBCode($bbcode)
 	{
 		$parser = new website_BBCodeParser();
-		$this->setMotif($parser->convertBBCodeToXml($bbcode, 'default'));
+		$this->setMotif($parser->convertBBCodeToXml($bbcode, $parser->getModuleProfile('forums')));
 	}
 }

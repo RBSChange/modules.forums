@@ -12,7 +12,7 @@
 	<tal:block change:field="name thread" hidden="true" value="${thread/getId}" />
 	<tal:block tal:condition="answerof" change:field="name answerof" hidden="true" value="${answerof/getId}" />
 	<ol>
-  		<li><input change:bbcodeinput="name textAsBBCode" labeled="true" required="true" /></li>
+  		<li><input change:bbcodeinput="name textAsBBCode" module-profile="forums" labeled="true" required="true" /></li>
 	</ol>
 	<p class="buttons">
 		<input class="button" name="preview" change:submit="labeli18n m.forums.frontoffice.form.preview" />

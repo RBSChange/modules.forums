@@ -49,7 +49,7 @@ class forums_ModuleService extends ModuleBaseService
 		}
 		
 		$ps = f_permission_PermissionService::getInstance();
-		return $ps->hasPermission($member->getUser(), $permission, $document->getId());
+		return $ps->hasExplicitPermission($member->getUser(), $permission, $document->getId());
 	}
 	
 	/**
@@ -66,7 +66,7 @@ class forums_ModuleService extends ModuleBaseService
 		}
 		
 		$ps = f_permission_PermissionService::getInstance();
-		return $ps->hasPermission($member->getUser(), $permission, $documentId);
+		return $ps->hasExplicitPermission($member->getUser(), $permission, $documentId);
 	}
 	
 	/**
@@ -75,7 +75,6 @@ class forums_ModuleService extends ModuleBaseService
 	public function getGlobalAllReadDate()
 	{
 		return date_Calendar::getInstance()->sub(date_Calendar::MONTH, 1)->toString();
-		//return date_Calendar::getInstance()->sub(date_Calendar::HOUR, 12)->toString();
 	}
 
 	/**

@@ -435,6 +435,6 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	public function setTextAsBBCode($bbcode)
 	{
 		$parser = new website_BBCodeParser();
-		$this->setText($parser->convertBBCodeToXml($bbcode, 'default'));
+		$this->setText($parser->convertBBCodeToXml($bbcode, $parser->getModuleProfile('forums')));
 	}
 }

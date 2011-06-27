@@ -327,6 +327,6 @@ class forums_persistentdocument_member extends forums_persistentdocument_memberb
 	public function setSignatureAsBBCode($bbcode)
 	{
 		$parser = new website_BBCodeParser();
-		$this->setSignature($parser->convertBBCodeToXml($bbcode, 'default'));
+		$this->setSignature($parser->convertBBCodeToXml($bbcode, $parser->getModuleProfile('forums')));
 	}
 }
