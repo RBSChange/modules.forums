@@ -5,8 +5,6 @@
 	<binding fileName="modules/media/persistentdocument/import/media_binding.xml" />
 	<binding fileName="modules/forums/persistentdocument/import/forums_binding.xml" />
 
-	<attribute name="template" default="true">webfactory/tplTwo</attribute>
-
 	<rootfolder module="media">
 		<folder byLabel="Medias de l'exemple de forum">
 			<media path="modules/forums/setup/media/sample/new.png" byLabel="Nouveau" id="visual-new" />

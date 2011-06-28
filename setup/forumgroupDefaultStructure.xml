@@ -2,8 +2,6 @@
 <script>
 	<binding fileName="modules/website/persistentdocument/import/website_binding.xml" />
 		
-	<attribute name="template" default="true">webfactory/tplTwo</attribute>
-	
 	<systemtopic byDocumentId-attr="">
 		<page label="Forum" isIndexPage="true" navigationVisibility="hidden" indexingstatus="false" metatitle="Forum {forums_forumDetail.forumname}" description="Forum {forums_forumDetail.forumname} : {forums_forumDetail.forumshortdesc}" keywords="{forums_forumDetail.forumkeywords}">
 			<tag name="functional_forums_forum-detail" />

@@ -2,8 +2,6 @@
 <script>
 	<binding fileName="modules/website/persistentdocument/import/website_binding.xml" />
 	
-	<attribute name="template" default="true">webfactory/tplTwo</attribute>
-	
 	<website byDocumentId-attr="">	
 		<topic label="Membres">
 			<page label="Liste des membres" isIndexPage="true" navigationVisibility="hidden" indexingstatus="false">
