@@ -12,12 +12,12 @@ class forums_BlockMemberbanAction extends website_TaggerBlockAction
 	 */
 	function execute($request, $response)
 	{
-		if ($this->isInBackoffice())
+		$post = $this->getDocumentParameter();
+		if ($this->isInBackofficeEdition() || $post === null)
 		{
 			return website_BlockView::NONE;
 		}
 		
-		$post = $this->getDocumentParameter();
 		if ($post->isBanable())
 		{
 			return $this->getInputViewName();

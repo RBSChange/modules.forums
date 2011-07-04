@@ -27,13 +27,13 @@ class forums_BlockForumAction extends website_BlockAction
 	 */
 	public function execute($request, $response)
 	{
-		if ($this->isInBackoffice())
+		if ($this->isInBackofficeEdition())
 		{
 			return website_BlockView::NONE;
 		}
 
 		$forum = $this->getDocumentParameter();
-		if (!$forum instanceof forums_persistentdocument_forum)
+		if (!($forum instanceof forums_persistentdocument_forum) || !$forum->isPublished())
 		{
 			return website_BlockView::NONE;
 		}

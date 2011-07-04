@@ -49,12 +49,21 @@ class forums_BlockNewpostAction extends forums_BlockPostListBaseAction
 	 */
 	public function execute($request, $response, forums_persistentdocument_post $post)
 	{
-		if ($this->isInBackoffice())
+		if ($this->isInBackofficeEdition())
 		{
 			return website_BlockView::NONE;
 		}
+		elseif ($this->isInBackofficePreview())
+		{
+			return $this->getInputViewName();
+		}
 
 		$thread = $this->getDocumentParameter();
+		if ($thread === null)
+		{
+			return website_BlockView::NONE;
+		}
+		
 		if (!$thread->isWriteable())
 		{
 			return $this->getForbiddenView();

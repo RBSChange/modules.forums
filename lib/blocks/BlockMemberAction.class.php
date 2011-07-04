@@ -26,14 +26,13 @@ class forums_BlockMemberAction extends website_BlockAction
 	 */
 	public function execute($request, $response)
 	{
-		if ($this->isInBackoffice())
+		$member = $this->getDocumentParameter();
+		if ($this->isInBackofficeEdition() || !($member instanceof forums_persistentdocument_member))
 		{
 			return website_BlockView::NONE;
 		}
 
-		$member = $this->getDocumentParameter();
 		$request->setAttribute('member', $member);
-
 		if($request->getParameter('resend') && $member->getEndpublicationdate() !== null && $member->isme())
 		{
 			forums_MemberService::getInstance()->sendReactivationMail($member);

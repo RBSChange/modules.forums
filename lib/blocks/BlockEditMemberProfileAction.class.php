@@ -13,7 +13,8 @@ class forums_BlockEditMemberProfileAction extends forums_BaseBlockAction
 	 */
 	function execute($request, $response)
     {
-		if ($this->isInBackoffice())
+    	$user = users_UserService::getInstance()->getCurrentFrontEndUser();
+		if ($this->isInBackofficeEdition() || $user === null)
 		{
 			return website_BlockView::NONE;
 		}
@@ -21,13 +22,11 @@ class forums_BlockEditMemberProfileAction extends forums_BaseBlockAction
 		$member = forums_MemberService::getInstance()->getCurrentMember();
 		if ($member === null)
 		{
-			$user = users_UserService::getInstance()->getCurrentFrontEndUser();
 			$member = forums_MemberService::getInstance()->getNewDocumentInstance();
 			$member->setUser($user);
 			$member->save();
 		}
-		$request->setAttribute('member', $member);
-		
+		$request->setAttribute('member', $member);		
 		return website_BlockView::INPUT;
     }
     

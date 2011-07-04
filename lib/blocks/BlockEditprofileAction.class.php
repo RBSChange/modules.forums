@@ -14,9 +14,13 @@ class forums_BlockEditprofileAction extends forums_BaseBlockAction
 	 */
 	public function execute($request, $response)
 	{
-		if ($this->isInBackoffice())
+		if ($this->isInBackofficeEdition())
 		{
 			return website_BlockView::NONE;
+		}
+		elseif ($this->isInBackofficePreview())
+		{
+			return $this->getInputViewName();
 		}
 		
 		$member = $this->getDocumentParameter();

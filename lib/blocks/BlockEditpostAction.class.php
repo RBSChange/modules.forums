@@ -25,13 +25,13 @@ class forums_BlockEditpostAction extends forums_BlockPostListBaseAction
 	 */
 	public function execute($request, $response)
 	{
-		if ($this->isInBackoffice())
+		if ($this->isInBackofficeEdition())
 		{
 			return website_BlockView::NONE;
 		}
 		
 		$post = $this->getDocumentParameter();
-		if (!$post->isEditable())
+		if (!($post instanceof forums_persistentdocument_post) || !$post->isEditable())
 		{
 			return $this->getForbiddenView();
 		}

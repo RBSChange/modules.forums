@@ -27,12 +27,12 @@ class forums_BlockThreadAction extends forums_BlockPostListBaseAction
 	 */
 	public function execute($request, $response)
 	{
-		if ($this->isInBackoffice())
+		if ($this->isInBackofficeEdition())
 		{
 			return website_BlockView::NONE;
 		}
 		$thread = $this->getDocumentParameter();
-		if ($thread === null || !($thread instanceof forums_persistentdocument_thread) || !$thread->isPublished())
+		if (!($thread instanceof forums_persistentdocument_thread) || !$thread->isPublished())
 		{
 			return website_BlockView::NONE;
 		}

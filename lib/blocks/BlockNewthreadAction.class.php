@@ -33,6 +33,11 @@ class forums_BlockNewthreadAction extends forums_BlockPostListBaseAction
 		}
 		
 		$forum = $this->getDocumentParameter();
+		if ($forum === null)
+		{
+			return website_BlockView::NONE;
+		}
+		
 		if (!$forum->isWritable())
 		{
 			return $this->getForbiddenView();
@@ -45,7 +50,6 @@ class forums_BlockNewthreadAction extends forums_BlockPostListBaseAction
 	 */
 	public function getInputViewName()
 	{
-		
 		return website_BlockView::SUCCESS;
 	}
 	

@@ -29,13 +29,13 @@ class forums_BlockPostAction extends forums_BlockPostListBaseAction
 	 */
 	function execute($request, $response)
 	{
-		if ($this->isInBackoffice())
+		if ($this->isInBackofficeEdition())
 		{
 			return website_BlockView::NONE;
 		}
 		
 		$post = $this->getDocumentParameter();
-		if ($post === null || !($post instanceof forums_persistentdocument_post) || !$post->isPublished())
+		if (!($post instanceof forums_persistentdocument_post) || !$post->isPublished())
 		{
 			return website_BlockView::NONE;
 		}

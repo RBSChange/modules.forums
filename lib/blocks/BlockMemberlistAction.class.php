@@ -12,7 +12,7 @@ class forums_BlockMemberlistAction extends website_TaggerBlockAction
 	 */
 	public function execute($request, $response)
 	{
-		if ($this->isInBackoffice())
+		if ($this->isInBackofficeEdition())
 		{
 			return website_BlockView::NONE;
 		}
