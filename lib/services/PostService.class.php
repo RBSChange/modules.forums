@@ -57,7 +57,7 @@ class forums_PostService extends f_persistentdocument_DocumentService
 	 * @param string $bockName
 	 * @return array with entries 'module' and 'template'. 
 	 */
-	public function getSolrserachResultItemTemplate($document, $bockName)
+	public function getSolrsearchResultItemTemplate($document, $bockName)
 	{
 		return array('module' => 'forums', 'template' => 'Forums-Inc-PostResultDetail');
 	}

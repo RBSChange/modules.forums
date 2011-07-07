@@ -10,7 +10,7 @@ class forums_BlockMemberbanAction extends website_TaggerBlockAction
 	 * @param f_mvc_Response $response
 	 * @return String
 	 */
-	function execute($request, $response)
+	public function execute($request, $response)
 	{
 		$post = $this->getDocumentParameter();
 		if ($this->isInBackofficeEdition() || $post === null)
@@ -20,6 +20,7 @@ class forums_BlockMemberbanAction extends website_TaggerBlockAction
 		
 		if ($post->isBanable())
 		{
+			$this->setCommonValues($request);
 			return $this->getInputViewName();
 		}
 		
@@ -29,9 +30,27 @@ class forums_BlockMemberbanAction extends website_TaggerBlockAction
 	}
 	
 	/**
+	 * @param f_mvc_Request $request
+	 */
+	public function onValidateInputFailed($request)
+	{
+		$this->setCommonValues($request);
+	}
+	
+	/**
+	 * @param f_mvc_Request $request
+	 */
+	protected function setCommonValues($request)
+	{
+		$post = $this->getDocumentParameter();
+		$request->setAttribute('post', $post);
+		$request->setAttribute('bans', forums_BanService::getInstance()->getBansForUser($post->getPostauthor()));	
+	}
+	
+	/**
 	 * @return String
 	 */
-	function getInputViewName()
+	public function getInputViewName()
 	{
 		return website_BlockView::SUCCESS;
 	}
@@ -39,7 +58,7 @@ class forums_BlockMemberbanAction extends website_TaggerBlockAction
 	/**
 	 * @return Array
 	 */
-	function getSubmitInputValidationRules()
+	public function getSubmitInputValidationRules()
 	{
 		return array('to{blank:false}', 'motif{blank:false}');
 	}
@@ -49,7 +68,7 @@ class forums_BlockMemberbanAction extends website_TaggerBlockAction
 	 * @param f_mvc_Response $response
 	 * @return String
 	 */
-	function executeSubmit($request, $response, forums_persistentdocument_ban $ban)
+	public function executeSubmit($request, $response, forums_persistentdocument_ban $ban)
 	{
 		$ban->save();
 		$this->sendBan($ban);

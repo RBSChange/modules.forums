@@ -32,7 +32,7 @@
 	<key id="num">n°</key>
 	<key id="see-page">voir la page</key>
 	<key id="deletedpost">message supprimé !</key>
-	<key id="top">haut</key>
+	<key id="top">revenir en haut</key>
 	<key id="editedby">édité par</key>
 	<key id="deletedby">supprimé par</key>
 	<key id="confirmdeletepost">confirmer la suppression de ce message ?</key>
@@ -97,6 +97,7 @@
 	<key id="needtovalid">(Obligatoire pour valider)</key>
 	<key id="changepass">changer mon mot de passe</key>
 	<key id="cancelbacktoprofile">annuler et retourner à mon profil</key>
+	<key id="cancelbacktoitsprofile">annuler et retourner au profil</key>
 	<key id="backtoprofile">retourner à mon profil</key>
 	<key id="backtoprofileedit">retourner à l'édition de mon profil</key>
 	<key id="yes">oui</key>
@@ -146,4 +147,8 @@
 	<key id="details">voir les détails</key>
 	<key id="move-thread">déplacer le sujet</key>
 	<key id="go-to-page">aller à la page</key>
+	<key id="member-informations">informations sur le membre</key>
+	<key id="authentication-confirmation">confirmez votre identité</key>
+	<key id="move-thread">déplacement d'un sujet</key>
+	<key id="destination-forum">forum destination</key>
 </i18n>

@@ -230,6 +230,8 @@ Avec title/alt :
 						<post postauthor-refid="member4" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
 						<post postauthor-refid="member1" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
 					</thread>
+					<forum label="Suggestions rejetées" nbPostPerPage="10" publicationstatus="ACTIVE" />
+					<forum label="Suggestions réalisées" nbPostPerPage="10" publicationstatus="ACTIVE" />
 				</forum>
 			</forumgroup>
 		</websitefolder>

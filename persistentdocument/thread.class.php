@@ -205,7 +205,7 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	}
 	
 	/**
-	 * @return string
+	 * @return string[]
 	 */
 	public function getPagination()
 	{
@@ -216,22 +216,23 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 			return null;
 		}
 		
-		$pagination = '<a class="link" href="' . LinkHelper::getDocumentUrl($this, null, array('forumsParam[page]' => 1)) . '">1</a>';
+		$pagination = array();
 		if ($pageCount <= 5)
 		{
-			for ($page = 2; $page <= $pageCount; $page++)
+			for ($page = 1; $page < $pageCount; $page++)
 			{
-				$pagination .= ', <a class="link" href="' . LinkHelper::getDocumentUrl($this, null, array('forumsParam[page]' => $page)) . '">' . $page . '</a>';
+				$pagination[] = '<a class="link" href="' . LinkHelper::getDocumentUrl($this, null, array('forumsParam[page]' => $page)) . '">' . $page . '</a><span>, </span>';
 			}
 		}
 		else 
 		{
-			$pagination .= ' ... <a class="link" href="' . LinkHelper::getDocumentUrl($this, null, array('forumsParam[page]' => ($pageCount - 3))) . '">' . ($pageCount - 3) . '</a>';
-			for ($page = $pageCount - 2; $page <= $pageCount; $page++)
+			$pagination[] = '<a class="link" href="' . LinkHelper::getDocumentUrl($this, null, array('forumsParam[page]' => 1)) . '">1</a><span> ... </span>';
+			for ($page = $pageCount - 2; $page < $pageCount; $page++)
 			{
-				$pagination .= ', <a class="link" href="' . LinkHelper::getDocumentUrl($this, null, array('forumsParam[page]' => $page)) . '">' . $page . '</a>';
+				$pagination[] = '<a class="link" href="' . LinkHelper::getDocumentUrl($this, null, array('forumsParam[page]' => $page)) . '">' . $page . '</a><span>, </span>';
 			}
 		}
+		$pagination[] = '<a class="link" href="' . LinkHelper::getDocumentUrl($this, null, array('forumsParam[page]' => 1)) . '">' . $pageCount . '</a>';
 		return $pagination;
 	}
 	

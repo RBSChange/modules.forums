@@ -1,25 +1,26 @@
 <tal:block change:loadhandler="forums_EditpostLoadHandler" />
-<h2 change:h="">${trans:m.forums.frontoffice.editpost,ucf}</h2>
+<h1 change:h="">${trans:m.forums.frontoffice.editpost,ucf}</h1>
 
 <tal:block tal:condition="previewPostInfo">
-	<h3 change:h="">${trans:m.forums.frontoffice.message-preview,ucf}</h3>
 	<tal:block change:include="module 'forums'; template 'Forums-Inc-PostList-Success'; type 'html'; postListInfo previewPostInfo" />
 </tal:block>
 
-<h3 change:h="">${trans:m.forums.frontoffice.message-input,ucf}</h3>
-<form change:form="beanClass forums_persistentdocument_post; beanName post" class="cmxform post-form">
-	<div change:errors=""></div>
-	<input change:field="name beanId" hidden="true" />
-	<input change:field="name thread.id" hidden="true" />
-	<ol>
-		<tal:block tal:condition="post/isFirstPostInThread">
-			<li><input change:field="name thread.label" /></li>
-			<li change:permission="perm forums.Moderate; nodeId post/getId; mode front"><input change:field="name thread.level" nopreamble="true" /></li>
-		</tal:block>
-		<li><input change:bbcodeinput="name textAsBBCode" module-profile="forums" labeled="true" required="true" /></li>
-	</ol>
-	<p class="buttons">
-		<input class="button" name="preview" change:submit="labeli18n m.forums.frontoffice.form.preview" />
-		<input class="button" change:submit="labeli18n m.forums.frontoffice.form.submit"/>
-	</p>
+<form change:form="beanClass forums_persistentdocument_post; beanName post">
+	<fieldset>
+		<legend>${trans:m.forums.frontoffice.message-input,ucf}</legend>
+		<div change:errors=""></div>
+		<ol>
+			<tal:block tal:condition="post/isFirstPostInThread">
+				<li><input change:field="name thread.label" /></li>
+				<li change:permission="perm forums.Moderate; nodeId post/getId; mode front"><input change:field="name thread.level" nopreamble="true" /></li>
+			</tal:block>
+			<li><input change:bbcodeinput="name textAsBBCode" module-profile="forums" labeled="true" required="true" /></li>
+		</ol>
+		<p class="buttons">
+			<input change:field="name beanId" hidden="true" />
+			<input change:field="name thread.id" hidden="true" />
+			<input name="preview" change:submit="labeli18n m.forums.frontoffice.form.preview" />
+			<input change:submit="labeli18n m.forums.frontoffice.form.submit"/>
+		</p>
+	</fieldset>
 </form>

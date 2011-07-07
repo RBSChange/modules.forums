@@ -1,6 +1,12 @@
-<a tal:condition="member/isMe" change:link="tag contextual_website_website_modules_users_edit-profil" class="button float-right">${trans:m.forums.frontoffice.edit,ucf}</a>
-<a tal:condition="php: !member.isMe() && member.isEditable()" change:link="tag contextual_website_website_modules_forums_editprofile ; forumsParam[cmpref] member/getId" class="button float-right">${trans:m.forums.frontoffice.edit,ucf}</a>
-<h2 change:h="">${trans:m.forums.frontoffice.profile-of,ucf,login=member/getLabelAsHtml}</h2>
+<ul class="mini-navigation" tal:condition="php: member.isMe() OR member.isEditable() OR enablePrivateMessaging">
+	<li>
+		<a tal:condition="member/isMe" change:link="tag contextual_website_website_modules_users_edit-profil">${trans:m.forums.frontoffice.edit,ucf}</a>
+		<a tal:condition="php: !member.isMe() && member.isEditable()" change:link="tag contextual_website_website_modules_forums_editprofile ; forumsParam[cmpref] member/getId">${trans:m.forums.frontoffice.edit,ucf}</a>
+	</li>
+	<li tal:condition="enablePrivateMessaging"><a change:link="tag contextual_website_website_modules_privatemessaging_newthread; privatemessagingParam[receivers] member/getLabelAsHtml">${trans:m.privatemessaging.fo.start-new-private-conversation,ucf}</a></li>
+</ul>
+
+<h1 change:h="">${trans:m.forums.frontoffice.profile-of,ucf,login=member/getLabelAsHtml}</h1>
 
 <tal:block tal:condition="member/isme">
 	<div tal:condition="mailsended"><em class="notification">${trans:m.forums.frontoffice.mail-sent}</em></div>
@@ -14,7 +20,7 @@
 	<div class="website-block">
 		<div class="column-50 margin-right">
 			<div class="member-pic">
-				<img class="image" tal:attributes="src php: member->getGravatarUrl(32)" alt="" />
+				<img class="image" src="${php: member->getGravatarUrl(64)}" alt="" />
 			</div>
 			<div class="member-info">
 				<ul>
@@ -33,7 +39,6 @@
 					<li>${trans:m.forums.frontoffice.member-since,ucf,lab} <strong change:memberdate="value member/getCreationdate; mode 'short'"></strong></li>
 					<li tal:condition="member/getWebsiteUrl">${trans:m.forums.frontoffice.web-site,ucf,lab} <strong><a class="link" tal:attributes="href member/getWebsiteUrl" target="_blank">${member/getShortWebsiteUrl}</a></strong></li>
 					<li tal:condition="member/getCountry">${trans:m.forums.frontoffice.country,ucf,lab} <strong>${member/getCountry/getLabelAsHtml}</strong></li>
-					<li tal:condition="enablePrivateMessaging"><a change:link="tag contextual_website_website_modules_privatemessaging_newthread; privatemessagingParam[receivers] member/getLabelAsHtml">${trans:m.privatemessaging.fo.start-new-private-conversation,ucf}</a></li>
 				</ul>
 			</div>
 		</div>
@@ -47,11 +52,12 @@
 			</div>
 		</div>
 	</div>
+	<div class="cleaner"></div>
 </div>
 
 <tal:block tal:condition="member/getSignature">
-	<h3 change:h="">${trans:m.forums.document.member.signature,ucf}</h3>
-	<div class="member-signature">${member/getSignatureAsHtml}</div>
+	<h2 change:h="">${trans:m.forums.document.member.signature,ucf}</h2>
+	<div class="normal member-signature">${member/getSignatureAsHtml}</div>
 </tal:block>
 
 <tal:block change:include="module 'forums'; template 'Forums-Inc-BanList-Success'; type 'html'; member member; removeMemberLink 'true'" />

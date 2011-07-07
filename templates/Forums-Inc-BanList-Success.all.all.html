@@ -13,7 +13,7 @@
 			<tbody>
 				<tr tal:repeat="ban member/getBans" class="row-${php: repeat.ban.odd ? '1' : '0'}">
 					<td change:memberdate="value ban/getFrom; mode 'long'" />
-					<td change:memberdate="value ban/getTo; mode 'short'" />
+					<td change:memberdate="value ban/getTo; mode 'long'" />
 					<td><a change:link="document ban/getBy">${ban/getBy/getLabelAsHtml}</a></td>
 					<td>${ban/getMotifAsHtml} <tal:block tal:condition="ban/getPost">(${trans: m.forums.frontoffice.banned-reason-message} <a change:link="document ban/getPost">${ban/getPost/getPostId}</a>)</tal:block></td>
 				</tr>

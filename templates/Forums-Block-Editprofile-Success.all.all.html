@@ -1,9 +1,9 @@
-<h2 change:h="">${trans:m.forums.frontoffice.modifyprofile,ucf}</h2>
-<form change:form="beanClass forums_persistentdocument_member; beanName member" class="cmxform">
-	<div change:errors=""></div>
-	<input change:field="name beanId" hidden="true" />
-	<div change:tabs="id editProfileForm">
-		<div change:tab="name generalities" labeli18n="m.forums.frontoffice.editprofile.tab-generalities">
+<form change:form="beanClass forums_persistentdocument_member; beanName member">
+	<fieldset>
+		<legend>${trans:m.forums.frontoffice.modifyprofile,ucf}</legend>
+		<div change:errors=""></div>
+		<fieldset>
+			<legend>${trans:m.forums.frontoffice.member-informations,ucf}</legend>
 			<ol>
 				<li><label class="label">${trans:m.forums.document.member.label,ucf,lab}</label> ${member/getLabelAsHtml}</li>
 				<li><input change:field="name user.titleid" /></li>
@@ -19,21 +19,23 @@
 				</li>
 				<li><input change:field="name country" /></li>
 				<li><input change:field="name websiteUrl" size="40" /></li>
+				<li><input change:bbcodeinput="name signatureAsBBCode" module-profile="forums" labeled="true" /></li>
 			</ol>
-		</div>
-		<div change:tab="name signature" labeli18n="m.forums.frontoffice.editprofile.tab-signature">
-			<input change:bbcodeinput="name signatureAsBBCode" module-profile="forums" />
-		</div>
-	</div>
-	
-	<ol>
-		<li>
-			<input change:passwordinput="" name="checkpassword" required="true" labeli18n="m.forums.document.member.password" />
-			<p class="help-text">${trans:m.forums.frontoffice.needtovalid,ucf} - <a change:link="tag contextual_website_website_modules_users_change-password">${trans:m.forums.frontoffice.changepass,ucf}</a></p>
-		</li>
-	</ol>	
-	<p class="buttons">
-		<input change:submit="labeli18n m.forums.frontoffice.submit" class="button"/>
-		<a change:link="document member" class="button">${trans:m.forums.frontoffice.cancelbacktoprofile,ucf}</a>
-	</p>
+		</fieldset>
+		
+		<fieldset>
+			<legend>${trans:m.forums.frontoffice.authentication-confirmation,ucf}</legend>
+			<ol>
+				<li>
+					<input change:passwordinput="" name="checkpassword" required="true" labeli18n="m.forums.document.member.password" />
+					<p class="help-text">${trans:m.forums.frontoffice.needtovalid,ucf}</p>
+				</li>
+			</ol>
+		</fieldset>
+		<p class="buttons">
+			<input change:field="name beanId" hidden="true" />
+			<input change:submit="labeli18n m.forums.frontoffice.submit" />
+			<a change:link="document member" class="button">${trans:m.forums.frontoffice.cancelbacktoitsprofile,ucf}</a>
+		</p>
+	</fieldset>
 </form>

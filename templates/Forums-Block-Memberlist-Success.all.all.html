@@ -1,4 +1,4 @@
-<h2 change:h="">${trans:m.forums.frontoffice.member-list,ucf}</h2>
+<h1 change:h="">${trans:m.forums.frontoffice.member-list,ucf}</h1>
 <table class="normal" cellspacing="0" cellpadding="0">
 	<thead>
 		<tr>
@@ -15,15 +15,17 @@
 			<td class="column-avatar"><img class="image" src="${php: member->getGravatarUrl(32)}" alt="" /></td>
 			<td class="column-label">
 				<a change:link="document member">${member/getLabelAsHtml}</a>
-				<tal:block tal:define="count member/getPublishedTitleCount" tal:condition="count">
-					<br />
-					<tal:block tal:condition="php: count == 1">${trans:m.forums.frontoffice.member-title,ucf,lab}</tal:block>
-					<tal:block tal:condition="php: count > 1">${trans:m.forums.frontoffice.member-titles,ucf,lab}</tal:block>
-					<tal:block tal:repeat="title member/getPublishedTitleArray">
-						<tal:block tal:condition="php: !repeat.title.start && repeat.title.end">${trans:m.forums.frontoffice.and}</tal:block>
-						<strong>${title/getLabelAsHtml}</strong><tal:block tal:condition="php: repeat.title.index LT (repeat.title.length - 2)">, </tal:block>
-					</tal:block>
-				</tal:block>			
+				<dl tal:define="count member/getPublishedTitleCount" tal:condition="count" class="inline-list">
+					<dt>
+						<tal:block tal:condition="php: count == 1">${trans:m.forums.frontoffice.member-title,ucf}</tal:block>
+						<tal:block tal:condition="php: count > 1">${trans:m.forums.frontoffice.member-titles,ucf}</tal:block>
+					</dt>
+					<dd tal:repeat="title member/getPublishedTitleArray">
+						<strong>${title/getLabelAsHtml}</strong>
+						<span tal:condition="php: repeat.title.index LT (repeat.title.length - 2)">, </span>
+						<span tal:condition="php: repeat.title.index EQ (repeat.title.length - 2)">${trans:m.forums.frontoffice.and}</span>
+					</dd>
+				</dl>			
 			</td>
 			<td class="column-date" change:memberdate="value member/getCreationdate; mode 'short'" />
 			<td class="column-threads">${member/getNbthread}</td>

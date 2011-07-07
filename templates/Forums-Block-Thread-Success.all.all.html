@@ -6,40 +6,69 @@
 	</form>
 </tal:block>
 
-<h2 change:h="">${thread/getForum/getLabelAsHtml} : ${thread/getLabelAsHtml}</h2>
-<div tal:condition="thread/isEditable" class="note" threadid="${thread/getId}">
-	<p tal:condition="not: thread/getPrivatenote"><a href="javascript:;" id="addprivatenote" class="link">${trans:m.forums.frontoffice.add-note,ucf}</a></p>
+<h1 change:h="">${thread/getForum/getLabelAsHtml} : ${thread/getLabelAsHtml}</h1>
+<div tal:condition="thread/canModerate" class="note" threadid="${thread/getId}">
+	<p class="normal" tal:condition="not: thread/getPrivatenote"><a href="javascript:;" id="addprivatenote" class="link">${trans:m.forums.frontoffice.add-note,ucf}</a></p>
 	<tal:block tal:condition="thread/getPrivatenote">
-		<p>
+		<p class="normal">
 			<a href="javascript:;" id="showprivatenote" class="link">${trans:m.forums.frontoffice.view-note,ucf}</a>
 			<a href="javascript:;" id="hideprivatenote" class="link hidden">${trans:m.forums.frontoffice.hide-note,ucf}</a>
 			<a href="javascript:;" id="modifprivatenote" class="link hidden">${trans:m.forums.frontoffice.edit-note,ucf}</a>
 		</p>
-		<div class="hidden" id="privatenotevalue">${thread/getPrivatenoteAsHtml}</div>
+		<div class="normal hidden" id="privatenotevalue">${thread/getPrivatenoteAsHtml}</div>
 		<script type="text/javascript">var privateNote = '${thread/getJsPrivateNote}';</script>
 	</tal:block>
 </div>
-<em class="locked" tal:condition="thread/isLocked">${trans:m.forums.frontoffice.closedthread,ucf}</em>
+<p tal:condition="thread/isLocked" class="normal"><em class="locked">${trans:m.forums.frontoffice.closedthread,ucf}</em></p>
 
 <form metal:use-macro="goToPageForm"></form>
 
-<ul class="inline-menu">
-	<li tal:condition="not: thread/isLocked"><a change:link="tag functional_forums_post-new ; forumsParam[cmpref] thread/getId">${trans:m.forums.frontoffice.newpost,ucf}</a></li>
-	<li><a change:link="document thread/getForum">${trans:m.forums.frontoffice.threadslist,ucf}</a></li>
-	<li tal:define="forumListPage thread/getForum/getSiblingForumListPage" tal:condition="forumListPage"><a change:link="document forumListPage">${trans:m.forums.frontoffice.forumslist,ucf}</a></li>
+<ul class="inline-list" tal:define="forumListPage thread/getForum/getSiblingForumListPage">
+	<li tal:condition="not: thread/isLocked">
+		<a change:link="tag functional_forums_post-new ; forumsParam[cmpref] thread/getId">${trans:m.forums.frontoffice.newpost,ucf}</a>
+		<span> | </span>
+	</li>
+	<li>
+		<a change:link="document thread/getForum">${trans:m.forums.frontoffice.threadslist,ucf}</a>
+		<span tal:condition="forumListPage"> | </span>
+	</li>
+	<li tal:condition="forumListPage">
+		<a change:link="document forumListPage">${trans:m.forums.frontoffice.forumslist,ucf}</a>
+	</li>
 </ul>
+
+<div class="cleaner"></div>
 
 <tal:block change:include="module 'forums'; template 'Forums-Inc-PostList-Success'; type 'html'; postListInfo postListInfo" />
 
 <form metal:use-macro="goToPageForm"></form>
 
-<ul class="inline-menu">
-	<li tal:condition="not: thread/isLocked"><a change:link="tag functional_forums_post-new ; forumsParam[cmpref] thread/getId">${trans:m.forums.frontoffice.newpost,ucf}</a></li>
-	<li tal:condition="followUrl"><a class="link" tal:attributes="href followUrl">${trans:m.forums.frontoffice.followthread,ucf}</a></li>
-	<li tal:condition="unfollowUrl"><a class="link" tal:attributes="href unfollowUrl">${trans:m.forums.frontoffice.cancelfollowthread,ucf}</a></li>
-	<li tal:condition="thread/isClosable"><a class="link closeThread" change:link="module forums; action CloseThread; id thread/getId">${trans:m.forums.frontoffice.closethread,ucf}</a></li>
-	<li tal:condition="thread/isOpenable"><a class="link openThread" change:link="module forums; action OpenThread; id thread/getId">${trans:m.forums.frontoffice.openthread,ucf}</a></li>
-	<li tal:condition="thread/canModerate"><a class="link" change:actionlink="action 'ChooseForum'; cmpref thread/getId">${trans:m.forums.frontoffice.move-thread,ucf}</a></li>
+<ul class="inline-list">
+	<li tal:condition="not: thread/isLocked">
+		<a change:link="tag functional_forums_post-new ; forumsParam[cmpref] thread/getId">${trans:m.forums.frontoffice.newpost,ucf}</a>
+		<span tal:condition="php: followUrl OR unfollowUrl OR thread.isClosable() OR thread.isOpenable() OR thread.canModerate()"> | </span>
+	</li>
+	<li tal:condition="followUrl">
+		<a class="link" href="${followUrl}">${trans:m.forums.frontoffice.followthread,ucf}</a>
+		<span tal:condition="php: thread.isClosable() OR thread.isOpenable() OR thread.canModerate()"> | </span>
+	</li>
+	<li tal:condition="unfollowUrl">
+		<a class="link" href="${unfollowUrl}">${trans:m.forums.frontoffice.cancelfollowthread,ucf}</a>
+		<span tal:condition="php: thread.isClosable() OR thread.isOpenable() OR thread.canModerate()"> | </span>
+	</li>
+	<li tal:condition="thread/isClosable">
+		<a class="link closeThread" change:link="module forums; action CloseThread; id thread/getId">${trans:m.forums.frontoffice.closethread,ucf}</a>
+		<span tal:condition="php: thread.isOpenable() OR thread.canModerate()"> | </span>
+	</li>
+	<li tal:condition="thread/isOpenable">
+		<a class="link openThread" change:link="module forums; action OpenThread; id thread/getId">${trans:m.forums.frontoffice.openthread,ucf}</a>
+		<span tal:condition="thread/canModerate"> | </span>
+	</li>
+	<li tal:condition="thread/canModerate">
+		<a change:actionlink="action 'ChooseForum'; cmpref thread/getId">${trans:m.forums.frontoffice.move-thread,ucf}</a>
+	</li>
 </ul>
+
+<div class="cleaner"></div>
 
 <tal:block change:block="" module="forums" name="RssMenu" parentref="${thread/getId}" />

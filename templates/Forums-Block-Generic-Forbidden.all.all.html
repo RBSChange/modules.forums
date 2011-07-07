@@ -1,11 +1,11 @@
 <tal:block tal:condition="member">
-	<h2 change:h="">${trans:m.forums.frontoffice.you-not-have-access,ucf}</h2>
+	<h1 change:h="">${trans:m.forums.frontoffice.you-not-have-access,ucf}</h1>
 	<tal:block tal:condition="member/isBanned">
-		<p>${trans:m.forums.frontoffice.logged-as-and-baned,ucf,lab,name=member/getLabelAsHtml} <tal:block change:memberdate="value member/getBan; mode 'long'" /></p>
+		<p class="normal">${trans:m.forums.frontoffice.logged-as-and-baned,ucf,lab,name=member/getLabelAsHtml} <tal:block change:memberdate="value member/getBan; mode 'long'" /></p>
 	</tal:block>
-	<p>${trans:m.forums.frontoffice.logged-as,ucf,name=member/getLabelAsHtml}</p>
+	<p class="normal">${trans:m.forums.frontoffice.logged-as,ucf,name=member/getLabelAsHtml}</p>
 </tal:block>
 <tal:block tal:condition="not: member">
-	<h2 change:h="">${trans:m.forums.frontoffice.restricted-access-must-login,ucf}</h2>
+	<h1 change:h="">${trans:m.forums.frontoffice.restricted-access-must-login,ucf}</h1>
 	<tal:block change:block="" module="users" name="Authentication" />
 </tal:block>

@@ -1,9 +1,12 @@
-<ul class="inline-menu" metal:define-macro="inlineMenu">
-	<li><a change:link="document post/getThread">${trans:m.forums.frontoffice.view-thread,ucf}</a></li>
-	<li><a href="${post/getPostUrlInThread}" class="link">${trans:m.forums.frontoffice.locate-in-thread,ucf}.</a></li>
+<ul class="inline-list" metal:define-macro="inlineMenu">
+	<li>
+		<a change:link="document post/getThread">${trans:m.forums.frontoffice.view-thread,ucf}</a>
+		<span> | </span>
+	</li>
+	<li><a href="${post/getPostUrlInThread}" class="link">${trans:m.forums.frontoffice.locate-in-thread,ucf}</a></li>
 </ul>
 
-<h2 change:h="">${trans:m.forums.frontoffice.post-detail-title,ucf,postId=post/getPostId}</h2>
+<h1 change:h="">${trans:m.forums.frontoffice.post-detail-title,ucf,postId=post/getPostId}</h1>
 
 <p class="normal">${trans:m.forums.frontoffice.number-n-in-thread-x,ucf,number=post/getNumber,thread=post/getThread/getLabelAsHtml}</p>
 

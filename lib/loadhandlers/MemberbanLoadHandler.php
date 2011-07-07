@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * @deprecated (will be removed in 4.0) parameters are now set by the block action.
+ */
 class forums_MemberbanLoadHandler extends website_ViewLoadHandlerImpl
 {
 	/**

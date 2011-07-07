@@ -1,20 +1,21 @@
-<tal:block change:loadhandler="forums_MemberbanLoadHandler" />
-<h2 change:h="">${trans:m.forums.frontoffice.forum-member-ban,ucf}</h2>
-<form change:form="beanClass forums_persistentdocument_ban; beanName ban" class="cmxform post-form">
-	<div change:errors=""></div>
-	<input change:field="name beanId" hidden="true" />
-	<input change:field="name member" value="${post/getPostauthor/getId}" hidden="true"/>
-	<input change:field="name post" value="${post/getId}" hidden="true"/>
-	<input change:hiddeninput="name postid" value="${post/getId}"/>
-	<ol>
-		<li><label>${trans:m.forums.document.ban.member,ucf,lab}</label> <a change:link="document post/getPostauthor">${post/getAuthorNameAsHtml}</a></li>
-		<li><label>${trans:m.forums.document.ban.post,ucf,lab}</label> ${post/getPostIdLink}</li>
-		<li><input change:field="name to" required="true"/></li>
-		<li><input change:bbcodeinput="name motifAsBBCode" module-profile="forums" labeled="true" /></li>
-	</ol>
-	<p class="buttons">
-		<input class="button" change:submit="labeli18n m.forums.frontoffice.form.submit"/>
-	</p>
+<form change:form="beanClass forums_persistentdocument_ban; beanName ban">
+	<fieldset>
+		<legend>${trans:m.forums.frontoffice.forum-member-ban,ucf}</legend>
+		<ul change:errors=""></ul>
+		<ol>
+			<li><label>${trans:m.forums.document.ban.member,ucf,lab}</label> <a change:link="document post/getPostauthor">${post/getAuthorNameAsHtml}</a></li>
+			<li><label>${trans:m.forums.document.ban.post,ucf,lab}</label> ${post/getPostIdLink}</li>
+			<li><input change:field="name to" required="true"/></li>
+			<li><input change:bbcodeinput="name motifAsBBCode" module-profile="forums" labeled="true" /></li>
+		</ol>
+		<p class="buttons">
+			<input change:field="name beanId" hidden="true" />
+			<input change:field="name member" value="${post/getPostauthor/getId}" hidden="true"/>
+			<input change:field="name post" value="${post/getId}" hidden="true"/>
+			<input change:hiddeninput="name postid" value="${post/getId}"/>
+			<input change:submit="labeli18n m.forums.frontoffice.form.submit"/>
+		</p>
+	</fieldset>
 </form>
 
 <tal:block change:include="module 'forums'; template 'Forums-Inc-BanList-Success'; type 'html'; member post/getPostauthor" />

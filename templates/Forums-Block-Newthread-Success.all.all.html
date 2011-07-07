@@ -1,23 +1,24 @@
 <tal:block change:loadhandler="forums_NewthreadLoadHandler" />
-<h2 change:h="">${trans:m.forums.frontoffice.newthread,ucf}</h2>
+<h1 change:h="">${trans:m.forums.frontoffice.newthread,ucf}</h1>
 
 <tal:block tal:condition="previewPostInfo">
-	<h3 change:h="">${trans:m.forums.frontoffice.message-preview,ucf}</h3>
 	<tal:block change:include="module 'forums'; template 'Forums-Inc-PostList-Success'; type 'html'; postListInfo previewPostInfo" />
 </tal:block>
 
-<h3 change:h="">${trans:m.forums.frontoffice.message-input,ucf}</h3>
-<form change:form="beanClass forums_persistentdocument_thread; beanName thread" class="cmxform post-form">
-	<div change:errors=""></div>
-	<tal change:field="name beanId" hidden="true" />
-	<tal change:field="name forum" hidden="true" value="${forum/getId}" />
-	<ol>
-		<li><input change:field="name label" /></li>
-		<li change:permission="perm forums.Moderate; nodeId forum/getId; mode front"><input change:field="name level" nopreamble="true" /></li>
-		<li><input change:bbcodeinput="name firstPost.textAsBBCode" labeled="true" required="true" /></li>
-	</ol>
-	<p class="buttons">
-		<input class="button" name="preview" change:submit="labeli18n m.forums.frontoffice.form.preview" />
-		<input class="button" change:submit="labeli18n m.forums.frontoffice.form.submit"/>
-	</p>
+<form change:form="beanClass forums_persistentdocument_thread; beanName thread">
+	<fieldset>
+		<legend>${trans:m.forums.frontoffice.message-input,ucf}</legend>
+		<div change:errors=""></div>
+		<tal change:field="name beanId" hidden="true" />
+		<tal change:field="name forum" hidden="true" value="${forum/getId}" />
+		<ol>
+			<li><input change:field="name label" /></li>
+			<li change:permission="perm forums.Moderate; nodeId forum/getId; mode front"><input change:field="name level" nopreamble="true" /></li>
+			<li><input change:bbcodeinput="name firstPost.textAsBBCode" labeled="true" required="true" /></li>
+		</ol>
+		<p class="buttons">
+			<input name="preview" change:submit="labeli18n m.forums.frontoffice.form.preview" />
+			<input change:submit="labeli18n m.forums.frontoffice.form.submit"/>
+		</p>
+	</fieldset>
 </form>

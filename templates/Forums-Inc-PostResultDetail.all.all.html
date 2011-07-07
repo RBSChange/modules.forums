@@ -1,14 +1,25 @@
-<tal:block tal:define="thread item/getDocument/getThread; forum thread/getForum">
-	<p>
-		<strong>${trans: m.forums.frontoffice.forum,ucf,lab}</strong>
-		<a change:link="document forum">${forum/getLabelAsHtml}</a>
-	</p>
-	<p>
-		<strong>${trans: m.forums.frontoffice.thread,ucf,lab}</strong>
-		<a change:link="document thread">${thread/getLabelAsHtml}</a> 
-	</p>
-</tal:block>
-<p>
-	<strong>${trans: m.solrsearch.frontoffice.description,ucf,lab}</strong>
-	${item/getHighlightedText}<span>${trans: m.solrsearch.frontoffice.end-description,ucf,etc}</span>		
-</p>
+<p class="normal">${item/getHighlightedText}<span>${trans:m.solrsearch.frontoffice.end-description,ucf,etc}</span></p>
+<dl class="inline-list" tal:define="doc item/getDocument">
+	<tal:block tal:condition="showTypes">
+		<dt>${trans:m.solrsearch.frontoffice.type,ucf}</dt> 
+		<dd>
+			<tal:block tal:condition="item/hasTypeLabel">${item/getTypeLabel}</tal:block>
+			<tal:block tal:condition="not:item/hasTypeLabel">${trans:m.forums.document.post.document-name,ucf}</tal:block>
+			<span> - </span>
+		</dd>
+	</tal:block>
+	<tal:block tal:condition="showDates">
+		<dt>${trans:m.solrsearch.frontoffice.creationdate,ucf}</dt>
+		<dd><tal:block change:datetime="doc/getCreationDate; formatI18n framework.datetime.short" /><span> - </span></dd>
+		<tal:block tal:condition="php: item.getDocument().getCreationDate() < item.getDocument().getModificationDate()">
+			<dt>${trans:m.solrsearch.frontoffice.modificationdate,ucf}</dt>
+			<dd><tal:block change:datetime="doc/getModificationDate; formatI18n framework.datetime.short" /><span> - </span></dd>
+		</tal:block>
+	</tal:block>
+	<tal:block tal:define="thread doc/getThread; forum thread/getForum">
+		<dt>${trans:m.forums.frontoffice.forum,ucf}</dt>
+		<dd><a change:link="document forum">${forum/getLabelAsHtml}</a><span> - </span></dd>
+		<dt>${trans:m.forums.frontoffice.thread,ucf}</dt>
+		<dd><a change:link="document thread">${thread/getLabelAsHtml}</a></dd>
+	</tal:block>
+</dl>

@@ -1,266 +1,56 @@
-.modules-forums ul.message-list{
-	margin-bottom: 16px;
-	list-style-type: none;
-}
-.modules-forums ul.message-list li{
-	background: url(/media/frontoffice/pixel2.gif) repeat-y 191px 0px;
-	background-color: #fff;
-	border: 1px solid #e4e2da;
-	-moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
-	margin-bottom: 12px;
-}
-.modules-forums ul.message-list li.odd{
-	background: url(/media/frontoffice/pixel2.gif) #faf9f7 repeat-y 191px 0px;
-	background-color: #eee;
-}
-.modules-forums ul.message-list li.tbv{
-	background: url(/media/frontoffice/pixel3.gif) repeat-y 191px 0px;
-	background-color: #b6cf4d;
-	color: #fff;
-}
-.modules-forums ul.message-list li.erased,
-.modules-forums em.locked{
-	border: 1px solid #b23030;
-	color: #b23030;
-	background: #ffe7e7;
-}
-.modules-forums ul.message-list li.erased{
-	padding: 8px 12px;
-}
-.modules-forums em.locked{
-	display: block;
-}
-.modules-forums .note{
-	border: 1px solid #d3d2ce;
-	background: #f5f4f0;
-}
-.modules-forums em.locked,
-.modules-forums .note{
-	padding: 8px 12px;
-	margin-bottom: 16px;
-	-moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
-}
-.modules-forums .forum-number{
-	color: #E6E4DC;
-	float: right;
-	font-size: 4em;
-	position: absolute;
-	right: 158px;
-	text-align: right;
-	width: 110px;
-}
-.modules-forums .author-information{
-	width: 180px;
-	padding: 12px 0 12px 12px;
-	float: left;
-	color: #333;
-}
-.modules-forums .author-information a.link{
-	font-size: 1.2em;
-	text-decoration: none;
-}
-.modules-forums .author-information a.link:hover{
-	text-decoration: underline;
-}
-.modules-forums .message-content{
-	padding: 12px;
-	margin-left: 192px;
-}
-.modules-forums .message-body{
-	overflow-y: auto;
-}
-.modules-forums .message-footer{
-	overflow-y: auto;
-	padding: 8px;
-	background: #e8e7df;
-	-moz-border-radius-bottomleft: 10px;
-	-webkit-border-bottom-left-radius: 10px;
-	-moz-border-radius-bottomright: 10px;
-	-webkit-border-bottom-right-radius: 10px;
-	font-size: 0.86em;
-	border-top: 1px solid #d5d3cc;
-	color: #666;
-}
-.modules-forums .message-footer a.link{
-	color: #666;
-}
-.modules-forums .ip-anchor{
-	float: right;
-	padding-left: 18px;
-}
-.modules-forums .message-footer .options-list{
-	padding-left: 197px;
-}
-.modules-forums ul.message-list li.first.tbv{
-	-moz-border-radius-topleft: 10px;
-	-webkit-border-top-left-radius: 10px;
-	-moz-border-radius-topright: 10px;
-	-webkit-border-top-right-radius: 10px;
-}
-.modules-forums ul.message-list li.last.tbv{
-	-moz-border-radius-bottomleft: 10px;
-	-webkit-border-bottom-left-radius: 10px;
-	-moz-border-radius-bottomright: 10px;
-	-webkit-border-bottom-right-radius: 10px;
-}
-.modules-forums ul.inline-menu{
-	margin-bottom: 16px;
-}
-.modules-forums ul.inline-menu li{
-	display: inline;
-	padding-right: 10px;
-}
-.modules-forums .member-pic{
-	float: left;
-}
-.modules-forums .member-info{
-	margin-left: 37px;
-}
-.modules-forums-member .member-signature{
-	margin-bottom: 16px;
-}
-.modules-forums .message-header{
-	padding: 8px;
-	border-bottom: 1px solid #d5d3cc;
-	background: #e8e7df;
-	color: #333;
-	-moz-border-radius-topleft: 10px;
-	-webkit-border-top-left-radius: 10px;
-	-moz-border-radius-topright: 10px;
-	-webkit-border-top-right-radius: 10px;
-}
-.modules-forums .message-header a.link{
-	color: #666;
-}
-.modules-forums .message-header,
-.modules-forums .member-signature{
-	font-size: 0.85em;
-}
-.modules-forums hr.signature-separator{
-	margin: 15px 0 5px 0;
-	border: 0;
-	border-bottom: 1px dashed #d5d3cc;
-}
-.modules-forums .action-log{
-	margin-top: 15px;
-	text-align: right;
-}
-.modules-forums .post-form input.textfield,
-.modules-forums .post-form textarea{
-	width: 64%;
-}
-.modules-forums .post-form input.textfield.dp-applied{
-	width: 140px;
-}
-.modules-forums .post-form
-{
-	border: 1px solid #e4e2da;
-	-moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
-	margin-bottom: 12px;
-}
-.modules-forums .post-form .buttons
-{
-	background: #e8e7df;
-	color: #333;
-	margin: 0;
-	padding: 5px;
-	-moz-border-radius-bottomleft: 10px;
-	-webkit-border-bottom-left-radius: 10px;
-	-moz-border-radius-bottomright: 10px;
-	-webkit-border-bottom-right-radius: 10px;
-}
-.modules-forums .post-form .errors
-{
-	background: #e8e7df;
-	color: #333;
-	margin: 0;
-	padding: 5px;
-	-moz-border-radius-topleft: 10px;
-	-webkit-border-top-left-radius: 10px;
-	-moz-border-radius-topright: 10px;
-	-webkit-border-top-right-radius: 10px;
-}
-.modules-forums .thread-list th
+.forums-table th
 {
 	white-space: nowrap;
 }
-.modules-forums .column-bullet
+.forums-table td,
+.forums-table .column-bullet img,
+.forums-table .column-avatar img
+{
+	vertical-align: middle;
+}
+.forums-table .column-bullet
 {
 	min-width: 30px;
 	text-align: center;
 }
-.modules-forums .column-avatar
+.forums-table .column-avatar
 {
 	min-width: 40px;
 	text-align: center;
 }
-.modules-forums .column-bullet img,
-.modules-forums .column-avatar img
-{
-	vertical-align: middle;
-}
-.modules-forums .column-label
+.forums-table .column-label
 {
 	width: 100%;
 }
-.modules-forums .column-posts,
-.modules-forums .column-threads
+.forums-table .column-posts,
+.forums-table .column-threads
 {
 	white-space: nowrap;
 	min-width: 75px;
 	text-align: center;
 }
-.modules-forums .column-last-post
+.forums-table .column-last-post
 {
 	white-space: nowrap;
 	min-width: 150px;
 	text-align: center;
 }
-.modules-forums .column-date,
-.modules-forums .column-country
+.forums-table .column-date,
+.forums-table .column-country
 {
 	white-space: nowrap;
 	min-width: 100px;
 	text-align: center;
 }
-.modules-forums .sub-forums
-{
-	margin-top: 3px;
-	font-size: 0.9em;
-}
-.modules-forums .sub-forums ul
-{
-	display: inline;
-}
-.modules-forums .sub-forums li
-{
-	display: inline-block;
-	margin-left: 15px;
-}
-.modules-forums .sub-forums img
-{
-	vertical-align: middle;
-}
 
-/** TODO: generalize it in cmxform default styles? */
-.modules-forums .cmxform
-{
-	overflow-y: auto;
-	margin-bottom: 15px;
+.message-list .message-body{
+	padding: 12px 0;
 }
-
-/** TODO: generalize it in form styles? */
-.modules-forums p.buttons
-{
-	overflow-y: auto;
-	margin-bottom: 15px;
+.message-list .author-information{
+	width: 180px;
+	float: left;
 }
-
-.modules-forums-RssMenu ul{
-	list-style-type: none;
+.message-list .message-content{
+	padding-left: 12px;
+	margin-left: 180px;
 }
-
-@import url(/modules/forums/style/frontoffice.trident.5.css);
