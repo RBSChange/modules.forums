@@ -6,7 +6,7 @@
 
 <tal:block tal:condition="forums">
 	<h3 change:h="" change:translate="modules.forums.frontoffice.Forums"></h3>
-	<tal:block change:include="module 'forums'; template 'Forums-Inc-ForumList-Success'; type 'html'; forums forums" />
+	<tal:block change:include="module 'forums'; template 'Forums-Inc-ForumList-Success'; type 'html'; forums forums; member member" />
 </tal:block>
 
 <tal:block tal:condition="forumgroup/mayContainThreads">

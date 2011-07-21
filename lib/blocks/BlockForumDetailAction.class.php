@@ -50,6 +50,9 @@ class forums_BlockForumDetailAction extends website_BlockAction
 			// Global announcements.
 			$request->setAttribute('globalAnnoucements', forums_ThreadService::getInstance()->getGlobalAnnoucements());
 		}
+		
+		$member = forums_MemberService::getInstance()->getCurrentMember();
+		$request->setAttribute('member', $member);
 
 		return website_BlockView::SUCCESS;
 	}
