@@ -61,7 +61,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 		{
 			return false;
 		}
-		else if ($member !== null && $this->getPostauthor() !== null && $this->getPostauthor()->getId() == $member->getId())
+		else if ($member !== null && !$member->isBanned() && $this->getPostauthor() !== null && $this->getPostauthor()->getId() == $member->getId())
 		{
 			return true;
 		}
@@ -83,7 +83,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 			return false;
 		}
 		// TODO dernier message seulement?
-		else if ($member !== null && $this->getPostauthor()->getId() == $member->getId())
+		else if ($member !== null && !$member->isBanned() && $this->getPostauthor() !== null && $this->getPostauthor()->getId() == $member->getId())
 		{
 			return true;
 		}
