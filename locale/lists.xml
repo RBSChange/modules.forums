@@ -12,6 +12,10 @@
 		<locale lang="fr">annonce</locale>
 		<locale lang="en">announcement</locale>
 	</entity>
+	<entity id="threadlevels.global">
+		<locale lang="fr">annonce globale</locale>
+		<locale lang="en">global announcement</locale>
+	</entity>
 	<entity id="modes.no">
 		<locale lang="fr">non</locale>
 		<locale lang="en">no</locale>
