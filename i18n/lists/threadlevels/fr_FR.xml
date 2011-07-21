@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <i18n baseKey="m.forums.lists.threadlevels" lcid="fr_FR">
-  <key id="normal">normal</key>
-  <key id="sticky">fixe</key>
-  <key id="announcement">annonce</key>
+	<key id="normal">normal</key>
+	<key id="sticky">fixe</key>
+	<key id="announcement">annonce</key>
+	<key id="global">annonce globale</key>
 </i18n>
