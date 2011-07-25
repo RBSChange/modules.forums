@@ -9,7 +9,7 @@
 /**
  * @package forums.list.phptal
  */
-class PHPTAL_Php_Attribute_CHANGE_memberdate extends ChangeTalAttribute 
+class PHPTAL_Php_Attribute_CHANGE_Memberdate extends ChangeTalAttribute 
 {	
 	/**
 	 * @see ChangeTalAttribute::getDefaultParameterName()
