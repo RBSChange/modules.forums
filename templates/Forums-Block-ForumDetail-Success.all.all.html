@@ -16,7 +16,7 @@
 	</ul>
 	
 	<tal:block tal:condition="php: count(globalAnnoucements)">
-		<tal:block tal:define="global threadColumnTitle">${trans:m.forums.lists.threadlevels.announcement,ucf}</tal:block>
+		<tal:block tal:define="global threadColumnTitle">${trans:m.forums.lists.threadlevels.global,ucf}</tal:block>
 		<tal:block change:include="module 'forums'; template 'Forums-Inc-ThreadList-Success'; type 'html'; threads globalAnnoucements; threadColumnTitle threadColumnTitle; showPagination 'false'" />
 	</tal:block>
 	
