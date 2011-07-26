@@ -13,7 +13,7 @@ class forums_BlockMemberAction extends website_BlockAction
 		$doc = $this->getDocumentParameter();
 		if ($doc instanceof forums_persistentdocument_member)
 		{
-			$date = date_DateFormat::format(date_Calendar::getInstance($doc->getCreationdate()), LocaleService::getInstance()->transFO('m.forums.bo.blocks.date-format-for-metas'));
+			$date = date_Formatter::format($doc->getUICreationdate(), LocaleService::getInstance()->transFO('m.forums.bo.blocks.date-format-for-metas'));
 			return array('login' => $doc->getLabel(), 'registrationdate' => $date);
 		}
 		return array();

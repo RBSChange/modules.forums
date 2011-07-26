@@ -55,7 +55,7 @@ class forums_persistentdocument_member extends forums_persistentdocument_memberb
 	 */
 	public function getMetadate()
 	{
-		return date_DateFormat::format(date_Calendar::getInstance($this->getCreationdate()), 'd F Y', RequestContext::getInstance()->getLang());
+		return date_Formatter::format($this->getCreationdate(), 'd F Y');
 	}
 	
 	/**

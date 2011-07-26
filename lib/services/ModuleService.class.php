@@ -129,8 +129,8 @@ class forums_ModuleService extends ModuleBaseService
 	{
 		$ms = forums_MemberService::getInstance();
 		return array(
-			'monthLabel' => ucfirst(date_DateFormat::format($fromDate, 'F Y')),
-			'monthShortLabel' => date_DateFormat::format($fromDate, 'm/Y'),
+			'monthLabel' => ucfirst(date_Formatter::format($fromDate, 'F Y')),
+			'monthShortLabel' => date_Formatter::format($fromDate, 'm/Y'),
 			'forums' => $this->findProjectedTotal($website, 'website.id', forums_ForumService::getInstance(), $fromDate, $toDate, 'creationdate'),
 			'threads' => $this->findProjectedTotal($website, 'forum.website.id', forums_ThreadService::getInstance(), $fromDate, $toDate, 'creationdate'),
 			'posts' => $this->findProjectedTotal($website, 'thread.forum.website.id', forums_PostService::getInstance(), $fromDate, $toDate, 'creationdate'),
@@ -150,14 +150,13 @@ class forums_ModuleService extends ModuleBaseService
 	 */
 	private function findProjectedTotal($website, $websiteField, $service, $fromDate = null, $toDate = null, $dateToCompare = null)
 	{
-		$dbFormat = 'Y-m-d H:i:s';
 		$query = $service->createQuery();
 		if ($fromDate && $toDate)
 		{
 			$query->add(Restrictions::between(
 				$dateToCompare,
-				date_DateFormat::format($fromDate, $dbFormat),
-				date_DateFormat::format($toDate, $dbFormat)
+				$fromDate->toString(),
+				$toDate->toString()
 			));
 		}
 		$query->add(Restrictions::eq($websiteField, $website->getId()));

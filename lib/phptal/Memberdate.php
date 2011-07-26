@@ -40,7 +40,7 @@ class PHPTAL_Php_Attribute_CHANGE_Memberdate extends ChangeTalAttribute
 		$date = date_Calendar::getInstance(self::getDateFromParams($params));		
 		$uiDate = date_Converter::convertDateToLocal($date);
 		$format = self::getFormat($params);
-    	return date_DateFormat::format($uiDate, $format);
+    	return date_Formatter::format($uiDate, $format);
 	}
 
 	/**

@@ -101,7 +101,7 @@ class forums_BanService extends f_persistentdocument_DocumentService
 	public function getNotificationParameters($ban)
 	{
 		$parameters = array();
-		$parameters['DATE'] = date_DateFormat::format(date_Calendar::getInstance($ban->getUITo()), date_DateFormat::getDateFormat());
+		$parameters['DATE'] = date_Formatter::toDefaultDate($ban->getUITo());
 		$parameters['MOTIF'] = $ban->getMotifAsHtml();		
 		$parameters['PSEUDO'] = $ban->getMember()->getLabelAsHtml();
 		return $parameters;
