@@ -48,7 +48,7 @@
 					</div>
 			
 					<div class="message-content">
-						${post/getTextAsHtml}
+						${structure post/getTextAsHtml}
 						<p tal:condition="post/getEditeddate" class="action-log">
 							<em>
 								${trans: m.forums.frontoffice.editedby,ucf} <a change:link="document post/getEditedby">${post/getLastEdithorNameAsHtml}</a> <tal:block change:memberdate="value post/getEditeddate; mode 'long'" />
@@ -62,7 +62,7 @@
 						<tal:block tal:condition="displayConfig/showSignatures">
 							<tal:block tal:condition="post/getPostauthor/getSignature">
 								<hr class="signature-separator" />
-								<div class="member-signature">${post/getPostauthor/getSignatureAsHtml}</div>
+								<div class="member-signature">${structure post/getPostauthor/getSignatureAsHtml}</div>
 							</tal:block>
 						</tal:block>
 					</div>

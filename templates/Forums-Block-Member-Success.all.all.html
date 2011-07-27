@@ -11,7 +11,7 @@
 <tal:block tal:condition="member/isme">
 	<div tal:condition="mailsended"><em class="notification">${trans:m.forums.frontoffice.mail-sent}</em></div>
 	<tal:block tal:condition="member/getEndpublicationdate">
-		<em class="notification">${trans:m.forums.frontoffice.must-validate-before,ucf} <tal:block change:memberdate="value member/getEndpublicationdate; mode 'short'" /> - <a tal:define="url php: array('changeParam[resend]'=>1)" change:currentPagelink="url">${trans:m.forums.frontoffice.resend,ucf}</a></em>
+		<em class="notification">${trans:m.forums.frontoffice.must-validate-before,ucf} <tal:block change:memberdate="value member/getEndpublicationdate; mode 'short'" /> - <a tal:define="url php: array('changeParam[resend]'=>1)" change:currentpagelink="url">${trans:m.forums.frontoffice.resend,ucf}</a></em>
 	</tal:block>
 	<em tal:condition="member/getBan" class="notification">${trans:m.forums.frontoffice.ban-until,ucf} <tal:block change:memberdate="value member/getBan; mode 'short'" /></em>
 </tal:block>

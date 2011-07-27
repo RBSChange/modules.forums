@@ -30,7 +30,7 @@
 					<a tal:attributes="href thread/getUserUrl" class="link">${thread/getLabelAsHtml}</a>
 					<dl class="inline-list" tal:condition="thread/hasPages">
 						<dt>${trans:m.forums.frontoffice.go-to-page,ucf}</dt>
-						<dd tal:repeat="page thread/getPagination">${page}</dd>
+						<dd tal:repeat="page thread/getPagination">${structure page}</dd>
 					</dl>
 				</td>
 				<td class="column-posts">${php: postCount-1}</td>
