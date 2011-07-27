@@ -27,15 +27,6 @@ class forums_ModuleService extends ModuleBaseService
 	}
 	
 	/**
-	 * @deprecated
-	 * @return String
-	 */
-	public function getIp()
-	{
-		return RequestContext::getInstance()->getClientIp();
-	}
-	
-	/**
 	 * @param forums_persistentdocument_member $member
 	 * @param String $permission
 	 * @param f_persistentdocument_PersistentDocument $document

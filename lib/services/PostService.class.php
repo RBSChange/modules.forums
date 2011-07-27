@@ -141,7 +141,7 @@ class forums_PostService extends f_persistentdocument_DocumentService
 		$document->setInsertInTree(false);
 		if ($document->getIp() === null)
 		{
-			$document->setIp(forums_ModuleService::getInstance()->getIp());
+			$document->setIp(RequestContext::getInstance()->getClientIp());
 		}
 		if ($document->getPostauthor() === null)
 		{
