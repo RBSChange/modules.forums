@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <panel>
-	<section labeli18n="modules.uixul.bo.doceditor.fieldsgroup.Title">
+	<section labeli18n="m.uixul.bo.doceditor.fieldsgroup.title">
 		<field name="label" hidehelp="true" />
 		<field name="displayname" />
 		<field name="signature" hidehelp="true" />
@@ -8,7 +8,7 @@
 		<field name="country" hidehelp="true" />
 		<field name="title" type="checklist" listid="modules_forums/titlesbywebsiteid" />
 	</section>
-	<section labeli18n="modules.forums.bo.doceditor.fieldsgroup.Display-preferences">
+	<section labeli18n="m.forums.bo.doceditor.fieldsgroup.display-preferences">
 		<field name="shortDateFormat" />
 		<field name="longDateFormat" />
 	</section>

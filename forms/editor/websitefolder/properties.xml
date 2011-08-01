@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <panel>
-	<section labeli18n="modules.forums.bo.doceditor.fieldsgroup.Titles">
+	<section labeli18n="m.forums.bo.doceditor.fieldsgroup.titles">
 		<fieldinput name="titlesJSON" type="titlelist" />
 	</section>
-	<section labeli18n="modules.forums.bo.doceditor.fieldsgroup.Ranks">
+	<section labeli18n="m.forums.bo.doceditor.fieldsgroup.ranks">
 		<fieldinput name="ranksJSON" type="ranklist" />
 	</section>
 	<xul>

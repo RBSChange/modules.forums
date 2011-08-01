@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <panel>
-	<section labeli18n="modules.uixul.bo.doceditor.fieldsgroup.Title">
+	<section labeli18n="m.uixul.bo.doceditor.fieldsgroup.title">
 		<field name="label" />
 		<field name="description" />
 	</section>
-	<section labeli18n="modules.forums.bo.doceditor.fieldsgroup.Metas">
+	<section labeli18n="m.forums.bo.doceditor.fieldsgroup.metas">
 		<field name="metatitle" />
 		<field name="metadescription" />
 		<field name="metakeywords" />
