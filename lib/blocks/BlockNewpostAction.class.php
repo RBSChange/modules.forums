@@ -6,29 +6,6 @@
 class forums_BlockNewpostAction extends forums_BlockPostListBaseAction
 {
 	/**
-	 * @param f_mvc_Request $request
-	 * @param f_mvc_Response $response
-	 */
-	public function initialize($request, $response)
-	{
-		if ($this->isInBackoffice())
-		{
-			return;
-		}
-
-		$ls = LocaleService::getInstance();
-		$doc = $this->getDocumentParameter();
-		if ($request->hasNonEmptyParameter('postid'))
-		{
-			$this->getContext()->setNavigationtitle($ls->transFO('m.forums.meta.answerpost', array('ucf')).' '.$doc->getLabel());
-		}
-		else
-		{
-			$this->getContext()->setNavigationtitle($ls->transFO('m.forums.meta.newpostin', array('ucf')).' '.$doc->getLabel());
-		}
-	}
-	
-	/**
 	 * @return array<String, String>
 	 */
 	public function getMetas()
@@ -36,7 +13,10 @@ class forums_BlockNewpostAction extends forums_BlockPostListBaseAction
 		$doc = $this->getDocumentParameter();
 		if ($doc instanceof forums_persistentdocument_thread)
 		{
-			return array('threadname' => $doc->getLabel(), 'forumname' => $doc->getForum()->getLabel());
+			return array(
+				'threadname' => $doc->getLabel(),
+				'forumname' => $doc->getForum()->getLabel()
+			);
 		}
 		return array();
 	}
