@@ -21,7 +21,7 @@
 				<drop model="modules_forums/forumgroup" action="move" />
 			</drops>
 			<columns>
-				<column name="path" label="Path" flex="5" />
+				<column name="path" flex="5" />
 			</columns>
 			<contextactions>
 				<contextaction name="edit" />
