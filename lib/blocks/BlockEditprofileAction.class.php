@@ -26,7 +26,7 @@ class forums_BlockEditprofileAction extends forums_BaseBlockAction
 		$member = $this->getDocumentParameter();
 		if ($member === null)
 		{
-			HttpController::getInstance()->redirect('website', 'Error404');
+			change_Controller::getInstance()->redirect('website', 'Error404');
 			return website_BlockView::NONE;
 		}
 		else if (!$member->isEditable())

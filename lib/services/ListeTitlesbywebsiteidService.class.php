@@ -38,7 +38,7 @@ class forums_ListTitlesbywebsiteidService extends BaseService implements list_Li
 	{
 		try 
 		{
-			$request = Controller::getInstance()->getContext()->getRequest();
+			$request = change_Controller::getInstance()->getContext()->getRequest();
 			$websiteId = intval($request->getParameter('websiteId', 0));
 			$website = DocumentHelper::getDocumentInstance($websiteId);
 		}

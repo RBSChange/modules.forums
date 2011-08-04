@@ -152,7 +152,7 @@ class forums_BlockNewpostAction extends forums_BlockPostListBaseAction
 		$post->getDocumentService()->activate($post->getId());
 						
 		$url = $post->getPostUrlInThread();
-		HttpController::getInstance()->redirectToUrl($url);
+		change_Controller::getInstance()->redirectToUrl($url);
 	}
 	
 	/**

@@ -24,7 +24,7 @@ class forums_BlockMemberbanAction extends website_TaggerBlockAction
 			return $this->getInputViewName();
 		}
 		
-		$agaviUser = Controller::getInstance()->getContext()->getUser();
+		$agaviUser = change_Controller::getInstance()->getContext()->getUser();
 		$agaviUser->setAttribute('illegalAccessPage', $_SERVER["REQUEST_URI"]);
 		return $this->forward('users', 'Authentication');
 	}
@@ -75,7 +75,7 @@ class forums_BlockMemberbanAction extends website_TaggerBlockAction
 		
 		$post = DocumentHelper::getDocumentInstance($request->getParameter('postid'));
 		$url = $post->getPostUrlInThread();
-		HttpController::getInstance()->redirectToUrl($url);
+		change_Controller::getInstance()->redirectToUrl($url);
 	}
 	
 	/**

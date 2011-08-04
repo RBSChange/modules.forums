@@ -1,4 +1,4 @@
-<p class="normal">${item/getHighlightedText}<span>${trans:m.solrsearch.frontoffice.end-description,ucf,etc}</span></p>
+<p class="normal">${structure item/getHighlightedText}<span>${trans:m.solrsearch.frontoffice.end-description,ucf,etc}</span></p>
 <dl class="inline-list" tal:define="doc item/getDocument">
 	<tal:block tal:condition="showTypes">
 		<dt>${trans:m.solrsearch.frontoffice.type,ucf}</dt> 

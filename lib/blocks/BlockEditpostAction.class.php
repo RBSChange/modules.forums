@@ -88,7 +88,7 @@ class forums_BlockEditpostAction extends forums_BlockPostListBaseAction
 			$tm->commit();
 		}
 		$url = $post->getPostUrlInThread();
-		HttpController::getInstance()->redirectToUrl($url);
+		change_Controller::getInstance()->redirectToUrl($url);
 	}
 	
 	/**

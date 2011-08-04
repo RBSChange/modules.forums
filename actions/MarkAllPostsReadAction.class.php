@@ -3,11 +3,11 @@
  * forums_MarkAllPostsReadAction
  * @package modules.forums.actions
  */
-class forums_MarkAllPostsReadAction extends f_action_BaseAction
+class forums_MarkAllPostsReadAction extends change_Action
 {
 	/**
-	 * @param Context $context
-	 * @param Request $request
+	 * @param change_Context $context
+	 * @param change_Request $request
 	 */
 	public function _execute($context, $request)
 	{
@@ -22,6 +22,6 @@ class forums_MarkAllPostsReadAction extends f_action_BaseAction
 		{
 			$url = $_SERVER['HTTP_REFERER'];
 		}
-		HttpController::getInstance()->redirectToUrl($url);
+		change_Controller::getInstance()->redirectToUrl($url);
 	}
 }

@@ -2,11 +2,11 @@
 /**
  * @package modules.forums
  */
-class forums_DeletePostAction extends f_action_BaseAction
+class forums_DeletePostAction extends change_Action
 {
 	/**
-	 * @param Context $context
-	 * @param Request $request
+	 * @param change_Context $context
+	 * @param change_Request $request
 	 */
 	public function _execute($context, $request)
 	{
@@ -19,7 +19,7 @@ class forums_DeletePostAction extends f_action_BaseAction
 				$post->setDeleteddate(date_Calendar::now()->toString());
 				$post->save();
 				$url = $post->getPostUrlInThread();
-				HttpController::getInstance()->redirectToUrl($url);
+				change_Controller::getInstance()->redirectToUrl($url);
 			}
 		}
 		catch (Exception $e)
@@ -28,7 +28,7 @@ class forums_DeletePostAction extends f_action_BaseAction
 		}
 		
 		$url = website_WebsiteModuleService::getInstance()->getCurrentWebsite()->getUrl();
-		HttpController::getInstance()->redirectToUrl($url);
+		change_Controller::getInstance()->redirectToUrl($url);
 	}
 	
 	/**

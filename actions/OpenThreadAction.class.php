@@ -3,11 +3,11 @@
  * forums_OpenThreadAction
  * @package modules.forums
  */
-class forums_OpenThreadAction extends f_action_BaseAction
+class forums_OpenThreadAction extends change_Action
 {
 	/**
-	 * @param Context $context
-	 * @param Request $request
+	 * @param change_Context $context
+	 * @param change_Request $request
 	 */
 	public function _execute($context, $request)
 	{
@@ -19,7 +19,7 @@ class forums_OpenThreadAction extends f_action_BaseAction
 				$thread->setLocked(false);
 				$thread->save();
 				$link = LinkHelper::getDocumentUrl($thread);
-				HttpController::getInstance()->redirectToUrl($link);
+				change_Controller::getInstance()->redirectToUrl($link);
 			}
 		}
 		catch (Exception $e)
@@ -28,7 +28,7 @@ class forums_OpenThreadAction extends f_action_BaseAction
 		}
 		
 		$url = website_WebsiteModuleService::getInstance()->getCurrentWebsite()->getUrl();
-		HttpController::getInstance()->redirectToUrl($url);
+		change_Controller::getInstance()->redirectToUrl($url);
 	}
 	
 	/**
