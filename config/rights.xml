@@ -20,7 +20,6 @@
       <permission name="LoadPermissions.*"/>
       <permission name="SavePermissions.*"/>
       <permission name="GetPreferencesDocument"/>
-      <permission name="EditLocale"/>
       <permission name="GetDialogThreadTree"/>
     </role>
     <role name="Writer" extend="Guest">
