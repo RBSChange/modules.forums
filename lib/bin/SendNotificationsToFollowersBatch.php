@@ -1,5 +1,5 @@
 <?php
-$threadId = $_POST['argv'][0];
+$threadId = $arguments[0];
 $rq = RequestContext::getInstance();
 $rq->setLang($rq->getDefaultLang());
 
