@@ -6,7 +6,7 @@
 	</form>
 </tal:block>
 
-<h1 change:h="">${thread/getForum/getLabelAsHtml} : ${thread/getLabelAsHtml}</h1>
+<h1 change:h="">${structure thread/getForum/getLabelAsHtml} : ${structure thread/getLabelAsHtml}</h1>
 <div tal:condition="thread/canModerate" class="note" threadid="${thread/getId}">
 	<p class="normal" tal:condition="not: thread/getPrivatenote"><a href="javascript:;" id="addprivatenote" class="link">${trans:m.forums.frontoffice.add-note,ucf}</a></p>
 	<tal:block tal:condition="thread/getPrivatenote">
@@ -15,7 +15,7 @@
 			<a href="javascript:;" id="hideprivatenote" class="link hidden">${trans:m.forums.frontoffice.hide-note,ucf}</a>
 			<a href="javascript:;" id="modifprivatenote" class="link hidden">${trans:m.forums.frontoffice.edit-note,ucf}</a>
 		</p>
-		<div class="normal hidden" id="privatenotevalue">${thread/getPrivatenoteAsHtml}</div>
+		<div class="normal hidden" id="privatenotevalue">${structure thread/getPrivatenoteAsHtml}</div>
 		<script type="text/javascript">var privateNote = '${thread/getJsPrivateNote}';</script>
 	</tal:block>
 </div>

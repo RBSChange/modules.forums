@@ -18,8 +18,8 @@
 	</tal:block>
 	<tal:block tal:define="thread doc/getThread; forum thread/getForum">
 		<dt>${trans:m.forums.frontoffice.forum,ucf}</dt>
-		<dd><a change:link="document forum">${forum/getLabelAsHtml}</a><span> - </span></dd>
+		<dd><a change:link="document forum">${structure forum/getLabelAsHtml}</a><span> - </span></dd>
 		<dt>${trans:m.forums.frontoffice.thread,ucf}</dt>
-		<dd><a change:link="document thread">${thread/getLabelAsHtml}</a></dd>
+		<dd><a change:link="document thread">${structure thread/getLabelAsHtml}</a></dd>
 	</tal:block>
 </dl>

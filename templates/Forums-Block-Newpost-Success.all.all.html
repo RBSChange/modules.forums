@@ -1,4 +1,4 @@
-<h1 change:h="">${trans:m.forums.frontoffice.newpost,ucf,lab} ${thread/getLabelAsHtml}</h1>
+<h1 change:h="">${trans:m.forums.frontoffice.newpost,ucf,lab} ${structure thread/getLabelAsHtml}</h1>
 
 <tal:block tal:condition="previewPostInfo">
 	<tal:block change:include="module 'forums'; template 'Forums-Inc-PostList-Success'; type 'html'; postListInfo previewPostInfo" />
@@ -21,7 +21,7 @@
 	</fieldset>
 </form>
 <tal:block tal:condition="answerof">
-	<h2 change:h="">${trans:m.forums.frontoffice.toanswerof,ucf} <a change:link="document answerof/getPostauthor">${answerof/getAuthorNameAsHtml}</a></h2>
+	<h2 change:h="">${trans:m.forums.frontoffice.toanswerof,ucf} <a change:link="document answerof/getPostauthor">${structure answerof/getAuthorNameAsHtml}</a></h2>
 	<tal:block change:include="module 'forums'; template 'Forums-Inc-PostList-Success'; type 'html'; postListInfo answerListInfo" />
 </tal:block>
 <tal:block tal:condition="not: answerof">

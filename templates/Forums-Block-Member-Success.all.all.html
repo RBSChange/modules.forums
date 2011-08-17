@@ -25,20 +25,20 @@
 			<div class="member-info">
 				<ul>
 					<tal:block tal:condition="member/getDisplayName">
-						<li>${trans:m.forums.frontoffice.firstname,ucf,lab} <strong>${member/getUser/getFirstnameAsHtml}</strong></li>
-						<li>${trans:m.forums.frontoffice.lastname,ucf,lab} <strong>${member/getUser/getlastnameAsHtml}</strong></li>
+						<li>${trans:m.forums.frontoffice.firstname,ucf,lab} <strong>${structure member/getUser/getFirstnameAsHtml}</strong></li>
+						<li>${trans:m.forums.frontoffice.lastname,ucf,lab} <strong>${structure member/getUser/getlastnameAsHtml}</strong></li>
 					</tal:block>
 					<li tal:define="count member/getPublishedTitleCount" tal:condition="count">
 						<tal:block tal:condition="php: count == 1">${trans:m.forums.frontoffice.member-title,ucf,lab}</tal:block>
 						<tal:block tal:condition="php: count > 1">${trans:m.forums.frontoffice.member-titles,ucf,lab}</tal:block>
 						<tal:block tal:repeat="title member/getPublishedTitleArray">
 							<tal:block tal:condition="php: !repeat.title.start && repeat.title.end">${trans:m.forums.frontoffice.and}</tal:block>
-							<strong>${title/getLabelAsHtml}</strong><tal:block tal:condition="php: repeat.title.index LT (repeat.title.length - 2)">, </tal:block>
+							<strong>${structure title/getLabelAsHtml}</strong><tal:block tal:condition="php: repeat.title.index LT (repeat.title.length - 2)">, </tal:block>
 					</tal:block>
 					</li>
 					<li>${trans:m.forums.frontoffice.member-since,ucf,lab} <strong change:memberdate="value member/getCreationdate; mode 'short'"></strong></li>
 					<li tal:condition="member/getWebsiteUrl">${trans:m.forums.frontoffice.web-site,ucf,lab} <strong><a class="link" tal:attributes="href member/getWebsiteUrl" target="_blank">${member/getShortWebsiteUrl}</a></strong></li>
-					<li tal:condition="member/getCountry">${trans:m.forums.frontoffice.country,ucf,lab} <strong>${member/getCountry/getLabelAsHtml}</strong></li>
+					<li tal:condition="member/getCountry">${trans:m.forums.frontoffice.country,ucf,lab} <strong>${structure member/getCountry/getLabelAsHtml}</strong></li>
 				</ul>
 			</div>
 		</div>
@@ -57,7 +57,7 @@
 
 <tal:block tal:condition="member/getSignature">
 	<h2 change:h="">${trans:m.forums.document.member.signature,ucf}</h2>
-	<div class="normal member-signature">${member/getSignatureAsHtml}</div>
+	<div class="normal member-signature">${structure member/getSignatureAsHtml}</div>
 </tal:block>
 
 <tal:block change:include="module 'forums'; template 'Forums-Inc-BanList-Success'; type 'html'; member member; removeMemberLink 'true'" />

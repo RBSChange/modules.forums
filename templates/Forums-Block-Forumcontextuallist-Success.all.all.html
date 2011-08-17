@@ -1,7 +1,7 @@
 <h1 change:h="" tal:condition="not:forumgroup">${trans: m.forums.frontoffice.forums,ucf}</h1>
 <tal:block tal:condition="forumgroup">
-	<h1 change:h="">${forumgroup/getLabelAsHtml}</h1>
-	<div tal:condition="forumgroup/getDescription" class="normal">${forumgroup/getDescriptionAsHtml}</div>
+	<h1 change:h="">${structure forumgroup/getLabelAsHtml}</h1>
+	<div tal:condition="forumgroup/getDescription" class="normal">${structure forumgroup/getDescriptionAsHtml}</div>
 </tal:block>
 
 <tal:block change:include="module 'forums'; template 'Forums-Inc-ForumList-Success'; type 'html'; forums forums; member member; hideMemberActions hideMemberActions" />

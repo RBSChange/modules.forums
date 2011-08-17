@@ -11,7 +11,7 @@
 				<div class="message-header">
 					<p class="float-right" tal:condition="not: displayConfig/hidePostLink">
 						<a change:link="document post">${post/getPostId}</a>
-						<tal:block tal:condition="post/isAnswer">${trans: m.forums.frontoffice.answer-to} <a change:link="document post/getAnswerof">${post/getAnswerof/getPostId}</a> ${trans: m.forums.frontoffice.written-by} <a change:link="document post/getAnswerof/getPostauthor">${post/getAnswerOf/getAuthorNameAsHtml}</a></tal:block>
+						<tal:block tal:condition="post/isAnswer">${trans: m.forums.frontoffice.answer-to} <a change:link="document post/getAnswerof">${post/getAnswerof/getPostId}</a> ${trans: m.forums.frontoffice.written-by} <a change:link="document post/getAnswerof/getPostauthor">${structure post/getAnswerOf/getAuthorNameAsHtml}</a></tal:block>
 					</p>
 					<p>
 						<img tal:condition="post/isPostOld" title="${trans:m.forums.frontoffice.post,ucf}" change:img="front/has-no-new-post.png" />
@@ -28,10 +28,10 @@
 							<img src="${php: post->getPostauthor()->getGravatarUrl(displayConfig['avatarsSize'])}" class="image" alt="" />
 							<br />
 						</tal:block>
-						<a change:link="document post/getPostauthor">${post/getAuthorNameAsHtml}</a>
+						<a change:link="document post/getPostauthor">${structure post/getAuthorNameAsHtml}</a>
 						<tal:block tal:repeat="title post/getPostAuthor/getPublishedTitleArray">
 							<br />
-							<strong>${trans: m.forums.frontoffice.member-title,ucf,lab}</strong> ${title/getLabelAsHtml}
+							<strong>${trans: m.forums.frontoffice.member-title,ucf,lab}</strong> ${structure title/getLabelAsHtml}
 							<tal:block tal:define="visual title/getVisual" tal:condition="visual/isPublished">
 								<br />
 								<img change:media="document visual" />
@@ -39,7 +39,7 @@
 						</tal:block>
 						<tal:block tal:define="rank post/getPostAuthor/getRank" tal:condition="rank">
 							<br />
-							<strong>${trans: m.forums.frontoffice.member-rank,ucf,lab}</strong> ${rank/getLabelAsHtml}
+							<strong>${trans: m.forums.frontoffice.member-rank,ucf,lab}</strong> ${structure rank/getLabelAsHtml}
 							<tal:block tal:define="visual rank/getVisual" tal:condition="visual/isPublished">
 								<br />
 								<img change:media="document visual" />
@@ -51,12 +51,12 @@
 						${structure post/getTextAsHtml}
 						<p tal:condition="post/getEditeddate" class="action-log">
 							<em>
-								${trans: m.forums.frontoffice.editedby,ucf} <a change:link="document post/getEditedby">${post/getLastEdithorNameAsHtml}</a> <tal:block change:memberdate="value post/getEditeddate; mode 'long'" />
+								${trans: m.forums.frontoffice.editedby,ucf} <a change:link="document post/getEditedby">${structure post/getLastEdithorNameAsHtml}</a> <tal:block change:memberdate="value post/getEditeddate; mode 'long'" />
 							</em>
 						</p>
 						<p tal:condition="post/getDeleteddate" class="action-log">
 							<em>
-								${trans: m.forums.frontoffice.deletedby,ucf} <a change:link="document post/getDeletedby">${post/getSuppressorNameAsHtml}</a> <tal:block change:memberdate="value post/getDeleteddate; mode 'long'" />
+								${trans: m.forums.frontoffice.deletedby,ucf} <a change:link="document post/getDeletedby">${structure post/getSuppressorNameAsHtml}</a> <tal:block change:memberdate="value post/getDeleteddate; mode 'long'" />
 							</em>
 						</p>
 						<tal:block tal:condition="displayConfig/showSignatures">

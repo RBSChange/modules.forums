@@ -14,14 +14,14 @@
 		<tr tal:repeat="member paginator" class="row-${php: repeat.member.odd ? '1' : '0'}">
 			<td class="column-avatar"><img class="image" src="${php: member->getGravatarUrl(32)}" alt="" /></td>
 			<td class="column-label">
-				<a change:link="document member">${member/getLabelAsHtml}</a>
+				<a change:link="document member">${structure member/getLabelAsHtml}</a>
 				<dl tal:define="count member/getPublishedTitleCount" tal:condition="count" class="inline-list">
 					<dt>
 						<tal:block tal:condition="php: count == 1">${trans:m.forums.frontoffice.member-title,ucf}</tal:block>
 						<tal:block tal:condition="php: count > 1">${trans:m.forums.frontoffice.member-titles,ucf}</tal:block>
 					</dt>
 					<dd tal:repeat="title member/getPublishedTitleArray">
-						<strong>${title/getLabelAsHtml}</strong>
+						<strong>${structure title/getLabelAsHtml}</strong>
 						<span tal:condition="php: repeat.title.index LT (repeat.title.length - 2)">, </span>
 						<span tal:condition="php: repeat.title.index EQ (repeat.title.length - 2)">${trans:m.forums.frontoffice.and}</span>
 					</dd>
@@ -30,7 +30,7 @@
 			<td class="column-date" change:memberdate="value member/getCreationdate; mode 'short'" />
 			<td class="column-threads">${member/getNbthread}</td>
 			<td class="column-posts">${member/getNbpost}</td>
-			<td class="column-country">${member/getCountry/getLabelAsHtml}</td>
+			<td class="column-country">${structure member/getCountry/getLabelAsHtml}</td>
 		</tr>
 	</tbody>
 </table>
