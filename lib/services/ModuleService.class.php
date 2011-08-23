@@ -21,7 +21,7 @@ class forums_ModuleService extends ModuleBaseService
 	{
 		if (is_null(self::$instance))
 		{
-			self::$instance = self::getServiceClassInstance(get_class());
+			self::$instance = new self();
 		}
 		return self::$instance;
 	}
@@ -39,7 +39,7 @@ class forums_ModuleService extends ModuleBaseService
 			return false;
 		}
 		
-		$ps = f_permission_PermissionService::getInstance();
+		$ps = change_PermissionService::getInstance();
 		return $ps->hasExplicitPermission($member->getUser(), $permission, $document->getId());
 	}
 	
@@ -56,7 +56,7 @@ class forums_ModuleService extends ModuleBaseService
 			return false;
 		}
 		
-		$ps = f_permission_PermissionService::getInstance();
+		$ps = change_PermissionService::getInstance();
 		return $ps->hasExplicitPermission($member->getUser(), $permission, $documentId);
 	}
 	

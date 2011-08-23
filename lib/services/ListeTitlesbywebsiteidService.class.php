@@ -18,7 +18,7 @@ class forums_ListTitlesbywebsiteidService extends BaseService implements list_Li
 	{
 		if (self::$instance === null)
 		{
-			self::$instance = self::getServiceClassInstance(get_class());
+			self::$instance = new self();
 		}
 		return self::$instance;
 	}

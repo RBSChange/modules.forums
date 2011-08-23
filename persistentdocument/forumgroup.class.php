@@ -129,7 +129,7 @@ class forums_persistentdocument_forumgroup extends forums_persistentdocument_for
 			return false;
 		}
 
-		$permissionService = f_permission_PermissionService::getInstance();
+		$permissionService = change_PermissionService::getInstance();
 		$user = users_UserService::getInstance()->getCurrentUser();
 		return $permissionService->hasFrontEndPermission($user, 'modules_website.AuthenticatedFrontUser', $this->getTopic()->getId());
 	}
