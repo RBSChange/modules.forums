@@ -3,41 +3,9 @@
  * Class where to put your custom methods for document forums_persistentdocument_member
  * @package forums.persistentdocument
  */
-class forums_persistentdocument_member extends forums_persistentdocument_memberbase implements indexer_IndexableDocument
+class forums_persistentdocument_member extends forums_persistentdocument_memberbase
 {
-	/**
-	 * Get the indexable document
-	 * @return indexer_IndexedDocument
-	 */
-	public function getIndexedDocument()
-	{
-		$indexedDoc = new indexer_IndexedDocument();
-		$indexedDoc->setId($this->getId());
-		$indexedDoc->setDocumentModel('modules_forums/member');
-		$indexedDoc->setLabel($this->getLabel());
-		$indexedDoc->setLang($this->getLang());
-		$indexedDoc->setText($this->getFullTextForIndexation());
-		return $indexedDoc;
-	}
-	
-	/**
-	 * @return String
-	 */
-	protected function getFullTextForIndexation()
-	{
-		$fullText = '';
-		if ($this->getCountry())
-		{
-			$fullText .= ' ' . $this->getCountry()->getLabel();
-		}
-		foreach ($this->getTitleArray() as $title)
-		{
-			$fullText .= ' ' . $title->getLabel();
-		}
-		$fullText .= ' ' . $this->getSignatureAsHtml();
-		return f_util_StringUtils::htmlToText($fullText);
-	}
-	
+
 	/**
 	 * @return Boolean
 	 */

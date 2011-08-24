@@ -3,18 +3,8 @@
  * forums_persistentdocument_forum
  * @package modules.forums.persistentdocument
  */
-class forums_persistentdocument_forum extends forums_persistentdocument_forumbase implements indexer_IndexableDocument
+class forums_persistentdocument_forum extends forums_persistentdocument_forumbase
 {
-	/**
-	 * @return indexer_IndexedDocument
-	 */
-	public function getIndexedDocument()
-	{
-		$indexedDoc = parent::getIndexedDocument();
-		$indexedDoc->setDocumentModel('modules_forums/forum');
-		return $indexedDoc;
-	}
-
 	/**
 	 * @return Integer
 	 */

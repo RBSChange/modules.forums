@@ -3,30 +3,8 @@
  * Class where to put your custom methods for document forums_persistentdocument_forumgroup
  * @package modules.forums.persistentdocument
  */
-class forums_persistentdocument_forumgroup extends forums_persistentdocument_forumgroupbase implements indexer_IndexableDocument
+class forums_persistentdocument_forumgroup extends forums_persistentdocument_forumgroupbase
 {
-	/**
-	 * @return indexer_IndexedDocument
-	 */
-	public function getIndexedDocument()
-	{
-		$indexedDoc = new indexer_IndexedDocument();
-		$indexedDoc->setId($this->getId());
-		$indexedDoc->setDocumentModel('modules_forums/forum');
-		$indexedDoc->setLabel($this->getLabel());
-		$indexedDoc->setLang(RequestContext::getInstance()->getLang());
-		$indexedDoc->setText($this->getFullTextForIndexation());
-		return $indexedDoc;
-	}
-
-	/**
-	 * @return String
-	 */
-	private function getFullTextForIndexation()
-	{
-		return f_util_StringUtils::htmlToText($this->getDescriptionAsHtml());
-	}
-
 	/**
 	 * @return String
 	 */

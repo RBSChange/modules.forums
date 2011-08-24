@@ -266,4 +266,22 @@ class forums_PostService extends f_persistentdocument_DocumentService
 		}
 		return null;
 	}
+	
+	/**
+	 * @param indexer_IndexedDocument $indexedDocument
+	 * @param forums_persistentdocument_post $document
+	 * @param indexer_IndexService $indexService
+	 */
+	protected function updateIndexDocument($indexedDocument, $document, $indexService)
+	{
+		if ($document->getDeleteddate() !== null)
+		{
+			$indexedDocument->foIndexable(false);
+		}
+		
+		if ($document->isFirstPostInThread())
+		{
+			$indexedDocument->setLabel($document->getThreadLabel());	
+		}
+	}
 }

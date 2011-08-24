@@ -3,42 +3,9 @@
  * forums_persistentdocument_post
  * @package modules.forums.persistentdocument
  */
-class forums_persistentdocument_post extends forums_persistentdocument_postbase implements indexer_IndexableDocument, rss_Item
+class forums_persistentdocument_post extends forums_persistentdocument_postbase implements rss_Item
 {
-	/**
-	 * Get the indexable document
-	 * @return indexer_IndexedDocument
-	 */
-	public function getIndexedDocument()
-	{
-		if ($this->getDeleteddate() !== null)
-		{
-			return null;
-		}
-		$indexedDoc = new indexer_IndexedDocument();
-		$indexedDoc->setId($this->getId());
-		$indexedDoc->setDocumentModel('modules_forums/post');
-		if ($this->isFirstPostInThread())
-		{
-			$indexedDoc->setLabel($this->getThreadLabel());	
-		}
-		else
-		{
-			$indexedDoc->setLabel($this->getLabel());	
-		}
-		$indexedDoc->setLang($this->getLang());
-		$indexedDoc->setText($this->getFullTextForIndexation());
-		return $indexedDoc;
-	}
-	
-	/**
-	 * @return String
-	 */
-	private function getFullTextForIndexation()
-	{
-		return f_util_StringUtils::htmlToText($this->getTextAsHtml());
-	}
-	
+
 	/**
 	 * @return Boolean
 	 */

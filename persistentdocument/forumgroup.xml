@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <document xmlns="http://www.rbs.fr/schema/change-document/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/static/schema/change-document/1.0.xsd"
+	xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/static/schema/change-document/4.0.xsd"
 	model-version="1.0" icon="folders-stack" indexable="true" table-name="m_forums_doc_forum">
 	<properties>
-		<add name="description" type="XHTMLFragment" localized="true" />
+		<add name="description" type="XHTMLFragment" localized="true" indexed="description"/>
 		<add name="topic" type="modules_website/systemtopic" min-occurs="1" inverse="true" cascade-delete="true" />
 		<add name="website" type="modules_website/website" min-occurs="1" inverse="true" />
 		<add name="metatitle" type="LongString" localized="true" />
