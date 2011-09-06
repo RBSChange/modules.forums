@@ -12,4 +12,10 @@
   <key id="log-reactivate-forumgroup">log reactivate forumgroup</key>
   <key id="delete-forumgroup">delete.forumgroup {documentlabel} {lang}</key>
   <key id="log-delete-forumgroup">log delete forumgroup</key>
+  <key id="insert-forum">insert.forum {lang} {documentlabel}</key>
+  <key id="log-insert-forum">log insert forum</key>
+  <key id="activate-forum">activate.forum {lang} {documentlabel}</key>
+  <key id="log-activate-forum">log activate forum</key>
+  <key id="update-forum">update.forum {lang} {documentlabel}</key>
+  <key id="log-update-forum">log update forum</key>
 </i18n>
