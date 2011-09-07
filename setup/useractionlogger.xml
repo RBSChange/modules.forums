@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<script>
+  <binding fileName="modules/useractionlogger/persistentdocument/import/useractionlogger_binding.xml"/>
+  <actiondef modulename="forums" actionname="update.forum" label="modules.forums.bo.useractionlogger.update-forum"/>
+  <actiondef modulename="forums" actionname="deactivated.forum" label="modules.forums.bo.useractionlogger.deactivated-forum"/>
+  <actiondef modulename="forums" actionname="reactivate.forum" label="modules.forums.bo.useractionlogger.reactivate-forum"/>
+</script>
