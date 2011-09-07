@@ -167,4 +167,44 @@ class forums_ForumService extends forums_ForumgroupService
 		}
 		return null;
 	}
+	
+	
+	/**
+	 * @param forums_persistentdocument_forum $forum
+	 */
+	public function deleteDelayed($forum)
+	{
+		$treenode = TreeService::getInstance()->getInstanceByDocument($forum);
+		$tm = $this->getTransactionManager();
+		try 
+		{
+			$tm->beginTransaction();
+			TreeService::getInstance()->deleteNode($treenode);
+			$this->putInTrash($forum->getId());
+			$tm->commit();
+		}
+		catch (Exception $e)
+		{
+			$tm->rollBack($e);
+		}
+	}
+	
+	/**
+	 * @return Array
+	 */
+	public function getIdsToDelete()
+	{
+		$idsToDelete = array();
+		$forums = $this->createQuery()->add(Restrictions::eq('publicationstatus', 'TRASH'))->find();
+		foreach ($forums as $forum)
+		{
+			$threadIds = forums_ThreadService::getInstance()->createQuery()
+							->add(Restrictions::eq('forum', $forum))->addOrder(Order::desc('id'))->setProjection(Projections::property('id', 'id'))->findColumn('id');
+			$idsToDelete = array_merge($idsToDelete, forums_PostService::getInstance()->createQuery()
+							->add(Restrictions::in('thread', $threadIds))->addOrder(Order::desc('id'))->setProjection(Projections::property('id', 'id'))->findColumn('id'));
+			$idsToDelete = array_merge($idsToDelete, $threadIds);
+			$idsToDelete[] = $forum->getId();
+		}
+		return $idsToDelete;
+	}
 }
