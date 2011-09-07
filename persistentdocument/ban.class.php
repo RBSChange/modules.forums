@@ -31,4 +31,16 @@ class forums_persistentdocument_ban extends forums_persistentdocument_banbase
 		$parser = new website_BBCodeParser();
 		$this->setMotif($parser->convertBBCodeToXml($bbcode, $parser->getModuleProfile('forums')));
 	}
+	
+	/**
+	 * @return Boolean
+	 */
+	public function isActive()
+	{
+		if ($this->getTo())
+		{
+			return date_Calendar::getInstance($this->getTo())->belongsToFuture();
+		}
+		return false;
+	}
 }

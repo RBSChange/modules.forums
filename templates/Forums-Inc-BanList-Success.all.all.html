@@ -8,6 +8,7 @@
 					<th>${trans: m.forums.frontoffice.to,ucf}</th>
 					<th>${trans: m.forums.frontoffice.banned-by,ucf}</th>
 					<th>${trans: m.forums.frontoffice.reason,ucf}</th>
+					<th>${trans: m.forums.frontoffice.delete,ucf}</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -16,6 +17,7 @@
 					<td change:memberdate="value ban/getTo; mode 'long'" />
 					<td><a change:link="document ban/getBy">${structure ban/getBy/getLabelAsHtml}</a></td>
 					<td>${structure ban/getMotifAsHtml} <tal:block tal:condition="ban/getPost">(${trans: m.forums.frontoffice.banned-reason-message} <a change:link="document ban/getPost">${ban/getPost/getPostId}</a>)</tal:block></td>
+					<td><a tal:condition="ban/isActive" change:link="module forums; action DeleteBan; cmpref ban/getId" >${trans: m.forums.frontoffice.delete}</a></td>
 				</tr>
 			</tbody>
 		</table>
