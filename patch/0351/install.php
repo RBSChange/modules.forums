@@ -1,9 +1,9 @@
 <?php
 /**
- * forums_patch_0303
+ * forums_patch_0351
  * @package modules.forums
  */
-class forums_patch_0303 extends patch_BasePatch
+class forums_patch_0351 extends patch_BasePatch
 {
 	/**
 	 * Entry point of the patch execution.
@@ -26,6 +26,6 @@ class forums_patch_0303 extends patch_BasePatch
 	 */
 	protected final function getNumber()
 	{
-		return '0303';
+		return '0351';
 	}
 }
