@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<script>
+	<binding fileName="modules/task/persistentdocument/import/task_binding.xml" />
+
+	<systemfolder module="task" relatedmodule="forums">
+		<plannedtask label="Suppression diffèrée des forums" systemtaskclassname="forums_BackgroundDeleteTask" />
+	</systemfolder>
+</script>
