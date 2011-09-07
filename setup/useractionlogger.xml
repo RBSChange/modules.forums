@@ -7,4 +7,7 @@
   <actiondef modulename="forums" actionname="deactivated.forumgroup" label="m.forums.bo.useractionlogger.deactivated-forumgroup"/>
   <actiondef modulename="forums" actionname="reactivate.forumgroup" label="m.forums.bo.useractionlogger.reactivate-forumgroup"/>
   <actiondef modulename="forums" actionname="delete.forumgroup" label="m.forums.bo.useractionlogger.delete-forumgroup"/>
+  <actiondef modulename="forums" actionname="insert.forum" label="m.forums.bo.useractionlogger.insert-forum"/>
+  <actiondef modulename="forums" actionname="activate.forum" label="m.forums.bo.useractionlogger.activate-forum"/>
+  <actiondef modulename="forums" actionname="update.forum" label="m.forums.bo.useractionlogger.update-forum"/>
 </script>
