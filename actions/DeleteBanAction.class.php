@@ -3,11 +3,11 @@
  * forums_DeleteBanAction
  * @package modules.forums.actions
  */
-class forums_DeleteBanAction extends f_action_BaseAction
+class forums_DeleteBanAction extends change_Action
 {
 	/**
-	 * @param Context $context
-	 * @param Request $request
+	 * @param change_Context $context
+	 * @param change_Request $request
 	 */
 	public function _execute($context, $request)
 	{
@@ -35,7 +35,7 @@ class forums_DeleteBanAction extends f_action_BaseAction
 				}
 			}
 		}
-		HttpController::getInstance()->redirectToUrl(LinkHelper::getDocumentUrl($ban->getMember()));
+		change_Controller::getInstance()->redirectToUrl(LinkHelper::getDocumentUrl($ban->getMember()));
 	}
 	
 	/**
