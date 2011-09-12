@@ -37,6 +37,14 @@ class forums_BlockEditMemberProfileAction extends forums_BaseBlockAction
     {
     	return true;
     }
+    
+	/**
+	 * @return string[]
+	 */
+	public function getMemberBeanExclude()
+	{
+		return array('title');
+	}
        
     /**
 	 * @param f_mvc_Request $request
