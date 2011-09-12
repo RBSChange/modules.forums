@@ -115,7 +115,8 @@ Avec title/alt :
 [quote][color="#f22"]Code couleur sur 3 chiffres[/color], [color="#26d923"]code couleur sur 6 chiffres[/color], [color="blue"]nom html de la couleur[/color][/quote]
 [b]Listes :[/b]
 [quote][nobb][list][item]Item 1[/item][item]Item 2[list][item]Item 2.1[/item][item]Item 2.2[/item][item]Item 2.3[/item][/list][/item][item]Item 3[/item][/list][/nobb][/quote]
-[quote][list][item]Item 1[/item][item]Item 2[list][item]Item 2.1[/item][item]Item 2.2[/item][item]Item 2.3[/item][/list][/item][item]Item 3[/item][/list][/quote]]]>
+[quote][list][item]Item 1[/item][item]Item 2[list][item]Item 2.1[/item][item]Item 2.2[/item][item]Item 2.3[/item][/list][/item][item]Item 3[/item][/list][/quote]
+Smileys : [nobb]:D[/nobb] :D [nobb];)[/nobb] ;) [nobb]:p[/nobb] :p [nobb]:([/nobb] :( [nobb]:)[/nobb] :) ]]>
 						</bbcodeattribute>
 						<post postauthor-refid="member1" text-attr="postText" />
 					</thread>
