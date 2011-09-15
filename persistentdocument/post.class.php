@@ -5,7 +5,6 @@
  */
 class forums_persistentdocument_post extends forums_persistentdocument_postbase implements rss_Item
 {
-
 	/**
 	 * @return Boolean
 	 */
@@ -403,5 +402,13 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	{
 		$parser = new website_BBCodeParser();
 		$this->setText($parser->convertBBCodeToXml($bbcode, $parser->getModuleProfile('forums')));
+	}
+	
+	/**
+	 * @return String
+	 */
+	public function getAnchor()
+	{
+		return 'post-'.$this->getId();
 	}
 }

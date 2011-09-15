@@ -72,8 +72,9 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 	
 	/**
 	 * @param forums_persistentdocument_thread $thread
-	 * @param Integer $start
-	 * @param Integer $limit
+	 * @param integer $start
+	 * @param integer $limit
+	 * @param string $order
 	 * @return forums_persistentdocument_post[]
 	 */
 	public function getPosts($thread, $start = null, $limit = 20, $order = 'asc')
@@ -94,6 +95,27 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 			$query->addOrder(Order::asc('number'));
 		}
 		return $query->find();
+	}
+	
+	/**
+	 * @param forums_persistentdocument_thread $thread
+	 * @param string $order
+	 * @return integer[]
+	 */
+	public function getPostIds($thread, $order = 'asc')
+	{
+		$query = forums_PostService::getInstance()->createQuery()->add(Restrictions::published());
+		$query->add(Restrictions::eq('thread', $thread->getId()));
+		if ($order == 'desc')
+		{
+			$query->addOrder(Order::desc('number'));
+		}
+		else
+		{
+			$query->addOrder(Order::asc('number'));
+		}
+		$query->setProjection(Projections::property('id'));
+		return $query->findColumn('id');
 	}
 	
 	/**

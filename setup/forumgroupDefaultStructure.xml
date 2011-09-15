@@ -18,13 +18,6 @@
 			</changecontent>
 		</page>
 		
-		<page label="Message" navigationVisibility="hidden" indexingstatus="false" metatitle="Message par {forums_post.postauthor} : sujet {forums_post.threadname}" description="{forums_post.postshortdesc}">
-			<tag name="functional_forums_post-detail" />
-			<changecontent for="content-block">
-				<changeblock type="modules_forums_post" />
-			</changecontent>
-		</page>
-		
 		<page label="Nouveau sujet" navigationVisibility="hidden" indexingstatus="false" metatitle="Forum {forums_newthread.forumname} : nouveau sujet">
 			<tag name="functional_forums_thread-new" />
 			<changecontent for="content-block">

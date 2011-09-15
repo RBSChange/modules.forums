@@ -4,7 +4,6 @@
 	<tag labeli18n="m.forums.bo.tags.forum-list" icon="list-block">functional_forums_forum-list</tag>
 	<tag labeli18n="m.forums.bo.tags.thread-detail" icon="thread">functional_forums_thread-detail</tag>
 	<tag labeli18n="m.forums.bo.tags.newthread" icon="add">functional_forums_thread-new</tag>
-	<tag labeli18n="m.forums.bo.tags.post-block" icon="post">functional_forums_post-detail</tag>
 	<tag labeli18n="m.forums.bo.tags.newpost" icon="add">functional_forums_post-new</tag>
 	<tag labeli18n="m.forums.bo.tags.editpost" icon="edit">functional_forums_post-edit</tag>
 	<tag labeli18n="m.forums.bo.tags.member-detail" icon="member">contextual_website_website_modules_forums_member</tag>

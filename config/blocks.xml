@@ -52,21 +52,6 @@
 			<meta name="forumname" allow="title,description" />
 		</metas>
 	</block>
-	<block type="modules_forums_post" icon="post">
-		<parameters>
-			<parameter name="nbitemperpage" type="Integer" default-value="1" hidden="true" />
-			<parameter name="showGravatars" type="Boolean" default-value="true" />
-			<parameter name="avatarsSize" type="Integer" default-value="64" />
-			<parameter name="showSignatures" type="Boolean" default-value="true" />
-			<parameter name="showActions" type="Boolean" default-value="true" hidden="true" />
-		</parameters>
-		<metas>
-			<meta name="forumname" allow="title,description" />
-			<meta name="threadname" allow="title,description" />
-			<meta name="postauthor" allow="title,description" />
-			<meta name="postshortdesc" allow="title,description" />
-		</metas>
-	</block>
 	<block type="modules_forums_newpost" icon="add">
 		<parameters>
 			<parameter name="nbitemperpage" type="Integer" default-value="20" />

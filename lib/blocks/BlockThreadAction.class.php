@@ -36,6 +36,7 @@ class forums_BlockThreadAction extends forums_BlockPostListBaseAction
 		{
 			return website_BlockView::NONE;
 		}
+		$threadService = $thread->getDocumentService();
 				
 		if ($request->hasParameter('privatenote') || $request->hasNonEmptyParameter('follow') || $request->hasNonEmptyParameter('unfollow'))
 		{	
@@ -75,15 +76,14 @@ class forums_BlockThreadAction extends forums_BlockPostListBaseAction
 			$this->getContext()->addScript('modules.forums.lib.js.privatenote');
 		}
 		
-		$nbItemPerPage = $thread->getForum()->getNbPostPerPage();
-		$page = $request->getParameter('page');
-		if (!is_numeric($page) || $page < 1 || $page > ceil($thread->getNbpost() / $nbItemPerPage))
-		{
-			$page = 1;
-		}
-		$posts = forums_ThreadService::getInstance()->getPosts($thread, ($nbItemPerPage * ($page - 1)) + 1, $nbItemPerPage);
-		$paginator = new paginator_Paginator('forums', $page, $posts, $nbItemPerPage);
+		$itemPerPage = $thread->getForum()->getNbPostPerPage();
+		$postIds = $threadService->getPostIds($thread);
+		$page = $this->getPageNumber($request, $itemPerPage, $postIds);
+		
+		$posts = $threadService->getPosts($thread, ($itemPerPage * ($page - 1)) + 1, $itemPerPage);
+		$paginator = new paginator_Paginator('forums', $page, $posts, $itemPerPage);
 		$paginator->setItemCount($thread->getNbpost());
+		$paginator->setExcludeParameters(array('postId'));
 				
 		$member = forums_MemberService::getInstance()->getCurrentMember();
 		if ($member !== null && count($posts) > 0)
@@ -107,8 +107,56 @@ class forums_BlockThreadAction extends forums_BlockPostListBaseAction
 		$request->setAttribute('postListInfo', $postListInfo);
 		
 		$this->getContext()->addScript('modules.forums.lib.js.forums');
+			
+		// Add link rel canonical.
+		$this->addCanonical($thread, $page, $request);
 		
 		return website_BlockView::SUCCESS;
+	}
+	
+	/**
+	 * @param forums_persistentodcument_thread $thread
+	 * @param integer $pageNumber
+	 * @param f_mvc_Request $request
+	 */
+	protected function addCanonical($thread, $pageNumber, $request)
+	{
+		$this->getContext()->addCanonicalParam('page', $pageNumber > 1 ? $pageNumber : null, 'forums');
+	}
+	
+	/**
+	 * @param f_mvc_Request $request
+	 * @param integer $itemPerPage
+	 * @param integer[] $postIds
+	 */
+	protected function getPageNumber($request, $itemPerPage, $postIds)
+	{
+		// If there is a page set, return it.
+		$pageNumber = $request->getParameter('page');
+		if ($pageNumber)
+		{
+			if (floor(count($postIds) / $itemPerPage) + 1 >= $pageNumber)
+			{
+				return $pageNumber;
+			}
+		}
+
+		// Else look for a comment id.
+		$globalRequest = change_Controller::getInstance()->getRequest();
+		$postId = intval($globalRequest->getParameter('postId'));
+		if ($postId)
+		{
+			foreach ($postIds as $index => $id)
+			{
+				if ($postId == $id)
+				{
+					return 1 + floor($index / $itemPerPage);
+				}
+			}
+		}
+
+		// Else return the first page.
+		return 1;
 	}
 	
 	/**

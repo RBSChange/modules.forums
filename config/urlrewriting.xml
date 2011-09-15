@@ -22,21 +22,6 @@
 			</parameters>
 		</rule>
 
-		<rule documentModel="post" viewMode="detail">
-			<template>/forums/$forumLabel/$threadLabel/post-$id</template>
-			<parameters>
-				<parameter name="forumLabel" method="getForumLabel" />
-				<parameter name="threadLabel" method="getThreadLabel" />
-			</parameters>
-		</rule>
-		<rule documentModel="post" viewMode="detail" lang="fr">
-			<template>/forums/$forumLabel/$threadLabel/message-$id</template>
-			<parameters>
-				<parameter name="forumLabel" method="getForumLabel" />
-				<parameter name="threadLabel" method="getThreadLabel" />
-			</parameters>
-		</rule>
-
 		<rule documentModel="member" viewMode="detail">
 			<template>/member/$name-$id</template>
 			<parameters>

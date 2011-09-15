@@ -252,23 +252,35 @@ class forums_PostService extends f_persistentdocument_DocumentService
 	}
 	
 	/**
+	 * @param website_UrlRewritingService $urlRewritingService
 	 * @param forums_persistentdocument_post $document
-	 * @return website_persistentdocument_page or null
+	 * @param website_persistentdocument_website $website
+	 * @param string $lang
+	 * @param array $parameters
+	 * @return f_web_Link | null
 	 */
-	public function getDisplayPage($document)
+	public function getWebLink($urlRewritingService, $document, $website, $lang, $parameters)
 	{
-		$document = DocumentHelper::getByCorrection($document);
-		
-		$model = $document->getPersistentModel();
-		if ($model->hasURL() && $document->isPublished())
-		{
-			$topic = $document->getThread()->getForum()->getTopic();
-			$page = website_PageService::getInstance()->createQuery()->add(Restrictions::childOf($topic->getId()))->add(Restrictions::published())->add(Restrictions::hasTag('functional_forums_post-detail'))->findUnique();
-			return $page;
-		}
-		return null;
+		$parameters['postId'] = $document->getId();
+		$link = $urlRewritingService->getDocumentLinkForWebsite($document->getThread(), $website, $lang, $parameters);
+		if ($link) {$link->setFragment($document->getAnchor());}
+		return $link;
 	}
 	
+	/**
+	 * @param forums_persistentdocument_post $document
+	 * @param change_Request $request
+	 * @return array($module, $action)
+	 */
+	public function getResolveDetail($document, $request)
+	{
+		$website = website_WebsiteModuleService::getInstance()->getCurrentWebsite();
+		$lang = RequestContext::getInstance()->getLang();
+		$link = $document->getDocumentService()->getWebLink(website_UrlRewritingService::getInstance(), $document, $website, $lang, array());
+		$request->setParameter('location', $link->getUrl());
+		return array('website', 'Redirect');
+	}
+		
 	/**
 	 * @param indexer_IndexedDocument $indexedDocument
 	 * @param forums_persistentdocument_post $document
