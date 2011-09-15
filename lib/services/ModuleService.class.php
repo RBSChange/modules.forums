@@ -32,10 +32,12 @@ class forums_ModuleService extends ModuleBaseService
 	public function getIp()
 	{
 		$ip = isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : null;
-		if (f_util_StringUtils::isEmpty($ip))
+		$remoteAddr = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null;
+		if (!f_util_StringUtils::isEmpty($ip) && !f_util_StringUtils::isEmpty($remoteAddr))
 		{
-			$ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null;
+			$ip .= ', '; 
 		}
+		$ip .= $remoteAddr;
 		return $ip;
 	}
 	

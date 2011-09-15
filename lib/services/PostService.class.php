@@ -140,7 +140,10 @@ class forums_PostService extends f_persistentdocument_DocumentService
 		
 		$document->setInsertInTree(false);
 		
-		$document->setIp(forums_ModuleService::getInstance()->getIp());
+		$ip = forums_ModuleService::getInstance()->getIp();
+		$document->setIp(trim(f_util_ArrayUtils::lastElement(explode(',', $ip))));
+		$document->setMeta('author_IP', $ip);
+		
 		if ($document->getPostauthor() === null)
 		{
 			$document->setPostauthor(forums_MemberService::getInstance()->getCurrentMember());
