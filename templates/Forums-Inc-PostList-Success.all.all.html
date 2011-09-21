@@ -11,7 +11,13 @@
 				<div class="message-header">
 					<p class="float-right" tal:condition="not: displayConfig/hidePostLink">
 						<a change:link="document post">${post/getPostId}</a>
-						<tal:block tal:condition="post/isAnswer">${trans: m.forums.frontoffice.answer-to} <a change:link="document post/getAnswerof">${post/getAnswerof/getPostId}</a> ${trans: m.forums.frontoffice.written-by} <a change:link="document post/getAnswerof/getPostauthor">${post/getAnswerOf/getAuthorNameAsHtml}</a></tal:block>
+						<tal:block tal:condition="post/isAnswer" tal:define="answerOf post/getAnswerof; answerOfAuthor answerOf/getPostauthor">
+							${trans: m.forums.frontoffice.answer-to}
+							<a change:link="document answerOf">${answerOf/getPostId}</a>
+							${trans: m.forums.frontoffice.written-by}
+							<tal:block tal:condition="answerOfAuthor"><a change:link="document answerOfAuthor">${answerOf/getAuthorNameAsHtml}</a></tal:block>
+							<tal:block tal:condition="not: answerOfAuthor">${answerOf/getAuthorNameAsHtml}</tal:block>
+						</tal:block>
 					</p>
 					<p>
 						<img tal:condition="post/isPostOld" title="${trans:m.forums.frontoffice.post,ucf}" change:img="front/has-no-new-post.png" />
@@ -22,14 +28,14 @@
 					<div class="cleaner"></div>					
 				</div>
 				
-				<div class="message-body">
-					<div class="author-information">
+				<div class="message-body" tal:define="author post/getPostauthor">
+					<div class="author-information" tal:condition="author">
 						<tal:block tal:condition="displayConfig/showGravatars">
-							<img src="${php: post->getPostauthor()->getGravatarUrl(displayConfig['avatarsSize'])}" class="image" alt="" />
+							<img src="${php: author->getGravatarUrl(displayConfig['avatarsSize'])}" class="image" alt="" />
 							<br />
 						</tal:block>
-						<a change:link="document post/getPostauthor">${post/getAuthorNameAsHtml}</a>
-						<tal:block tal:repeat="title post/getPostAuthor/getPublishedTitleArray">
+						<a change:link="document author">${post/getAuthorNameAsHtml}</a>
+						<tal:block tal:repeat="title author/getPublishedTitleArray">
 							<br />
 							<strong>${trans: m.forums.frontoffice.member-title,ucf,lab}</strong> ${title/getLabelAsHtml}
 							<tal:block tal:define="visual title/getVisual" tal:condition="visual/isPublished">
@@ -37,7 +43,7 @@
 								<img change:media="document visual" />
 							</tal:block>
 						</tal:block>
-						<tal:block tal:define="rank post/getPostAuthor/getRank" tal:condition="rank">
+						<tal:block tal:define="rank author/getRank" tal:condition="rank">
 							<br />
 							<strong>${trans: m.forums.frontoffice.member-rank,ucf,lab}</strong> ${rank/getLabelAsHtml}
 							<tal:block tal:define="visual rank/getVisual" tal:condition="visual/isPublished">
@@ -46,23 +52,32 @@
 							</tal:block>
 						</tal:block>		
 					</div>
+					<div class="author-information" tal:condition="not: author">
+						${trans:m.forums.frontoffice.unknown,ucf}
+					</div>
 			
 					<div class="message-content">
 						${post/getTextAsHtml}
 						<p tal:condition="post/getEditeddate" class="action-log">
 							<em>
-								${trans: m.forums.frontoffice.editedby,ucf} <a change:link="document post/getEditedby">${post/getLastEdithorNameAsHtml}</a> <tal:block change:memberdate="value post/getEditeddate; mode 'long'" />
+								${trans: m.forums.frontoffice.editedby,ucf}
+								<tal:block tal:condition="post/getEditedby"><a change:link="document post/getEditedby">${post/getLastEdithorNameAsHtml}</a></tal:block>
+								<tal:block tal:condition="not: post/getEditedby">${post/getLastEdithorNameAsHtml}</tal:block>
+								<tal:block change:memberdate="value post/getEditeddate; mode 'long'" />
 							</em>
 						</p>
 						<p tal:condition="post/getDeleteddate" class="action-log">
 							<em>
-								${trans: m.forums.frontoffice.deletedby,ucf} <a change:link="document post/getDeletedby">${post/getSuppressorNameAsHtml}</a> <tal:block change:memberdate="value post/getDeleteddate; mode 'long'" />
+								${trans: m.forums.frontoffice.deletedby,ucf}
+								<tal:block tal:condition="post/getDeletedby"><a change:link="document post/getDeletedby">${post/getSuppressorNameAsHtml}</a></tal:block>
+								<tal:block tal:condition="not: post/getDeletedby">${post/getSuppressorNameAsHtml}</tal:block>
+								<tal:block change:memberdate="value post/getDeleteddate; mode 'long'" />
 							</em>
 						</p>
 						<tal:block tal:condition="displayConfig/showSignatures">
-							<tal:block tal:condition="post/getPostauthor/getSignature">
+							<tal:block tal:condition="author/getSignature">
 								<hr class="signature-separator" />
-								<div class="member-signature">${post/getPostauthor/getSignatureAsHtml}</div>
+								<div class="member-signature">${author/getSignatureAsHtml}</div>
 							</tal:block>
 						</tal:block>
 					</div>

@@ -37,7 +37,9 @@
 				<td class="column-last-post" tal:define="lastPost thread/getLastPost; lastPostAuthor lastPost/getPostAuthor">
 					<tal:block change:memberdate="value lastPost/getCreationdate; mode 'long'" />
 					<br />
-					${trans: m.forums.frontoffice.by} <a change:link="document lastPostAuthor">${lastPostAuthor/getLabelAsHtml}</a>
+					${trans: m.forums.frontoffice.by}
+					<a tal:condition="lastPostAuthor" change:link="document lastPostAuthor">${lastPostAuthor/getLabelAsHtml}</a>
+					<tal:block tal:condition="not: lastPostAuthor">${trans:m.forums.frontoffice.unknown,ucf}</tal:block>
 				</td>
 			</tr>
 		</tal:block>

@@ -557,4 +557,106 @@
 			</xul:vbox>		
 		</content>	
 	</binding>
+	
+	<!-- Publication -->
+	
+	<binding id="cPublicationSection" extends="layout.cDocumentEditor#cPublicationSection">
+		<implementation>
+			<method name="delete">
+				<body><![CDATA[
+					var me = this;
+					var callback = function (deletePosts) { me.doDelete(deletePosts); };
+					getController().openModalDialog(this, 'forums_ConfirmDeletion', { cmpref: this.mValues.id, lang: this.name, sender: this, callback: callback });
+				]]></body>
+			</method>
+			
+			<method name="doDelete">
+				<parameter name="deletePosts" />
+				<body><![CDATA[	
+					this.panel.lockCommandsUI();
+					var attributes = {cmpref: this.mValues.id, lang: this.name, deletePosts: deletePosts};
+					var result = wCore.executeJSON(this.modulename, 'DeleteJSON', attributes, null, true);
+					if (result.status === 'OK')
+					{
+						this.panel.refresh();
+					}
+					else
+					{
+						this.panel.showErrorMessage(result.contents.errorMessage);
+					}
+				]]></body>
+			</method>
+		</implementation>
+	</binding>
+	
+	<binding id="cConfirmDeletionDialog" extends="core.wDialog#wDialog">
+		<implementation>
+			<constructor><![CDATA[
+				wCore.debug('cConfirmDeletionDialog.constructor');
+			]]></constructor>
+
+			<method name="onInitialize">
+				<body><![CDATA[
+					this.resizeTo(600, 325);
+				]]></body>
+			</method>
+
+			<method name="deleteMember">
+				<parameter name="deletePosts" />
+				<body><![CDATA[
+					try
+					{
+						this.parameters.sender.doDelete(deletePosts);
+						this.controller.closeModalDialog(true);
+					}
+        			catch (e)
+	 				{
+	 					wCore.error('cConfirmDeletionDialog.delete', [deletePosts], e);
+	 				}
+				]]></body>
+			</method>
+
+			<method name="closeDialog">
+				<parameter name="refesh" />
+				<body><![CDATA[
+					this.controller.closeModalDialog(true);
+					if (refesh && this.sender && 'refresh' in this.sender)
+					{
+						this.sender.refresh();	
+					}
+				]]></body>
+			</method>
+		</implementation>
+		<content>
+			<xul:vbox flex="1">
+				<xul:hbox class="wizardTitle">
+					<xul:label value="${transui:m.forums.bo.general.member-deletion,ucf}" />
+					<xul:spacer flex="1" />
+					<xul:toolbarbutton image="{IconsBase}/small/delete.png" oncommand="closeDialog(false);" />
+				</xul:hbox>
+				<xul:scrollbox anonid="scrollctrl" flex="1" class="editordatacontainer" orient="vertical">
+					<xul:grid flex="1">
+						<xul:columns>
+							<xul:column flex="1" />
+							<xul:column />
+						</xul:columns>
+						<xul:rows>
+							<xul:row>
+								<xul:label>${transui:m.forums.bo.general.preserve-posts-description,ucf}</xul:label>
+								<xul:button image="{IconsBase}/small/check.png" oncommand="deleteMember(false);" label="${transui:m.forums.bo.general.preserve-posts-button,ucf}" />
+							</xul:row>
+							<xul:row>
+								<xul:label>${transui:m.forums.bo.general.delete-posts-description,ucf}</xul:label>
+								<xul:button image="{IconsBase}/small/check.png" oncommand="deleteMember(true);" label="${transui:m.forums.bo.general.delete-posts-button,ucf}" />
+							</xul:row>
+							<xul:row>
+								<xul:label>${transui:m.forums.bo.general.cancel-deletion-description,ucf}</xul:label>
+								<xul:button image="{IconsBase}/small/delete.png" oncommand="closeDialog(false);" label="${transui:m.forums.bo.general.cancel-deletion-button,ucf}" />
+							</xul:row>
+						</xul:rows>
+					</xul:grid>
+				</xul:scrollbox>
+			</xul:vbox>
+		</content>
+	</binding>
 </bindings>

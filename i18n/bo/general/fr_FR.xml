@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <i18n baseKey="m.forums.bo.general" lcid="fr_FR">
-  <key id="module-name">forums</key>
-  <key id="tree-root-name">forums</key>
-  <key id="system-folder-name">forums</key>
+	<key id="module-name">forums</key>
+	<key id="tree-root-name">forums</key>
+	<key id="system-folder-name">forums</key>
+	<key id="member-deletion">suppression d'un membre</key>
+	<key id="preserve-posts-description">Conserver les messages que le membre a postés jusqu'à présent sur le forum. Ces messages seront indiqué comme posté par « Inconnu ».</key>
+	<key id="preserve-posts-button">conserver ses messages</key>
+	<key id="delete-posts-description">Marquer tous les messages que le membre a postés jusqu'à présent sur le forum comme supprimés. Ces messages seront toujours lisibles par les modéateurs.</key>
+	<key id="delete-posts-button">supprimer ses messages</key>
+	<key id="cancel-deletion-description">Annuler la suppression de ce membre.</key>
+	<key id="cancel-deletion-button">annuler</key>
 </i18n>

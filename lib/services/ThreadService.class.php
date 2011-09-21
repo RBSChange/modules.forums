@@ -450,4 +450,53 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 		}
 		return $parameters;
 	}
+	
+	/**
+	 * @param forums_persistentdocument_member $member
+	 * @param integer $max the maximum number of threads that can treat
+	 * @return integer the number of treated threads
+	 */	
+	public function treatThreadsForMemberDeletion($member, $max)
+	{
+		$count = 0;
+		foreach (array('threadauthor', 'privatenoteby', 'followers') as $fieldName)
+		{
+			$query = $this->createQuery();
+			$query->add(Restrictions::eq($fieldName, $member));
+			$query->setFirstResult(0)->setMaxResults($max - $count);
+			$threads = $query->find();
+			foreach ($threads as $thread)
+			{
+				/* @var $thread forums_persistentdocument_thread */
+				$thread->getDocumentService()->treatThreadForMemberDeletion($thread, $member);
+			}
+			$count += count($threads);
+		}
+		if (Framework::isInfoEnabled())
+		{
+			Framework::info(__METHOD__ . ' ' . $count . ' threads treated');
+		}
+		return $count;
+	}
+	
+	/**
+	 * @param forums_persistentdocument_thread $thread
+	 * @param forums_persistentdocument_member $member
+	 */	
+	protected function treatThreadForMemberDeletion($thread, $member)
+	{
+		if (DocumentHelper::equals($thread->getThreadauthor(), $member))
+		{
+			$thread->setThreadauthor(null);
+			$thread->setMeta('threadAuthorDeletedMember', $member->getLabel() . ' (' . $member->getId() . ')');
+		}
+		
+		if (DocumentHelper::equals($thread->getPrivatenoteby(), $member))
+		{
+			$thread->setPrivatenoteby(null);
+		}
+		
+		$thread->removeFollowers($member);		
+		$thread->save();
+	}
 }

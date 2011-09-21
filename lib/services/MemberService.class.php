@@ -333,4 +333,76 @@ class forums_MemberService extends f_persistentdocument_DocumentService
 	{	
 		$formProperties['websiteId'] = $document->getWebsite()->getId();
 	}
+	
+	/**
+	 * @param forums_persistentdocument_member $member
+	 * @param string $deletePosts 'true'|'false'
+	 */
+	public function deleteDelayed($member, $deletePosts = false)
+	{
+		$tm = $this->getTransactionManager();
+		try 
+		{
+			$tm->beginTransaction();
+			$member->setMeta('deletePosts', $deletePosts);
+			$member->saveMeta();
+			$this->putInTrash($member->getId());
+			$tm->commit();
+		}
+		catch (Exception $e)
+		{
+			$tm->rollBack($e);
+		}
+	}
+	
+	/**
+	 * @return array
+	 */
+	public function getIdsToDelete()
+	{
+		return $this->createQuery()->add(Restrictions::eq('publicationstatus', 'TRASH'))
+			->setProjection(Projections::property('id'))->findColumn('id');
+	}
+	
+	/**
+	 * @param forums_persistentdocument_member $member
+	 * @param integer $max the maximum number of documents that can treat
+	 * @return integer the maximum number of documents that can still treat
+	 */
+	public function prepareMemberDeletion($member, $max)
+	{
+		// Handle bans.
+		$max -= forums_BanService::getInstance()->treatBansForMemberDeletion($member, $max);
+		if ($max < 1)
+		{
+			return $max;
+		}
+		
+		// Handle posts.
+		$max -= forums_PostService::getInstance()->treatPostsForMemberDeletion($member, $max);
+		if ($max < 1)
+		{
+			return $max;
+		}
+		
+		// Handle threads.
+		$max -= forums_ThreadService::getInstance()->treatThreadsForMemberDeletion($member, $max);
+		if ($max < 1)
+		{
+			return $max;
+		}
+		
+		// Handle privatemessaging.
+		if (ModuleService::getInstance()->moduleExists('privatemessaging'))
+		{
+			$pmMember = privatemessaging_MemberService::getInstance()->getByUser($member->getUser());		
+			$max -= $pmMember->getDocumentService()->deleteMember($pmMember, $max);
+			if ($max < 1)
+			{
+				return $max;
+			}
+		}
+		
+		return $max;
+	}
 }

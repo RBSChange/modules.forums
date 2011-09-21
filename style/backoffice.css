@@ -28,3 +28,7 @@ treechildren::-moz-tree-image(modules_forums_ban){
 treechildren::-moz-tree-image(modules_forums_forumgroup){
 	list-style-image: url(/changeicons/small/folders-stack.png);
 }
+
+wdialog[template="forums_ConfirmDeletion"] grid row{
+	margin: 25px;
+}

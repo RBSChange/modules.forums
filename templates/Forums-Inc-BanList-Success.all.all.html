@@ -15,7 +15,10 @@
 				<tr tal:repeat="ban member/getBans" class="row-${php: repeat.ban.odd ? '1' : '0'}">
 					<td change:memberdate="value ban/getFrom; mode 'long'" />
 					<td change:memberdate="value ban/getTo; mode 'long'" />
-					<td><a change:link="document ban/getBy">${ban/getBy/getLabelAsHtml}</a></td>
+					<td>
+						<a tal:condition="ban/getBy" change:link="document ban/getBy">${ban/getBy/getLabelAsHtml}</a>
+						<tal:block tal:condition="not: ban/getBy">${trans:m.forums.frontoffice.unknown,ucf}</tal:block>
+					</td>
 					<td>${ban/getMotifAsHtml} <tal:block tal:condition="ban/getPost">(${trans: m.forums.frontoffice.banned-reason-message} <a change:link="document ban/getPost">${ban/getPost/getPostId}</a>)</tal:block></td>
 					<td><a tal:condition="ban/isActive" change:link="module forums; action DeleteBan; cmpref ban/getId" >${trans: m.forums.frontoffice.delete}</a></td>
 				</tr>

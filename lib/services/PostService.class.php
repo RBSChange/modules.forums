@@ -268,4 +268,63 @@ class forums_PostService extends f_persistentdocument_DocumentService
 		}
 		return null;
 	}
+	
+	/**
+	 * @param forums_persistentdocument_member $member
+	 * @param integer $max the maximum number of posts that can treat
+	 * @return integer the number of treated posts
+	 */	
+	public function treatPostsForMemberDeletion($member, $max)
+	{
+		$count = 0;
+		foreach (array('postauthor', 'editedby', 'deletedby') as $fieldName)
+		{
+			$query = $this->createQuery();
+			$query->add(Restrictions::eq($fieldName, $member));
+			$query->setFirstResult(0)->setMaxResults($max - $count);
+			$posts = $query->find();
+			foreach ($posts as $post)
+			{
+				/* @var $post forums_persistentdocument_post */
+				$post->getDocumentService()->treatPostForMemberDeletion($post, $member);
+			}
+			$count += count($posts);
+		}
+		if (Framework::isInfoEnabled())
+		{
+			Framework::info(__METHOD__ . ' ' . $count . ' posts treated');
+		}
+		return $count;
+	}
+	
+	/**
+	 * @param forums_persistentdocument_post $post
+	 * @param forums_persistentdocument_member $member
+	 */	
+	protected function treatPostForMemberDeletion($post, $member)
+	{
+		if (DocumentHelper::equals($post->getPostauthor(), $member))
+		{
+			$post->setPostauthor(null);
+			if ($member->getMeta('deletePosts') == 'true' && $post->getDeleteddate() == null)
+			{
+				$post->setDeleteddate(date_Calendar::now()->toString());
+				$post->setMeta('deletedOnMemberDeletion', true);
+			}
+		}
+		
+		if (DocumentHelper::equals($post->getEditedby(), $member))
+		{
+			$post->setEditedby(null);
+			$post->setMeta('editedByDeletedMember', $member->getLabel() . ' (' . $member->getId() . ')');
+		}
+		
+		if (DocumentHelper::equals($post->getDeletedby(), $member))
+		{
+			$post->setDeletedby(null);
+			$post->setMeta('deletedByDeletedMember', $member->getLabel() . ' (' . $member->getId() . ')');
+		}
+		
+		$post->save();
+	}
 }
