@@ -27,7 +27,7 @@
 				<td class="column-label">
 					<strong tal:condition="php: thread.getLevel() == 20">${trans: m.forums.lists.threadlevels.sticky,ucf,lab}</strong>
 					<strong tal:condition="php: thread.getLevel() == 30">${trans: m.forums.lists.threadlevels.announcement,ucf,lab}</strong>
-					<a tal:attributes="href thread/getUserUrl" class="link">${structure thread/getLabelAsHtml}</a>
+					<a tal:attributes="href thread/getUserUrl" class="link">${thread/getLabel}</a>
 					<dl class="inline-list" tal:condition="thread/hasPages">
 						<dt>${trans:m.forums.frontoffice.go-to-page,ucf}</dt>
 						<dd tal:repeat="page thread/getPagination">${structure page}</dd>
@@ -37,7 +37,9 @@
 				<td class="column-last-post" tal:define="lastPost thread/getLastPost; lastPostAuthor lastPost/getPostAuthor">
 					<tal:block change:memberdate="value lastPost/getCreationdate; mode 'long'" />
 					<br />
-					${trans: m.forums.frontoffice.by} <a change:link="document lastPostAuthor">${structure lastPostAuthor/getLabelAsHtml}</a>
+					${trans: m.forums.frontoffice.by}
+					<a tal:condition="lastPostAuthor" change:link="document lastPostAuthor">${lastPostAuthor/getLabel}</a>
+					<tal:block tal:condition="not: lastPostAuthor">${trans:m.forums.frontoffice.unknown,ucf}</tal:block>
 				</td>
 			</tr>
 		</tal:block>

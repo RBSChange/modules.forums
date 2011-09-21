@@ -5,7 +5,6 @@
  */
 class forums_persistentdocument_member extends forums_persistentdocument_memberbase
 {
-
 	/**
 	 * @return Boolean
 	 */

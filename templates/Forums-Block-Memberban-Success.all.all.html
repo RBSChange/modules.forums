@@ -4,7 +4,7 @@
 		<ul change:errors=""></ul>
 		<ol>
 			<li><label>${trans:m.forums.document.ban.member,ucf,lab}</label> <a change:link="document post/getPostauthor">${structure post/getAuthorNameAsHtml}</a></li>
-			<li><label>${trans:m.forums.document.ban.post,ucf,lab}</label> ${post/getPostIdLink}</li>
+			<li><label>${trans:m.forums.document.ban.post,ucf,lab}</label> ${structure post/getPostIdLink}</li>
 			<li><input change:field="name to" required="true"/></li>
 			<li><input change:bbcodeinput="name motifAsBBCode" module-profile="forums" labeled="true" /></li>
 		</ol>

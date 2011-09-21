@@ -12,4 +12,6 @@
   <key id="log-reactivate-forumgroup">log reactivate forumgroup</key>
   <key id="delete-forumgroup">delete.forumgroup {documentlabel} {lang}</key>
   <key id="log-delete-forumgroup">log delete forumgroup</key>
+  <key id="savepermissions-websitefolder">savepermissions.websitefolder {documentlabel}</key>
+  <key id="log-savepermissions-websitefolder">log savepermissions websitefolder</key>
 </i18n>

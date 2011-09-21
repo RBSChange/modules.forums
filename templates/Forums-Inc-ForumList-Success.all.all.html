@@ -38,7 +38,9 @@
 					<tal:block tal:condition="lastPost">
 						<tal:block change:memberdate="value lastPost/getCreationdate; mode 'long'" />
 						<br />
-						${trans: m.forums.frontoffice.by} <a change:link="document lastPostAuthor">${structure lastPostAuthor/getLabelAsHtml}</a>
+						${trans: m.forums.frontoffice.by} 
+						<a tal:condition="lastPostAuthor" change:link="document lastPostAuthor">${lastPostAuthor/getLabel}</a>
+						<tal:block tal:condition="not: lastPostAuthor">${trans:m.forums.frontoffice.unknown,ucf}</tal:block>
 					</tal:block>
 				</td>
 			</tr>

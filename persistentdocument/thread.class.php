@@ -56,15 +56,16 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	public function isEditable()
 	{
 		$member = forums_MemberService::getInstance()->getCurrentMember();
+		$author = $this->getThreadauthor();
 		if (!$this->isVisible())
 		{
 			return false;
 		}
-		if (forums_ModuleService::getInstance()->hasPermission($member, 'modules_forums.Moderate', $this))
+		elseif (forums_ModuleService::getInstance()->hasPermission($member, 'modules_forums.Moderate', $this))
 		{
 			return true;
 		}
-		else if ($member !== null && $this->getThreadauthor()->getId() == $member->getId() && !$this->isLocked())
+		elseif ($member !== null && $author !== null && $author->getId() == $member->getId() && !$this->isLocked())
 		{
 			return true;
 		}

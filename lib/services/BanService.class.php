@@ -106,4 +106,50 @@ class forums_BanService extends f_persistentdocument_DocumentService
 		$parameters['PSEUDO'] = $ban->getMember()->getLabelAsHtml();
 		return $parameters;
 	}
+	
+	/**
+	 * @param forums_persistentdocument_member $member
+	 * @param integer $max the maximum number of bans that can treat
+	 * @return integer the number of treated bans
+	 */	
+	public function treatBansForMemberDeletion($member, $max)
+	{
+		$count = 0;
+		foreach (array('member', 'by') as $fieldName)
+		{
+			$query = $this->createQuery();
+			$query->add(Restrictions::eq($fieldName, $member));
+			$query->setFirstResult(0)->setMaxResults($max - $count);
+			$bans = $query->find();
+			foreach ($bans as $ban)
+			{
+				/* @var $ban forums_persistentdocument_ban */
+				$ban->getDocumentService()->treatBanForMemberDeletion($ban, $member);
+			}
+			$count += count($bans);
+		}
+		if (Framework::isInfoEnabled())
+		{
+			Framework::info(__METHOD__ . ' ' . $count . ' bans treated');
+		}
+		return $count;
+	}
+	
+	/**
+	 * @param forums_persistentdocument_ban $ban
+	 * @param forums_persistentdocument_member $member
+	 */	
+	protected function treatBanForMemberDeletion($ban, $member)
+	{
+		if (DocumentHelper::equals($ban->getMember(), $member))
+		{
+			$ban->delete();
+		}
+		elseif (DocumentHelper::equals($ban->getBy(), $member))
+		{
+			$ban->setBy(null);
+			$ban->setMeta('byDeletedMember', $member->getLabel() . ' (' . $member->getId() . ')');
+			$ban->save();
+		}
+	}
 }

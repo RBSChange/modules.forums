@@ -19,7 +19,7 @@
 <div class="member-idcard">
 	<div class="website-block">
 		<div class="column-50 margin-right">
-			<div class="member-pic">
+			<div class="member-pic" tal:condition="member">
 				<img class="image" src="${php: member->getGravatarUrl(64)}" alt="" />
 			</div>
 			<div class="member-info">

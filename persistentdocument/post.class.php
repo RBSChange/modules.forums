@@ -99,6 +99,19 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	/**
 	 * @return String
 	 */
+	public function getAuthorName()
+	{
+		$member = $this->getPostauthor();
+		if ($member instanceof forums_persistentdocument_member)
+		{
+			return $member->getLabel();
+		}
+		return LocaleService::getInstance()->transFO('m.forums.frontoffice.unknown', array('ucf'));
+	}
+	
+	/**
+	 * @return String
+	 */
 	public function getAuthorNameAsHtml()
 	{
 		$member = $this->getPostauthor();

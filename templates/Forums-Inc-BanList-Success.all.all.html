@@ -1,6 +1,6 @@
 <tal:block tal:condition="member/hasToShowBansToCurrentUser">
 	<tal:block tal:condition="member/getBans">
-		<h2 change:h="">${trans: m.forums.frontoffice.ban-history-for,ucf} <a tal:condition="not: removeMemberLink" change:link="document member">${structure member/getLabelAsHtml}</a><tal:block tal:condition="removeMemberLink">${structure member/getLabelAsHtml}</tal:block></h2>
+		<h2 change:h="">${trans: m.forums.frontoffice.ban-history-for,ucf} <a tal:condition="not: removeMemberLink" change:link="document member">${member/getLabel}</a><tal:block tal:condition="removeMemberLink">${member/getLabelAsHtml}</tal:block></h2>
 		<table class="normal">
 			<thead>
 				<tr>
@@ -15,7 +15,10 @@
 				<tr tal:repeat="ban member/getBans" class="row-${php: repeat.ban.odd ? '1' : '0'}">
 					<td change:memberdate="value ban/getFrom; mode 'long'" />
 					<td change:memberdate="value ban/getTo; mode 'long'" />
-					<td><a change:link="document ban/getBy">${structure ban/getBy/getLabelAsHtml}</a></td>
+					<td>
+						<a tal:condition="ban/getBy" change:link="document ban/getBy">${ban/getBy/getLabel}</a>
+						<tal:block tal:condition="not: ban/getBy">${trans:m.forums.frontoffice.unknown,ucf}</tal:block>
+					</td>
 					<td>${structure ban/getMotifAsHtml} <tal:block tal:condition="ban/getPost">(${trans: m.forums.frontoffice.banned-reason-message} <a change:link="document ban/getPost">${ban/getPost/getPostId}</a>)</tal:block></td>
 					<td><a tal:condition="ban/isActive" change:link="module forums; action DeleteBan; cmpref ban/getId" >${trans: m.forums.frontoffice.delete}</a></td>
 				</tr>

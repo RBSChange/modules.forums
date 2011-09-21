@@ -59,6 +59,6 @@
 	
 	<systemfolder module="task" relatedmodule="forums">
 		<plannedtask label="Notifications de suivi des sujets des forums" systemtaskclassname="forums_SendNotificationsToFollowersTask" />
-		<plannedtask label="Suppression diffèrée des forums" systemtaskclassname="forums_BackgroundDeleteTask" />
+		<plannedtask label="Suppression différée des forums et membres" systemtaskclassname="forums_BackgroundDeleteTask" />
 	</systemfolder>
 </script>
