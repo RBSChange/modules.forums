@@ -1,6 +1,6 @@
 <tal:block tal:condition="member/hasToShowBansToCurrentUser">
 	<tal:block tal:condition="member/getBans">
-		<h2 change:h="">${trans: m.forums.frontoffice.ban-history-for,ucf} <a tal:condition="not: removeMemberLink" change:link="document member">${member/getLabel}</a><tal:block tal:condition="removeMemberLink">${member/getLabelAsHtml}</tal:block></h2>
+		<h2 change:h="">${trans: m.forums.frontoffice.ban-history-for,ucf} <a tal:condition="not: removeMemberLink" change:link="document member">${member/getLabel}</a><tal:block tal:condition="removeMemberLink">${member/getLabel}</tal:block></h2>
 		<table class="normal">
 			<thead>
 				<tr>
