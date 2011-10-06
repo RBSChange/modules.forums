@@ -53,7 +53,7 @@ class forums_BlockEditprofileAction extends forums_BaseBlockAction
 	 */
 	public function validateSubmitInput($request, forums_persistentdocument_member $member)
 	{
-		$val = BeanUtils::getBeanValidationRules('forums_persistentdocument_member', null, array('login'));
+		$val = BeanUtils::getBeanValidationRules('forums_persistentdocument_member', null, array('login', 'label'));
 		$val[] = 'user.email{email:true}';
 		$ok = $this->processValidationRules($val, $request, $member);
 		if (!users_UserService::getInstance()->checkIdentity($member->getUser(), $request->getParameter('checkpassword')))
@@ -91,11 +91,6 @@ class forums_BlockEditprofileAction extends forums_BaseBlockAction
 			forums_MemberService::getInstance()->sendReactivationMail($member);
 		}
 		$member->save();
-		$tm = f_persistentdocument_TransactionManager::getInstance();		
-		while ($tm->hasTransaction())
-		{
-			$tm->commit();
-		}
 		$url = LinkHelper::getDocumentUrl($member);
 		$this->redirectToUrl($url);
 	}
