@@ -8,7 +8,7 @@ class forums_BlockNewthreadAction extends forums_BlockPostListBaseAction
 	/**
 	 * @return array<String, String>
 	 */
-	function getMetas()
+	public function getMetas()
 	{
 		$doc = $this->getDocumentParameter();
 		if ($doc instanceof forums_persistentdocument_forum)
@@ -25,7 +25,7 @@ class forums_BlockNewthreadAction extends forums_BlockPostListBaseAction
 	 * @param f_mvc_Response $response
 	 * @return String
 	 */
-	function execute($request, $response)
+	public function execute($request, $response)
 	{
 		if ($this->isInBackoffice())
 		{
@@ -33,21 +33,22 @@ class forums_BlockNewthreadAction extends forums_BlockPostListBaseAction
 		}
 		
 		$forum = $this->getDocumentParameter();
-		if ($forum->isWritable())
+		if ($forum === null)
 		{
-			return $this->getInputViewName();
+			return website_BlockView::NONE;
 		}
 		
-		$agaviUser = Controller::getInstance()->getContext()->getUser();
-		$agaviUser->setAttribute('illegalAccessPage', $_SERVER["REQUEST_URI"]);
-		$request->setAttribute('member', forums_MemberService::getInstance()->getCurrentMember());
-		return $this->getTemplateByFullName('modules_forums', 'Forums-Block-Generic-Forbidden');
+		if (!$forum->isWritable())
+		{
+			return $this->getForbiddenView($request);
+		}
+		return $this->getInputViewName();
 	}
 	
 	/**
 	 * @return String
 	 */
-	function getInputViewName()
+	public function getInputViewName()
 	{
 		return website_BlockView::SUCCESS;
 	}
@@ -61,14 +62,18 @@ class forums_BlockNewthreadAction extends forums_BlockPostListBaseAction
 	}
 	
 	/**
-	 * @see website_BlockAction::execute()
-	 *
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
 	 * @return String
 	 */
-	function executeSubmit($request, $response, forums_persistentdocument_thread $thread)
+	public function executeSubmit($request, $response, forums_persistentdocument_thread $thread)
 	{
+		$forum = $this->getDocumentParameter();
+		if (!$forum->isWritable())
+		{
+			return $this->getForbiddenView($request);
+		}
+		
 		$post = $thread->getFirstPost();
 		$thread->setFirstPost(null);
 		$thread->save();
@@ -89,14 +94,18 @@ class forums_BlockNewthreadAction extends forums_BlockPostListBaseAction
 	}
 	
 	/**
-	 * @see website_BlockAction::execute()
-	 *
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
 	 * @return String
 	 */
 	public function executePreview($request, $response, forums_persistentdocument_thread $thread)
 	{
+		$forum = $this->getDocumentParameter();
+		if (!$forum->isWritable())
+		{
+			return $this->getForbiddenView($request);
+		}
+		
 		$post = $thread->getFirstPost();
 		$post->setThread($thread);
 		$post->setText(website_BBCodeService::getInstance()->fixContent($post->getText()));

@@ -3,7 +3,7 @@
  * forums_BlockEditprofileAction
  * @package modules.forums.lib.blocks
  */
-class forums_BlockEditprofileAction extends website_TaggerBlockAction
+class forums_BlockEditprofileAction extends forums_BaseBlockAction
 {
 	/**
 	 * @see website_BlockAction::execute()
@@ -12,7 +12,7 @@ class forums_BlockEditprofileAction extends website_TaggerBlockAction
 	 * @param f_mvc_Response $response
 	 * @return String
 	 */
-	function execute($request, $response)
+	public function execute($request, $response)
 	{
 		if ($this->isInBackoffice())
 		{
@@ -25,16 +25,13 @@ class forums_BlockEditprofileAction extends website_TaggerBlockAction
 			HttpController::getInstance()->redirect('website', 'Error404');
 			return website_BlockView::NONE;
 		}
-		else if ($member->isEditable())
+		else if (!$member->isEditable())
 		{
-			$request->setAttribute('member', $member);
-			return $this->getInputViewName();
+			return $this->getForbiddenView($request);
 		}
 		
-		$agaviUser = Controller::getInstance()->getContext()->getUser();
-		$agaviUser->setAttribute('illegalAccessPage', $_SERVER["REQUEST_URI"]);
-		$request->setAttribute('member', forums_MemberService::getInstance()->getCurrentMember());
-		return $this->getTemplateByFullName('modules_forums', 'Forums-Block-Generic-Forbidden');
+		$request->setAttribute('member', $member);
+		return $this->getInputViewName();
 	}
 	
 	/**
@@ -50,7 +47,7 @@ class forums_BlockEditprofileAction extends website_TaggerBlockAction
 	 * @param forums_persistentdocument_member $member
 	 * @return Boolean
 	 */
-	function validateSubmitInput($request, forums_persistentdocument_member $member)
+	public function validateSubmitInput($request, forums_persistentdocument_member $member)
 	{
 		$val = BeanUtils::getBeanValidationRules('forums_persistentdocument_member', null, array('login'));
 		$val[] = 'user.email{email:true}';
@@ -63,6 +60,9 @@ class forums_BlockEditprofileAction extends website_TaggerBlockAction
 		return $ok;
 	}
 	
+	/**
+	 * @return boolean
+	 */
 	public function submitNeedTransaction()
     {
     	return true;
@@ -73,8 +73,13 @@ class forums_BlockEditprofileAction extends website_TaggerBlockAction
 	 * @param f_mvc_Response $response
 	 * @param forums_persistentdocument_member $member
 	 */
-	function executeSubmit($request, $response, forums_persistentdocument_member $member)
+	public function executeSubmit($request, $response, forums_persistentdocument_member $member)
 	{
+		if (!$member->isEditable())
+		{
+			return $this->getForbiddenView($request);
+		}
+		
 		if ($member->isPropertyModified('email'))
 		{
 			$fin = date_Calendar::now()->add(date_Calendar::DAY, 2)->toString();

@@ -19,8 +19,6 @@ class forums_BlockEditpostAction extends forums_BlockPostListBaseAction
 	}
 	
 	/**
-	 * @see website_BlockAction::execute()
-	 *
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
 	 * @return String
@@ -33,15 +31,12 @@ class forums_BlockEditpostAction extends forums_BlockPostListBaseAction
 		}
 		
 		$post = $this->getDocumentParameter();
-		if ($post->isEditable())
+		if (!($post instanceof forums_persistentdocument_post) || !$post->isEditable())
 		{
-			return $this->getInputViewName();
+			return $this->getForbiddenView($request);
 		}
 		
-		$agaviUser = Controller::getInstance()->getContext()->getUser();
-		$agaviUser->setAttribute('illegalAccessPage', $_SERVER["REQUEST_URI"]);
-		$request->setAttribute('member', forums_MemberService::getInstance()->getCurrentMember());
-		return $this->getTemplateByFullName('modules_forums', 'Forums-Block-Generic-Forbidden');
+		return $this->getInputViewName();
 	}
 
 	/**
@@ -60,20 +55,26 @@ class forums_BlockEditpostAction extends forums_BlockPostListBaseAction
 		return array_merge(BeanUtils::getBeanValidationRules('forums_persistentdocument_post', null, array('label')), BeanUtils::getSubBeanValidationRules('forums_persistentdocument_post', 'thread', null, null));
 	}
 	
+	/**
+	 * @return boolean 
+	 */
 	public function submitNeedTransaction()
     {
     	return true;
     }
 	
 	/**
-	 * @see website_BlockAction::execute()
-	 *
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
 	 * @return String
 	 */
 	public function executeSubmit($request, $response, forums_persistentdocument_post $post)
 	{
+		if (!$post->isEditable())
+		{
+			return $this->getForbiddenView($request);
+		}
+		
 		$post->setEditedby(forums_MemberService::getInstance()->getCurrentMember());
 		$post->setEditeddate(date_Calendar::now()->toString());
 		$post->save();
@@ -100,14 +101,17 @@ class forums_BlockEditpostAction extends forums_BlockPostListBaseAction
 	}
 	
 	/**
-	 * @see website_BlockAction::execute()
-	 *
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
 	 * @return String
 	 */
 	public function executePreview($request, $response, forums_persistentdocument_post $post)
 	{
+		if (!$post->isEditable())
+		{
+			return $this->getForbiddenView($request);
+		}
+		
 		if	($post->getAnswerof() !== null && $post->getAnswerof()->getThread()->getId() != $post->getThread()->getId())
 		{
 			$post->setAnswerof(null);
