@@ -233,7 +233,7 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 				$pagination[] = '<a class="link" href="' . LinkHelper::getDocumentUrl($this, null, array('forumsParam[page]' => $page)) . '">' . $page . '</a><span>, </span>';
 			}
 		}
-		$pagination[] = '<a class="link" href="' . LinkHelper::getDocumentUrl($this, null, array('forumsParam[page]' => 1)) . '">' . $pageCount . '</a>';
+		$pagination[] = '<a class="link" href="' . LinkHelper::getDocumentUrl($this, null, array('forumsParam[page]' => $pageCount)) . '">' . $pageCount . '</a>';
 		return $pagination;
 	}
 	
