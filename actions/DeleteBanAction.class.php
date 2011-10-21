@@ -15,7 +15,7 @@ class forums_DeleteBanAction extends change_Action
 		$ban = forums_persistentdocument_ban::getInstanceById($this->getDocumentIdFromRequest($request));
 		if ($member instanceof forums_persistentdocument_member)
 		{
-			$website = website_persistentdocument_website::getInstanceById($member->getUser()->getWebsiteid());
+			$website = website_WebsiteService::getInstance()->getCurrentWebsite();
 			if ($member->isSuperModerator($website))
 			{
 				$tm = $this->getTransactionManager();
@@ -36,14 +36,5 @@ class forums_DeleteBanAction extends change_Action
 			}
 		}
 		change_Controller::getInstance()->redirectToUrl(LinkHelper::getDocumentUrl($ban->getMember()));
-	}
-	
-	/**
-	 * (non-PHPdoc)
-	 * @see f_action_BaseAction::isSecure()
-	 */
-	public function isSecure()
-	{
-		return false;	
 	}
 }

@@ -22,7 +22,7 @@ class forums_ViewFeedAction extends change_Action
 		}
 		else
 		{
-			$parent = website_WebsiteModuleService::getInstance()->getCurrentWebsite();
+			$parent = website_WebsiteService::getInstance()->getCurrentWebsite();
 		}
 		
 		$docType = $request->getModuleParameter('forums', 'docType');

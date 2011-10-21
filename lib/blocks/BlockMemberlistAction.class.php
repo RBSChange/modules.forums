@@ -17,7 +17,7 @@ class forums_BlockMemberlistAction extends website_TaggerBlockAction
 			return website_BlockView::NONE;
 		}
 
-		$website = website_WebsiteModuleService::getInstance()->getCurrentWebsite();
+		$website = website_WebsiteService::getInstance()->getCurrentWebsite();
 		$members = forums_MemberService::getInstance()->getPublishedMembersByWebsite($website);
 		$nbItemPerPage = $this->getNbItemPerPage($request, $response);
 		$page = $request->getParameter('page');

@@ -106,7 +106,7 @@ class forums_ModuleService extends ModuleBaseService
 			'forums' => $this->findProjectedTotal($website, 'website.id', forums_ForumService::getInstance()),
 			'threads' => $this->findProjectedTotal($website, 'forum.website.id', forums_ThreadService::getInstance()),
 			'posts' => $this->findProjectedTotal($website, 'thread.forum.website.id', forums_PostService::getInstance()),
-			'members' => $this->findProjectedTotal($website, 'user.websiteid', forums_MemberService::getInstance())
+			'members' => $this->findGroupProjectedTotal($website->getGroup(), 'user.groups', forums_MemberService::getInstance())
 		);
 	}
 	
@@ -119,15 +119,16 @@ class forums_ModuleService extends ModuleBaseService
 	public function getDashboardMonthStatisticsByWebsite($website, $fromDate, $toDate)
 	{
 		$ms = forums_MemberService::getInstance();
+		$group = $website->getGroup();
 		return array(
 			'monthLabel' => ucfirst(date_Formatter::format($fromDate, 'F Y')),
 			'monthShortLabel' => date_Formatter::format($fromDate, 'm/Y'),
 			'forums' => $this->findProjectedTotal($website, 'website.id', forums_ForumService::getInstance(), $fromDate, $toDate, 'creationdate'),
 			'threads' => $this->findProjectedTotal($website, 'forum.website.id', forums_ThreadService::getInstance(), $fromDate, $toDate, 'creationdate'),
 			'posts' => $this->findProjectedTotal($website, 'thread.forum.website.id', forums_PostService::getInstance(), $fromDate, $toDate, 'creationdate'),
-			'members' => $this->findProjectedTotal($website, 'user.websiteid', $ms, $fromDate, $toDate, 'creationdate'),
-			'lastlogin' => $this->findProjectedTotal($website, 'user.websiteid', $ms, $fromDate, $toDate, 'user.lastlogin'),
-			'hasposted' => $this->findProjectedTotal($website, 'user.websiteid', $ms, $fromDate, $toDate, 'post.creationdate')
+			'members' => $this->findGroupProjectedTotal($group, 'user.groups', $ms, $fromDate, $toDate, 'creationdate'),
+			'lastlogin' => $this->findGroupProjectedTotal($group, 'user.groups', $ms, $fromDate, $toDate, 'user.lastlogin'),
+			'hasposted' => $this->findGroupProjectedTotal($group, 'user.groups', $ms, $fromDate, $toDate, 'post.creationdate')
 		);
 	}
 	
@@ -151,6 +152,30 @@ class forums_ModuleService extends ModuleBaseService
 			));
 		}
 		$query->add(Restrictions::eq($websiteField, $website->getId()));
+		return f_util_ArrayUtils::firstElement($query->setProjection(Projections::rowCount('projection'))->findColumn('projection'));
+	}
+	
+	/**
+	 * @param users_persistentdocument_group $group
+	 * @param string $groupField
+	 * @param date_Calendar $fromDate
+	 * @param date_Calendar $toDate
+	 * @param f_persistentdocument_criteria_OperationProjection $projection
+	 * @param String $orderStatus
+	 * @return Mixed
+	 */
+	private function findGroupProjectedTotal($group, $groupField, $service, $fromDate = null, $toDate = null, $dateToCompare = null)
+	{
+		$query = $service->createQuery();
+		if ($fromDate && $toDate)
+		{
+			$query->add(Restrictions::between(
+				$dateToCompare,
+				$fromDate->toString(),
+				$toDate->toString()
+			));
+		}
+		$query->add(Restrictions::eq($groupField, $group));
 		return f_util_ArrayUtils::firstElement($query->setProjection(Projections::rowCount('projection'))->findColumn('projection'));
 	}
 	

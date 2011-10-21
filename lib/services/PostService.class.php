@@ -274,7 +274,7 @@ class forums_PostService extends f_persistentdocument_DocumentService
 	 */
 	public function getResolveDetail($document, $request)
 	{
-		$website = website_WebsiteModuleService::getInstance()->getCurrentWebsite();
+		$website = website_WebsiteService::getInstance()->getCurrentWebsite();
 		$lang = RequestContext::getInstance()->getLang();
 		$link = $document->getDocumentService()->getWebLink(website_UrlRewritingService::getInstance(), $document, $website, $lang, array());
 		$request->setParameter('location', $link->getUrl());

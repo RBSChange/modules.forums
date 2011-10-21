@@ -70,7 +70,7 @@ class forums_persistentdocument_member extends forums_persistentdocument_memberb
 	{
 		if ($website === null)
 		{
-			$website = website_WebsiteModuleService::getInstance()->getCurrentWebsite();
+			$website = website_WebsiteService::getInstance()->getCurrentWebsite();
 		}
 		$folder = forums_WebsitefolderService::getInstance()->getByWebsite($website);
 		return forums_ModuleService::getInstance()->hasPermissionOnId($this, 'modules_forums.Banuser', $folder->getId());
@@ -148,11 +148,7 @@ class forums_persistentdocument_member extends forums_persistentdocument_memberb
 	 */
 	public function getWebsite()
 	{
-		if ($this->getUser())
-		{
-			return DocumentHelper::getDocumentInstance($this->getUser()->getWebsiteid());
-		}
-		return null;
+		return website_WebsiteService::getInstance()->getCurrentWebsite();
 	}
 	
 	/**

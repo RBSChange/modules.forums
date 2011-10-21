@@ -211,7 +211,7 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 	{
 		if ($website === null)
 		{
-			$website = website_WebsiteModuleService::getInstance()->getCurrentWebsite();
+			$website = website_WebsiteService::getInstance()->getCurrentWebsite();
 		}
 		$query = $this->createQuery()->add(Restrictions::eq('level', self::LEVEL_GLOBAL));
 		$query->createCriteria('forum')->add(Restrictions::eq('website', $website));

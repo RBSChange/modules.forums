@@ -57,7 +57,7 @@ class forums_ForumService extends forums_ForumgroupService
 	 */
 	public function getCurrentForum()
 	{
-		$page = website_WebsiteModuleService::getInstance()->getCurrentPage();
+		$page = website_PageService::getInstance()->getCurrentPage();
 		if ($page === null)
 		{
 			return null;

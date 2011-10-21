@@ -60,7 +60,7 @@ class forums_RankService extends f_persistentdocument_DocumentService
 		$quantity = $member->getNbpost();
 		$query = $this->createQuery()
 			->add(Restrictions::published())
-			->add(Restrictions::eq('website.id', $member->getUser()->getWebsiteid()))
+			->add(Restrictions::eq('website', website_WebsiteService::getInstance()->getCurrentWebsite()))
 			->add(Restrictions::le('thresholdMin', $quantity))
 			->add(Restrictions::gt('thresholdMax', $quantity))
 			->setFirstResult(0)

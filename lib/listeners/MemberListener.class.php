@@ -18,7 +18,7 @@ class forums_MemberListener
 	public function onPersistentDocumentUpdated($sender, $params)
 	{
 		$document = $params['document'];
-		if ($document instanceof users_persistentdocument_websitefrontenduser)
+		if ($document instanceof users_persistentdocument_user)
 		{
 			$member = forums_MemberService::getInstance()->getByUser($document, false);
 			if ($member !== null)
@@ -37,7 +37,7 @@ class forums_MemberListener
 	public function onUserLogin($sender, $params)
 	{
 		$user = $params['user'];
-		if ($user instanceof users_persistentdocument_frontenduser)
+		if ($user instanceof users_persistentdocument_user)
 		{
 			$member = forums_MemberService::getInstance()->getByUser($user, false);
 			if ($member !== null)

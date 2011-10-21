@@ -60,8 +60,9 @@ class forums_MemberService extends f_persistentdocument_DocumentService
 	{
 		$query = $this->createQuery();
 		$query->add(Restrictions::published());
-		$query->createCriteria('user')->add(Restrictions::eq('websiteid', $website->getId()));
-		$query->addOrder(Order::iasc('document_label'));
+		$query->createCriteria('user')
+			->add(Restrictions::eq('groups', $website->getGroup()));
+		$query->addOrder(Order::iasc('label'));
 		return $query->find();
 	}
 	
@@ -74,13 +75,13 @@ class forums_MemberService extends f_persistentdocument_DocumentService
 	}
 	
 	/**
-	 * @param users_persistentdocument_frontenduser $user
+	 * @param users_persistentdocument_user $user
 	 * @param Boolean $createIfNull
 	 * @return forums_persistentdocument_member
 	 */
 	public function getByUser($user, $createIfNull = true)
 	{
-		if ($user instanceof users_persistentdocument_websitefrontenduser)
+		if ($user instanceof users_persistentdocument_user)
 		{
 			$member = f_util_ArrayUtils::firstElement($user->getMemberArrayInverse());
 			if ($member === null && $createIfNull)
@@ -104,7 +105,7 @@ class forums_MemberService extends f_persistentdocument_DocumentService
 	{
 		if ($websiteId === null)
 		{
-			$website = website_WebsiteModuleService::getInstance()->getCurrentWebsite();
+			$website = website_WebsiteService::getInstance()->getCurrentWebsite();
 			$websiteId = $website->getId();
 		}
 		$user = users_UserService::getInstance()->getFrontendUserByLogin($login, $websiteId);
@@ -124,11 +125,15 @@ class forums_MemberService extends f_persistentdocument_DocumentService
 	{
 		if ($websiteId === null)
 		{
-			$website = website_WebsiteModuleService::getInstance()->getCurrentWebsite();
-			$websiteId = $website->getId();
+			$website = website_WebsiteService::getInstance()->getCurrentWebsite();
 		}
-		$query = $this->createQuery()->add(Restrictions::eq('label', $label));
-		$query->add(Restrictions::eq('user.websiteid', $websiteId));
+		else
+		{
+			$website = DocumentHelper::getDocumentInstance($websiteId);
+		}
+		$query = $this->createQuery()
+			->add(Restrictions::eq('label', $label));
+		$query->add(Restrictions::eq('user.groups', $website->getGroup()));
 		return $query->findUnique(); 
 	}
 	
@@ -321,7 +326,16 @@ class forums_MemberService extends f_persistentdocument_DocumentService
 	 */
 	public function getWebsiteId($document)
 	{
-		return $document->getUser()->getWebsiteid();
+		return users_UserService::getInstance()->getWebsiteId($document->getUser());
+	}
+	
+	/**
+	 * @param forums_persistentdocument_member $document
+	 * @return integer
+	 */
+	public function getWebsiteIds($document)
+	{
+		return users_UserService::getInstance()->getWebsiteIds($document->getUser());
 	}
 		
 	/**

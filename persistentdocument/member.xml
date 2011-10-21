@@ -6,7 +6,7 @@
 		<add name="label">
 			<constraints>pseudonym:true</constraints>
 		</add>
-		<add name="user" type="modules_users/websitefrontenduser" min-occurs="1" inverse="true" />
+		<add name="user" type="modules_users/user" min-occurs="1" inverse="true" />
 		<add name="displayname" type="Boolean" default-value="false" />
 		<add name="signature" type="LongString" indexed="description" />
 		<add name="websiteUrl" type="String" indexed="none">

@@ -47,9 +47,10 @@ class validation_PseudonymValidator extends validation_UniqueValidator
 	{
 		if ($this->getDocumentId() !== null)
 		{
-			return $this->document->getUser()->getWebsiteid();
+			$websiteId = users_UserService::getInstance()->getWebsiteId($this->document->getUser());
+			if ($websiteId) {return $websiteId;}
 		}
-		return website_WebsiteModuleService::getInstance()->getCurrentWebsite()->getId();
+		return website_WebsiteService::getInstance()->getCurrentWebsite()->getId();
 	}
 	
 	/**

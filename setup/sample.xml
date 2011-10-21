@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <script>
+	<binding fileName="modules/list/persistentdocument/import/list_binding.xml" />
 	<binding fileName="modules/website/persistentdocument/import/website_binding.xml" />
 	<binding fileName="modules/users/persistentdocument/import/users_binding.xml" />
 	<binding fileName="modules/media/persistentdocument/import/media_binding.xml" />
@@ -16,16 +17,35 @@
 		</folder>
 	</rootfolder>
 	
-	<websitefrontendgroup for-default-website="true">
-		<websitefrontenduser id="usera" byLogin="forummod1" firstname="John" lastname="Smith" email="john.smith@rbs.fr" password="abcd123" />
-		<websitefrontenduser id="userb" byLogin="forummod2" firstname="Jane" lastname="Doe" email="jane.doe@rbs.fr" password="abcd123" />
-		<websitefrontenduser id="user1" byLogin="forummember1" firstname="John" lastname="Doe" email="john.doe@rbs.fr" password="abcd123" />
-		<websitefrontenduser id="user2" byLogin="forummember2" firstname="Jack" lastname="Black" email="jack.black@rbs.fr" password="abcd123" />
-		<websitefrontenduser id="user3" byLogin="forummember3" firstname="Joe" lastname="White" email="joe.white@rbs.fr" password="abcd123" />
-		<websitefrontenduser id="user4" byLogin="forummember4" firstname="Bill" lastname="Green" email="bill.green@rbs.fr" password="abcd123" />
-	</websitefrontendgroup>
-		
+	<editablelist listid="modules_users/title" >	
+		<item byLabel="M" id="mr"/>
+		<item byLabel="Mme" id="mm"/>
+	</editablelist>
+	
 	<website byTag="default_modules_website_default-website" id="website" />
+	
+	<group byWebsite-refid="website">
+		<user id="usera" byLogin="forummod1"  email="john.smith@rbs.fr" password="abcd123" label="John Smith" >
+			<usersprofile firstname="John" lastname="Smith"  titleid-refid="mr" registeredwebsiteid-refid="website" />
+		</user>
+		<user id="userb" byLogin="forummod2"  email="jane.doe@rbs.fr" password="abcd123" label="Jane 123" >
+			<usersprofile firstname="Jane" lastname="Doe"  titleid-refid="mm" registeredwebsiteid-refid="website" />
+		</user>
+		<user id="user1" byLogin="forummember1"  email="john.doe@rbs.fr" password="abcd123" label="John 459" >
+			<usersprofile firstname="John" lastname="Doe"  titleid-refid="mr" registeredwebsiteid-refid="website" />
+		</user>
+		<user id="user2" byLogin="forummember2"  email="jack.black@rbs.fr" password="abcd123" label="Jack Black" >
+			<usersprofile firstname="Jack" lastname="Black"  titleid-refid="mr" registeredwebsiteid-refid="website" />
+		</user>
+		<user id="user3" byLogin="forummember3"  email="joe.white@rbs.fr" password="abcd123" label="Joe le blanc" >
+			<usersprofile firstname="Joe" lastname="White"  titleid-refid="mr" registeredwebsiteid-refid="website" />
+		</user>
+		<user id="user4" byLogin="forummember4"  email="bill.green@rbs.fr" password="abcd123" label="Bill Green" >
+			<usersprofile firstname="Bill" lastname="Green" titleid-refid="mr" registeredwebsiteid-refid="website" />
+		</user>
+	</group>
+		
+	
 	
 	<rank byLabel="Débutant" thresholdMin="0" visual-refid="visual-new" website-refid="website" />
 	<rank byLabel="Confirmé" thresholdMin="5" visual-refid="visual-bronze" website-refid="website" />
@@ -46,14 +66,14 @@
 	<rootfolder module="forums">
 		<websitefolder byWebsite-refid="website">
 			<permissions>
-				<frontendpermission module="forums" role="SuperModerator" user-refid="userb" />
+				<permission module="forums" role="SuperModerator" user-refid="userb" />
 			</permissions>
 			<execute method="setDocumentIdAttributeWithWebsite" />
 			<binding fileName="modules/forums/setup/membersDefaultStructure.xml" />
 			<forumgroup label="Forums" mountParent-refid="website" publicationstatus="ACTIVE">
 				<permissions>
-					<frontendpermission module="forums" role="SuperModerator" user-refid="userb" />
-					<frontendpermission module="forums" role="Moderator" user-refid="usera" />
+					<permission module="forums" role="SuperModerator" user-refid="userb" />
+					<permission module="forums" role="Moderator" user-refid="usera" />
 				</permissions>
 				<execute method="setDocumentIdAttributeWithTopic" />
 				<binding fileName="modules/forums/setup/forumgroupDefaultStructure.xml" />

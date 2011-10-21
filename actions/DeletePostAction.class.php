@@ -27,7 +27,7 @@ class forums_DeletePostAction extends change_Action
 			Framework::exception($e);
 		}
 		
-		$url = website_WebsiteModuleService::getInstance()->getCurrentWebsite()->getUrl();
+		$url = website_WebsiteService::getInstance()->getCurrentWebsite()->getUrl();
 		change_Controller::getInstance()->redirectToUrl($url);
 	}
 	

@@ -49,7 +49,7 @@ class forums_BlockMemberAction extends website_BlockAction
 	 */
 	protected function enablePrivateMessaging()
 	{
-		$website = website_WebsiteModuleService::getInstance()->getCurrentWebsite();
+		$website = website_WebsiteService::getInstance()->getCurrentWebsite();
 		$tag = 'contextual_website_website_modules_privatemessaging_newthread';
 		return TagService::getInstance()->getDocumentByContextualTag($tag, $website, false) != null;
 	}

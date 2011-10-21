@@ -39,8 +39,12 @@ class PHPTAL_Php_Attribute_CHANGE_Memberdate extends ChangeTalAttribute
 	{
 		$date = date_Calendar::getInstance(self::getDateFromParams($params));		
 		$uiDate = date_Converter::convertDateToLocal($date);
-		$format = self::getFormat($params);
-    	return date_Formatter::format($uiDate, $format);
+		$mode = (array_key_exists('mode', $params)) ? $params['mode'] : 'long';
+		if ($mode === 'long')
+		{
+			return date_Formatter::toDefaultDateTime($uiDate);
+		}
+    	return date_Formatter::toDefaultDate($uiDate);
 	}
 
 	/**
@@ -50,35 +54,5 @@ class PHPTAL_Php_Attribute_CHANGE_Memberdate extends ChangeTalAttribute
 	private static function getDateFromParams($params)
 	{
 		return (array_key_exists('value', $params)) ? $params['value'] : null;
-	}
-	
-	/**
-	 * @var Array
-	 */
-	private static $formats = array();
-	
-	/**
-	 * @param Array $params
-	 * @return String
-	 */
-	private static function getFormat($params)
-	{
-		$mode = (array_key_exists('mode', $params)) ? $params['mode'] : 'long';
-		if (!isset(self::$formats[$mode]))
-		{
-			$member = forums_MemberService::getInstance()->getCurrentMember();
-			$getter = 'get'.ucfirst($mode).'DateFormat';
-			$format = null;
-			if ($member !== null && f_util_ClassUtils::methodExists($member, $getter))
-			{
-				$format = f_util_ClassUtils::callMethodOn($member, $getter);
-			}
-			if (!$format)
-			{
-				$format = LocaleService::getInstance()->transFO('m.forums.frontoffice.'.strtolower($mode).'-date-format');
-			}
-			self::$formats[$mode] = $format;
-		}
-		return self::$formats[$mode];
 	}
 }
