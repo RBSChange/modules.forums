@@ -79,7 +79,7 @@ class forums_ForumgroupService extends f_persistentdocument_DocumentService
 		if ($topic === null)
 		{
 			$topic = website_SystemtopicService::getInstance()->getNewDocumentInstance();
-			$topic->setReferenceId($document->getId());
+			$topic->setReferenceId(abs($document->getId()));
 			$topic->setLabel($document->getLabel());
 			$topic->setDescription($document->getDescription());
 			$topic->setPublicationstatus('DRAFT');
