@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <i18n baseKey="m.forums.document.post" lcid="en_GB">
-  <key id="document-name">post</key>
-  <key id="label">label</key>
-  <key id="text">text</key>
-  <key id="postauthor">author</key>
-  <key id="editedby">edited by</key>
-  <key id="editeddate">edition date</key>
-  <key id="deletedby">deleted by</key>
-  <key id="number">number</key>
-  <key id="ip">ip</key>
-  <key id="thread">thread</key>
-  <key id="answerof">answer of</key>
+	<key id="document-name">post</key>
+	<key id="label">label</key>
+	<key id="text">text</key>
+	<key id="editedby">edited by</key>
+	<key id="editeddate">edition date</key>
+	<key id="deletedby">deleted by</key>
+	<key id="number">number</key>
+	<key id="ip">ip</key>
+	<key id="thread">thread</key>
+	<key id="answerof">answer of</key>
 </i18n>

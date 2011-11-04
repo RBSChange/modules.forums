@@ -14,7 +14,7 @@ class forums_BlockDashboardGeneralStatisticsAction extends dashboard_BlockDashbo
 	{
 		if ($request->hasParameter('websiteId'))
 		{
-			$website = DocumentHelper::getDocumentInstance($request->getParameter('websiteId'));
+			$website = website_persistentdocument_website::getInstanceById($request->getParameter('websiteId'));
 		}
 		else
 		{
@@ -24,7 +24,6 @@ class forums_BlockDashboardGeneralStatisticsAction extends dashboard_BlockDashbo
 		{
 			return;
 		}
-		
 		$websiteId = $website->getId();
 		$ms = forums_ModuleService::getInstance();
 		$request->setAttribute('global', $ms->getDashboardGlobalStatisticsByWebsite($website));
@@ -54,7 +53,7 @@ class forums_BlockDashboardGeneralStatisticsAction extends dashboard_BlockDashbo
 				$producer = new forums_WebsiteBasicStatisticsProducer();
 				$chart = new f_chart_BarChart($producer->getDataTable(array('websiteId' => $websiteId, 'mode' => $columnName)));
 				$chart->setGrid(new f_chart_Grid(0, 20));
-				$charts[] = array('chart' => $chart, 'title' => LocaleService::getInstance()->transBO("m.forums.bo.blocks.dashboardgeneralstatistics.column-$columnName", array('ucf')));
+				$charts[] = array('chart' => $chart, 'title' => LocaleService::getInstance()->trans("m.forums.bo.blocks.dashboardgeneralstatistics.column-$columnName", array('ucf')));
 			}			
 			$request->setAttribute('charts', $charts);
 		}

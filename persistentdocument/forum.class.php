@@ -10,24 +10,24 @@ class forums_persistentdocument_forum extends forums_persistentdocument_forumbas
 	 */
 	public function getNbnewpost()
 	{
-		$ms = forums_MemberService::getInstance();
-		$member = forums_MemberService::getInstance()->getCurrentMember();
+		$fps = forums_ForumsprofileService::getInstance();
+		$user = users_UserService::getInstance()->getCurrentUser();
+		$profile = ($user) ? $fps->getByAccessorId($user->getId()) : null;
+		
 		$last = null;
-		if ($member !== null)
+		if ($profile !== null)
 		{
-			$last = $member->getLastReadDateByForumId($this->getId());
+			$last = $profile->getLastReadDateByForumId($this->getId());
 		}
 		if ($last === null)
 		{
-			$last = $ms->getAllReadDate($member);
-		}
-			
+			$last = $fps->getAllReadDate($profile);
+		}			
 		$query = forums_PostService::getInstance()->createQuery()
 			->add(Restrictions::gt('creationdate', $last))
-			->setProjection(Projections::rowCount('count'))
-			->setFetchColumn('count');
+			->setProjection(Projections::rowCount('count'));
 		$query->createCriteria('thread')->add(Restrictions::eq('forum', $this));
-		return f_util_ArrayUtils::firstElement($query->find());
+		return f_util_ArrayUtils::firstElement($query->findColumn('count'));
 	}
 	
 	/**
@@ -39,8 +39,8 @@ class forums_persistentdocument_forum extends forums_persistentdocument_forumbas
 		{
 			return false;
 		}
-		$member = forums_MemberService::getInstance()->getCurrentMember();
-		if ($member === null || $member->isBanned())
+		$user = users_UserService::getInstance()->getCurrentUser();
+		if ($user === null || forums_ModuleService::getInstance()->isBanned($user))
 		{
 			return false;
 		}

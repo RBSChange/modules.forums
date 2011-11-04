@@ -22,19 +22,6 @@
 			</parameters>
 		</rule>
 
-		<rule documentModel="member" viewMode="detail">
-			<template>/member/$name-$id</template>
-			<parameters>
-				<parameter name="name" method="getLabel" />
-			</parameters>
-		</rule>
-		<rule documentModel="member" viewMode="detail" lang="fr">
-			<template>/membre/$name-$id</template>
-			<parameters>
-				<parameter name="name" method="getLabel" />
-			</parameters>
-		</rule>
-
 		<rule redirection="forums/DeletePost">
 			<template>/delete-post.html</template>
 		</rule>

@@ -26,12 +26,12 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	 */
 	public function isEditable()
 	{
-		$member = forums_MemberService::getInstance()->getCurrentMember();
+		$user = users_UserService::getInstance()->getCurrentUser();
 		if (!$this->isVisible())
 		{
 			return false;
 		}
-		else if (forums_ModuleService::getInstance()->hasPermission($member, 'modules_forums.Moderate', $this))
+		else if (forums_ModuleService::getInstance()->hasPermission($user, 'modules_forums.Moderate', $this))
 		{
 			return true;
 		}
@@ -39,7 +39,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 		{
 			return false;
 		}
-		else if ($member !== null && !$member->isBanned() && $this->getPostauthor() !== null && $this->getPostauthor()->getId() == $member->getId())
+		else if ($user !== null && !forums_ModuleService::getInstance()->isBanned($user) && $this->getAuthorid() == $user->getId())
 		{
 			return true;
 		}
@@ -51,12 +51,12 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	 */
 	public function isDeletable()
 	{
-		$member = forums_MemberService::getInstance()->getCurrentMember();
+	$user = users_UserService::getInstance()->getCurrentUser();
 		if (!$this->isVisible())
 		{
 			return false;
 		}
-		else if (forums_ModuleService::getInstance()->hasPermission($member, 'modules_forums.Moderate', $this))
+		else if (forums_ModuleService::getInstance()->hasPermission($user, 'modules_forums.Moderate', $this))
 		{
 			return true;
 		}
@@ -65,7 +65,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 			return false;
 		}
 		// TODO dernier message seulement?
-		else if ($member !== null && !$member->isBanned() && $this->getPostauthor() !== null && $this->getPostauthor()->getId() == $member->getId())
+		else if ($user !== null && !forums_ModuleService::getInstance()->isBanned($user) && $this->getAuthorid() == $user->getId())
 		{
 			return true;
 		}
@@ -77,34 +77,47 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	 */
 	public function isBanable()
 	{
-		$member = forums_MemberService::getInstance()->getCurrentMember();
-		$target = $this->getPostauthor();
-		if ($target === null || $target->isBanned() || $member === null || $member->isBanned() || $target->getId() == $member->getId())
+		$fms = forums_ModuleService::getInstance();
+		$user = users_UserService::getInstance()->getCurrentUser();
+		$author = $this->getAuthoridInstance();
+		if ($user === null || $fms->isBanned($user) || $author === null || $fms->isBanned($author) || $author->getId() == $user->getId())
 		{
 			return false;
 		}
 		
-		$website = $target->getWebsite();
-		if ($target->isSuperModerator($website))
+		if ($fms->isSuperModerator($author))
 		{
 			return false;
 		}
-		else if ($member->isSuperModerator($website))
+		else if ($fms->isSuperModerator($user))
 		{
 			return true;
 		}
 		return false;
 	}
-		
+
+	/**
+	 * @return String
+	 */
+	public function getAuthorProfile()
+	{
+		$user = $this->getAuthoridInstance();
+		if ($user instanceof users_persistentdocument_user)
+		{
+			return $user->getProfile('forums');
+		}
+		return null;
+	}
+	
 	/**
 	 * @return String
 	 */
 	public function getAuthorName()
 	{
-		$member = $this->getPostauthor();
-		if ($member instanceof forums_persistentdocument_member)
+		$user = $this->getAuthoridInstance();
+		if ($user instanceof users_persistentdocument_user)
 		{
-			return $member->getLabel();
+			return $user->getLabel();
 		}
 		return LocaleService::getInstance()->transFO('m.forums.frontoffice.unknown', array('ucf'));
 	}
@@ -112,12 +125,12 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	/**
 	 * @return String
 	 */
-	public function getAuthorNameAsHtml()
+	public function getLastEdithorName()
 	{
-		$member = $this->getPostauthor();
-		if ($member instanceof forums_persistentdocument_member)
+		$user = $this->getEditedbyInstance();
+		if ($user instanceof users_persistentdocument_user)
 		{
-			return $member->getLabelAsHtml();
+			return $user->getLabel();
 		}
 		return LocaleService::getInstance()->transFO('m.forums.frontoffice.unknown', array('ucf'));
 	}
@@ -125,25 +138,12 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	/**
 	 * @return String
 	 */
-	public function getLastEdithorNameAsHtml()
+	public function getSuppressorName()
 	{
-		$member = $this->getEditedby();
-		if ($member instanceof forums_persistentdocument_member)
+		$user = $this->getDeletedbyInstance();
+		if ($user instanceof users_persistentdocument_user)
 		{
-			return $member->getLabelAsHtml();
-		}
-		return LocaleService::getInstance()->transFO('m.forums.frontoffice.unknown', array('ucf'));
-	}
-	
-	/**
-	 * @return String
-	 */
-	public function getSuppressorNameAsHtml()
-	{
-		$member = $this->getDeletedby();
-		if ($member instanceof forums_persistentdocument_member)
-		{
-			return $member->getLabelAsHtml();
+			return $user->getLabel();
 		}
 		return LocaleService::getInstance()->transFO('m.forums.frontoffice.unknown', array('ucf'));
 	}
@@ -157,9 +157,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 		{
 			return false;
 		}
-		
-		$member = forums_MemberService::getInstance()->getCurrentMember();
-		return !forums_ModuleService::getInstance()->hasPermission($member, 'modules_forums.Moderate', $this);
+		return !forums_ModuleService::getInstance()->currentUserHasPermission('modules_forums.Moderate', $this);
 	}
 		
 	/**
@@ -314,9 +312,10 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	 */
 	private function calculatePostNewStatus()
 	{
-		$ms = forums_MemberService::getInstance();
-		$member = $ms->getCurrentMember();
-		$globalLast = $ms->getAllReadDate($member);
+		$fps = forums_ForumsprofileService::getInstance();
+		$user = users_UserService::getInstance()->getCurrentUser();
+		$profile = ($user) ? $fps->getByAccessorId($user->getId()) : null;
+		$globalLast = $fps->getAllReadDate($profile);
 	
 		// A post without a thread is always new (preview).
 		if ($this->getThread() === null)
@@ -326,9 +325,9 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 		
 		// New?
 		$last = null;
-		if ($member !== null)
+		if ($profile !== null)
 		{
-			$last = $member->getLastReadDateByThreadId($this->getThread()->getId());
+			$last = $profile->getLastReadDateByThreadId($this->getThread()->getId());
 		}
 		if ($last === null)
 		{
@@ -341,9 +340,9 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 		
 		// Semi-new?
 		$last = null;
-		if ($member !== null)
+		if ($user !== null)
 		{
-			$last = $member->getMeta('m.forums.lastSessionStart');
+			$last = $user->getMeta('m.forums.lastSessionStart');
 		}
 		if ($last === null)
 		{
@@ -393,35 +392,34 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	/**
 	 * @return String
 	 */
-	public function getTextAsHtml()
-	{
-		$parser = new website_BBCodeParser();
-		return $parser->convertXmlToHtml($this->getText());
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getTextAsBBCode()
-	{
-		$parser = new website_BBCodeParser();
-		return $parser->convertXmlToBBCode($this->getText());
-	}
-
-	/**
-	 * @param string $bbcode
-	 */
-	public function setTextAsBBCode($bbcode)
-	{
-		$parser = new website_BBCodeParser();
-		$this->setText($parser->convertBBCodeToXml($bbcode, $parser->getModuleProfile('forums')));
-	}
-	
-	/**
-	 * @return String
-	 */
 	public function getAnchor()
 	{
 		return 'post-'.$this->getId();
+	}
+	
+	// Deprecated.
+	
+	/**
+	 * @deprecated use getAuthorName
+	 */
+	public function getAuthorNameAsHtml()
+	{
+		return f_util_HtmlUtils::textToHtml($this->getAuthorName());
+	}
+	
+	/**
+	 * @deprecated use getLastEdithorName
+	 */
+	public function getLastEdithorNameAsHtml()
+	{
+		return f_util_HtmlUtils::textToHtml($this->getLastEdithorName());
+	}
+	
+	/**
+	 * @deprecated use getSuppressorName
+	 */
+	public function getSuppressorNameAsHtml()
+	{
+		return f_util_HtmlUtils::textToHtml($this->getSuppressorName());
 	}
 }

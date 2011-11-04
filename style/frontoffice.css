@@ -3,8 +3,7 @@
 	white-space: nowrap;
 }
 .forums-table td,
-.forums-table .column-bullet img,
-.forums-table .column-avatar img
+.forums-table .column-bullet img
 {
 	vertical-align: middle;
 }
@@ -13,11 +12,7 @@
 	min-width: 30px;
 	text-align: center;
 }
-.forums-table .column-avatar
-{
-	min-width: 40px;
-	text-align: center;
-}
+
 .forums-table .column-label
 {
 	width: 100%;
@@ -35,11 +30,18 @@
 	min-width: 150px;
 	text-align: center;
 }
-.forums-table .column-date,
-.forums-table .column-country
+.forums-table .column-date
 {
 	white-space: nowrap;
 	min-width: 100px;
+	text-align: center;
+}
+
+.users-list .column-posts,
+.users-list .column-threads
+{
+	white-space: nowrap;
+	min-width: 75px;
 	text-align: center;
 }
 

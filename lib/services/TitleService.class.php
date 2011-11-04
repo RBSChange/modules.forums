@@ -60,6 +60,14 @@ class forums_TitleService extends f_persistentdocument_DocumentService
 	{
 		return $this->createQuery()->add(Restrictions::eq('website', $website))->find();
 	}
+	
+	/**
+	 * @return forums_persistentdocument_title[]
+	 */
+	public function getAll()
+	{
+		return $this->createQuery()->find();
+	}
 
 	/**
 	 * @param forums_persistentdocument_title $document

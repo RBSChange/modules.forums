@@ -108,7 +108,6 @@ class forums_BlockNewthreadAction extends forums_BlockPostListBaseAction
 		
 		$post = $thread->getFirstPost();
 		$post->setThread($thread);
-		$post->setPostauthor(forums_MemberService::getInstance()->getCurrentMember());
 		$post->setCreationdate(date_Calendar::getInstance()->toString());
 		$request->setAttribute('thread', $thread);
 		

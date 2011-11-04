@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <i18n baseKey="m.forums.document.forum" lcid="en_GB">
-  <include id="m.forums.document.forumgroup"/>
-  <key id="document-name">forum</key>
-  <key id="nbpostperpage">posts per page</key>
+	<include id="m.forums.document.forumgroup" />
+	<key id="document-name">forum</key>
+	<key id="nbpostperpage">posts per page</key>
 </i18n>

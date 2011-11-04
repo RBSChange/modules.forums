@@ -11,10 +11,11 @@ class forums_MarkAllPostsReadAction extends change_Action
 	 */
 	public function _execute($context, $request)
 	{
-		$member = forums_MemberService::getInstance()->getCurrentMember();
-		if ($member !== null)
+		$user = users_UserService::getInstance()->getCurrentUser();
+		if ($user !== null)
 		{
-			$member->markAllPostsAsRead();
+			$profile = forums_ForumsprofileService::getInstance()->getByAccessorId($user->getId(), true);
+			$profile->markAllPostsAsRead();
 		}
 		
 		$url = $request->getParameter('backUrl');

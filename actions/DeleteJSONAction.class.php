@@ -13,11 +13,6 @@ class forums_DeleteJSONAction extends generic_DeleteJSONAction
 			$document->getDocumentService()->deleteDelayed($document);
 			return $this->sendJSON(array('id' => 0));
 		}
-		elseif ($document instanceof forums_persistentdocument_member)
-		{
-			$document->getDocumentService()->deleteDelayed($document, $request->getParameter('deletePosts'));
-			return $this->sendJSON(array('id' => 0));
-		}
 		return parent::_execute($context, $request);
 	}
 }

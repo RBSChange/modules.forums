@@ -27,7 +27,7 @@
 					<td>${global/forums}</td>
 					<td>${global/threads}</td>
 					<td>${global/posts}</td>
-					<td>${global/members}</td>
+					<td>${global/users}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -40,7 +40,7 @@
 					<th tal:condition="columnsArray/forums">${trans:m.forums.bo.blocks.dashboardgeneralstatistics.column-forums,ucf}</th>
 					<th tal:condition="columnsArray/threads">${trans:m.forums.bo.blocks.dashboardgeneralstatistics.column-threads,ucf}</th>
 					<th tal:condition="columnsArray/posts">${trans:m.forums.bo.blocks.dashboardgeneralstatistics.column-posts,ucf}</th>
-					<th tal:condition="columnsArray/members">${trans:m.forums.bo.blocks.dashboardgeneralstatistics.column-members,ucf}</th>
+					<th tal:condition="columnsArray/users">${trans:m.forums.bo.blocks.dashboardgeneralstatistics.column-members,ucf}</th>
 					<th tal:condition="columnsArray/lastlogin">${trans:m.forums.bo.blocks.dashboardgeneralstatistics.column-lastlogin,ucf}</th>
 					<th tal:condition="columnsArray/hasposted">${trans:m.forums.bo.blocks.dashboardgeneralstatistics.column-hasposted,ucf}</th>
 				</tr>
@@ -51,7 +51,7 @@
 					<td tal:condition="columnsArray/forums">${line/forums}</td>
 					<td tal:condition="columnsArray/threads">${line/threads}</td>
 					<td tal:condition="columnsArray/posts">${line/posts}</td>
-					<td tal:condition="columnsArray/members">${line/members}</td>
+					<td tal:condition="columnsArray/users">${line/users}</td>
 					<td tal:condition="columnsArray/lastlogin">${line/lastlogin}</td>
 					<td tal:condition="columnsArray/hasposted">${line/hasposted}</td>
 				</tr>

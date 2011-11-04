@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <i18n baseKey="m.forums.document.forumgroup" lcid="fr_FR">
-  <key id="document-name">groupe de forums</key>
-  <key id="label">nom</key>
-  <key id="label-help">nom</key>
-  <key id="description">description</key>
-  <key id="lockedmode">forum fermé</key>
-  <key id="lockedmode-help">forum fermé en écriture</key>
-  <key id="locked">forum fermé</key>
-  <key id="locked-help">forum fermé en écriture</key>
-  <key id="mount-parent">point de montage</key>
-  <key id="mount-parent-help">rubrique ou site dans lequel ce forum doit apparaître.</key>
-  <key id="excludefromrss">exclure des flux RSS</key>
-  <key id="excludefromrss-help">Permet d'exclure des flux RSS générés sur le site l'ensemble des sujets et messages de ce forum.</key>
-  <key id="excludefromrssmode">exclure des flux RSS</key>
-  <key id="excludefromrssmode-help">Permet d'exclure des flux RSS générés sur le site l'ensemble des sujets et messages de ce forum.</key>
-  <key id="metatitle">nom</key>
-  <key id="metatitle-help">nom utilisable dans les métas de page</key>
-  <key id="metadescription">description</key>
-  <key id="metadescription-help">description utilisable dans les métas de page</key>
-  <key id="metakeywords">mots-clés</key>
-  <key id="metakeywords-help">mots-clés utilisable dans les métas de page</key>
+	<include id="m.generic.document.document" />
+	<key id="document-name">groupe de forums</key>
+	<key id="label">nom</key>
+	<key id="label-help">nom</key>
+	<key id="description">description</key>
+	<key id="lockedmode">forum fermé</key>
+	<key id="lockedmode-help">forum fermé en écriture</key>
+	<key id="locked">forum fermé</key>
+	<key id="locked-help">forum fermé en écriture</key>
+	<key id="mount-parent">point de montage</key>
+	<key id="mount-parent-help">rubrique ou site dans lequel ce forum doit apparaître.</key>
+	<key id="excludefromrss">exclure des flux RSS</key>
+	<key id="excludefromrss-help">Permet d'exclure des flux RSS générés sur le site l'ensemble des sujets et messages de ce forum.</key>
+	<key id="excludefromrssmode">exclure des flux RSS</key>
+	<key id="excludefromrssmode-help">Permet d'exclure des flux RSS générés sur le site l'ensemble des sujets et messages de ce forum.</key>
+	<key id="metatitle">nom</key>
+	<key id="metatitle-help">nom utilisable dans les métas de page</key>
+	<key id="metadescription">description</key>
+	<key id="metadescription-help">description utilisable dans les métas de page</key>
+	<key id="metakeywords">mots-clés</key>
+	<key id="metakeywords-help">mots-clés utilisable dans les métas de page</key>
 </i18n>

@@ -23,17 +23,19 @@ class forums_BlockForumcontextuallistAction extends website_BlockAction
 			return website_BlockView::NONE;
 		}
 		
-		$member = forums_MemberService::getInstance()->getCurrentMember();
-		$request->setAttribute('member', $member);
+		$user = users_UserService::getInstance()->getCurrentUser();
+		$this->getRequest()->setAttribute('user', $user);
+		$profile = ($user) ? forums_ForumsprofileService::getInstance()->getByAccessorId($user->getId(), true) : null;
+		$this->getRequest()->setAttribute('profile', $profile);
 		
 		$handleMemberActions = $this->getConfiguration()->getShowGlobalMemberActions();
 		$request->setAttribute('hideMemberActions', !$handleMemberActions);
 		$request->setAttribute('currentUrl', LinkHelper::getCurrentUrl());
 		
 		// Mark all posts as read if asked.
-		if ($handleMemberActions && $member !== null && $request->hasParameter('markAllPostsRead'))
+		if ($handleMemberActions && $user !== null && $request->hasParameter('markAllPostsRead'))
 		{
-			$member->markAllPostsAsRead();
+			$profile->markAllPostsAsRead();
 		}
 		
 		$request->setAttribute('parent', $this->getContext()->getParent());
@@ -54,7 +56,7 @@ class forums_BlockForumcontextuallistAction extends website_BlockAction
 		$request->setAttribute('parent', $parent);
 		if ($parent instanceof website_persistentdocument_systemtopic)
 		{
-			$parentReference = $parent->getReference();
+			$parentReference = $parent->getReferenceIdInstance();
 			if ($parentReference instanceof forums_persistentdocument_forumgroup)
 			{
 				$request->setAttribute('forumgroup', $parentReference);

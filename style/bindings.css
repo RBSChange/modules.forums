@@ -4,9 +4,6 @@
 #wmodule_forums cfield[fieldtype="ranklist"]{
 	-moz-binding: url(binding:modules.forums.cForumsEditor#cRankList);
 }
-#edt_forums_member cpublicationsection{
-	-moz-binding: url(binding:modules.forums.cForumsEditor#cPublicationSection);
-}
-wdialog[template="forums_ConfirmDeletion"]{
-	-moz-binding: url(binding:modules.forums.cForumsEditor#cConfirmDeletionDialog);
+profile[name="forums"]{
+	-moz-binding: url(binding:modules.forums.cProfile#cForumsProfile);
 }

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.forums.document.forumsprofile" lcid="fr_FR">
+	<include id="m.users.document.profile" />
+	<key id="document-name">profil forums</key>
+	<key id="signature">signature</key>
+	<key id="forummembertitle">titre</key>
+	<key id="forummembertitle-help">Titres du membre affichés dans les messages, les profils et la liste des membres. Ces titres ne sont qu'affichés et n'influent en aucune manière sur les permissions du membre.</key>
+	<key id="rank">rang</key>
+</i18n>

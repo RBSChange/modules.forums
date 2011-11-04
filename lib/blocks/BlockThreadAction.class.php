@@ -37,28 +37,29 @@ class forums_BlockThreadAction extends forums_BlockPostListBaseAction
 			return website_BlockView::NONE;
 		}
 		$threadService = $thread->getDocumentService();
-				
+
 		if ($request->hasParameter('privatenote') || $request->hasNonEmptyParameter('follow') || $request->hasNonEmptyParameter('unfollow'))
 		{	
 			$tm = f_persistentdocument_TransactionManager::getInstance();
 			try
 			{
 				$tm->beginTransaction();
+				$user = users_UserService::getInstance()->getCurrentUser();
 				if ($request->hasParameter('privatenote') && $thread->isEditable())
 				{
 					$thread->setPrivatenoteAsBBCode($request->getParameter('privatenote'));
-					$thread->setPrivatenoteby(forums_MemberService::getInstance()->getCurrentMember());
+					$thread->setPrivatenoteby($user);
 					$thread->save();
 				}
 				
 				if ($request->hasNonEmptyParameter('follow'))
 				{
-					$thread->addFollowers(forums_MemberService::getInstance()->getCurrentMember());
+					$thread->addFollowers($user);
 					$thread->save();
 				}
 				if ($request->hasNonEmptyParameter('unfollow'))
 				{
-					$thread->removeFollowers(forums_MemberService::getInstance()->getCurrentMember());
+					$thread->removeFollowers($user);
 					$thread->save();
 				}
 				$tm->commit();
@@ -84,11 +85,12 @@ class forums_BlockThreadAction extends forums_BlockPostListBaseAction
 		$paginator = new paginator_Paginator('forums', $page, $posts, $itemPerPage);
 		$paginator->setItemCount($thread->getNbpost());
 		$paginator->setExcludeParameters(array('postId'));
-				
-		$member = forums_MemberService::getInstance()->getCurrentMember();
-		if ($member !== null && count($posts) > 0)
+
+		$user = users_UserService::getInstance()->getCurrentUser();
+		if ($user !== null && count($posts) > 0)
 		{
-			$member->getDocumentService()->setPostAsReadForMember($member, f_util_ArrayUtils::lastElement($posts));
+			$post = f_util_ArrayUtils::lastElement($posts);
+			$post->getDocumentService()->setAsReadForUser($post, $user);
 		}
 		
 		if ($thread->canFollow())
@@ -180,16 +182,18 @@ class forums_BlockThreadAction extends forums_BlockPostListBaseAction
 		
 		if (!$this->canModerate($thread))
 		{
-			$this->addError(LocaleService::getInstance()->transFO('m.forums.frontoffice.you-dont-have-permission', array('ucf')));
-			return website_BlockView::ERROR;
+			$this->addError(LocaleService::getInstance()->trans('m.forums.frontoffice.you-dont-have-permission', array('ucf')));
+			return $this->getForbiddenView();
 		}
 		
-		$website = $thread->getForum()->getWebsite();
+		$forum = $thread->getForum();
+		$website = $forum->getWebsite();
 		$forums = forums_ForumService::getInstance()->createQuery()->add(Restrictions::published())
 			->add(Restrictions::eq('website', $website))
-			->add(Restrictions::ne('id', $website->getId()))
+			->add(Restrictions::ne('id', $forum->getId()))
 			->find();
 		$request->setAttribute('forums', $forums);
+		Framework::fatal(__METHOD__ . count($forums));
 		
 		return 'Chooseforum';
 	}
@@ -214,22 +218,19 @@ class forums_BlockThreadAction extends forums_BlockPostListBaseAction
 		
 		if (!$this->canModerate($thread))
 		{
-			$this->addError(LocaleService::getInstance()->transFO('m.forums.frontoffice.you-dont-have-permission', array('ucf')));
-			return website_BlockView::ERROR;
+			$this->addError(LocaleService::getInstance()->trans('m.forums.frontoffice.you-dont-have-permission', array('ucf')));
+			return $this->getForbiddenView();
 		}
 		
 		$forum = forums_persistentdocument_forum::getInstanceById($request->getParameter('forumId'));
 		$website = $thread->getForum()->getWebsite();
-		if ($website != $forum->getWebsite)
+		if ($website != $forum->getWebsite())
 		{
-			$thread->setForum($forum);
-			$thread->save();
+			$this->addError(LocaleService::getInstance()->trans('m.forums.frontoffice.invalid-forum', array('ucf')));
+			return $this->getForbiddenView();
 		}
-		else 
-		{
-			$this->addError(LocaleService::getInstance()->transFO('m.forums.frontoffice.invalid-forum', array('ucf')));
-			return website_BlockView::ERROR;
-		}
+		$thread->setForum($forum);
+		$thread->save();
 		
 		$this->redirectToUrl(LinkHelper::getDocumentUrl($forum));
 		return website_BlockView::NONE;
@@ -241,7 +242,6 @@ class forums_BlockThreadAction extends forums_BlockPostListBaseAction
 	 */
 	private function canModerate($thread)
 	{
-		$member = forums_MemberService::getInstance()->getCurrentMember();
-		return forums_ModuleService::getInstance()->hasPermission($member, 'modules_forums.Moderate', $thread);
+		return forums_ModuleService::getInstance()->currentUserHasPermission('modules_forums.Moderate', $thread);
 	}
 }

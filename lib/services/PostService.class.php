@@ -145,10 +145,6 @@ class forums_PostService extends f_persistentdocument_DocumentService
 			$document->setIp(trim(f_util_ArrayUtils::lastElement(explode(',', $ip))));
 			$document->setMeta('author_IP', $ip);
 		}
-		if ($document->getPostauthor() === null)
-		{
-			$document->setPostauthor(forums_MemberService::getInstance()->getCurrentMember());
-		}
 		
 		if ($parentNodeId !== null && $document->getThread() === null)
 		{
@@ -161,10 +157,11 @@ class forums_PostService extends f_persistentdocument_DocumentService
 						
 		if ($document->getLabel() === null)
 		{
+			$author = $document->getAuthoridInstance();
 			$replacements = array(
-				'author' => ($document->getPostauthor() !== null) ? $document->getPostauthor()->getLabel() : '[...]'
+				'author' => ($author !== null) ? $author->getLabel() : '[...]'
 			);
-			$document->setLabel(LocaleService::getInstance()->transFO('m.forums.document.post.label-patern', array('ucf'), $replacements));
+			$document->setLabel(LocaleService::getInstance()->transData('m.forums.document.post.label-patern', array('ucf'), $replacements));
 		}
 	}
 	
@@ -300,61 +297,77 @@ class forums_PostService extends f_persistentdocument_DocumentService
 	}
 	
 	/**
-	 * @param forums_persistentdocument_member $member
-	 * @param integer $max the maximum number of posts that can treat
-	 * @return integer the number of treated posts
-	 */	
-	public function treatPostsForMemberDeletion($member, $max)
+	 * @param integer $userId
+	 * @return integer
+	 */
+	public function getCountByAuthorid($userId)
 	{
-		$count = 0;
-		foreach (array('postauthor', 'editedby', 'deletedby') as $fieldName)
-		{
-			$query = $this->createQuery();
-			$query->add(Restrictions::eq($fieldName, $member));
-			$query->setFirstResult(0)->setMaxResults($max - $count);
-			$posts = $query->find();
-			foreach ($posts as $post)
-			{
-				/* @var $post forums_persistentdocument_post */
-				$post->getDocumentService()->treatPostForMemberDeletion($post, $member);
-			}
-			$count += count($posts);
-		}
-		if (Framework::isInfoEnabled())
-		{
-			Framework::info(__METHOD__ . ' ' . $count . ' posts treated');
-		}
-		return $count;
+		$row = $this->createQuery()->add(Restrictions::eq('authorid', $userId))->setProjection(Projections::rowCount('nb'))->findUnique();
+		return $row['nb'];
 	}
 	
 	/**
 	 * @param forums_persistentdocument_post $post
-	 * @param forums_persistentdocument_member $member
-	 */	
-	protected function treatPostForMemberDeletion($post, $member)
+	 * @param users_persistentdocument_user $user
+	 */
+	public function setAsReadForUser($post, $user)
 	{
-		if (DocumentHelper::equals($post->getPostauthor(), $member))
+		if (!$user) { return; }		
+		try
 		{
-			$post->setPostauthor(null);
-			if ($member->getMeta('deletePosts') == 'true' && $post->getDeleteddate() == null)
+			$this->tm->beginTransaction();
+			
+			$profile = forums_ForumsprofileService::getInstance()->getByAccessorId($user->getId(), true);
+			$allReadDate = $profile->getDocumentService()->getAllReadDate($profile);
+			
+			// By thread...
+			$track = $profile->getDecodedTrackingByThread();
+			$thread = $post->getThread();
+			$threadId = $thread->getId();
+			$postDate = $post->getCreationdate();
+			if (!isset($track[$threadId]))
 			{
-				$post->setDeleteddate(date_Calendar::now()->toString());
-				$post->setMeta('deletedOnMemberDeletion', true);
+				$profile->setTempLastReadDateByThreadId($threadId, $allReadDate);
 			}
+			else if ($track[$threadId] < $postDate)
+			{
+				$profile->setTempLastReadDateByThreadId($threadId, $track[$threadId]);
+			}
+			if ($postDate > $allReadDate)
+			{
+				if (!isset($track[$threadId]) || $track[$threadId] < $postDate)
+				{
+					$track[$threadId] = $postDate;
+				}
+			}
+			else if (isset($track[$threadId]) && $track[$threadId] <= $allReadDate)
+			{
+				unset($track[$threadId]);
+			}
+			$profile->setTrackingByThread($track);
+			
+			// By forum...
+			$track = $profile->getDecodedTrackingByForum();
+			$forumId = $thread->getForum()->getId();
+			if ($postDate > $allReadDate)
+			{
+				if (!isset($track[$forumId]) || $track[$forumId] < $postDate)
+				{
+					$track[$forumId] = $postDate;
+				}
+			}
+			else if (isset($track[$forumId]) && $track[$forumId] <= $allReadDate)
+			{
+				unset($track[$forumId]);
+			}
+			$profile->setTrackingByForum($track);
+			
+			$this->pp->updateDocument($profile);
+			$this->tm->commit();
 		}
-		
-		if (DocumentHelper::equals($post->getEditedby(), $member))
+		catch (Exception $e)
 		{
-			$post->setEditedby(null);
-			$post->setMeta('editedByDeletedMember', $member->getLabel() . ' (' . $member->getId() . ')');
+			$this->tm->rollBack($e);
 		}
-		
-		if (DocumentHelper::equals($post->getDeletedby(), $member))
-		{
-			$post->setDeletedby(null);
-			$post->setMeta('deletedByDeletedMember', $member->getLabel() . ' (' . $member->getId() . ')');
-		}
-		
-		$post->save();
 	}
 }

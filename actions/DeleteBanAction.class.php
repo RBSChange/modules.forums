@@ -11,28 +11,27 @@ class forums_DeleteBanAction extends change_Action
 	 */
 	public function _execute($context, $request)
 	{
-		$member = forums_MemberService::getInstance()->getCurrentMember();
-		$ban = forums_persistentdocument_ban::getInstanceById($this->getDocumentIdFromRequest($request));
-		if ($member instanceof forums_persistentdocument_member)
+		$user = users_UserService::getInstance()->getCurrentUser();
+		if ($user instanceof users_persistentdocument_user && forums_ModuleService::getInstance()->isSuperModerator($user))
 		{
-			$website = website_WebsiteService::getInstance()->getCurrentWebsite();
-			if ($member->isSuperModerator($website))
+			$tm = $this->getTransactionManager();
+			try
 			{
-				$tm = $this->getTransactionManager();
-				try
-				{
-					$tm->beginTransaction();
-					$bannedMember = $ban->getMember();
-					$bannedMember->setBan(null);
-					$bannedMember->save();
-					$ban->setTo(date_Calendar::now());
-					$ban->save();
-					$tm->commit();	
+				$tm->beginTransaction();
+				$ban = forums_persistentdocument_ban::getInstanceById($this->getDocumentIdFromRequest($request));
+				$profile = $ban->getMember()->getProfile('forums');
+				if ($profile) 
+				{ 
+					$profile->setBan(null);
+					$profile->save();
 				}
-				catch (Exception $e)
-				{
-					$tm->rollBack($e);
-				}
+				$ban->setTo(date_Calendar::now());
+				$ban->save();
+				$tm->commit();	
+			}
+			catch (Exception $e)
+			{
+				$tm->rollBack($e);
 			}
 		}
 		change_Controller::getInstance()->redirectToUrl(LinkHelper::getDocumentUrl($ban->getMember()));

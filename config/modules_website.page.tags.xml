@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tags extends="generic">
-	<tag labeli18n="m.forums.bo.tags.forum-detail" icon="forum">functional_forums_forum-detail</tag>
-	<tag labeli18n="m.forums.bo.tags.forum-list" icon="list-block">functional_forums_forum-list</tag>
-	<tag labeli18n="m.forums.bo.tags.thread-detail" icon="thread">functional_forums_thread-detail</tag>
-	<tag labeli18n="m.forums.bo.tags.newthread" icon="add">functional_forums_thread-new</tag>
-	<tag labeli18n="m.forums.bo.tags.newpost" icon="add">functional_forums_post-new</tag>
-	<tag labeli18n="m.forums.bo.tags.editpost" icon="edit">functional_forums_post-edit</tag>
-	<tag labeli18n="m.forums.bo.tags.member-detail" icon="member">contextual_website_website_modules_forums_member</tag>
-	<tag labeli18n="m.forums.bo.tags.member-ban" icon="member">contextual_website_website_modules_forums_memberban</tag>
-	<tag labeli18n="m.forums.bo.tags.memberlist-block" icon="list-block">contextual_website_website_modules_forums_memberlist</tag>
-	<tag labeli18n="m.forums.bo.tags.editprofile-block" icon="edit">contextual_website_website_modules_forums_editprofile</tag>
-</tags>
+<bocks extends="generic">
+	<tag labeli18n="m.forums.bo.blocks.forumdetail.title" icon="forum">functional_forums_forum-detail</tag>
+	<tag labeli18n="m.forums.bo.blocks.forumcontextuallist.title" icon="list-block">functional_forums_forum-list</tag>
+	<tag labeli18n="m.forums.bo.blocks.thread.title" icon="thread">functional_forums_thread-detail</tag>
+	<tag labeli18n="m.forums.bo.blocks.newthread.title" icon="add">functional_forums_thread-new</tag>
+	<tag labeli18n="m.forums.bo.blocks.newpost.title" icon="add">functional_forums_post-new</tag>
+	<tag labeli18n="m.forums.bo.blocks.editpost.title" icon="edit">functional_forums_post-edit</tag>
+	<tag labeli18n="m.forums.bo.blocks.memberban.title" icon="member">contextual_website_website_modules_forums_memberban</tag>
+</bocks>

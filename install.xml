@@ -1,4 +1,2 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<install type="modules" name="forums" version="4.0.0">
-  <package type="modules" name="zone"/>
-</install>
+<install type="modules" name="forums" version="4.0.0" />

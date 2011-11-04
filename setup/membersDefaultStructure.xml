@@ -2,35 +2,18 @@
 <script>
 	<binding fileName="modules/website/persistentdocument/import/website_binding.xml" />
 	
-	<website byDocumentId-attr="">	
-		<topic label="Membres">
-			<page label="Liste des membres" isIndexPage="true" navigationVisibility="hidden" indexingstatus="false">
-				<tag name="contextual_website_website_modules_forums_memberlist" />
-				<changecontent for="content-block">
-					<changeblock type="modules_forums_memberlist" />
-				</changecontent>
-			</page>
+	<topic byDocumentId-attr="">
+		<page byTag="contextual_website_website_modules_users_userslist">
+			<changecontent for="content-block">
+				<changeblock type="modules_forums_memberlist" />
+			</changecontent>
+		</page>
 			
-			<page label="Membre" navigationVisibility="hidden" indexingstatus="false" metatitle="{forums_member.login} - Profil du membre" description="Profil de {forums_member.login} - membre depuis {forums_member.registrationdate}" keywords="profil, membre, {forums_member.login}">
-				<tag name="contextual_website_website_modules_forums_member" />
-				<changecontent for="content-block">
-					<changeblock type="modules_forums_member" />
-				</changecontent>
-			</page>
-			
-			<page label="Modifier le profil d'un membre" navigationVisibility="hidden" indexingstatus="false">
-				<tag name="contextual_website_website_modules_forums_editprofile" />
-				<changecontent for="content-block">
-					<changeblock type="modules_forums_editprofile" />
-				</changecontent>
-			</page>
-			
-			<page label="Bannir un membre" navigationVisibility="hidden" indexingstatus="false">
-				<tag name="contextual_website_website_modules_forums_memberban" />
-				<changecontent for="content-block">
-					<changeblock type="modules_forums_memberban" />
-				</changecontent>
-			</page>
-		</topic>
-	</website>
+		<page byTag="contextual_website_website_modules_forums_memberban" label="Bannir un membre"
+			navigationVisibility="hidden" indexingstatus="false">
+			<changecontent for="content-block">
+				<changeblock type="modules_forums_memberban" />
+			</changecontent>
+		</page>
+	</topic>
 </script>

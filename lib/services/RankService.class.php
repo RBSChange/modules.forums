@@ -51,13 +51,13 @@ class forums_RankService extends f_persistentdocument_DocumentService
 	{
 		return $this->pp->createQuery('modules_forums/rank', false);
 	}
-	
+		
 	/**
-	 * @param forums_persistentdocument_member $member
+	 * @param users_persistentdocument_user $user
 	 */
-	public function getByMember($member)
+	public function getByUser($user)
 	{
-		$quantity = $member->getNbpost();
+		$quantity = forums_PostService::getInstance()->getCountByAuthorid($user->getId());
 		$query = $this->createQuery()
 			->add(Restrictions::published())
 			->add(Restrictions::eq('website', website_WebsiteService::getInstance()->getCurrentWebsite()))
@@ -157,5 +157,15 @@ class forums_RankService extends f_persistentdocument_DocumentService
 			$rank->setModificationdate(null);
 			$rank->save();
 		}
+	}
+	
+	// Deprecated 
+	
+	/**
+	 * @deprecated use getByUser
+	 */
+	public function getByMember($member)
+	{
+		return null;
 	}
 }

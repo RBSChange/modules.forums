@@ -1,36 +1,41 @@
-<h1 change:h="">${trans:m.forums.frontoffice.member-list,ucf}</h1>
-<table class="normal" cellspacing="0" cellpadding="0">
+<h1 change:h="">${trans:m.users.fo.member-list,ucf}</h1>
+<table class="normal users-list" cellspacing="0" cellpadding="0">
 	<thead>
 		<tr>
 			<th class="column-avatar" />
-			<th class="column-label">${trans:m.forums.frontoffice.member-name,ucf}</th>
-			<th class="column-date">${trans:m.forums.frontoffice.member-since,ucf}</th>
+			<th class="column-label">${trans:m.users.document.user.label,ucf}</th>
+			<th class="column-date">${trans:m.users.fo.member-since,ucf}</th>
 			<th class="column-threads">${trans:m.forums.frontoffice.threads,ucf}</th>
 			<th class="column-posts">${trans:m.forums.frontoffice.posts,ucf}</th>
-			<th class="column-country">${trans:m.forums.frontoffice.country,ucf}</th>
+			<th class="column-website">${trans:m.users.fo.web-site,ucf}</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr tal:repeat="member paginator" class="row-${php: repeat.member.odd ? '1' : '0'}">
-			<td class="column-avatar"><img class="image" src="${php: member->getGravatarUrl(32)}" alt="" /></td>
-			<td class="column-label">
-				<a change:link="document member">${structure member/getLabelAsHtml}</a>
-				<dl tal:define="count member/getPublishedTitleCount" tal:condition="count" class="inline-list">
-					<dt>
-						<tal:block tal:condition="php: count == 1">${trans:m.forums.frontoffice.member-title,ucf}</tal:block>
-						<tal:block tal:condition="php: count > 1">${trans:m.forums.frontoffice.member-titles,ucf}</tal:block>
-					</dt>
-					<dd tal:repeat="title member/getPublishedTitleArray">
-						<strong>${structure title/getLabelAsHtml}</strong>
-						<span tal:condition="php: repeat.title.index LT (repeat.title.length - 2)">, </span>
-						<span tal:condition="php: repeat.title.index EQ (repeat.title.length - 2)">${trans:m.forums.frontoffice.and}</span>
-					</dd>
-				</dl>			
-			</td>
-			<td class="column-date" change:memberdate="value member/getCreationdate; mode 'short'" />
-			<td class="column-threads">${member/getNbthread}</td>
-			<td class="column-posts">${member/getNbpost}</td>
-			<td class="column-country">${structure member/getCountry/getLabelAsHtml}</td>
+		<tr tal:repeat="user paginator" class="${php: repeat.user.odd ? 'odd' : 'even'}">
+			<tal:block tal:define="userprofile user/getUsersProfile; forumsprofile php: user.getProfile('forums')">
+				<td class="column-avatar"><img change:avatar="user user" /></td>
+				<td class="column-label">
+					<a change:link="document user">${user/getLabel}</a>
+					<dl tal:define="count forumsprofile/getPublishedForumMemberTitleCount" tal:condition="count" class="inline-list">
+						<dt>
+							<tal:block tal:condition="php: count == 1">${trans:m.forums.frontoffice.member-title,ucf}</tal:block>
+							<tal:block tal:condition="php: count > 1">${trans:m.forums.frontoffice.member-titles,ucf}</tal:block>
+						</dt>
+						<dd tal:repeat="title forumsprofile/getPublishedForumMemberTitleArray">
+							<strong>${title/getLabel}</strong>
+							<span tal:condition="php: repeat.title.index LT (repeat.title.length - 2)">,</span>
+							<span tal:condition="php: repeat.title.index EQ (repeat.title.length - 2)">${trans:m.forums.frontoffice.and}</span>
+						</dd>
+					</dl>
+					<p tal:condition="userprofile/getLocation">${trans:m.users.document.usersprofile.location,ucf,lab} ${userprofile/getLocation}</p>
+				</td>
+				<td class="column-date">${datetime:user/getUICreationdate}</td>
+				<td class="column-threads">${forumsprofile/getNbthread | '0'}</td>
+				<td class="column-posts">${forumsprofile/getNbpost | '0'}</td>
+				<td class="column-website">
+					<a tal:condition="userprofile/getPersonnalwebsiteurl" class="link" url="${userprofile/getPersonnalwebsiteurl}" title="${trans:m.users.fo.go-to-personnal-web-site,ucf,attr,name=user/getLabel}">${trans:m.users.fo.web-site,ucf}</a>
+				</td>
+			</tal:block>
 		</tr>
 	</tbody>
 </table>

@@ -78,18 +78,11 @@
 			<meta name="forumname" allow="title,description" />
 		</metas>
 	</block>
-	<block type="modules_forums_member" icon="member">
-		<metas>
-			<meta name="login" allow="title,description,keywords" />
-			<meta name="registrationdate" allow="title,description" />
-		</metas>
-	</block>
-	<block type="modules_forums_memberlist" icon="list-block">
+	<block type="modules_forums_memberlist" icon="list-block" requestModule="users">
 		<parameters>
-			<parameter name="nbitemperpage" type="Integer" default-value="20" />
+			<parameter name="itemsperpage" type="Integer" default-value="20" />
 		</parameters>
 	</block>
-	<block type="modules_forums_editprofile" icon="edit"  />
 	<block type="modules_forums_memberban" icon="document" />
 	<block type="modules_forums_RssMenu" hidden="true" />
 	<!-- Dashboard blocks. -->

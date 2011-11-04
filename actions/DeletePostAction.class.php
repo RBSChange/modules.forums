@@ -15,7 +15,7 @@ class forums_DeletePostAction extends change_Action
 			$post = DocumentHelper::getDocumentInstance($request->getParameter('id'));
 			if ($post instanceof forums_persistentdocument_post && $post->isDeletable())
 			{
-				$post->setDeletedby(forums_MemberService::getInstance()->getCurrentMember());
+				$post->setDeletedby(users_UserService::getInstance()->getCurrentUser());
 				$post->setDeleteddate(date_Calendar::now()->toString());
 				$post->save();
 				$url = $post->getPostUrlInThread();

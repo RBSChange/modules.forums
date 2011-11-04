@@ -10,13 +10,12 @@ $notif = $ns->getConfiguredByCodeName('modules_forums/follower', $ds->getWebsite
 $num = 1 + ($thread->getNbpost() - $thread->getTofollow()->getNumber());
 if ($notif instanceof notification_persistentdocument_notification)
 {
-	foreach ($thread->getFollowersArray() as $member)
+	foreach ($thread->getFollowersArray() as $user)
 	{
-		$user = $member->getUser();
 		if ($user->isPublished())
 		{
 			$callback = array($ds, 'getNotificationParameters');
-			$params = array('thread' => $thread, 'member' => $member, 'specificParams' => array('NUM' => $num));
+			$params = array('thread' => $thread, 'user' => $user, 'specificParams' => array('NUM' => $num));
 			$user->getDocumentService()->sendNotificationToUserCallback($notif, $user, $callback, $params);
 		}
 		else

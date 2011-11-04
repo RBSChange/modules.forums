@@ -4,7 +4,7 @@
 	<div tal:condition="forumgroup/getDescription" class="normal">${structure forumgroup/getDescriptionAsHtml}</div>
 </tal:block>
 
-<tal:block change:include="module 'forums'; template 'Forums-Inc-ForumList-Success'; type 'html'; forums forums; member member; hideMemberActions hideMemberActions" />
+<tal:block change:include="module 'forums'; template 'Forums-Inc-ForumList-Success'; type 'html'; forums forums; user user; profile profile; hideMemberActions hideMemberActions" />
 
 <tal:block tal:condition="forumgroup" change:block="" module="forums" name="RssMenu" parentref="${forumgroup/getId}" />
 <tal:block tal:condition="not:forumgroup" change:block="" module="forums" name="RssMenu" parentref="${parent/getId}" />

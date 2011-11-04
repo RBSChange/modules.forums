@@ -9,7 +9,7 @@
 	</thead>
 	<tbody>
 		<tal:block tal:repeat="thread threads">
-			<tr tal:define="newCount thread/getNbnewpost ; postCount thread/getNbpost" class="row-${php: repeat.thread.odd ? '1' : '0'}">
+			<tr tal:define="newCount thread/getNbnewpost ; postCount thread/getNbpost" class="${php: repeat.thread.odd ? 'odd' : 'even'}">
 				<td class="column-bullet" >
 					<tal:block tal:condition="thread/isLocked">
 						<img tal:condition="php: newCount >= 1 && newCount == postCount" change:img="front/new-thread-locked.png" title="${trans: m.forums.frontoffice.is-new-thread-locked,ucf}" />
@@ -34,12 +34,12 @@
 					</dl>
 				</td>
 				<td class="column-posts">${php: postCount-1}</td>
-				<td class="column-last-post" tal:define="lastPost thread/getLastPost; lastPostAuthor lastPost/getPostAuthor">
-					<tal:block change:memberdate="value lastPost/getCreationdate; mode 'long'" />
+				<td class="column-last-post" tal:define="lastPost thread/getLastPost; lastAuthor lastPost/getAuthoridInstance">
+					${datetime:lastPost/getUICreationdate}
 					<br />
 					${trans: m.forums.frontoffice.by}
-					<a tal:condition="lastPostAuthor" change:link="document lastPostAuthor">${lastPostAuthor/getLabel}</a>
-					<tal:block tal:condition="not: lastPostAuthor">${trans:m.forums.frontoffice.unknown,ucf}</tal:block>
+					<a tal:condition="lastAuthor" change:link="document lastAuthor">${lastAuthor/getLabel}</a>
+					<tal:block tal:condition="not: lastAuthor">${trans:m.forums.frontoffice.unknown,ucf}</tal:block>
 				</td>
 			</tr>
 		</tal:block>

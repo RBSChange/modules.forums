@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <script>
-  <binding fileName="modules/generic/persistentdocument/import/generic_binding.xml"/>
-  <binding name="forum" className="forums_ForumScriptDocumentElement"/>
-  <binding name="thread" className="forums_ThreadScriptDocumentElement"/>
-  <binding name="post" className="forums_PostScriptDocumentElement"/>
-  <binding name="ban" className="forums_BanScriptDocumentElement"/>
-  <binding name="member" className="forums_MemberScriptDocumentElement"/>
-  <binding name="rank" className="forums_RankScriptDocumentElement"/>
-  <binding name="title" className="forums_TitleScriptDocumentElement"/>
-  <binding name="websitefolder" className="forums_WebsitefolderScriptDocumentElement"/>
-  <binding name="forumgroup" className="forums_ForumgroupScriptDocumentElement"/>
+	<binding fileName="modules/generic/persistentdocument/import/generic_binding.xml" />
+	<binding name="forum" className="forums_ForumScriptDocumentElement" />
+	<binding name="thread" className="forums_ThreadScriptDocumentElement" />
+	<binding name="post" className="forums_PostScriptDocumentElement" />
+	<binding name="ban" className="forums_BanScriptDocumentElement" />
+	<binding name="rank" className="forums_RankScriptDocumentElement" />
+	<binding name="title" className="forums_TitleScriptDocumentElement" />
+	<binding name="websitefolder" className="forums_WebsitefolderScriptDocumentElement" />
+	<binding name="forumgroup" className="forums_ForumgroupScriptDocumentElement" />
+	<binding name="forumsprofile" className="forums_ForumsprofileScriptDocumentElement" />
 </script>

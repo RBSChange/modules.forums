@@ -22,7 +22,10 @@ abstract class forums_BlockPostListBaseAction extends forums_BaseBlockAction
 		$displayConfig['showSignatures'] = $this->getConfigurationValue('showSignatures', true);
 		$displayConfig['showActions'] = $this->getConfigurationValue('showActions', false);
 		$displayConfig['showPagination'] = $this->getConfigurationValue('showPagination', true);
-		$displayConfig['currentMember'] = forums_MemberService::getInstance()->getCurrentMember();
+		$user = users_UserService::getInstance()->getCurrentUser();
+		$displayConfig['currentUser'] = $user;
+		$profile = ($user) ? forums_ForumsprofileService::getInstance()->getByAccessorId($user->getId(), true) : null;
+		$displayConfig['currentProfile'] = $profile;
 		
 		return $displayConfig;
 	}

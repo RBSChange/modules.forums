@@ -26,8 +26,8 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	 */
 	public function isWriteable()
 	{
-		$member = forums_MemberService::getInstance()->getCurrentMember();
-		if (!$this->isVisible() || $member === null || $member->isBanned())
+		$user = users_UserService::getInstance()->getCurrentUser();
+		if (!$this->isVisible() || $user === null || forums_ModuleService::getInstance()->isBanned($user))
 		{
 			return false;
 		}
@@ -55,17 +55,16 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	 */
 	public function isEditable()
 	{
-		$member = forums_MemberService::getInstance()->getCurrentMember();
-		$author = $this->getThreadauthor();
+		$user = users_UserService::getInstance()->getCurrentUser();
 		if (!$this->isVisible())
 		{
 			return false;
 		}
-		elseif (forums_ModuleService::getInstance()->hasPermission($member, 'modules_forums.Moderate', $this))
+		elseif (forums_ModuleService::getInstance()->hasPermission($user, 'modules_forums.Moderate', $this))
 		{
 			return true;
 		}
-		elseif ($member !== null && $author !== null && $author->getId() == $member->getId() && !$this->isLocked())
+		elseif ($user !== null && $this->getAuthorid() == $user->getId() && !$this->isLocked())
 		{
 			return true;
 		}
@@ -77,8 +76,7 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	 */
 	public function isClosable()
 	{
-		$member = forums_MemberService::getInstance()->getCurrentMember();
-		return (!$this->getLocked() && forums_ModuleService::getInstance()->hasPermission($member, 'modules_forums.Moderate', $this));
+		return (!$this->getLocked() && forums_ModuleService::getInstance()->currentUserHasPermission('modules_forums.Moderate', $this));
 	}
 	
 	/**
@@ -86,8 +84,7 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	 */
 	public function isOpenable()
 	{
-		$member = forums_MemberService::getInstance()->getCurrentMember();
-		return ($this->getLocked() && forums_ModuleService::getInstance()->hasPermission($member, 'modules_forums.Moderate', $this));
+		return ($this->getLocked() && forums_ModuleService::getInstance()->currentUserHasPermission('modules_forums.Moderate', $this));
 	}
 	
 	/**
@@ -103,61 +100,24 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	 */
 	public function getNbnewpost()
 	{
-		$ms = forums_MemberService::getInstance();
-		$member = forums_MemberService::getInstance()->getCurrentMember();
+		$fps = forums_ForumsprofileService::getInstance();
+		$user = users_UserService::getInstance()->getCurrentUser();
+		$profile = ($user) ? $fps->getByAccessorId($user->getId()) : null;
+
 		$last = null;
-		if ($member !== null)
+		if ($user !== null)
 		{
-			$last = $member->getLastReadDateByThreadId($this->getId());
+			$last = $profile->getLastReadDateByThreadId($this->getId());
 		}
 		if ($last === null)
 		{
-			$last = $ms->getAllReadDate($member);
+			$last = $fps->getAllReadDate($profile);
 		}
 		return f_util_ArrayUtils::firstElement(forums_PostService::getInstance()->createQuery()
 			->add(Restrictions::eq('thread', $this))
 			->add(Restrictions::gt('creationdate', $last))
 			->setProjection(Projections::rowCount('count'))
 			->setFetchColumn('count')->find());
-	}
-	
-	/**
-	 * @return String
-	 */
-	private function getPrivatenotebyLabelAsHtml()
-	{
-		if ($this->getPrivatenoteby() !== null)
-		{
-			return $this->getPrivatenoteby()->getLabelAsHtml();
-		}
-		return '';
-	}
-	
-	/**
-	 * @return String
-	 */
-	public function getPrivatenoteAsHtml()
-	{
-		$parser = new website_BBCodeParser();
-		return $parser->convertXmlToHtml($this->getPrivatenote());
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getPrivatenoteAsBBCode()
-	{
-		$parser = new website_BBCodeParser();
-		return $parser->convertXmlToBBCode($this->getPrivatenote());
-	}
-
-	/**
-	 * @param string $bbcode
-	 */
-	public function setPrivatenoteAsBBCode($bbcode)
-	{
-		$parser = new website_BBCodeParser();
-		$this->setPrivatenote($parser->convertBBCodeToXml($bbcode, $parser->getModuleProfile('forums')));
 	}
 	
 	/**
@@ -176,8 +136,8 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	 */
 	public function canFollow()
 	{
-		$member = forums_MemberService::getInstance()->getCurrentMember();
-		if ($member !== null && !in_array($member->getId(), DocumentHelper::getIdArrayFromDocumentArray($this->getFollowersArray())))
+		$user = users_UserService::getInstance()->getCurrentUser();
+		if ($user !== null && !in_array($user->getId(), DocumentHelper::getIdArrayFromDocumentArray($this->getFollowersArray())))
 		{
 			return true;
 		}
@@ -189,8 +149,8 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	 */
 	public function canUnfollow()
 	{
-		$member = forums_MemberService::getInstance()->getCurrentMember();
-		if ($member !== null && in_array($member->getId(), DocumentHelper::getIdArrayFromDocumentArray($this->getFollowersArray())))
+		$user = users_UserService::getInstance()->getCurrentUser();
+		if ($user !== null && in_array($user->getId(), DocumentHelper::getIdArrayFromDocumentArray($this->getFollowersArray())))
 		{
 			return true;
 		}
@@ -242,12 +202,7 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	 */
 	public function canModerate()
 	{
-		$member = forums_MemberService::getInstance()->getCurrentMember();
-		if (forums_ModuleService::getInstance()->hasPermission($member, 'modules_forums.Moderate', $this))
-		{
-			return true;
-		}
-		return false;
+		return forums_ModuleService::getInstance()->currentUserHasPermission('modules_forums.Moderate', $this);
 	}
 
 	/**

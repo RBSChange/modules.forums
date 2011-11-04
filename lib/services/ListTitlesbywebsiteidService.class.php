@@ -2,17 +2,12 @@
 class forums_ListTitlesbywebsiteidService extends BaseService implements list_ListItemsService
 {
 	/**
-	 * @var form_ListRecipientgrouplistService
+	 * @var forums_ListTitlesbywebsiteidService
 	 */
 	private static $instance;
 
 	/**
-	 * @var form_FormService
-	 */
-	private $parentForm;
-
-	/**
-	 * @return form_ListRecipientgrouplistService
+	 * @return forums_ListTitlesbywebsiteidService
 	 */
 	public static function getInstance()
 	{
@@ -22,37 +17,34 @@ class forums_ListTitlesbywebsiteidService extends BaseService implements list_Li
 		}
 		return self::$instance;
 	}
-
-	/**
-	 * @param form_FormService $form
-	 */
-	public final function setParentForm($form)
-	{
-		$this->parentForm = $form;
-	}
-
 	/**
 	 * @return array
 	 */
 	public function getItems()
 	{
+		$items = array();
+		$titles = null;
 		try 
 		{
 			$request = change_Controller::getInstance()->getContext()->getRequest();
 			$websiteId = intval($request->getParameter('websiteId', 0));
-			$website = DocumentHelper::getDocumentInstance($websiteId);
+			if ($websiteId > 0)
+			{
+				$website = website_persistentdocument_website::getInstanceById($websiteId);
+				$titles = forums_TitleService::getInstance()->getByWebsite($website);
+			}
 		}
 		catch (Exception $e)
 		{
-			if (Framework::isDebugEnabled())
-			{
-				Framework::debug(__METHOD__ . ' EXCEPTION: ' . $e->getMessage());
-			}
-			return array();
+			Framework::exception($e);
 		}
 		
-		$items = array();
-		foreach (forums_TitleService::getInstance()->getByWebsite($website) as $title)
+		if ($titles === null)
+		{
+			$titles = forums_TitleService::getInstance()->getAll();
+		}
+		
+		foreach ($titles as $title)
 		{
 			$items[] = new list_Item(
 				$title->getLabel(),

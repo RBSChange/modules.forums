@@ -52,7 +52,7 @@ class forums_BlockNewpostAction extends forums_BlockPostListBaseAction
 		if ($request->getParameter('quote') == 'true' && !$request->getParameter('text') && $request->getParameter('postid'))
 		{
 			$quotedPost = forums_persistentdocument_post::getInstanceById($request->getParameter('postid'));
-			$post->setTextAsBBCode('[quote="' . $quotedPost->getAuthorNameAsHtml() . '"]' . $quotedPost->getTextAsBBCode() . '[/quote]');
+			$post->setTextAsBBCode('[quote="' . $quotedPost->getAuthorName() . '"]' . $quotedPost->getTextAsBBCode() . '[/quote]');
 			$request->setAttribute('post', $post);
 		}
 		
@@ -160,7 +160,8 @@ class forums_BlockNewpostAction extends forums_BlockPostListBaseAction
 		{
 			$post->setAnswerof(null);
 		}
-		$post->setPostauthor(forums_MemberService::getInstance()->getCurrentMember());
+		$user = users_UserService::getInstance()->getCurrentUser();
+		if ($user) { $post->setAuthorid($user->getId()); }
 		$post->setCreationdate(date_Calendar::getInstance()->toString());
 		$request->setAttribute('post', $post);
 		

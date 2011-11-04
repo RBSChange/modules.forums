@@ -27,37 +27,55 @@ class forums_ModuleService extends ModuleBaseService
 	}
 	
 	/**
-	 * @param forums_persistentdocument_member $member
-	 * @param String $permission
-	 * @param f_persistentdocument_PersistentDocument $document
-	 * @return Boolean
+	 * @param string $permission
+	 * @param f_peristentdocument_PersistentDocument $document
+	 * @return boolean
 	 */
-	public function hasPermission($member, $permission, $document)
+	public function currentUserHasPermission($permission, $document)
 	{
-		if ($document === null || $member === null || $member->isBanned())
-		{
-			return false;
-		}
-		
-		$ps = change_PermissionService::getInstance();
-		return $ps->hasExplicitPermission($member->getUser(), $permission, $document->getId());
+		$user = users_UserService::getInstance()->getCurrentUser();
+		return $this->hasPermission($user, $permission, $document);
 	}
 	
 	/**
-	 * @param forums_persistentdocument_member $member
-	 * @param String $permission
-	 * @param f_persistentdocument_PersistentDocument $document
-	 * @return Boolean
+	 * @param users_persistentdocument_user $user
+	 * @param string $permission
+	 * @param f_peristentdocument_PersistentDocument $document
+	 * @return boolean
 	 */
-	public function hasPermissionOnId($member, $permission, $documentId)
+	public function hasPermission($user, $permission, $document)
 	{
-		if ($documentId === null || $member === null || $member->isBanned())
+		if ($document === null || $user === null || $this->isBanned($user))
 		{
 			return false;
 		}
-		
-		$ps = change_PermissionService::getInstance();
-		return $ps->hasExplicitPermission($member->getUser(), $permission, $documentId);
+		return change_PermissionService::getInstance()->hasPermission($user, $permission, $document->getId(), false);
+	}
+	
+	/**
+	 * @param users_persistentdocument_user $user
+	 * @param website_persistentdocument_website $website
+	 * @return Boolean
+	 */
+	public function isSuperModerator($user, $website = null)
+	{
+		if ($website === null)
+		{
+			$website = website_WebsiteService::getInstance()->getCurrentWebsite();
+		}
+		$folder = forums_WebsitefolderService::getInstance()->getByWebsite($website);
+		return $this->hasPermission($user, 'modules_forums.Banuser', $folder);
+	}
+	
+	/**
+	 * @param users_persistentdocument_user $user
+	 * @param website_persistentdocument_website $website
+	 * @return Boolean
+	 */
+	public function isBanned($user)
+	{
+		$profile = $user->getProfile('forums');
+		return ($profile && $profile->getBan() !== null);
 	}
 	
 	/**
@@ -92,8 +110,6 @@ class forums_ModuleService extends ModuleBaseService
 	public function getRssMaxItemCount()
 	{
 		return 30;
-		// TODO?
-		// ModuleService::getInstance()->getPreferenceValue('forums', 'rssMaxItemCount');
 	}
 	
 	/**
@@ -106,7 +122,7 @@ class forums_ModuleService extends ModuleBaseService
 			'forums' => $this->findProjectedTotal($website, 'website.id', forums_ForumService::getInstance()),
 			'threads' => $this->findProjectedTotal($website, 'forum.website.id', forums_ThreadService::getInstance()),
 			'posts' => $this->findProjectedTotal($website, 'thread.forum.website.id', forums_PostService::getInstance()),
-			'members' => $this->findGroupProjectedTotal($website->getGroup(), 'user.groups', forums_MemberService::getInstance())
+			'users' => $this->findProjectedTotal($website->getGroup(), 'groups', users_UserService::getInstance())
 		);
 	}
 	
@@ -118,7 +134,7 @@ class forums_ModuleService extends ModuleBaseService
 	 */
 	public function getDashboardMonthStatisticsByWebsite($website, $fromDate, $toDate)
 	{
-		$ms = forums_MemberService::getInstance();
+		$us = users_UserService::getInstance();
 		$group = $website->getGroup();
 		return array(
 			'monthLabel' => ucfirst(date_Formatter::format($fromDate, 'F Y')),
@@ -126,23 +142,46 @@ class forums_ModuleService extends ModuleBaseService
 			'forums' => $this->findProjectedTotal($website, 'website.id', forums_ForumService::getInstance(), $fromDate, $toDate, 'creationdate'),
 			'threads' => $this->findProjectedTotal($website, 'forum.website.id', forums_ThreadService::getInstance(), $fromDate, $toDate, 'creationdate'),
 			'posts' => $this->findProjectedTotal($website, 'thread.forum.website.id', forums_PostService::getInstance(), $fromDate, $toDate, 'creationdate'),
-			'members' => $this->findGroupProjectedTotal($group, 'user.groups', $ms, $fromDate, $toDate, 'creationdate'),
-			'lastlogin' => $this->findGroupProjectedTotal($group, 'user.groups', $ms, $fromDate, $toDate, 'user.lastlogin'),
-			'hasposted' => $this->findGroupProjectedTotal($group, 'user.groups', $ms, $fromDate, $toDate, 'post.creationdate')
+			'users' => $this->findProjectedTotal($group, 'groups', $us, $fromDate, $toDate, 'creationdate'),
+			'lastlogin' => $this->findProjectedTotal($group, 'groups', $us, $fromDate, $toDate, 'lastlogin'),
+			'hasposted' => $this->findHasPostedTotal($website, $fromDate, $toDate, 'creationdate')
 		);
+	}
+	
+	/**
+	 * @param f_persitentdocument_PersistentDocument $reference
+	 * @param string $referenceField
+	 * @param DocumentService $service
+	 * @param date_Calendar $fromDate
+	 * @param date_Calendar $toDate
+	 * @param date_Calendar $dateToCompare
+	 * @return Mixed
+	 */
+	private function findProjectedTotal($reference, $referenceField, $service, $fromDate = null, $toDate = null, $dateToCompare = null)
+	{
+		$query = $service->createQuery();
+		if ($fromDate && $toDate)
+		{
+			$query->add(Restrictions::between(
+				$dateToCompare,
+				$fromDate->toString(),
+				$toDate->toString()
+			));
+		}
+		$query->add(Restrictions::eq($referenceField, $reference->getId()));
+		return f_util_ArrayUtils::firstElement($query->setProjection(Projections::rowCount('projection'))->findColumn('projection'));
 	}
 	
 	/**
 	 * @param website_persistentdocument_website $website
 	 * @param date_Calendar $fromDate
 	 * @param date_Calendar $toDate
-	 * @param f_persistentdocument_criteria_OperationProjection $projection
-	 * @param String $orderStatus
+	 * @param date_Calendar $dateToCompare
 	 * @return Mixed
 	 */
-	private function findProjectedTotal($website, $websiteField, $service, $fromDate = null, $toDate = null, $dateToCompare = null)
+	private function findHasPostedTotal($website, $fromDate = null, $toDate = null, $dateToCompare = null)
 	{
-		$query = $service->createQuery();
+		$query = forums_PostService::getInstance()->createQuery();
 		if ($fromDate && $toDate)
 		{
 			$query->add(Restrictions::between(
@@ -151,32 +190,8 @@ class forums_ModuleService extends ModuleBaseService
 				$toDate->toString()
 			));
 		}
-		$query->add(Restrictions::eq($websiteField, $website->getId()));
-		return f_util_ArrayUtils::firstElement($query->setProjection(Projections::rowCount('projection'))->findColumn('projection'));
-	}
-	
-	/**
-	 * @param users_persistentdocument_group $group
-	 * @param string $groupField
-	 * @param date_Calendar $fromDate
-	 * @param date_Calendar $toDate
-	 * @param f_persistentdocument_criteria_OperationProjection $projection
-	 * @param String $orderStatus
-	 * @return Mixed
-	 */
-	private function findGroupProjectedTotal($group, $groupField, $service, $fromDate = null, $toDate = null, $dateToCompare = null)
-	{
-		$query = $service->createQuery();
-		if ($fromDate && $toDate)
-		{
-			$query->add(Restrictions::between(
-				$dateToCompare,
-				$fromDate->toString(),
-				$toDate->toString()
-			));
-		}
-		$query->add(Restrictions::eq($groupField, $group));
-		return f_util_ArrayUtils::firstElement($query->setProjection(Projections::rowCount('projection'))->findColumn('projection'));
+		$query->createCriteria('thread')->createCriteria('forum')->add(Restrictions::eq('website', $website));
+		return f_util_ArrayUtils::firstElement($query->setProjection(Projections::distinctCount('authorid', 'projection'))->findColumn('projection'));
 	}
 	
 	/**
@@ -196,7 +211,7 @@ class forums_ModuleService extends ModuleBaseService
 				return $this->getMembersStructureInitializationAttributes($container, $attributes, $script);
 			
 			default:
-				throw new BaseException('Unknown structure initialization script: '.$script, 'modules.brand.bo.actions.Unknown-structure-initialization-script', array('script' => $script));
+				throw new BaseException('Unknown structure initialization script: '.$script, 'm.website.bo.actions.unknown-structure-initialization-script', array('script' => $script));
 		}
 	}
 	
@@ -239,17 +254,54 @@ class forums_ModuleService extends ModuleBaseService
 			throw new BaseException('Invalid website folder', 'modules.forums.bo.actions.Invalid-websitefolder');
 		}
 		
+		$ts = TagService::getInstance();
 		$website = $container->getWebsite();
-		if (TagService::getInstance()->hasDocumentByContextualTag('contextual_website_website_modules_forums_memberlist', $website) || 
-			TagService::getInstance()->hasDocumentByContextualTag('contextual_website_website_modules_forums_member', $website) ||
-			TagService::getInstance()->hasDocumentByContextualTag('contextual_website_website_modules_forums_editprofile', $website) ||
-			TagService::getInstance()->hasDocumentByContextualTag('contextual_website_website_modules_forums_memberban', $website))
+		if ($ts->hasDocumentByContextualTag('contextual_website_website_modules_forums_memberban', $website))
 		{
-			throw new BaseException('This website already contains member pages', 'modules.forums.bo.actions.Website-already-contains-member-page');
+			throw new BaseException('This website already contains specific member pages', 'modules.forums.bo.actions.Website-already-contains-member-page');
+		}
+		
+		$page = $ts->getDocumentByContextualTag('contextual_website_website_modules_users_userslist', $website, false);
+		if (!($page instanceof website_persistentdocument_page))
+		{
+			throw new BaseException('This website doesn\'t have a member topic. You can initialize it in users module.', 'modules.forums.bo.actions.Website-do-contains-member-topic');
 		}
 		
 		// Set atrtibutes.
-		$attributes['byDocumentId'] = $website->getId();
+		$attributes['byDocumentId'] = $page->getTopic()->getId();
 		return $attributes;
+	}
+
+	/**
+	 * @param users_persistentdocument_user $user
+	 * @param integer $max the maximum number of documents that can treat
+	 * @return integer the maximum number of documents that can still treat
+	 */
+	public function prepareUserDeletion($user, $max)
+	{
+		// Handle bans.
+		$max -= forums_BanService::getInstance()->treatBansForUserDeletion($user, $max);
+		if ($max < 1)
+		{
+			return $max;
+		}
+		
+		// Handle threads.
+		$max -= forums_ThreadService::getInstance()->treatThreadsForUserDeletion($user, $max);
+		return $max;
+	}
+	
+	// Deprecated
+	
+	/**
+	 * @deprecated use hasPermission or currentUserHasPermission
+	 */
+	public function hasPermissionOnId($user, $permission, $documentId)
+	{
+		if ($documentId === null || $user === null || $this->isBanned($user))
+		{
+			return false;
+		}
+		return change_PermissionService::getInstance()->hasPermission($user, $permission, $documentId, false);
 	}
 }

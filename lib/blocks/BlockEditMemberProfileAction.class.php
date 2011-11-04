@@ -3,7 +3,7 @@
  * forums_BlockEditMemberProfileAction
  * @package modules.forums.lib.blocks
  */
-class forums_BlockEditMemberProfileAction extends forums_BaseBlockAction
+class forums_BlockEditMemberProfileAction extends website_BlockAction
 {
 	/**
 	 * @see website_BlockAction::execute()
@@ -11,69 +11,67 @@ class forums_BlockEditMemberProfileAction extends forums_BaseBlockAction
 	 * @param f_mvc_Response $response
 	 * @return String
 	 */
-	function execute($request, $response)
-    {
-    	$user = users_UserService::getInstance()->getCurrentFrontEndUser();
+	public function execute($request, $response)
+	{
+		$user = users_UserService::getInstance()->getCurrentUser();
 		if ($this->isInBackofficeEdition() || $user === null)
 		{
 			return website_BlockView::NONE;
 		}
-		
-		$member = forums_MemberService::getInstance()->getCurrentMember();
-		if ($member === null)
+
+		$profile = forums_ForumsprofileService::getInstance()->getByAccessorId($user->getId());
+		if ($profile === null)
 		{
-			$member = forums_MemberService::getInstance()->getNewDocumentInstance();
-			$member->setUser($user);
-			$member->save();
+			$profile = forums_ForumsprofileService::getInstance()->getNewDocumentInstance();
+			$profile->setAccessor($user);
 		}
-		$request->setAttribute('member', $member);		
+		$request->setAttribute('profile', $profile);
 		return website_BlockView::INPUT;
-    }
-    
-    /**
-     * @return boolean
-     */
-    public function saveNeedTransaction()
-    {
-    	return true;
-    }
-    
-	/**
-	 * @return string[]
-	 */
-	public function getMemberBeanExclude()
-	{
-		return array('title');
 	}
-       
-    /**
+
+	/**
+	 * @return boolean
+	 */
+	public function saveNeedTransaction()
+	{
+		return true;
+	}
+	 
+	/**
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
-	 * @param forums_persistentdocument_member $member
+	 * @param forums_persistentdocument_forumsprofile $profile
 	 * @return String
 	 */
-	public function executeSave($request, $response, forums_persistentdocument_member $member)
+	public function executeSave($request, $response, forums_persistentdocument_forumsprofile $profile)
 	{
-		$currentMember = forums_MemberService::getInstance()->getCurrentMember();
-		if ($currentMember->getId() !== $member->getId())
+		$user = users_UserService::getInstance()->getCurrentUser();
+		if ($profile->isNew())
 		{
-			return $this->getForbiddenView();
+			$profile->setAccessor($user);
 		}
-		
-		$member->save();
-		
-		$this->addMessage(LocaleService::getInstance()->transFO('m.users.frontoffice.informations-updated', array('ucf')));
-		
+		elseif ($user->getId() != $profile->getAccessorId())
+		{
+			throw new BaseException('Not your profile!', 'm.users.fo.not-your-profile');
+		}
+		$profile->save();
+		$request->setAttribute('profile', $profile);
+		RequestContext::getInstance()->resetProfile();
+		users_ProfileService::getInstance()->initCurrent(false);
+		$this->addMessage(LocaleService::getInstance()->trans('m.users.frontoffice.informations-updated', array('ucf', 'html')));
 		return website_BlockView::INPUT;
 	}
-	
+
 	/**
 	 * @param f_mvc_Request $request
-	 * @param forums_persistentdocument_member $member
+	 * @param forums_persistentdocument_forumsprofile $profile
 	 */
-	public function validateSaveInput($request, $member)
+	public function validateSaveInput($request, $profile)
 	{
-		$val = BeanUtils::getBeanValidationRules('forums_persistentdocument_member', null, array('user'));
-		return $this->processValidationRules($val, $request, $member);
+		$user = users_UserService::getInstance()->getCurrentUser();
+		$profile->setAccessor($user);
+
+		$rules = BeanUtils::getBeanValidationRules('forums_persistentdocument_forumsprofile');
+		return $this->processValidationRules($rules, $request, $profile);
 	}
 }

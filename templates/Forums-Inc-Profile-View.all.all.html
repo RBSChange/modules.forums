@@ -1,0 +1,32 @@
+<h2 change:h="">${trans:m.forums.document.forumsprofile.document-name,ucf}</h2>
+
+<dl class="document-infos">
+	<tal:block tal:define="count profile/getPublishedForumMemberTitleCount" tal:condition="count">
+		<dt>
+			<tal:block tal:condition="php: count == 1">${trans:m.forums.frontoffice.member-title,ucf}</tal:block>
+			<tal:block tal:condition="php: count > 1">${trans:m.forums.frontoffice.member-titles,ucf}</tal:block>
+		</dt>
+		<dd>
+			<ul class="inline-list">
+				<li tal:repeat="title profile/getPublishedForumMemberTitleArray">
+					<span tal:condition="php: !repeat.title.start && repeat.title.end">${trans:m.forums.frontoffice.and}</span>
+					${title/getLabel}<span tal:condition="php: repeat.title.index LT (repeat.title.length - 2)">, </span>
+				</li>
+			</ul>
+		</dd>
+	</tal:block>
+	<tal:block tal:define="rank profile/getRank" tal:condition="rank">
+		<dt>${trans:m.forums.frontoffice.member-rank,ucf}</dt>
+		<dd>${rank/getLabel}</dd>
+	</tal:block>
+	<dt>${trans:m.forums.frontoffice.post-count,ucf}</dt>
+	<dd>${profile/getNbpost | '0'}</dd>
+	<dt>${trans:m.forums.frontoffice.thread-count,ucf}</dt>
+	<dd>${profile/getNbthread | '0'}</dd>
+	<tal:block tal:condition="profile/getSignatureAsHtml">
+		<dt>${trans:m.forums.document.forumsprofile.signature,ucf}</dt>
+		<dd>${structure profile/getSignatureAsHtml}</dd>
+	</tal:block>
+</dl>
+
+<tal:block change:include="module 'forums'; template 'Forums-Inc-BanList-Success'; type 'html'; user user; removeMemberLink 'true'" />

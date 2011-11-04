@@ -3,14 +3,14 @@
 		<legend>${trans:m.forums.frontoffice.forum-member-ban,ucf}</legend>
 		<ul change:errors=""></ul>
 		<ol>
-			<li><label>${trans:m.forums.document.ban.member,ucf,lab}</label> <a change:link="document post/getPostauthor">${structure post/getAuthorNameAsHtml}</a></li>
+			<li><label>${trans:m.forums.document.ban.member,ucf,lab}</label> <a change:link="document post/getAuthoridInstance">${post/getAuthorName}</a></li>
 			<li><label>${trans:m.forums.document.ban.post,ucf,lab}</label> ${structure post/getPostIdLink}</li>
 			<li><input change:field="name to" required="true"/></li>
 			<li><input change:bbcodeinput="name motifAsBBCode" module-profile="forums" labeled="true" /></li>
 		</ol>
 		<p class="buttons">
 			<input change:field="name beanId" hidden="true" />
-			<input change:field="name member" value="${post/getPostauthor/getId}" hidden="true"/>
+			<input change:field="name member" value="${post/getAuthorid}" hidden="true"/>
 			<input change:field="name post" value="${post/getId}" hidden="true"/>
 			<input change:hiddeninput="name postid" value="${post/getId}"/>
 			<input change:submit="labeli18n m.forums.frontoffice.form.submit"/>
@@ -18,4 +18,4 @@
 	</fieldset>
 </form>
 
-<tal:block change:include="module 'forums'; template 'Forums-Inc-BanList-Success'; type 'html'; member post/getPostauthor" />
+<tal:block change:include="module 'forums'; template 'Forums-Inc-BanList-Success'; type 'html'; user post/getAuthoridInstance" />

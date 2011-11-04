@@ -13,14 +13,14 @@ class forums_BlockMemberbanAction extends website_TaggerBlockAction
 	public function execute($request, $response)
 	{
 		$post = $this->getDocumentParameter();
-		if ($this->isInBackofficeEdition() || $post === null)
+		if ($this->isInBackofficeEdition() || !($post instanceof forums_persistentdocument_post))
 		{
 			return website_BlockView::NONE;
 		}
 		
 		if ($post->isBanable())
 		{
-			$this->setCommonValues($request);
+			$this->setCommonValues($request, $post);
 			return $this->getInputViewName();
 		}
 		
@@ -43,7 +43,7 @@ class forums_BlockMemberbanAction extends website_TaggerBlockAction
 	{
 		$post = $this->getDocumentParameter();
 		$request->setAttribute('post', $post);
-		$request->setAttribute('bans', forums_BanService::getInstance()->getBansForUser($post->getPostauthor()));	
+		$request->setAttribute('bans', forums_BanService::getInstance()->getBansForUser($post->getAuthoridInstance()));	
 	}
 	
 	/**
@@ -83,12 +83,11 @@ class forums_BlockMemberbanAction extends website_TaggerBlockAction
 	private function sendBan($ban)
 	{
 		$ns = notification_NotificationService::getInstance();
-		$member = $ban->getMember();
-		$ms = $member->getDocumentService();
-		$notif = $ns->getConfiguredByCodeName('modules_forums/ban', $ms->getWebsiteId($member), $member->getLang());
+		$user = $ban->getMember();
+		$website = website_WebsiteService::getInstance()->getCurrentWebsite();
+		$notif = $ns->getConfiguredByCodeName('modules_forums/ban', $website, $user->getLang());
 		if ($notif instanceof notification_persistentdocument_notification)
 		{
-			$user = $member->getUser();
 			$callback = array($ban->getDocumentService(), 'getNotificationParameters');
 			$user->getDocumentService()->sendNotificationToUserCallback($notif, $user, $callback, $ban);
 		}

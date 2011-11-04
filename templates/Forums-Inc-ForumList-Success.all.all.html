@@ -10,7 +10,7 @@
 	</thead>
 	<tbody>
 		<tal:block tal:repeat="forum forums">
-			<tr tal:condition="forum/isVisible" class="row-${php: repeat.forum.odd ? '1' : '0'}">
+			<tr tal:condition="forum/isVisible" class="${php: repeat.forum.odd ? 'odd' : 'even'}">
 				<td class="column-bullet" tal:define="newCount forum/getNbnewpost">
 					<img tal:condition="php: newCount == 1" change:img="front/has-new-post.png" title="${trans: m.forums.frontoffice.has-new-post,ucf}" />
 					<img tal:condition="php: newCount > 1" change:img="front/has-new-post.png" title="${trans: m.forums.frontoffice.has-n-new-posts,ucf,count=newCount}" />
@@ -34,13 +34,13 @@
 				</td>
 				<td class="column-threads">${forum/getNbthreadRecursive}</td>
 				<td class="column-posts">${forum/getNbpostRecursive}</td>
-				<td class="column-last-post" tal:define="lastPost forum/getLastPostRecursive; lastPostAuthor lastPost/getPostAuthor">
+				<td class="column-last-post" tal:define="lastPost forum/getLastPostRecursive; lastAuthor lastPost/getAuthoridInstance">
 					<tal:block tal:condition="lastPost">
-						<tal:block change:memberdate="value lastPost/getCreationdate; mode 'long'" />
+						${datetime:lastPost/getUICreationdate}
 						<br />
 						${trans: m.forums.frontoffice.by} 
-						<a tal:condition="lastPostAuthor" change:link="document lastPostAuthor">${lastPostAuthor/getLabel}</a>
-						<tal:block tal:condition="not: lastPostAuthor">${trans:m.forums.frontoffice.unknown,ucf}</tal:block>
+						<a tal:condition="lastAuthor" change:link="document lastAuthor">${lastAuthor/getLabel}</a>
+						<tal:block tal:condition="not: lastAuthor">${trans:m.forums.frontoffice.unknown,ucf}</tal:block>
 					</tal:block>
 				</td>
 			</tr>
@@ -49,8 +49,8 @@
 </table>
 
 <ul class="inline-list" tal:condition="not: hideMemberActions">
-	<li tal:condition="not: member"><a change:link="tag contextual_website_website_modules_users_register">${trans: m.forums.frontoffice.register,ucf}</a></li>
-	<li tal:condition="not: member"><a change:link="tag contextual_website_website_modules_users_register">${trans: m.forums.frontoffice.log-in,ucf}</a></li>
-	<li tal:condition="member"><a change:link="tag contextual_website_website_modules_users_edit-profil">${trans: m.forums.frontoffice.edit-profile,ucf}</a></li>
-	<li tal:condition="member"><a change:link="module forums; action MarkAllPostsRead; backUrl currentUrl">${trans: m.forums.frontoffice.mark-all-as-read,ucf}</a></li>
+	<li tal:condition="not: user"><a change:link="tag contextual_website_website_modules_users_register">${trans: m.forums.frontoffice.register,ucf}</a></li>
+	<li tal:condition="not: user"><a change:link="tag contextual_website_website_modules_users_register">${trans: m.forums.frontoffice.log-in,ucf}</a></li>
+	<li tal:condition="user"><a change:link="tag contextual_website_website_modules_users_edit-profil">${trans: m.forums.frontoffice.edit-profile,ucf}</a></li>
+	<li tal:condition="user"><a change:link="module forums; action MarkAllPostsRead; backUrl currentUrl">${trans: m.forums.frontoffice.mark-all-as-read,ucf}</a></li>
 </ul>

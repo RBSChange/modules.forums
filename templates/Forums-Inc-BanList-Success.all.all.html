@@ -1,6 +1,6 @@
-<tal:block tal:condition="member/hasToShowBansToCurrentUser">
-	<tal:block tal:condition="member/getBans">
-		<h2 change:h="">${trans: m.forums.frontoffice.ban-history-for,ucf} <a tal:condition="not: removeMemberLink" change:link="document member">${member/getLabel}</a><tal:block tal:condition="removeMemberLink">${member/getLabel}</tal:block></h2>
+<tal:block tal:condition="forumsprofile/hasToShowBansToCurrentUser">
+	<tal:block tal:condition="forumsprofile/getBans">
+		<h2 change:h="">${trans: m.forums.frontoffice.ban-history-for,ucf} <a tal:condition="not: removeMemberLink" change:link="document user">${user/getLabel}</a><tal:block tal:condition="removeMemberLink">${user/getLabel}</tal:block></h2>
 		<table class="normal">
 			<thead>
 				<tr>
@@ -12,12 +12,12 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr tal:repeat="ban member/getBans" class="row-${php: repeat.ban.odd ? '1' : '0'}">
-					<td change:memberdate="value ban/getFrom; mode 'long'" />
-					<td change:memberdate="value ban/getTo; mode 'long'" />
-					<td>
-						<a tal:condition="ban/getBy" change:link="document ban/getBy">${ban/getBy/getLabel}</a>
-						<tal:block tal:condition="not: ban/getBy">${trans:m.forums.frontoffice.unknown,ucf}</tal:block>
+				<tr tal:repeat="ban forumsprofile/getBans" class="${php: repeat.ban.odd ? 'odd' : 'even'}">
+					<td>${datetime:ban/getUIFrom}</td>
+					<td>${datetime:ban/getUITo}</td>
+					<td tal:define="author ban/getAuthorIdInstance">
+						<a tal:condition="author" change:link="document author">${author/getLabel}</a>
+						<tal:block tal:condition="not: author">${trans:m.forums.frontoffice.unknown,ucf}</tal:block>
 					</td>
 					<td>${structure ban/getMotifAsHtml} <tal:block tal:condition="ban/getPost">(${trans: m.forums.frontoffice.banned-reason-message} <a change:link="document ban/getPost">${ban/getPost/getPostId}</a>)</tal:block></td>
 					<td><a tal:condition="ban/isActive" change:link="module forums; action DeleteBan; cmpref ban/getId" >${trans: m.forums.frontoffice.delete}</a></td>

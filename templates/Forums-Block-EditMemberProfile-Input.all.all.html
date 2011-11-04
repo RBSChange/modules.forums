@@ -1,33 +1,10 @@
-<form change:form="beanClass forums_persistentdocument_member; beanName member">
+<form change:form="beanClass forums_persistentdocument_forumsprofile; beanName profile">
 	<fieldset>
 		<legend>${title}</legend>
 		<ul change:errors=""></ul>
 		<ul change:messages=""></ul>
 		<input change:field="name beanId" hidden="true" />	
 		<ol>
-			<li><input change:field="name label" /></li>
-			<li>
-				<input change:field="name displayname" />
-				<p class="help-text">${trans:m.forums.frontoffice.authdisplayname,ucf}</p>
-			</li>
-			<li><input change:field="name country" /></li>
-			<li><input change:field="name websiteUrl" size="40" /></li>
-			<li>
-				<input change:field="name shortDateFormat" size="40" />
-				<p class="help-text">
-					${trans:m.forums.document.member.shortdateformat-help,ucf}
-					<br />
-					${trans:m.forums.frontoffice.default-value,ucf,lab} <strong>${trans:m.forums.frontoffice.short-date-format}</strong>
-				</p>
-			</li>
-			<li>
-				<input change:field="name longDateFormat" size="40" />
-				<p class="help-text">
-					${trans:m.forums.document.member.longdateformat-help,ucf}
-					<br />
-					${trans:m.forums.frontoffice.default-value,ucf,lab} <strong>${trans:m.forums.frontoffice.long-date-format}</strong>
-				</p>
-			</li>
 			<li><input change:bbcodeinput="name signatureAsBBCode" module-profile="forums" labeled="true" /></li>
 		</ol>
 		<p class="buttons">

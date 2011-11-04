@@ -53,21 +53,21 @@ class forums_BanService extends f_persistentdocument_DocumentService
 	}
 	
 	/**
-	 * @param forums_persistentdocument_member $member
-	 * @return Array<forums_persistentdocument_ban>
+	 * @param users_persistentdocument_user $user
+	 * @return forums_persistentdocument_ban[]
 	 */
-	public function getBansForUser($member)
+	public function getBansForUser($user)
 	{
-		return $this->createQuery()->add(Restrictions::eq('member', $member->getId()))->addOrder(Order::desc('from'))->find();
+		return $this->createQuery()->add(Restrictions::eq('member', $user))->addOrder(Order::desc('from'))->find();
 	}
 	
 	public function unBanUsers()
 	{
-		$users = forums_MemberService::getInstance()->createQuery()->add(Restrictions::isNotNull('ban'))->add(Restrictions::le('ban', date_Calendar::now()->toString()))->find();
-		foreach ($users as $user)
+		$profiles = forums_ForumsprofileService::getInstance()->createQuery()->add(Restrictions::isNotNull('ban'))->add(Restrictions::le('ban', date_Calendar::now()->toString()))->find();
+		foreach ($profiles as $profile)
 		{
-			$user->setBan(null);
-			$user->save();
+			$profile->setBan(null);
+			$profile->save();
 		}
 	}
 	
@@ -79,7 +79,6 @@ class forums_BanService extends f_persistentdocument_DocumentService
 	protected function preInsert($document, $parentNodeId)
 	{
 		$document->setFrom(date_Calendar::now()->toString());
-		$document->setBy(forums_MemberService::getInstance()->getCurrentMember());
 	}
 	
 	/**
@@ -89,9 +88,9 @@ class forums_BanService extends f_persistentdocument_DocumentService
 	 */
 	protected function postInsert($document, $parentNodeId)
 	{
-		$member = $document->getMember();
-		$member->setBan($document->getTo());
-		$member->save();
+		$profile = forums_ForumsprofileService::getInstance()->getByAccessorId($document->getMemberId(), true);
+		$profile->setBan($document->getTo());
+		$profile->save();
 	}
 	
 	/**
@@ -108,48 +107,20 @@ class forums_BanService extends f_persistentdocument_DocumentService
 	}
 	
 	/**
-	 * @param forums_persistentdocument_member $member
+	 * @param users_persistentdocument_user $user
 	 * @param integer $max the maximum number of bans that can treat
 	 * @return integer the number of treated bans
 	 */	
-	public function treatBansForMemberDeletion($member, $max)
+	public function treatBansForUserDeletion($user, $max)
 	{
-		$count = 0;
-		foreach (array('member', 'by') as $fieldName)
-		{
-			$query = $this->createQuery();
-			$query->add(Restrictions::eq($fieldName, $member));
-			$query->setFirstResult(0)->setMaxResults($max - $count);
-			$bans = $query->find();
-			foreach ($bans as $ban)
-			{
-				/* @var $ban forums_persistentdocument_ban */
-				$ban->getDocumentService()->treatBanForMemberDeletion($ban, $member);
-			}
-			$count += count($bans);
-		}
+		$query = $this->createQuery();
+		$query->add(Restrictions::eq('member', $user));
+		$query->setFirstResult(0)->setMaxResults($max - $count);
+		$count = $query->delete();
 		if (Framework::isInfoEnabled())
 		{
 			Framework::info(__METHOD__ . ' ' . $count . ' bans treated');
 		}
 		return $count;
-	}
-	
-	/**
-	 * @param forums_persistentdocument_ban $ban
-	 * @param forums_persistentdocument_member $member
-	 */	
-	protected function treatBanForMemberDeletion($ban, $member)
-	{
-		if (DocumentHelper::equals($ban->getMember(), $member))
-		{
-			$ban->delete();
-		}
-		elseif (DocumentHelper::equals($ban->getBy(), $member))
-		{
-			$ban->setBy(null);
-			$ban->setMeta('byDeletedMember', $member->getLabel() . ' (' . $member->getId() . ')');
-			$ban->save();
-		}
 	}
 }

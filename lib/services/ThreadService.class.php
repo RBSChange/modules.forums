@@ -152,16 +152,20 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 	 */
 	public function getUserUrl($thread)
 	{
-		$member = forums_MemberService::getInstance()->getCurrentMember();
-		if ($member !== null)
+		$user = users_UserService::getInstance()->getCurrentUser();
+		if ($user !== null)
 		{
-			$date = $member->getLastReadDateByThreadId($thread->getId());
-			if ($date !== null)
+			$profile = forums_ForumsprofileService::getInstance()->getByAccessorId($user->getId());
+			if ($profile !== null)
 			{
-				$post = $this->getFirstUnreadPost($thread, $date);
-				if ($post !== null)
+				$date = $profile->getLastReadDateByThreadId($thread->getId());
+				if ($date !== null)
 				{
-					return $post->getPostUrlInThread();
+					$post = $this->getFirstUnreadPost($thread, $date);
+					if ($post !== null)
+					{
+						return $post->getPostUrlInThread();
+					}
 				}
 			}
 		}
@@ -305,9 +309,9 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 				
 		$document->setInsertInTree(false);
 		
-		if ($document->getThreadauthor() === null)
+		if ($document->getAuthorid() === null)
 		{
-			$document->setThreadauthor(forums_MemberService::getInstance()->getCurrentMember());
+			$document->setAuthorid(users_UserService::getInstance()->getCurrentUser());
 		}
 		
 		if ($parentNodeId !== null && $document->getForum() === null)
@@ -460,10 +464,10 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 		$parameters['TOPIC'] = $thread->getLabelAsHtml();
 		$parameters['LINK'] = '<a class="link" href="' . $thread->getTofollow()->getPostUrlInThread() . '">' . LocaleService::getInstance()->transFO('m.forums.frontoffice.thislink') . '</a>';
 		
-		if (isset($params['member']) && $params['member'] instanceof forums_persistentdocument_member)
+		if (isset($params['user']) && $params['user'] instanceof users_persistentdocument_user)
 		{
-			$member = $params['member'];
-			$parameters['PSEUDO'] = $member->getLabelAsHtml();
+			$user = $params['user'];
+			$parameters['PSEUDO'] = $user->getLabelAsHtml();
 		}
 		
 		if (isset($params['specificParams']) && is_array($params['specificParams']))
@@ -474,26 +478,23 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 	}
 	
 	/**
-	 * @param forums_persistentdocument_member $member
+	 * @param users_persistentdocument_user $user
 	 * @param integer $max the maximum number of threads that can treat
 	 * @return integer the number of treated threads
 	 */	
-	public function treatThreadsForMemberDeletion($member, $max)
+	public function treatThreadsForUserDeletion($user, $max)
 	{
-		$count = 0;
-		foreach (array('threadauthor', 'privatenoteby', 'followers') as $fieldName)
+		$query = $this->createQuery();
+		$query->add(Restrictions::eq('followers', $user));
+		$query->setFirstResult(0)->setMaxResults($max - $count);
+		$threads = $query->find();
+		foreach ($threads as $thread)
 		{
-			$query = $this->createQuery();
-			$query->add(Restrictions::eq($fieldName, $member));
-			$query->setFirstResult(0)->setMaxResults($max - $count);
-			$threads = $query->find();
-			foreach ($threads as $thread)
-			{
-				/* @var $thread forums_persistentdocument_thread */
-				$thread->getDocumentService()->treatThreadForMemberDeletion($thread, $member);
-			}
-			$count += count($threads);
+			/* @var $thread forums_persistentdocument_thread */
+			$thread->removeFollowers($user);		
+			$thread->save();
 		}
+		$count = count($threads);
 		if (Framework::isInfoEnabled())
 		{
 			Framework::info(__METHOD__ . ' ' . $count . ' threads treated');
@@ -502,23 +503,12 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 	}
 	
 	/**
-	 * @param forums_persistentdocument_thread $thread
-	 * @param forums_persistentdocument_member $member
-	 */	
-	protected function treatThreadForMemberDeletion($thread, $member)
+	 * @param integer $userId
+	 * @return integer
+	 */
+	public function getCountByAuthorid($userId)
 	{
-		if (DocumentHelper::equals($thread->getThreadauthor(), $member))
-		{
-			$thread->setThreadauthor(null);
-			$thread->setMeta('threadAuthorDeletedMember', $member->getLabel() . ' (' . $member->getId() . ')');
-		}
-		
-		if (DocumentHelper::equals($thread->getPrivatenoteby(), $member))
-		{
-			$thread->setPrivatenoteby(null);
-		}
-		
-		$thread->removeFollowers($member);		
-		$thread->save();
+		$row = $this->createQuery()->add(Restrictions::eq('authorid', $userId))->setProjection(Projections::rowCount('nb'))->findUnique();
+		return $row['nb'];
 	}
 }

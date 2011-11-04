@@ -75,7 +75,7 @@ class forums_BlockEditpostAction extends forums_BlockPostListBaseAction
 			return $this->getForbiddenView();
 		}
 		
-		$post->setEditedby(forums_MemberService::getInstance()->getCurrentMember());
+		$post->setEditedby(users_UserService::getInstance()->getCurrentUser());
 		$post->setEditeddate(date_Calendar::now()->toString());
 		$post->save();
 		if ($post->isFirstPostInThread())

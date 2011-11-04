@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <i18n baseKey="m.forums.bo.actions" lcid="fr_FR">
-  <key id="create_">créer</key>
-  <key id="createforumgroup_">créer</key>
-  <key id="createwebsitefolder_">créer</key>
-  <key id="initforumgroupdefaultstructure">créer les pages par défaut</key>
-  <key id="initmembersdefaultstructure">initialiser la rubrique membres</key>
-  <key id="create-forum">créer un forum</key>
-  <key id="create-forumgroup">créer un groupe de forums</key>
-  <key id="create-rank">créer un rang</key>
-  <key id="create-title">créer un titre</key>
-  <key id="forumgroup-already-contains-pages">Ce groupe de forums contient déjà des pages.</key>
-  <key id="invalid-forumgroup">Cette action ne peut être effectuée que sur un groupe de forums.</key>
-  <key id="invalid-websitefolder">Cette action ne peut être effectuée que sur un dossier de site.</key>
-  <key id="website-already-contains-member-page">Ce site contient déjà des pages de la rubrique membres.</key>
+	<key id="create_">créer</key>
+	<key id="createforumgroup_">créer</key>
+	<key id="createwebsitefolder_">créer</key>
+	<key id="initforumgroupdefaultstructure">créer les pages par défaut</key>
+	<key id="initmembersdefaultstructure">compléter la rubrique membres</key>
+	<key id="create-forum">créer un forum</key>
+	<key id="create-forumgroup">créer un groupe de forums</key>
+	<key id="create-rank">créer un rang</key>
+	<key id="create-title">créer un titre</key>
+	<key id="forumgroup-already-contains-pages">Ce groupe de forums contient déjà des pages.</key>
+	<key id="invalid-forumgroup">Cette action ne peut être effectuée que sur un groupe de forums.</key>
+	<key id="invalid-websitefolder">Cette action ne peut être effectuée que sur un dossier de site.</key>
+	<key id="website-already-contains-member-page">Ce site contient déjà les pages du module forums dans rubrique membres.</key>
+	<key id="website-do-contains-member-topic">Ce site ne contient pas de rubrique membres. Celle-ci peut être initialisée depuis le module utilisateurs.</key>
 </i18n>
