@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<document xmlns="http://www.rbs.fr/schema/change-document/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/static/schema/change-document/4.0.xsd" model-version="1.0"
-	icon="member" indexable="true" publish-on-day-change="false">
-	<properties>
-		<add name="label">
-			<constraints>pseudonym:true</constraints>
-		</add>
-		<add name="user" type="modules_users/user" min-occurs="1" inverse="true" />
-		<add name="displayname" type="Boolean" default-value="false" />
-		<add name="signature" type="LongString" indexed="description" />
-		<add name="websiteUrl" type="String" indexed="none">
-			<constraints>url:true</constraints>
-		</add>
-		<add name="title" type="modules_forums/title" max-occurs="-1" indexed="property"/>
-		<add name="country" type="modules_zone/country" from-list="modules_zone/publishedcountries" indexed="property"/>
-		<add name="ban" type="DateTime" />
-		<add name="trackingByForum" type="Lob" />
-		<add name="trackingByThread" type="Lob" />
-		<add name="lastAllRead" type="DateTime" />
-		<add name="shortDateFormat" type="String" indexed="none"/>
-		<add name="longDateFormat" type="String" indexed="none" />
-	</properties>
-	<statuses default="ACTIVE" />
+<document xmlns="http://www.rbs.fr/schema/change-document/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/static/schema/change-document/4.0.xsd" model-version="1.0" icon="member" indexable="true" publish-on-day-change="false">
+  <properties>
+    <property name="label" />
+    <property name="user" type="modules_users/user" min-occurs="1" inverse="true"/>
+    <property name="displayname" type="Boolean" default-value="false"/>
+    <property name="signature" type="LongString" indexed="description"/>
+    <property name="websiteUrl" type="String" indexed="none">
+      <constraint name="url"/>
+    </property>
+    <property name="title" type="modules_forums/title" max-occurs="-1" indexed="property"/>
+    <property name="country" type="modules_zone/country" from-list="modules_zone/publishedcountries" indexed="property"/>
+    <property name="ban" type="DateTime"/>
+    <property name="trackingByForum" type="Lob"/>
+    <property name="trackingByThread" type="Lob"/>
+    <property name="lastAllRead" type="DateTime"/>
+    <property name="shortDateFormat" type="String" indexed="none"/>
+    <property name="longDateFormat" type="String" indexed="none"/>
+  </properties>
+  <statuses default="ACTIVE"/>
 </document>
