@@ -10,11 +10,11 @@ class forums_patch_0401 extends change_Patch
 	 */
 	public function getPreCommandList()
 	{
-		/*return array(
+		return array(
 			array('disable-site'),
 			array('compile-documents'),
 			array('generate-database'),
-		);*/
+		);
 	}
 	
 	/**
@@ -291,10 +291,10 @@ class forums_patch_0401 extends change_Patch
 	 */
 	public function getPostCommandList()
 	{
-		/*return array(
+		return array(
 			array('clear-documentscache'),
 			array('enable-site'),
-		);*/
+		);
 	}
 	
 	/**

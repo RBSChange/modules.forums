@@ -101,7 +101,7 @@ class forums_persistentdocument_forumsprofile extends forums_persistentdocument_
 	public function getLastReadDateByForumId($forumId)
 	{
 		$track = $this->getDecodedTrackingByForum();
-		if (isset($track[$forumId]) && $track[$forumId])
+		if (is_array($track) && isset($track[$forumId]) && $track[$forumId])
 		{
 			return $track[$forumId];
 		}
@@ -130,7 +130,7 @@ class forums_persistentdocument_forumsprofile extends forums_persistentdocument_
 			return $this->tempLastReadDateByThreadId[$threadId];
 		}
 		$track = $this->getDecodedTrackingByThread();
-		if (isset($track[$threadId]) && $track[$threadId])
+		if (is_array($track) && isset($track[$threadId]) && $track[$threadId])
 		{
 			return $track[$threadId];
 		}

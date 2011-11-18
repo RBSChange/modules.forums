@@ -110,26 +110,33 @@ class forums_ForumsprofileService extends users_ProfileService
 		
 			// By thread...
 			$track = $profile->getDecodedTrackingByThread();
-			foreach ($track as $key => $value)
+			if (is_array($track))
 			{
-				if ($date >= $value)
+				foreach ($track as $key => $value)
 				{
-					unset($track[$key]);
+					if ($date >= $value)
+					{
+						unset($track[$key]);
+					}
 				}
+				$profile->setTrackingByThread($track);
 			}
-			$profile->setTrackingByThread($track);
+			
 			
 			// By forum...
 			$track = $profile->getDecodedTrackingByForum();
-			foreach ($track as $key => $value)
+			if (is_array($track))
 			{
-				if ($date >= $value)
+				foreach ($track as $key => $value)
 				{
-					unset($track[$key]);
+					if ($date >= $value)
+					{
+						unset($track[$key]);
+					}
 				}
+				$profile->setTrackingByForum($track);
 			}
-			$profile->setTrackingByForum($track);
-			
+
 			$this->pp->updateDocument($profile);
 			$this->tm->commit();
 		}

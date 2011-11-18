@@ -322,6 +322,7 @@ class forums_PostService extends f_persistentdocument_DocumentService
 			
 			// By thread...
 			$track = $profile->getDecodedTrackingByThread();
+			if (!is_array($track)) {$track = array();}
 			$thread = $post->getThread();
 			$threadId = $thread->getId();
 			$postDate = $post->getCreationdate();
@@ -348,6 +349,7 @@ class forums_PostService extends f_persistentdocument_DocumentService
 			
 			// By forum...
 			$track = $profile->getDecodedTrackingByForum();
+			if (!is_array($track)) {$track = array();}
 			$forumId = $thread->getForum()->getId();
 			if ($postDate > $allReadDate)
 			{
