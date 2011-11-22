@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.forums.bo.useractionlogger" lcid="en_GB">
+  <key id="activate-forum">activate.forum {lang} {documentlabel}</key>
+  <key id="activate-forumgroup">activate.forumgroup {lang} {documentlabel}</key>
+  <key id="deactivated-forumgroup">deactivated.forumgroup {lang} {documentlabel}</key>
+  <key id="delete-forumgroup">elete.forumgroup {documentlabel} {lang}</key>
+  <key id="insert-forum">insert.forum {lang} {documentlabel}</key>
+  <key id="insert-forumgroup">insert.forumgroup {lang} {documentlabel}</key>
+  <key id="log-activate-forum">log activate forum</key>
+  <key id="log-activate-forumgroup">log activate forumgroup</key>
+  <key id="log-deactivated-forumgroup">log deactivated forumgroup</key>
+  <key id="log-delete-forumgroup">log delete forumgroup</key>
+  <key id="log-insert-forum">log insert forum</key>
+  <key id="log-insert-forumgroup">log insert forumgroup</key>
+  <key id="log-reactivate-forumgroup">log reactivate forumgroup</key>
+  <key id="log-savepermissions-forumgroup">log savepermissions forumgroup</key>
+  <key id="log-update-forum">log update forum</key>
+  <key id="reactivate-forumgroup">reactivate.forumgroup {lang} {documentlabel}</key>
+  <key id="savepermissions-forumgroup">savepermissions.forumgroup {lang} {documentlabel}</key>
+  <key id="update-forum">update.forum {lang} {documentlabel}</key>
+</i18n>

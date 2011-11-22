@@ -4,4 +4,6 @@
   <key id="posts">posts</key>
   <key id="path">path</key>
   <key id="website">website</key>
+  <key id="thresholdmax">to</key>
+  <key id="thresholdmin">from</key>
 </i18n>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <i18n baseKey="m.forums.bo.blocks.thread.metas" lcid="fr_FR">
-  <include id="m.forums.bo.blocks.postlistbase"/>
   <key id="threadshortdesc">description courte du sujet</key>
   <key id="threadkeywords">mots-clés du sujet</key>
 </i18n>

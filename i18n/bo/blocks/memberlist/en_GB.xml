@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <i18n baseKey="m.forums.bo.blocks.memberlist" lcid="en_GB">
-  <key id="title">members list</key>
+  <key id="title">member list</key>
   <key id="nbitemperpage">number of elements per page</key>
   <key id="nbitemperpage-help">number of elements per page</key>
 </i18n>

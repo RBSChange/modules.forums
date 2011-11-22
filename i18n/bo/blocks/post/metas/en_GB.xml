@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <i18n baseKey="m.forums.bo.blocks.post.metas" lcid="en_GB">
-  <include id="m.forums.bo.blocks.postlistbase"/>
   <key id="postauthor">post author</key>
   <key id="postshortdesc">post short description</key>
 </i18n>

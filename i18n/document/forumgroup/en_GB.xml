@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <i18n baseKey="m.forums.document.forumgroup" lcid="en_GB">
-  <key id="label">name</key>
-  <key id="label-help">name</key>
+  <key id="label">label</key>
+  <key id="label-help">label</key>
   <key id="description">description</key>
   <key id="lockedmode">forum locked</key>
-  <key id="lockedmode-help">forum locked for writing</key>
+  <key id="lockedmode-help">Forum locked for writing.</key>
   <key id="locked">forum locked</key>
-  <key id="locked-help">forum locked for writing</key>
+  <key id="locked-help">Forum locked for writing.</key>
   <key id="metatitle">name</key>
   <key id="metadescription">description</key>
   <key id="metakeywords">keywords</key>
+  <key id="document-name">forum group</key>
+  <key id="excludefromrss">exclude from RSS feeds</key>
+  <key id="excludefromrss-help">Allows excluding from the RSS feeds generated on the website of all threads and posts of this forum.</key>
+  <key id="excludefromrssmode">exclude from RSS feeds</key>
+  <key id="excludefromrssmode-help">Allows excluding from the RSS feeds generated on the website of all threads and posts of this forum.</key>
+  <key id="metadescription-help">Description used in the page meta-information.</key>
+  <key id="metakeywords-help">Keywords used in the page meta-information.</key>
+  <key id="metatitle-help">Name used in the page meta-information.</key>
+  <key id="mount-parent">parent container</key>
+  <key id="mount-parent-help">Topic or website in which this forum must appear.</key>
 </i18n>

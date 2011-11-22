@@ -7,4 +7,17 @@
   <key id="country">country</key>
   <key id="password">password</key>
   <key id="confirmpassword">confirm password</key>
+  <key id="displayname">display the name</key>
+  <key id="displayname-help">Displays the last name and first name in the public profile.</key>
+  <key id="endpublicationdate">publication end</key>
+  <key id="endpublicationdate-help">From this date on, the document will no longer be published. If left empty, the document will be published indefinitely.</key>
+  <key id="label">nickname</key>
+  <key id="longdateformat">long date format</key>
+  <key id="longdateformat-help">Format for long dates (notably applied on dates related to threads and posts). The syntax is the same as the one used by the date() PHP function.</key>
+  <key id="shortdateformat">short date format</key>
+  <key id="shortdateformat-help">Format for short dates (notably applied on member registration dates). The syntax is the same as the one used by the date() PHP function.</key>
+  <key id="signature">signature</key>
+  <key id="startpublicationdate">publication start</key>
+  <key id="startpublicationdate-help">From this date on, the document will be published. If left empty, the document will be published immediately.</key>
+  <key id="title-help">Member title displayed on the posts, the profiles and the member lists. These titles will only be displayed and do not affect the permissions of the member.</key>
 </i18n>

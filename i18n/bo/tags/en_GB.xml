@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <i18n baseKey="m.forums.bo.tags" lcid="en_GB">
-  <key id="forum-list">forums list</key>
+  <key id="forum-list">forum list</key>
   <key id="forum-detail">forum threads list</key>
-  <key id="thread-detail">thread posts list</key>
+  <key id="thread-detail">thread post list</key>
   <key id="newthread">new thread</key>
   <key id="editpost">edit post</key>
   <key id="newpost">new post</key>
-  <key id="editthread">edit thread</key>
-  <key id="member-detail">member detail</key>
-  <key id="member-ban">ban member</key>
-  <key id="post-block">post detail</key>
-  <key id="editmemberprofile-block">editmemberprofile block</key>
+  <key id="editthread">edit a thread</key>
+  <key id="member-detail">member details</key>
+  <key id="member-ban">ban a member</key>
+  <key id="post-block">post details</key>
+  <key id="editmemberprofile-block">edit member profile block</key>
+  <key id="editprofile-block">profile editing</key>
+  <key id="memberlist-block">member list</key>
+  <key id="newmember-block">registration</key>
 </i18n>

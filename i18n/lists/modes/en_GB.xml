@@ -2,5 +2,5 @@
 <i18n baseKey="m.forums.lists.modes" lcid="en_GB">
   <key id="no">no</key>
   <key id="yes">yes</key>
-  <key id="inherit">inherits</key>
+  <key id="inherit">inherited</key>
 </i18n>
