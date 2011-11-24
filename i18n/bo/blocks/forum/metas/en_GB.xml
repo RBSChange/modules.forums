@@ -2,5 +2,5 @@
 <i18n baseKey="m.forums.bo.blocks.forum.metas" lcid="en_GB">
   <key id="forumname">forum name</key>
   <key id="forumshortdesc">forum short description</key>
-  <key id="forumkeywords">forum key-words</key>
+  <key id="forumkeywords">forum keywords</key>
 </i18n>

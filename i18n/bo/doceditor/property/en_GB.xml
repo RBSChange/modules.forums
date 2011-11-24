@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.forums.bo.doceditor.property" lcid="en_GB">
+  <key id="nbpost">number of posts</key>
+  <key id="nbthread">number of threads</key>
+  <key id="path">path</key>
+  <key id="ranks">ranks</key>
+  <key id="titles">titles</key>
+</i18n>

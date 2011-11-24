@@ -3,4 +3,10 @@
   <key id="module-name">forums</key>
   <key id="tree-root-name">forums</key>
   <key id="system-folder-name">forums</key>
+  <key id="preserve-posts-description"/>
+  <key id="preserve-posts-button"/>
+  <key id="delete-posts-description"/>
+  <key id="delete-posts-button"/>
+  <key id="cancel-deletion-description"/>
+  <key id="cancel-deletion-button"/>
 </i18n>

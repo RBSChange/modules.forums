@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <i18n baseKey="m.forums.bo.blocks.memberlist" lcid="en_GB">
-	<include id="m.users.bo.blocks.userslist" />
+  <include id="m.users.bo.blocks.userslist"/>
 </i18n>

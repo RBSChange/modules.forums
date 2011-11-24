@@ -3,7 +3,15 @@
   <key id="create_">create</key>
   <key id="createforumgroup_">create</key>
   <key id="createwebsitefolder_">create</key>
-  <key id="create-forum">create new forum</key>
-  <key id="create-rank">create new rank</key>
-  <key id="create-title">create new title</key>
+  <key id="create-forum">create a forum</key>
+  <key id="create-rank">create a rank</key>
+  <key id="create-title">create a title</key>
+  <key id="create-forumgroup">create a forum group</key>
+  <key id="forumgroup-already-contains-pages">This forum group already contains pages</key>
+  <key id="initforumgroupdefaultstructure">create the default pages</key>
+  <key id="initmembersdefaultstructure">initialise the default member structure</key>
+  <key id="invalid-forumgroup">This action can only be performed on a forum group.</key>
+  <key id="invalid-websitefolder">This action can only be performed on a website folder.</key>
+  <key id="website-already-contains-member-page">This website already contains pages of the member structure.</key>
+  <key id="website-do-contains-member-topic"/>
 </i18n>

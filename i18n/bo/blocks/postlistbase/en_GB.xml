@@ -2,7 +2,10 @@
 <i18n baseKey="m.forums.bo.blocks.postlistbase" lcid="en_GB">
   <key id="nbitemperpage">number of elements per page</key>
   <key id="nbitemperpage-help">number of elements per page</key>
-  <key id="showgravatars">show avatar</key>
-  <key id="showgravatars-help">show avatar (www.gravatar.com)</key>
+  <key id="showgravatars">display an avatar</key>
+  <key id="showgravatars-help">Display an avatar (www.gravatar.com website).</key>
   <key id="avatarssize">avatar size</key>
+  <key id="avatarssize-help">Avatar size in pixels (the avatar will always be square).</key>
+  <key id="showsignatures">display the signature</key>
+  <key id="showsignatures-help">Display the signature below the message (the signature is defined in the member profile).</key>
 </i18n>
