@@ -94,28 +94,13 @@ class forums_WebsitefolderService extends generic_FolderService
 
 	/**
 	 * @param forums_persistentdocument_websitefolder $document
+	 * @param array<string, string> $attributes
+	 * @param integer $mode
 	 * @param string $moduleName
-	 * @param string $treeType
-	 * @param array<string, string> $nodeAttributes
-	 */	
-	public function addTreeAttributes($document, $moduleName, $treeType, &$nodeAttributes)
-	{
-		$nodeAttributes['websiteId'] = $document->getWebsite()->getId();
-	}
-
-	/**
-	 * @param forums_persistentdocument_websitefolder $document
-	 * @return void
 	 */
-	// TODO: enable cascade deletion?
-/*	protected function preDelete($document)
+	public function completeBOAttributes($document, &$attributes, $mode, $moduleName)
 	{
-		parent::preDelete($document);
-		
-		// Delete forums.
-		foreach ($this->getChildrenOf($document) as $child)
-		{
-			$child->delete();
-		}
-	}*/
+		// Used in structure initialization.
+		$attributes['websiteId'] = $document->getWebsite()->getId();
+	}
 }
