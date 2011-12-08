@@ -1,12 +1,10 @@
 <?php
 /**
- * Class where to put your custom methods for document forums_persistentdocument_websitefolder
  * @package forums.persistentdocument
  */
 class forums_persistentdocument_websitefolder extends forums_persistentdocument_websitefolderbase 
 {
 	/**
-	 * @see f_persistentdocument_PersistentDocumentImpl::getTreeNodeLabel()
 	 * @return String
 	 */
 	public function getLabel()
