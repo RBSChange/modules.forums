@@ -139,7 +139,7 @@
 	<key id="lastname">nom</key>
 	<key id="sub-forums">sous-forums</key>
 	<key id="quote">citer</key>
-	<key id="last-viewed-pagePath">dernière page vue</key>
+	<key id="last-viewed-pagepath">dernière page vue</key>
 	<key id="view-last-post">voir le dernier message</key>
 	<key id="post">message</key>
 	<key id="new-post">nouveau message</key>	
