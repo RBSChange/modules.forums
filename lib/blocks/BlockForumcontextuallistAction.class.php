@@ -30,7 +30,7 @@ class forums_BlockForumcontextuallistAction extends website_BlockAction
 		$request->setAttribute('hideMemberActions', !$handleMemberActions);
 		$request->setAttribute('currentUrl', LinkHelper::getCurrentUrl());
 		
-		// Mark all posts as read if asked.
+		// @deprecated (will be removed in 4.0) use the MarkAllPostRead action instead in your templates.
 		if ($handleMemberActions && $member !== null && $request->hasParameter('markAllPostsRead'))
 		{
 			$member->markAllPostsAsRead();
