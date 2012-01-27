@@ -7,7 +7,7 @@
 		</li>
 		
 		<tal:block tal:condition="not: post/wasDeleted">
-			<li class="${php: repeat.post.start ? 'start' : ''} ${php: repeat.post.end ? 'last' : ''} ${php: repeat.post.odd ? 'odd' : 'even'}${php: post->getDeleteddate() ? ' tbv' : ''}" id="post-${post/getId}">
+			<li class="${php: repeat.post.start ? 'start' : ''} ${php: repeat.post.end ? 'last' : ''} ${alternateclass:postIndex}${php: post->getDeleteddate() ? ' tbv' : ''}" id="post-${post/getId}">
 				<div class="message-header">
 					<p class="float-right" tal:condition="not: displayConfig/hidePostLink">
 						<a change:link="document post">${post/getPostId}</a>
@@ -88,7 +88,7 @@
 					<ul class="inline-list float-right">
 						<li tal:condition="php: displayConfig['showActions'] && displayConfig['currentMember'] && displayConfig['currentMember'].isSuperModerator() && post.getIp()">
 							<a class="link" href="http://www.db.ripe.net/whois?searchtext=${post/getIp}" target="_blank">${post/getIp}</a>
-							<span> | </span>
+							<span class="separator"> | </span>
 						</li>
 						<li><a class="link" href="#top">${trans: m.forums.frontoffice.top,ucf}</a></li>
 					</ul>
@@ -97,20 +97,20 @@
 							<tal:block tal:condition="not: post/getThread/isLocked">
 								<li>
 									<a change:link="tag functional_forums_post-new ; forumsParam[cmpref] post/getThread/getId ; forumsParam[postid] post/getId">${trans: m.forums.frontoffice.answer,ucf}</a>
-									<span> | </span>
+									<span class="separator"> | </span>
 								</li>
 								<li>
 									<a change:link="tag functional_forums_post-new ; forumsParam[cmpref] post/getThread/getId ; forumsParam[postid] post/getId ; forumsParam[quote] 'true'">${trans:m.forums.frontoffice.quote,ucf}</a>
-									<span tal:condition="php:post.isEditable() OR post.isDeletable() OR post.isBanable()"> | </span>
+									<span tal:condition="php:post.isEditable() OR post.isDeletable() OR post.isBanable()" class="separator"> | </span>
 								</li>
 							</tal:block>
 							<li tal:condition="post/isEditable">
 								<a change:link="tag functional_forums_post-edit ; forumsParam[cmpref] post/getId">${trans: m.forums.frontoffice.edit,ucf}</a>
-								<span tal:condition="php:post.isDeletable() OR post.isBanable()"> | </span>
+								<span tal:condition="php:post.isDeletable() OR post.isBanable()" class="separator"> | </span>
 							</li>
 							<li tal:condition="post/isDeletable">
 								<a change:link="module forums; action DeletePost; id post/getId" class="link postDelete">${trans: m.forums.frontoffice.delete,ucf}</a>
-								<span tal:condition="post/isBanable"> | </span>
+								<span tal:condition="post/isBanable" class="separator"> | </span>
 							</li>
 						</tal:block>
 						<li tal:condition="post/isBanable">

@@ -7,8 +7,8 @@
 
 <form change:form="beanClass forums_persistentdocument_post; beanName post">
 	<fieldset>
-		<legend>${trans:m.forums.frontoffice.message-input,ucf}</legend>
-		<div change:errors=""></div>
+		<legend class="h-2">${trans:m.forums.frontoffice.message-input,ucf}</legend>
+		<ul change:errors=""></ul>
 		<ol>
 			<tal:block tal:condition="post/isFirstPostInThread">
 				<li><input change:field="name thread.label" /></li>

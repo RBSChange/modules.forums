@@ -1,9 +1,9 @@
 <form change:form="beanClass forums_persistentdocument_member; beanName member">
 	<fieldset>
-		<legend>${trans:m.forums.frontoffice.modifyprofile,ucf}</legend>
-		<div change:errors=""></div>
+		<legend class="h-1">${trans:m.forums.frontoffice.modifyprofile,ucf}</legend>
+		<ul change:errors=""></ul>
 		<fieldset>
-			<legend>${trans:m.forums.frontoffice.member-informations,ucf}</legend>
+			<legend class="h-2">${trans:m.forums.frontoffice.member-informations,ucf}</legend>
 			<ol>
 				<li><label class="label">${trans:m.forums.document.member.label,ucf,lab}</label> ${member/getLabelAsHtml}</li>
 				<li><input change:field="name user.titleid" /></li>
@@ -21,10 +21,9 @@
 				<li><input change:field="name websiteUrl" size="40" /></li>
 				<li><input change:bbcodeinput="name signatureAsBBCode" module-profile="forums" labeled="true" /></li>
 			</ol>
-		</fieldset>
-		
+		</fieldset>		
 		<fieldset>
-			<legend>${trans:m.forums.frontoffice.authentication-confirmation,ucf}</legend>
+			<legend class="h-2">${trans:m.forums.frontoffice.authentication-confirmation,ucf}</legend>
 			<ol>
 				<li>
 					<input change:passwordinput="" name="checkpassword" required="true" labeli18n="m.forums.document.member.password" />

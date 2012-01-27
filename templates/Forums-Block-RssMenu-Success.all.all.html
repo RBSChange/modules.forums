@@ -1,6 +1,6 @@
 <tal:block tal:condition="links">
 	<dl class="menu-list">
-		<dt>${trans:m.forums.frontoffice.rss-menu-title,ucf}</dt>
+		<dt class="h-2">${trans:m.forums.frontoffice.rss-menu-title,ucf}</dt>
 		<dd tal:repeat="link links">
 			<img change:img="icon/small/rss.png" style="vertical-align: middle" /> <a change:link="module forums; action ViewFeed; parentref link/parentref; docType link/docType; recursive link/recursive">${link/title}</a>
 		</dd>

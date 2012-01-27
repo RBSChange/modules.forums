@@ -1,9 +1,8 @@
 <form change:form="beanClass forums_persistentdocument_member; beanName member">
 	<fieldset>
-		<legend>${title}</legend>
+		<legend class="h-2">${title}</legend>
 		<ul change:errors=""></ul>
 		<ul change:messages=""></ul>
-		<input change:field="name beanId" hidden="true" />	
 		<ol>
 			<li><input change:field="name label" /></li>
 			<li>
@@ -31,6 +30,7 @@
 			<li><input change:bbcodeinput="name signatureAsBBCode" module-profile="forums" labeled="true" /></li>
 		</ol>
 		<p class="buttons">
+			<input change:field="name beanId" hidden="true" />	
 			<input change:submit="labeli18n m.users.frontoffice.editprofil.submitbutton" class="button" name="save" />
 		</p>
 	</fieldset>

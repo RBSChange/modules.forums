@@ -23,14 +23,14 @@
 
 <form metal:use-macro="goToPageForm"></form>
 
-<ul class="inline-list" tal:define="forumListPage thread/getForum/getSiblingForumListPage">
+<ul class="inline-list normal-margin" tal:define="forumListPage thread/getForum/getSiblingForumListPage">
 	<li tal:condition="not: thread/isLocked">
 		<a change:link="tag functional_forums_post-new ; forumsParam[cmpref] thread/getId">${trans:m.forums.frontoffice.newpost,ucf}</a>
-		<span> | </span>
+		<span class="separator"> | </span>
 	</li>
 	<li>
 		<a change:link="document thread/getForum">${trans:m.forums.frontoffice.threadslist,ucf}</a>
-		<span tal:condition="forumListPage"> | </span>
+		<span tal:condition="forumListPage" class="separator"> | </span>
 	</li>
 	<li tal:condition="forumListPage">
 		<a change:link="document forumListPage">${trans:m.forums.frontoffice.forumslist,ucf}</a>
@@ -43,26 +43,26 @@
 
 <form metal:use-macro="goToPageForm"></form>
 
-<ul class="inline-list">
+<ul class="inline-list normal-margin">
 	<li tal:condition="not: thread/isLocked">
 		<a change:link="tag functional_forums_post-new ; forumsParam[cmpref] thread/getId">${trans:m.forums.frontoffice.newpost,ucf}</a>
-		<span tal:condition="php: followUrl OR unfollowUrl OR thread.isClosable() OR thread.isOpenable() OR thread.canModerate()"> | </span>
+		<span tal:condition="php: followUrl OR unfollowUrl OR thread.isClosable() OR thread.isOpenable() OR thread.canModerate()" class="separator"> | </span>
 	</li>
 	<li tal:condition="followUrl">
 		<a class="link" href="${followUrl}">${trans:m.forums.frontoffice.followthread,ucf}</a>
-		<span tal:condition="php: thread.isClosable() OR thread.isOpenable() OR thread.canModerate()"> | </span>
+		<span tal:condition="php: thread.isClosable() OR thread.isOpenable() OR thread.canModerate()" class="separator"> | </span>
 	</li>
 	<li tal:condition="unfollowUrl">
 		<a class="link" href="${unfollowUrl}">${trans:m.forums.frontoffice.cancelfollowthread,ucf}</a>
-		<span tal:condition="php: thread.isClosable() OR thread.isOpenable() OR thread.canModerate()"> | </span>
+		<span tal:condition="php: thread.isClosable() OR thread.isOpenable() OR thread.canModerate()" class="separator"> | </span>
 	</li>
 	<li tal:condition="thread/isClosable">
 		<a class="link closeThread" change:link="module forums; action CloseThread; id thread/getId">${trans:m.forums.frontoffice.closethread,ucf}</a>
-		<span tal:condition="php: thread.isOpenable() OR thread.canModerate()"> | </span>
+		<span tal:condition="php: thread.isOpenable() OR thread.canModerate()" class="separator"> | </span>
 	</li>
 	<li tal:condition="thread/isOpenable">
 		<a class="link openThread" change:link="module forums; action OpenThread; id thread/getId">${trans:m.forums.frontoffice.openthread,ucf}</a>
-		<span tal:condition="thread/canModerate"> | </span>
+		<span tal:condition="thread/canModerate" class="separator"> | </span>
 	</li>
 	<li tal:condition="thread/canModerate">
 		<a change:actionlink="action 'ChooseForum'; cmpref thread/getId">${trans:m.forums.frontoffice.move-thread,ucf}</a>

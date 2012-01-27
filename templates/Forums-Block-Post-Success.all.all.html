@@ -1,7 +1,7 @@
-<ul class="inline-list" metal:define-macro="inlineMenu">
+<ul class="inline-list normal-margin" metal:define-macro="inlineMenu">
 	<li>
 		<a change:link="document post/getThread">${trans:m.forums.frontoffice.view-thread,ucf}</a>
-		<span> | </span>
+		<span class="separator"> | </span>
 	</li>
 	<li><a href="${post/getPostUrlInThread}" class="link">${trans:m.forums.frontoffice.locate-in-thread,ucf}</a></li>
 </ul>

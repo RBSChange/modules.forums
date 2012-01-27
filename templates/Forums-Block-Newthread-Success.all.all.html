@@ -7,16 +7,16 @@
 
 <form change:form="beanClass forums_persistentdocument_thread; beanName thread">
 	<fieldset>
-		<legend>${trans:m.forums.frontoffice.message-input,ucf}</legend>
-		<div change:errors=""></div>
-		<tal change:field="name beanId" hidden="true" />
-		<tal change:field="name forum" hidden="true" value="${forum/getId}" />
+		<legend class="h-2">${trans:m.forums.frontoffice.message-input,ucf}</legend>
+		<ul change:errors=""></ul>
 		<ol>
 			<li><input change:field="name label" /></li>
 			<li change:permission="perm forums.Moderate; nodeId forum/getId; mode front"><input change:field="name level" nopreamble="true" /></li>
 			<li><input change:bbcodeinput="name firstPost.textAsBBCode" labeled="true" required="true" /></li>
 		</ol>
 		<p class="buttons">
+			<input change:field="name beanId" hidden="true" />
+			<input change:field="name forum" hidden="true" value="${forum/getId}" />
 			<input name="preview" change:submit="labeli18n m.forums.frontoffice.form.preview" />
 			<input change:submit="labeli18n m.forums.frontoffice.form.submit"/>
 		</p>

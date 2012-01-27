@@ -1,6 +1,6 @@
 <h1 change:h="">${forum/getLabelAsHtml}</h1>
 <div tal:condition="forum/getDescription" class="normal">${forum/getDescriptionAsHtml}</div>
-<ul class="inline-list" tal:condition="not: forum/isLocked">
+<ul class="inline-list normal-margin" tal:condition="not: forum/isLocked">
 	<li><a change:link="tag functional_forums_thread-new ; forumsParam[cmpref] forum/getId">${trans:m.forums.frontoffice.newthread,ucf}</a></li>
 </ul>
 

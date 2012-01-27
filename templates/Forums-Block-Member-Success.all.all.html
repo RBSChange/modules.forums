@@ -16,43 +16,59 @@
 	<em tal:condition="member/getBan" class="notification">${trans:m.forums.frontoffice.ban-until,ucf} <tal:block change:memberdate="value member/getBan; mode 'short'" /></em>
 </tal:block>
 
-<div class="member-idcard">
-	<div class="website-block">
-		<div class="column-50 margin-right">
-			<div class="member-pic" tal:condition="member">
-				<img class="image" src="${php: member->getGravatarUrl(64)}" alt="" />
-			</div>
-			<div class="member-info">
-				<ul>
-					<tal:block tal:condition="member/getDisplayName">
-						<li>${trans:m.forums.frontoffice.firstname,ucf,lab} <strong>${member/getUser/getFirstnameAsHtml}</strong></li>
-						<li>${trans:m.forums.frontoffice.lastname,ucf,lab} <strong>${member/getUser/getlastnameAsHtml}</strong></li>
-					</tal:block>
-					<li tal:define="count member/getPublishedTitleCount" tal:condition="count">
-						<tal:block tal:condition="php: count == 1">${trans:m.forums.frontoffice.member-title,ucf,lab}</tal:block>
-						<tal:block tal:condition="php: count > 1">${trans:m.forums.frontoffice.member-titles,ucf,lab}</tal:block>
-						<tal:block tal:repeat="title member/getPublishedTitleArray">
-							<tal:block tal:condition="php: !repeat.title.start && repeat.title.end">${trans:m.forums.frontoffice.and}</tal:block>
-							<strong>${title/getLabelAsHtml}</strong><tal:block tal:condition="php: repeat.title.index LT (repeat.title.length - 2)">, </tal:block>
-					</tal:block>
-					</li>
-					<li>${trans:m.forums.frontoffice.member-since,ucf,lab} <strong change:memberdate="value member/getCreationdate; mode 'short'"></strong></li>
-					<li tal:condition="member/getWebsiteUrl">${trans:m.forums.frontoffice.web-site,ucf,lab} <strong><a class="link" tal:attributes="href member/getWebsiteUrl" target="_blank">${member/getShortWebsiteUrl}</a></strong></li>
-					<li tal:condition="member/getCountry">${trans:m.forums.frontoffice.country,ucf,lab} <strong>${member/getCountry/getLabelAsHtml}</strong></li>
-				</ul>
-			</div>
+<div class="member-idcard columns">
+	<div class="column-50">
+		<div class="member-pic" tal:condition="member">
+			<img class="image document-visual" src="${php: member->getGravatarUrl(64)}" alt="" />
 		</div>
-		<div class="column-50 margin-left">
-			<div class="member-counts" tal:condition="php: member.getNbpost() || member.getNbthread()">
-				<ul tal:define="nbpost member/getNbpost ; nbthread member/getNbthread">
-					<li tal:define="rank member/getRank" tal:condition="rank">${trans:m.forums.frontoffice.member-rank,ucf,lab} <strong>${rank/getLabel}</strong></li>
-					<li>${trans:m.forums.frontoffice.post-count,ucf,lab} <strong>${nbpost}</strong></li>
-					<li>${trans:m.forums.frontoffice.thread-count,ucf,lab} <strong>${nbthread}</strong></li>
-				</ul>
-			</div>
+		<div class="member-info">
+			<dl class="document-infos">
+				<tal:block tal:condition="member/getDisplayName">
+					<dt>${trans:m.forums.frontoffice.firstname,ucf,lab}</dt>
+					<dd>${member/getUser/getFirstnameAsHtml}</dd>
+					<dt>${trans:m.forums.frontoffice.lastname,ucf,lab}</dt>
+					<dd>${member/getUser/getlastnameAsHtml}</dd>
+				</tal:block>
+				<tal:block tal:define="count member/getPublishedTitleCount" tal:condition="count">
+					<dt tal:condition="php: count == 1">${trans:m.forums.frontoffice.member-title,ucf,lab}</dt>
+					<dt tal:condition="php: count > 1">${trans:m.forums.frontoffice.member-titles,ucf,lab}</dt>
+					<dd>
+						<ul class="inline-list">
+							<li tal:repeat="title member/getPublishedTitleArray">
+								${title/getLabelAsHtml}
+								<span tal:condition="php: repeat.title.index LT (repeat.title.length - 2)" class="punctuation">, </span>
+								<span tal:condition="php: repeat.title.index EQ (repeat.title.length - 2)" class="punctuation">${trans:m.forums.frontoffice.and}</span>
+							</li>
+						</ul>
+					</dd>
+				</tal:block>
+				<dt>${trans:m.forums.frontoffice.member-since,ucf,lab}</dt>
+				<dd><tal:block change:memberdate="value member/getCreationdate; mode 'short'" /></dd>
+				<tal:block tal:condition="member/getWebsiteUrl">
+					<dt>${trans:m.forums.frontoffice.web-site,ucf,lab}</dt>
+					<dd><a class="link" tal:attributes="href member/getWebsiteUrl" target="_blank">${member/getShortWebsiteUrl}</a></dd>
+				</tal:block>
+				<tal:block tal:condition="member/getCountry">
+					<dt>${trans:m.forums.frontoffice.country,ucf,lab}</dt>
+					<dd>${member/getCountry/getLabelAsHtml}</dd>
+				</tal:block>
+			</dl>
 		</div>
 	</div>
-	<div class="cleaner"></div>
+	<div class="column-50">
+		<div class="member-counts" tal:condition="php: member.getNbpost() || member.getNbthread()">
+			<dl tal:define="nbpost member/getNbpost ; nbthread member/getNbthread" class="document-infos">
+				<tal:block tal:define="rank member/getRank" tal:condition="rank">
+					<dt>${trans:m.forums.frontoffice.member-rank,ucf,lab}</dt>
+					<dd>${rank/getLabelAsHtml}</dd>
+				</tal:block>
+				<dt>${trans:m.forums.frontoffice.post-count,ucf,lab}</dt>
+				<dd>${nbpost}</dd>
+				<dt>${trans:m.forums.frontoffice.thread-count,ucf,lab}</dt>
+				<dd>${nbthread}</dd>
+			</dl>
+		</div>
+	</div>
 </div>
 
 <tal:block tal:condition="member/getSignature">

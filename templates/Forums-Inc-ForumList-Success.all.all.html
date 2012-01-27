@@ -1,4 +1,4 @@
-<table class="normal forums-table" cellspacing="0" cellpadding="0">
+<table class="normal forums-table">
 	<thead>
 		<tr>
 			<th class="column-bullet" />
@@ -48,9 +48,9 @@
 	</tbody>
 </table>
 
-<ul class="inline-list" tal:condition="not: hideMemberActions">
-	<li tal:condition="not: member"><a change:link="tag contextual_website_website_modules_users_register">${trans: m.forums.frontoffice.register,ucf}</a></li>
+<ul class="inline-list normal-margin" tal:condition="not: hideMemberActions">
+	<li tal:condition="not: member"><a change:link="tag contextual_website_website_modules_users_register">${trans: m.forums.frontoffice.register,ucf}</a><span class="separator"> | </span></li>
 	<li tal:condition="not: member"><a change:link="tag contextual_website_website_modules_users_register">${trans: m.forums.frontoffice.log-in,ucf}</a></li>
-	<li tal:condition="member"><a change:link="tag contextual_website_website_modules_users_edit-profil">${trans: m.forums.frontoffice.edit-profile,ucf}</a></li>
+	<li tal:condition="member"><a change:link="tag contextual_website_website_modules_users_edit-profil">${trans: m.forums.frontoffice.edit-profile,ucf}</a><span class="separator"> | </span></li>
 	<li tal:condition="member"><a change:link="module forums; action MarkAllPostsRead; backUrl currentUrl">${trans: m.forums.frontoffice.mark-all-as-read,ucf}</a></li>
 </ul>

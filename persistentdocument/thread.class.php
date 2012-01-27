@@ -222,15 +222,15 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 		{
 			for ($page = 1; $page < $pageCount; $page++)
 			{
-				$pagination[] = '<a class="link" href="' . LinkHelper::getDocumentUrl($this, null, array('forumsParam[page]' => $page)) . '">' . $page . '</a><span>, </span>';
+				$pagination[] = '<a class="link" href="' . LinkHelper::getDocumentUrl($this, null, array('forumsParam[page]' => $page)) . '">' . $page . '</a><span class="punctuation">, </span>';
 			}
 		}
 		else 
 		{
-			$pagination[] = '<a class="link" href="' . LinkHelper::getDocumentUrl($this, null, array('forumsParam[page]' => 1)) . '">1</a><span> ... </span>';
+			$pagination[] = '<a class="link" href="' . LinkHelper::getDocumentUrl($this, null, array('forumsParam[page]' => 1)) . '">1</a><span class="separator"> ... </span>';
 			for ($page = $pageCount - 2; $page < $pageCount; $page++)
 			{
-				$pagination[] = '<a class="link" href="' . LinkHelper::getDocumentUrl($this, null, array('forumsParam[page]' => $page)) . '">' . $page . '</a><span>, </span>';
+				$pagination[] = '<a class="link" href="' . LinkHelper::getDocumentUrl($this, null, array('forumsParam[page]' => $page)) . '">' . $page . '</a><span class="punctuation">, </span>';
 			}
 		}
 		$pagination[] = '<a class="link" href="' . LinkHelper::getDocumentUrl($this, null, array('forumsParam[page]' => $pageCount)) . '">' . $pageCount . '</a>';

@@ -1,6 +1,6 @@
 <form change:form="beanClass forums_persistentdocument_ban; beanName ban">
 	<fieldset>
-		<legend>${trans:m.forums.frontoffice.forum-member-ban,ucf}</legend>
+		<legend class="h-1">${trans:m.forums.frontoffice.forum-member-ban,ucf}</legend>
 		<ul change:errors=""></ul>
 		<ol>
 			<li><label>${trans:m.forums.document.ban.member,ucf,lab}</label> <a change:link="document post/getPostauthor">${post/getAuthorNameAsHtml}</a></li>
