@@ -107,6 +107,7 @@
 	<block type="modules_forums_editprofile" icon="edit"  />
 	<block type="modules_forums_memberban" icon="document" />
 	<block type="modules_forums_RssMenu" hidden="true" />
+	<block type="modules_forums_EditMemberProfile" hidden="true" />
 	<!-- Dashboard blocks. -->
 	<block type="modules_forums_DashboardGeneralStatistics" icon="statistics" dashboard="true">
 		<parameters>
