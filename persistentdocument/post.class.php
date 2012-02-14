@@ -396,9 +396,17 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	}
 	
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getRSSGuid()
+	{
+		return $this->getDocumentModelName() . '#' . $this->getId();
+	}
+	
+	/**
+	 * @return string
+	 */
+	public function getRSSLink()
 	{
 		return LinkHelper::getDocumentUrl($this);
 	}
