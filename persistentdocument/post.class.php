@@ -400,7 +400,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	 */
 	public function getRSSGuid()
 	{
-		return $this->getDocumentModelName() . '#' . $this->getId();
+		return LinkHelper::getPermalink($this);
 	}
 	
 	/**
