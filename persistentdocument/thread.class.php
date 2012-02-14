@@ -288,9 +288,17 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	}
 	
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getRSSGuid()
+	{
+		return $this->getDocumentModelName() . '#' . $this->getId();
+	}
+	
+	/**
+	 * @return string
+	 */
+	public function getRSSLink()
 	{
 		return LinkHelper::getDocumentUrl($this);
 	}
