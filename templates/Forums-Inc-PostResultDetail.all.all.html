@@ -10,10 +10,10 @@
 	</tal:block>
 	<tal:block tal:condition="showDates">
 		<dt>${trans:m.solrsearch.frontoffice.creationdate,ucf}</dt>
-		<dd><tal:block change:datetime="value doc/getCreationdate; format 'classic'" /><span class="separator"> - </span></dd>
+		<dd>${datetime:doc/getUICreationdate}<span class="separator"> - </span></dd>
 		<tal:block tal:condition="php: item.getDocument().getCreationdate() < item.getDocument().getModificationdate()">
 			<dt>${trans:m.solrsearch.frontoffice.modificationdate,ucf}</dt>
-			<dd><tal:block change:datetime="value doc/getModificationdate; format 'classic'" /><span class="separator"> - </span></dd>
+			<dd>${datetime:doc/getUIModificationdate}<span class="separator"> - </span></dd>
 		</tal:block>
 	</tal:block>
 	<tal:block tal:define="thread doc/getThread; forum thread/getForum">
