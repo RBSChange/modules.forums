@@ -16,7 +16,9 @@ class forums_BlockPostAction extends forums_BlockPostListBaseAction
 			$thread = $doc->getThread();
 			$description = f_util_StringUtils::shortenString(f_util_StringUtils::htmlToText($doc->getTextAsHtml()), 100);
 			$author = ($doc->getPostauthor() !== null) ? $doc->getPostauthor()->getLabel() : '';
-			return array('threadname' => $thread->getLabel(), 'forumname' => $thread->getForum()->getLabel(), 'postauthor' => $author, 'postshortdesc' => $description);
+			$postId = $doc->getPostId();
+			$postNumber = $doc->getNumber();
+			return array('threadname' => $thread->getLabel(), 'forumname' => $thread->getForum()->getLabel(), 'postauthor' => $author, 'postshortdesc' => $description, 'postuniqueid' => $postId, 'postnumber' => $postNumber);
 		}
 		return array();
 	}

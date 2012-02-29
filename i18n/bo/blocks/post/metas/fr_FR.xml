@@ -2,4 +2,8 @@
 <i18n baseKey="m.forums.bo.blocks.post.metas" lcid="fr_FR">
   <key id="postauthor">auteur du message</key>
   <key id="postshortdesc">description courte du message</key>
+  <key id="threadname">nom du sujet</key>
+  <key id="forumname">nom du forum</key>
+  <key id="postuniqueid">numéro unique du message contenant l'id du sujet</key>
+  <key id="postnumber">numéro du message</key>
 </i18n>

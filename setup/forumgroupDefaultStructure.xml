@@ -18,7 +18,7 @@
 			</changecontent>
 		</page>
 		
-		<page label="Message" navigationVisibility="hidden" indexingstatus="false" metatitle="Message par {forums_post.postauthor} : sujet {forums_post.threadname}" description="{forums_post.postshortdesc}">
+		<page label="Message" navigationVisibility="hidden" indexingstatus="false" metatitle="Message ({forums_post.postuniqueid}) par {forums_post.postauthor} : sujet {forums_post.threadname}" description="{forums_post.postshortdesc}">
 			<tag name="functional_forums_post-detail" />
 			<changecontent for="content-block">
 				<changeblock type="modules_forums_post" />

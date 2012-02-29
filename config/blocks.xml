@@ -65,6 +65,8 @@
 			<meta name="threadname" allow="title,description" />
 			<meta name="postauthor" allow="title,description" />
 			<meta name="postshortdesc" allow="title,description" />
+			<meta name="postuniqueid" allow="title,description" />
+			<meta name="postnumber" allow="title,description" />
 		</metas>
 	</block>
 	<block type="modules_forums_newpost" icon="add">
