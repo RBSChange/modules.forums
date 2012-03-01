@@ -8,5 +8,6 @@
 			shorthelp="modules.forums.document.forum.Mount-parent-help" />
 		<field name="lockedMode" />
 		<field name="excludeFromRssMode" />
+		<field name="flagList" allow="[modules_list/list]"/>
 	</section>
 </panel>

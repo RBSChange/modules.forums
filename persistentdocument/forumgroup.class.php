@@ -6,6 +6,12 @@
 class forums_persistentdocument_forumgroup extends forums_persistentdocument_forumgroupbase implements indexer_IndexableDocument
 {
 	/**
+	 * Store the flag list on the document instance
+	 * @var list_persistentdocument_list
+	 */
+	private $flagListCached = null;
+	
+	/**
 	 * @return indexer_IndexedDocument
 	 */
 	public function getIndexedDocument()
@@ -18,7 +24,7 @@ class forums_persistentdocument_forumgroup extends forums_persistentdocument_for
 		$indexedDoc->setText($this->getFullTextForIndexation());
 		return $indexedDoc;
 	}
-
+	
 	/**
 	 * @return String
 	 */
@@ -26,7 +32,7 @@ class forums_persistentdocument_forumgroup extends forums_persistentdocument_for
 	{
 		return f_util_StringUtils::htmlToText($this->getDescriptionAsHtml());
 	}
-
+	
 	/**
 	 * @return String
 	 */
@@ -36,14 +42,14 @@ class forums_persistentdocument_forumgroup extends forums_persistentdocument_for
 		{
 			return $this->getMetakeywords();
 		}
-		return str_replace(' ', ', ', $this->getLabel()).', '.LocaleService::getInstance()->transFO('m.forums.meta.forum');
+		return str_replace(' ', ', ', $this->getLabel()) . ', ' . LocaleService::getInstance()->transFO('m.forums.meta.forum');
 	}
-
+	
 	/**
 	 * @var f_persistentdocument_PersistentDocument $parent instance of topic or website
 	 */
 	private $parent = null;
-
+	
 	/**
 	 * @return f_persistentdocument_PersistentDocument instance of topic or website
 	 */
@@ -60,7 +66,7 @@ class forums_persistentdocument_forumgroup extends forums_persistentdocument_for
 		}
 		return null;
 	}
-
+	
 	/**
 	 * @return Integer
 	 */
@@ -69,7 +75,7 @@ class forums_persistentdocument_forumgroup extends forums_persistentdocument_for
 		$parent = $this->getMountParent();
 		return ($parent === null) ? null : $parent->getId();
 	}
-
+	
 	/**
 	 * @param f_persistentdocument_PersistentDocument $parent
 	 */
@@ -78,7 +84,7 @@ class forums_persistentdocument_forumgroup extends forums_persistentdocument_for
 		$this->parent = $parent;
 		$this->setModificationdate(null);
 	}
-
+	
 	/**
 	 * @param Integer $parentId
 	 */
@@ -91,7 +97,7 @@ class forums_persistentdocument_forumgroup extends forums_persistentdocument_for
 		}
 		$this->setMountParent($parent);
 	}
-
+	
 	/**
 	 * @return website_persistentdocument_page
 	 */
@@ -110,7 +116,7 @@ class forums_persistentdocument_forumgroup extends forums_persistentdocument_for
 		}
 		return null;
 	}
-
+	
 	/**
 	 * @return boolean
 	 */
@@ -118,7 +124,7 @@ class forums_persistentdocument_forumgroup extends forums_persistentdocument_for
 	{
 		return false;
 	}
-
+	
 	/**
 	 * @return boolean
 	 */
@@ -128,12 +134,12 @@ class forums_persistentdocument_forumgroup extends forums_persistentdocument_for
 		{
 			return false;
 		}
-
+		
 		$permissionService = f_permission_PermissionService::getInstance();
 		$user = users_UserService::getInstance()->getCurrentUser();
 		return $permissionService->hasFrontEndPermission($user, 'modules_website.AuthenticatedFrontUser', $this->getTopic()->getId());
 	}
-
+	
 	/**
 	 * @return Boolean
 	 */
@@ -141,7 +147,7 @@ class forums_persistentdocument_forumgroup extends forums_persistentdocument_for
 	{
 		return $this->getLocked();
 	}
-
+	
 	/**
 	 * @return boolean
 	 */
@@ -149,7 +155,7 @@ class forums_persistentdocument_forumgroup extends forums_persistentdocument_for
 	{
 		return $this->getExcludeFromRss();
 	}
-
+	
 	/**
 	 * @return forums_persistentdocument_forumgroup[]
 	 */
@@ -157,7 +163,7 @@ class forums_persistentdocument_forumgroup extends forums_persistentdocument_for
 	{
 		return forums_ForumgroupService::getInstance()->getByTopicParentId($this->getTopic()->getId());
 	}
-
+	
 	/**
 	 * @return forums_persistentdocument_post
 	 */
@@ -165,12 +171,12 @@ class forums_persistentdocument_forumgroup extends forums_persistentdocument_for
 	{
 		return $this->getDocumentService()->getLastPostRecursive($this);
 	}
-
+	
 	/**
 	 * @var array
 	 */
 	private $infosRecursive;
-
+	
 	/**
 	 * @param mixed $name
 	 */
@@ -182,7 +188,7 @@ class forums_persistentdocument_forumgroup extends forums_persistentdocument_for
 		}
 		return isset($this->infosRecursive[$name]) ? $this->infosRecursive[$name] : null;
 	}
-
+	
 	/**
 	 * @return integer
 	 */
@@ -190,7 +196,7 @@ class forums_persistentdocument_forumgroup extends forums_persistentdocument_for
 	{
 		return $this->getInfosRecursive('nbthreadrecursive');
 	}
-
+	
 	/**
 	 * @return integer
 	 */
@@ -198,4 +204,26 @@ class forums_persistentdocument_forumgroup extends forums_persistentdocument_for
 	{
 		return $this->getInfosRecursive('nbpostrecursive');
 	}
+	
+	/**
+	 * @return list_persistentdocument_list
+	 */
+	public function getDefaultFlagList()
+	{
+		if ($this->flagListCached == null)
+		{
+			$this->setFlagListCached($this->getDocumentService()->getFlagListRecursively($this));
+		}
+		
+		return $this->flagListCached;
+	}
+	
+	/**
+	 * @param string $flagListCached
+	 */
+	public function setFlagListCached($flagListCached)
+	{
+		$this->flagListCached = $flagListCached;
+	}
+
 }

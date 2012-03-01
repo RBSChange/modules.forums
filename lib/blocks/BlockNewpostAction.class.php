@@ -15,16 +15,16 @@ class forums_BlockNewpostAction extends forums_BlockPostListBaseAction
 		{
 			return;
 		}
-
+		
 		$ls = LocaleService::getInstance();
 		$doc = $this->getDocumentParameter();
 		if ($request->hasNonEmptyParameter('postid'))
 		{
-			$this->getContext()->setNavigationtitle($ls->transFO('m.forums.meta.answerpost', array('ucf')).' '.$doc->getLabel());
+			$this->getContext()->setNavigationtitle($ls->transFO('m.forums.meta.answerpost', array('ucf')) . ' ' . $doc->getLabel());
 		}
 		else
 		{
-			$this->getContext()->setNavigationtitle($ls->transFO('m.forums.meta.newpostin', array('ucf')).' '.$doc->getLabel());
+			$this->getContext()->setNavigationtitle($ls->transFO('m.forums.meta.newpostin', array('ucf')) . ' ' . $doc->getLabel());
 		}
 	}
 	
@@ -40,7 +40,7 @@ class forums_BlockNewpostAction extends forums_BlockPostListBaseAction
 		}
 		return array();
 	}
-
+	
 	/**
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
@@ -57,29 +57,25 @@ class forums_BlockNewpostAction extends forums_BlockPostListBaseAction
 		{
 			return $this->getInputViewName();
 		}
-
 		$thread = $this->getDocumentParameter();
 		if ($thread === null)
 		{
 			return website_BlockView::NONE;
 		}
-		
 		if (!$thread->isWriteable())
 		{
 			return $this->getForbiddenView();
 		}
-		
 		if ($request->getParameter('quote') == 'true' && !$request->getParameter('text') && $request->getParameter('postid'))
 		{
 			$quotedPost = forums_persistentdocument_post::getInstanceById($request->getParameter('postid'));
 			$post->setTextAsBBCode('[quote="' . $quotedPost->getAuthorNameAsHtml() . '"]' . $quotedPost->getTextAsBBCode() . '[/quote]');
 			$request->setAttribute('post', $post);
 		}
-		
 		$this->setRequestAttributes($request);
 		return $this->getInputViewName();
 	}
-
+	
 	/**
 	 * @param f_mvc_Request $request
 	 */
@@ -93,7 +89,18 @@ class forums_BlockNewpostAction extends forums_BlockPostListBaseAction
 	 */
 	private function setRequestAttributes($request)
 	{
+		/* @var $thread forums_persistentdocument_thread */
 		$thread = $this->getDocumentParameter();
+		if ($request->hasParameter('thread.flag'))
+		{
+			$thread->setFlag($request->getParameter('thread.flag'));
+		}
+		else if (!$request->hasParameter('post'))
+		{
+			$post = forums_persistentdocument_post::getNewInstance();
+			$post->setThread($thread);
+			$request->setAttribute('post', $post);
+		}
 		$request->setAttribute('thread', $thread);
 		$answerId = $request->getParameter('postid');
 		if ($answerId !== null)
@@ -105,7 +112,7 @@ class forums_BlockNewpostAction extends forums_BlockPostListBaseAction
 			$postListInfo['paginator'] = array($answerTo);
 			$request->setAttribute('answerListInfo', $postListInfo);
 		}
-		else 
+		else
 		{
 			$posts = forums_ThreadService::getInstance()->getPosts($thread, 0, $this->getNbItemPerPage(), 'desc');
 			$postListInfo = array();
@@ -122,7 +129,7 @@ class forums_BlockNewpostAction extends forums_BlockPostListBaseAction
 	{
 		return website_BlockView::SUCCESS;
 	}
-
+	
 	/**
 	 * @return Array
 	 */
@@ -130,7 +137,7 @@ class forums_BlockNewpostAction extends forums_BlockPostListBaseAction
 	{
 		return BeanUtils::getBeanValidationRules('forums_persistentdocument_post', null, array('label', 'thread'));
 	}
-
+	
 	/**
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
@@ -144,13 +151,13 @@ class forums_BlockNewpostAction extends forums_BlockPostListBaseAction
 			return $this->getForbiddenView();
 		}
 		
-		if	($post->getAnswerof() !== null && $post->getAnswerof()->getThread()->getId() != $post->getThread()->getId())
+		if ($post->getAnswerof() !== null && $post->getAnswerof()->getThread()->getId() != $post->getThread()->getId())
 		{
 			$post->setAnswerof(null);
 		}
 		$post->save();
 		$post->getDocumentService()->activate($post->getId());
-						
+		
 		$url = $post->getPostUrlInThread();
 		HttpController::getInstance()->redirectToUrl($url);
 	}
@@ -176,7 +183,7 @@ class forums_BlockNewpostAction extends forums_BlockPostListBaseAction
 			return $this->getForbiddenView();
 		}
 		
-		if	($post->getAnswerof() !== null && $post->getAnswerof()->getThread()->getId() != $post->getThread()->getId())
+		if ($post->getAnswerof() !== null && $post->getAnswerof()->getThread()->getId() != $post->getThread()->getId())
 		{
 			$post->setAnswerof(null);
 		}

@@ -5,6 +5,13 @@
  */
 class forums_persistentdocument_thread extends forums_persistentdocument_threadbase implements rss_Item
 {
+	
+	/**
+	 * Store the flag Label
+	 * @var String
+	 */
+	private $flagLabel = null;
+	
 	/**
 	 * @return String
 	 */
@@ -114,11 +121,7 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 		{
 			$last = $ms->getAllReadDate($member);
 		}
-		return f_util_ArrayUtils::firstElement(forums_PostService::getInstance()->createQuery()
-			->add(Restrictions::eq('thread', $this))
-			->add(Restrictions::gt('creationdate', $last))
-			->setProjection(Projections::rowCount('count'))
-			->setFetchColumn('count')->find());
+		return f_util_ArrayUtils::firstElement(forums_PostService::getInstance()->createQuery()->add(Restrictions::eq('thread', $this))->add(Restrictions::gt('creationdate', $last))->setProjection(Projections::rowCount('count'))->setFetchColumn('count')->find());
 	}
 	
 	/**
@@ -141,7 +144,7 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 		$parser = new website_BBCodeParser();
 		return $parser->convertXmlToHtml($this->getPrivatenote());
 	}
-
+	
 	/**
 	 * @return string
 	 */
@@ -150,7 +153,7 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 		$parser = new website_BBCodeParser();
 		return $parser->convertXmlToBBCode($this->getPrivatenote());
 	}
-
+	
 	/**
 	 * @param string $bbcode
 	 */
@@ -225,7 +228,7 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 				$pagination[] = '<a class="link" href="' . LinkHelper::getDocumentUrl($this, null, array('forumsParam[page]' => $page)) . '">' . $page . '</a><span class="punctuation">, </span>';
 			}
 		}
-		else 
+		else
 		{
 			$pagination[] = '<a class="link" href="' . LinkHelper::getDocumentUrl($this, null, array('forumsParam[page]' => 1)) . '">1</a><span class="separator"> ... </span>';
 			for ($page = $pageCount - 2; $page < $pageCount; $page++)
@@ -249,13 +252,13 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 		}
 		return false;
 	}
-
+	
 	/**
 	 * @return String
 	 */
 	public function getKeywords()
 	{
-		return str_replace(' ', ', ', $this->getLabel()).', '.LocaleService::getInstance()->transFO('m.forums.meta.forum');
+		return str_replace(' ', ', ', $this->getLabel()) . ', ' . LocaleService::getInstance()->transFO('m.forums.meta.forum');
 	}
 	
 	/**
@@ -281,8 +284,8 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	{
 		$firstPost = $this->getFirstPost();
 		if ($firstPost->getDeleteddate() === null)
-		{ 
-			return $firstPost->getTextAsHtml();	
+		{
+			return $firstPost->getTextAsHtml();
 		}
 		return "";
 	}
@@ -325,6 +328,21 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	public function getPostFeedLabel()
 	{
 		$ls = LocaleService::getInstance();
-		return $ls->transFO('m.forums.frontoffice.posts-of', array('lab', 'ucf'), array('type' => $ls->transFO($this->getPersistentModel()->getLabelKey()))) . ' ' . $this->getLabel();
+		return $ls->transFO('m.forums.frontoffice.posts-of', array('lab', 'ucf'), array(
+			'type' => $ls->transFO($this->getPersistentModel()->getLabelKey()))) . ' ' . $this->getLabel();
 	}
+	
+	/**
+	 * Get the flag label
+	 * @return String
+	 */
+	public function getFlagLabel()
+	{
+		if ($this->flagLabel == null)
+		{
+			$this->flagLabel = $this->getDocumentService()->getFlagLabel($this);
+		}
+		return $this->flagLabel;
+	}
+
 }

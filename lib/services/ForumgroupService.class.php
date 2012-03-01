@@ -9,7 +9,7 @@ class forums_ForumgroupService extends f_persistentdocument_DocumentService
 	 * @var forums_ForumgroupService
 	 */
 	private static $instance;
-
+	
 	/**
 	 * @return forums_ForumgroupService
 	 */
@@ -21,7 +21,7 @@ class forums_ForumgroupService extends f_persistentdocument_DocumentService
 		}
 		return self::$instance;
 	}
-
+	
 	/**
 	 * @return forums_persistentdocument_forumgroup
 	 */
@@ -29,7 +29,7 @@ class forums_ForumgroupService extends f_persistentdocument_DocumentService
 	{
 		return $this->getNewDocumentInstanceByModelName('modules_forums/forumgroup');
 	}
-
+	
 	/**
 	 * Create a query based on 'modules_forums/forumgroup' model.
 	 * Return document that are instance of modules_forums/forumgroup,
@@ -62,7 +62,7 @@ class forums_ForumgroupService extends f_persistentdocument_DocumentService
 		$query->createCriteria('topic')->add(Restrictions::childOf($parentId));
 		return $query->find();
 	}
-
+	
 	/**
 	 * @param forums_persistentdocument_forumgroup $document
 	 * @param Integer $parentNodeId Parent node ID where to save the document (optionnal => can be null !).
@@ -113,23 +113,23 @@ class forums_ForumgroupService extends f_persistentdocument_DocumentService
 	 */
 	private function refreshProperty($document, $propertyName, $parentNodeId)
 	{
-		$setter = 'set'.ucfirst($propertyName);
-		switch ($document->{'get'.ucfirst($propertyName).'Mode'}())
+		$setter = 'set' . ucfirst($propertyName);
+		switch ($document->{'get' . ucfirst($propertyName) . 'Mode'}())
 		{
-			case forums_ModuleService::EXTBOOL_INHERIT:
-				$document->{$setter}($this->getForumgroupParent($document, $parentNodeId)->{'get'.ucfirst($propertyName)}());
+			case forums_ModuleService::EXTBOOL_INHERIT :
+				$document->{$setter}($this->getForumgroupParent($document, $parentNodeId)->{'get' . ucfirst($propertyName)}());
 				break;
-				
-			case forums_ModuleService::EXTBOOL_TRUE:
+			
+			case forums_ModuleService::EXTBOOL_TRUE :
 				$document->{$setter}(true);
 				break;
-				
-			case forums_ModuleService::EXTBOOL_FALSE:
+			
+			case forums_ModuleService::EXTBOOL_FALSE :
 				$document->{$setter}(false);
 				break;
 		}
 	}
-		
+	
 	/**
 	 * @param forums_persistentdocument_forumgroup $document
 	 * @param Integer $parentNodeId Parent node ID where to save the document (optionnal => can be null !).
@@ -148,17 +148,14 @@ class forums_ForumgroupService extends f_persistentdocument_DocumentService
 		}
 		throw new Exception('Bad parent type: ' . get_class($parent));
 	}
-
+	
 	/**
 	 * @param forums_persistentdocument_forum $forum
 	 * @return forums_persistentdocument_post
 	 */
 	public function getLastPostRecursive($forum)
 	{
-		$query = forums_PostService::getInstance()->createQuery()
-			->add(Restrictions::isNull('deleteddate'))
-			->addOrder(Order::desc('document_creationdate'))
-			->setFirstResult(0)->setMaxResults(1);
+		$query = forums_PostService::getInstance()->createQuery()->add(Restrictions::isNull('deleteddate'))->addOrder(Order::desc('document_creationdate'))->setFirstResult(0)->setMaxResults(1);
 		$criteria = $query->createCriteria('thread')->createCriteria('forum');
 		$criteria->add(Restrictions::orExp(Restrictions::eq('id', $forum->getId()), Restrictions::descendentOf($forum->getId())));
 		return f_util_ArrayUtils::firstElement($query->find());
@@ -218,10 +215,9 @@ class forums_ForumgroupService extends f_persistentdocument_DocumentService
 	 */
 	private function refreshPropertyOnChildren($document, $propertyName)
 	{
-		$setter = 'set'.ucfirst($propertyName);
-		$getter = 'get'.ucfirst($propertyName);
-		$query = $this->createQuery()->add(Restrictions::eq($propertyName.'Mode', forums_ModuleService::EXTBOOL_INHERIT))
-				->add(Restrictions::childOf($document->getId()));
+		$setter = 'set' . ucfirst($propertyName);
+		$getter = 'get' . ucfirst($propertyName);
+		$query = $this->createQuery()->add(Restrictions::eq($propertyName . 'Mode', forums_ModuleService::EXTBOOL_INHERIT))->add(Restrictions::childOf($document->getId()));
 		foreach ($query->find() as $forum)
 		{
 			$forum->{$setter}($document->{$getter}());
@@ -263,7 +259,7 @@ class forums_ForumgroupService extends f_persistentdocument_DocumentService
 		$topic->save();
 		$topic->activate();
 	}
-
+	
 	/**
 	 * @param forums_persistentdocument_forumgroup $document
 	 * @param String $oldPublicationStatus
@@ -306,11 +302,7 @@ class forums_ForumgroupService extends f_persistentdocument_DocumentService
 		if ($model->hasURL() && $document->isPublished())
 		{
 			$topic = $document->getTopic();
-			$page = website_PageService::getInstance()->createQuery()
-				->add(Restrictions::childOf($topic->getId()))
-				->add(Restrictions::published())
-				->add(Restrictions::hasTag('functional_forums_forum-list'))
-				->findUnique();
+			$page = website_PageService::getInstance()->createQuery()->add(Restrictions::childOf($topic->getId()))->add(Restrictions::published())->add(Restrictions::hasTag('functional_forums_forum-list'))->findUnique();
 			return $page;
 		}
 		return null;
@@ -321,14 +313,40 @@ class forums_ForumgroupService extends f_persistentdocument_DocumentService
 	 * @param string $moduleName
 	 * @param string $treeType
 	 * @param array<string, string> $nodeAttributes
-	 */	
+	 */
 	public function addTreeAttributes($document, $moduleName, $treeType, &$nodeAttributes)
 	{
 		$topic = $document->getTopic();
 		$nodeAttributes['topicId'] = $topic->getId();
-	    if ($treeType == 'wlist')
+		if ($treeType == 'wlist')
 		{
-	    	$nodeAttributes['path'] = $document->getDocumentService()->getPathOf($topic);
+			$nodeAttributes['path'] = $document->getDocumentService()->getPathOf($topic);
 		}
 	}
+	
+	/**
+	 * 
+	 * @param forums_persistentdocument_forumgroup $document
+	 * @return list_persistentdocument_list | null
+	 */
+	public function getFlagListRecursively($document)
+	{
+		$list = $document->getFlagList();
+		
+		// If list is null try to get it on the parent
+		if ($list == null)
+		{
+			
+			$parent = $document->getDocumentService()->getParentOf($document);
+			
+			if ($parent != null && $parent instanceof forums_persistentdocument_forumgroup)
+			{
+				$list = $document->getDocumentService()->getFlagListRecursively($parent);
+			}
+		
+		}
+		
+		return $list;
+	}
+
 }

@@ -1,5 +1,9 @@
 <tal:block change:loadhandler="forums_EditpostLoadHandler" />
 <h1 change:h="">${trans:m.forums.frontoffice.editpost,ucf}</h1>
+<h2 change:h="">
+	${trans:m.forums.document.post.thread,ucf,lab}
+	<tal:block change:include="module 'forums'; template 'Forums-Inc-ThreadLabel-Success'; type 'html'; thread post/getThread" />
+</h2>
 
 <tal:block tal:condition="previewPostInfo">
 	<tal:block change:include="module 'forums'; template 'Forums-Inc-PostList-Success'; type 'html'; postListInfo previewPostInfo" />
@@ -9,10 +13,15 @@
 	<fieldset>
 		<legend class="h-2">${trans:m.forums.frontoffice.message-input,ucf}</legend>
 		<ul change:errors=""></ul>
-		<ol>
-			<tal:block tal:condition="post/isFirstPostInThread">
-				<li><input change:field="name thread.label" /></li>
+		<ol tal:define="isFirst post/isFirstPostInThread">
+			<tal:block tal:condition="isFirst">
 				<li change:permission="perm forums.Moderate; nodeId post/getId; mode front"><input change:field="name thread.level" nopreamble="true" /></li>
+			</tal:block>
+			<tal:block tal:condition="post/getThread/isEditable" tal:define="flagList post/getThread/getForum/getDefaultFlagList">
+			<li tal:condition="flagList"><input change:selectinput="" listId="${flagList/getListid}" name="thread.flag" labeled="true"/></li>
+			</tal:block>
+			<tal:block tal:condition="isFirst">
+				<li><input change:field="name thread.label" /></li>
 			</tal:block>
 			<li><input change:bbcodeinput="name textAsBBCode; required true" module-profile="forums" labeled="true" /></li>
 		</ol>

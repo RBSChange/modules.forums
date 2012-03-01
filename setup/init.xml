@@ -42,6 +42,10 @@
 			<staticitem label="&amp;modules.forums.lists.modes.Yes;" value="1" />
 			<staticitem label="&amp;modules.forums.lists.modes.Inherit;" value="2" />
 		</staticlist>
+		
+		<valuededitablelist listid="modules_forums/flag" label="m.forums.lists.flag.label" description="m.forums.lists.flag.description">
+			<valueditem label="Resolu" byValue="resolved" />
+		</valuededitablelist>
 	</systemfolder>
 
 	<systemfolder module="notification" relatedmodule="forums">

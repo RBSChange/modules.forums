@@ -6,6 +6,7 @@
 		<field name="lockedMode" />
 		<field name="excludeFromRssMode" />
 		<field name="nbPostPerPage" />
+		<field name="flagList" allow="[modules_list/list]"/>
 	</section>
 	<section labeli18n="modules.forums.bo.doceditor.fieldsgroup.Metas">
 		<field name="metatitle" class="with-counter" rows="2" />

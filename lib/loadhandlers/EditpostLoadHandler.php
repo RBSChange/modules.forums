@@ -10,6 +10,9 @@ class forums_EditpostLoadHandler extends website_ViewLoadHandlerImpl
 	 */
 	public function execute($request, $response)
 	{
-		$request->setAttribute('post', $this->getDocumentParameter());
+		/* @var $post forums_persistentdocument_post */
+		$post = $this->getDocumentParameter();
+		
+		$request->setAttribute('post', $post);
 	}
 }

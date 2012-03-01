@@ -1,4 +1,8 @@
-<h1 change:h="">${trans:m.forums.frontoffice.newpost,ucf,lab} ${thread/getLabelAsHtml}</h1>
+<h1 change:h="">${trans:m.forums.frontoffice.newpost,ucf,lab}</h1>
+<h2 change:h="">
+	${trans:m.forums.document.post.thread,ucf,lab}
+	<tal:block change:include="module 'forums'; template 'Forums-Inc-ThreadLabel-Success'; type 'html'; thread thread" />
+</h2>
 
 <tal:block tal:condition="previewPostInfo">
 	<tal:block change:include="module 'forums'; template 'Forums-Inc-PostList-Success'; type 'html'; postListInfo previewPostInfo" />
@@ -9,6 +13,9 @@
 		<legend class="h-2">${trans:m.forums.frontoffice.message-input,ucf}</legend>
 		<ul change:errors=""></ul>
 		<ol>
+	  		<tal:block tal:condition="thread/isEditable" tal:define="flagList thread/getForum/getDefaultFlagList">
+				<li tal:condition="flagList"><input change:selectinput="" listId="${flagList/getListid}" name="thread.flag" labeled="true"/></li>
+			</tal:block>
 	  		<li><input change:bbcodeinput="name textAsBBCode; required true" module-profile="forums" labeled="true" /></li>
 		</ol>
 		<p class="buttons">

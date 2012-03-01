@@ -6,7 +6,7 @@
 	</form>
 </tal:block>
 
-<h1 change:h="">${thread/getForum/getLabelAsHtml} : ${thread/getLabelAsHtml}</h1>
+<h1 change:h="">${thread/getForum/getLabelAsHtml} : <tal:block change:include="module 'forums'; template 'Forums-Inc-ThreadLabel-Success'; type 'html'; thread thread" /></h1>
 <div tal:condition="thread/canModerate" class="note" threadid="${thread/getId}">
 	<p class="normal" tal:condition="not: thread/getPrivatenote"><a href="javascript:;" id="addprivatenote" class="link">${trans:m.forums.frontoffice.add-note,ucf}</a></p>
 	<tal:block tal:condition="thread/getPrivatenote">

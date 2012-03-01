@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<script>
+	<binding fileName="modules/list/persistentdocument/import/list_binding.xml" />
+
+	<systemfolder module="list" relatedmodule="forums">
+		<valuededitablelist listid="modules_forums/flag" label="m.forums.lists.flag.label" description="m.forums.lists.flag.description">
+			<valueditem label="Resolu" byValue="solved" />
+		</valuededitablelist>
+	</systemfolder>
+
+</script>

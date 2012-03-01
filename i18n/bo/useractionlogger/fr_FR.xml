@@ -18,4 +18,8 @@
   <key id="log-activate-forum">log activate forum</key>
   <key id="update-forum">update.forum {lang} {documentlabel}</key>
   <key id="log-update-forum">log update forum</key>
+  <key id="savepermissions-websitefolder">savepermissions.websitefolder {documentlabel}</key>
+  <key id="log-savepermissions-websitefolder">log savepermissions websitefolder</key>
+  <key id="update-forumgroup">update.forumgroup {lang} {documentlabel}</key>
+  <key id="log-update-forumgroup">log update forumgroup</key>
 </i18n>

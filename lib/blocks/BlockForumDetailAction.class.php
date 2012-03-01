@@ -41,8 +41,14 @@ class forums_BlockForumDetailAction extends website_BlockAction
 		
 		if ($forumgroup instanceof forums_persistentdocument_forum)
 		{
-			$threads = forums_ThreadService::getInstance()->getByForum($forumgroup);
-			$paginator = new paginator_Paginator('forums', $request->getParameter('page', 1), $threads, $this->getNbItemPerPage($request, $response));
+			$count = forums_ThreadService::getInstance()->countByForum($forumgroup);
+			$page = $request->getParameter('page', 1);
+			$itemPerPage = $this->getNbItemPerPage($request, $response);
+			$offset = ($page - 1) * $itemPerPage;
+			
+			$threads = forums_ThreadService::getInstance()->getByForum($forumgroup, $offset, $itemPerPage);
+			$paginator = new paginator_Paginator('forums', $page, $threads, $itemPerPage, $count);
+			
 			$request->setAttribute('threadsPaginator', $paginator);
 			
 			// Global announcements.

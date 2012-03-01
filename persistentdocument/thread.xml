@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<document xmlns="http://www.rbs.fr/schema/change-document/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/static/schema/change-document/1.0.xsd" model-version="1.0"
-	icon="thread" indexable="false" backoffice-indexable="false" publish-on-day-change="false">
-	<properties>
-		<add name="forum" type="modules_forums/forum" min-occurs="1" tree-node="true" inverse="true" preserve-old-value="true" />
-		<add name="level" type="Integer" from-list="modules_forums/threadlevels" default-value="10" min-occurs="1" />
-		<add name="firstPost" type="modules_forums/post" />
-		<add name="threadauthor" type="modules_forums/member" />
-		<add name="nbpost" type="Integer" default-value="0" />
-		<add name="privatenote" type="LongString" />
-		<add name="privatenoteby" type="modules_forums/member" />
-		<add name="locked" type="Boolean" default-value="false" />
-		<add name="followers" type="modules_forums/member" max-occurs="-1" />
-		<add name="tofollow" type="modules_forums/post" />
-		<add name="lastPostDate" type="DateTime" />
-	</properties>
-	<statuses default="ACTIVE" />
+<document xmlns="http://www.rbs.fr/schema/change-document/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/static/schema/change-document/1.0.xsd" model-version="1.0" icon="thread" indexable="false" backoffice-indexable="false" publish-on-day-change="false">
+  <properties>
+    <add name="forum" type="modules_forums/forum" min-occurs="1" tree-node="true" inverse="true" preserve-old-value="true"/>
+    <add name="level" type="Integer" from-list="modules_forums/threadlevels" default-value="10" min-occurs="1"/>
+    <add name="firstPost" type="modules_forums/post"/>
+    <add name="threadauthor" type="modules_forums/member"/>
+    <add name="nbpost" type="Integer" default-value="0"/>
+    <add name="privatenote" type="LongString"/>
+    <add name="privatenoteby" type="modules_forums/member"/>
+    <add name="locked" type="Boolean" default-value="false"/>
+    <add name="followers" type="modules_forums/member" max-occurs="-1"/>
+    <add name="tofollow" type="modules_forums/post"/>
+    <add name="lastPostDate" type="DateTime"/>
+    <add name="flag" type="String"/>
+  </properties>
+  <statuses default="ACTIVE"/>
 </document>

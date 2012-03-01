@@ -9,9 +9,10 @@
 	<fieldset>
 		<legend class="h-2">${trans:m.forums.frontoffice.message-input,ucf}</legend>
 		<ul change:errors=""></ul>
-		<ol>
-			<li><input change:field="name label" /></li>
+		<ol tal:define="flagList forum/getDefaultFlagList">
 			<li change:permission="perm forums.Moderate; nodeId forum/getId; mode front"><input change:field="name level" nopreamble="true" /></li>
+			<li tal:condition="flagList"><input change:selectinput="" listId="${flagList/getListid}" name="flag" labeled="true"/></li>
+			<li><input change:field="name label" /></li>
 			<li><input change:bbcodeinput="name firstPost.textAsBBCode; required true" labeled="true" /></li>
 		</ol>
 		<p class="buttons">

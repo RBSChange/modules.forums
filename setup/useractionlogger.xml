@@ -10,4 +10,6 @@
   <actiondef modulename="forums" actionname="insert.forum" label="m.forums.bo.useractionlogger.insert-forum"/>
   <actiondef modulename="forums" actionname="activate.forum" label="m.forums.bo.useractionlogger.activate-forum"/>
   <actiondef modulename="forums" actionname="update.forum" label="m.forums.bo.useractionlogger.update-forum"/>
+  <actiondef modulename="forums" actionname="savepermissions.websitefolder" label="m.forums.bo.useractionlogger.savepermissions-websitefolder"/>
+  <actiondef modulename="forums" actionname="update.forumgroup" label="m.forums.bo.useractionlogger.update-forumgroup"/>
 </script>

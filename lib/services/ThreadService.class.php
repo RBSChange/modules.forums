@@ -82,7 +82,8 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 		$query->add(Restrictions::eq('thread', $thread->getId()));
 		if ($start !== null)
 		{
-			$query->add(Restrictions::ge('number', $start));
+			$query->setFirstResult($start);
+// 			$query->add(Restrictions::ge('number', $start));
 		}
 		$query->setMaxResults($limit);
 		if ($order == 'desc')
@@ -102,10 +103,7 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 	 */
 	public function getLastPost($thread)
 	{
-		$query = forums_PostService::getInstance()->createQuery()->add(Restrictions::eq('thread', $thread))
-			->add(Restrictions::isNull('deleteddate'))
-			->addOrder(Order::desc('document_creationdate'))
-			->setFirstResult(0)->setMaxResults(1);
+		$query = forums_PostService::getInstance()->createQuery()->add(Restrictions::eq('thread', $thread))->add(Restrictions::isNull('deleteddate'))->addOrder(Order::desc('document_creationdate'))->setFirstResult(0)->setMaxResults(1);
 		return f_util_ArrayUtils::firstElement($query->find());
 	}
 	
@@ -116,11 +114,7 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 	 */
 	public function getFirstUnreadPost($thread, $date)
 	{
-		$query = forums_PostService::getInstance()->createQuery()->add(Restrictions::eq('thread', $thread))
-			->add(Restrictions::isNull('deleteddate'))
-			->add(Restrictions::gt('creationdate', $date))
-			->addOrder(Order::asc('document_creationdate'))
-			->setFirstResult(0)->setMaxResults(1);
+		$query = forums_PostService::getInstance()->createQuery()->add(Restrictions::eq('thread', $thread))->add(Restrictions::isNull('deleteddate'))->add(Restrictions::gt('creationdate', $date))->addOrder(Order::asc('document_creationdate'))->setFirstResult(0)->setMaxResults(1);
 		return f_util_ArrayUtils::firstElement($query->find());
 	}
 	
@@ -145,7 +139,7 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 		}
 		return LinkHelper::getDocumentUrl($thread);
 	}
-
+	
 	/**
 	 * @param task_persistentdocument_plannedtask $plannedTask
 	 */
@@ -198,16 +192,28 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 	}
 	
 	/**
+	 * Count the number of Thread in a forum
+	 * @param unknown_type $forum
+	 */
+	public function countByForum($forum)
+	{
+		$row = forums_ThreadService::getInstance()->createQuery()->add(Restrictions::published())->add(Restrictions::eq('forum', $forum->getId()))->add(Restrictions::ne('level', self::LEVEL_GLOBAL))->setProjection(Projections::rowCount('count'))->findUnique();
+		return $row['count'];
+	}
+	
+	/**
 	 * @param forums_persistentdocument_forum $forum
 	 * @return forums_persistentdocument_threads[]
 	 */
-	public function getByForum($forum)
+	public function getByForum($forum, $offset = null, $limit = null)
 	{
-		return forums_ThreadService::getInstance()->createQuery()->add(Restrictions::published())
-			->add(Restrictions::eq('forum', $forum->getId()))
-			->add(Restrictions::ne('level', self::LEVEL_GLOBAL))
-			->addOrder(Order::desc('level'))
-			->addOrder(Order::desc('lastpostdate'))->find();
+		$query = forums_ThreadService::getInstance()->createQuery()->add(Restrictions::published())->add(Restrictions::eq('forum', $forum->getId()))->add(Restrictions::ne('level', self::LEVEL_GLOBAL))->addOrder(Order::desc('level'))->addOrder(Order::desc('lastpostdate'));
+		if ($offset !== null && $limit !== null)
+		{
+			$query->setFirstResult($offset);
+			$query->setMaxResults($limit);
+		}
+		return $query->find();
 	}
 	
 	/**
@@ -253,7 +259,7 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 		}
 		else
 		{
-			throw new BaseException('Invalid parent type: '.$parent->getDocumentModelName());
+			throw new BaseException('Invalid parent type: ' . $parent->getDocumentModelName());
 		}
 		
 		$limit = forums_ModuleService::getInstance()->getRssMaxItemCount();
@@ -280,7 +286,7 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 	protected function preInsert($document, $parentNodeId = null)
 	{
 		parent::preInsert($document, $parentNodeId);
-				
+		
 		$document->setInsertInTree(false);
 		
 		if ($document->getThreadauthor() === null)
@@ -333,7 +339,7 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 			$oldId = $document->getForumOldValueId();
 			if ($oldId)
 			{
-				try 
+				try
 				{
 					$forum = DocumentHelper::getDocumentInstance($oldId);
 					$this->refreshCounts($forum);
@@ -422,7 +428,7 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 		$data = parent::getResume($document, $forModuleName);
 		
 		$data['properties']['nbpost'] = strval($document->getNbpost());
-
+		
 		return $data;
 	}
 	
@@ -434,7 +440,7 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 	{
 		$parameters = array();
 		
-		$thread = $params['thread'];		
+		$thread = $params['thread'];
 		$parameters['TOPIC'] = $thread->getLabelAsHtml();
 		$parameters['LINK'] = '<a class="link" href="' . $thread->getTofollow()->getPostUrlInThread() . '">' . LocaleService::getInstance()->transFO('m.forums.frontoffice.thislink') . '</a>';
 		
@@ -455,7 +461,7 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 	 * @param forums_persistentdocument_member $member
 	 * @param integer $max the maximum number of threads that can treat
 	 * @return integer the number of treated threads
-	 */	
+	 */
 	public function treatThreadsForMemberDeletion($member, $max)
 	{
 		$count = 0;
@@ -482,7 +488,7 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 	/**
 	 * @param forums_persistentdocument_thread $thread
 	 * @param forums_persistentdocument_member $member
-	 */	
+	 */
 	protected function treatThreadForMemberDeletion($thread, $member)
 	{
 		if (DocumentHelper::equals($thread->getThreadauthor(), $member))
@@ -496,7 +502,44 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 			$thread->setPrivatenoteby(null);
 		}
 		
-		$thread->removeFollowers($member);		
+		$thread->removeFollowers($member);
 		$thread->save();
 	}
+	
+	/**
+	 * Get the label of flag on the thread
+	 * @param forums_persistentdocument_thread $thread
+	 * @return string
+	 */
+	public function getFlagLabel($thread)
+	{
+		$flagLabel = '';
+		$flag = $thread->getFlag();
+		if ($flag != null)
+		{
+			// Get forum
+			$forum = $thread->getForum();
+			
+			// Get flag list of Forum
+			$list = $forum->getDocumentService()->getFlagListRecursively($forum);
+			
+			// Search item in list
+			if ($list != null)
+			{
+				$item = $list->getItemByValue($flag);
+				if ($item != null)
+				{
+					$flagLabel = $item->getLabel();
+				}
+			}
+			
+			if ($flagLabel == '')
+			{
+				$flagLabel = $flag;
+			}
+		
+		}
+		return $flagLabel;
+	}
+
 }
