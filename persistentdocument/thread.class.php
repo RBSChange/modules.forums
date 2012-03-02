@@ -5,13 +5,12 @@
  */
 class forums_persistentdocument_thread extends forums_persistentdocument_threadbase implements rss_Item
 {
-	
 	/**
 	 * Store the flag Label
 	 * @var String
 	 */
 	private $flagLabel = null;
-	
+
 	/**
 	 * @return String
 	 */
@@ -344,5 +343,4 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 		}
 		return $this->flagLabel;
 	}
-
 }

@@ -428,6 +428,7 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 		$data = parent::getResume($document, $forModuleName);
 		
 		$data['properties']['nbpost'] = strval($document->getNbpost());
+		$data['properties']['path'] = $this->getPathOf($document);
 		
 		return $data;
 	}
@@ -537,9 +538,7 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 			{
 				$flagLabel = $flag;
 			}
-		
 		}
 		return $flagLabel;
 	}
-
 }

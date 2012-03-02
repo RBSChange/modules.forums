@@ -27,12 +27,16 @@ class forums_ModuleService extends ModuleBaseService
 	}
 	
 	/**
-	 * @deprecated
-	 * @return String
+	 * @param f_persistentdocument_PersistentDocument $document
+	 * @return f_persistentdocument_PersistentDocument or null
 	 */
-	public function getIp()
+	public function getVirtualParentForBackoffice($document)
 	{
-		return RequestContext::getInstance()->getClientIp();
+		if ($document instanceof forums_persistentdocument_thread)
+		{
+			return $document->getForum();
+		}
+		return null;
 	}
 	
 	/**
@@ -236,5 +240,15 @@ class forums_ModuleService extends ModuleBaseService
 		// Set atrtibutes.
 		$attributes['byDocumentId'] = $website->getId();
 		return $attributes;
+	}
+	
+	// Deprecated.
+	
+	/**
+	 * @deprecated (will be removed in 4.0) use RequestContext::getClientIp()
+	 */
+	public function getIp()
+	{
+		return RequestContext::getInstance()->getClientIp();
 	}
 }
