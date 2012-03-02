@@ -57,7 +57,7 @@
 					</div>
 			
 					<div class="message-content">
-						${post/getTextAsHtml}
+						<div class="normal">${post/getTextAsHtml}</div>
 						<p tal:condition="post/getEditeddate" class="action-log">
 							<em>
 								${trans: m.forums.frontoffice.editedby,ucf}
