@@ -83,7 +83,6 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 		if ($start !== null)
 		{
 			$query->setFirstResult($start);
-// 			$query->add(Restrictions::ge('number', $start));
 		}
 		$query->setMaxResults($limit);
 		if ($order == 'desc')

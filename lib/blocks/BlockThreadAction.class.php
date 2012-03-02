@@ -81,7 +81,7 @@ class forums_BlockThreadAction extends forums_BlockPostListBaseAction
 		{
 			$page = 1;
 		}
-		$posts = forums_ThreadService::getInstance()->getPosts($thread, ($nbItemPerPage * ($page - 1)) + 1, $nbItemPerPage);
+		$posts = forums_ThreadService::getInstance()->getPosts($thread, ($nbItemPerPage * ($page - 1)), $nbItemPerPage);
 		$paginator = new paginator_Paginator('forums', $page, $posts, $nbItemPerPage, $thread->getNbpost());
 				
 		$member = forums_MemberService::getInstance()->getCurrentMember();
