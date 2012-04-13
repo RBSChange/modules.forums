@@ -16,7 +16,11 @@
 			<a href="javascript:;" id="modifprivatenote" class="link hidden">${trans:m.forums.frontoffice.edit-note,ucf}</a>
 		</p>
 		<div class="normal hidden" id="privatenotevalue">${thread/getPrivatenoteAsHtml}</div>
-		<script type="text/javascript">var privateNote = '${thread/getJsPrivateNote}';</script>
+		<script type="text/javascript">
+			/* <![CDATA[ */
+			var privateNote = '${thread/getJsPrivateNote}';
+			/* ]]> */
+		</script>
 	</tal:block>
 </div>
 <p tal:condition="thread/isLocked" class="normal"><em class="locked">${trans:m.forums.frontoffice.closedthread,ucf}</em></p>
