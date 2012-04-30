@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <panels>
-	<panel name="resume" />
-	<panel name="history" />
-	<panel name="redirect" />
+  <panel name="resume"/>
+  <panel name="redirect"/>
+  <panel name="history"/>
 </panels>
