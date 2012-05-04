@@ -2,5 +2,7 @@
 <panels>
 	<panel name="resume" />
 	<panel name="properties" />
+	<panel name="publication"/>
 	<panel name="permission" />
+	<panel name="history"/>
 </panels>
