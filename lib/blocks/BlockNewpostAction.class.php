@@ -95,7 +95,7 @@ class forums_BlockNewpostAction extends forums_BlockPostListBaseAction
 		{
 			$thread->setFlag($request->getParameter('thread.flag'));
 		}
-		else if (!$request->hasParameter('post'))
+		elseif (!$request->hasParameter('post') && !$request->hasAttribute('post'))
 		{
 			$post = forums_persistentdocument_post::getNewInstance();
 			$post->setThread($thread);

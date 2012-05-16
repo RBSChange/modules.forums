@@ -13,7 +13,7 @@
 			<li change:permission="perm forums.Moderate; nodeId forum/getId; mode front"><input change:field="name level" nopreamble="true" /></li>
 			<li tal:condition="flagList"><input change:selectinput="" listId="${flagList/getListid}" name="flag" labeled="true"/></li>
 			<li><input change:field="name label" /></li>
-			<li><input change:bbcodeinput="name firstPost.textAsBBCode; required true" labeled="true" /></li>
+			<li><input change:bbcodeinput="name firstPost.textAsBBCode; required true" module-profile="forums" labeled="true" /></li>
 		</ol>
 		<p class="buttons">
 			<input change:field="name beanId" hidden="true" />
