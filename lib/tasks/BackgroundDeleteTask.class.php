@@ -16,7 +16,7 @@ class forums_BackgroundDeleteTask extends task_SimpleSystemTask
 		foreach (array_chunk($ids, 100) as $chunk)
 		{
 			$this->plannedTask->ping();
-			$result = f_util_System::execHTTPScript($batchPath, $chunk);
+			$result = f_util_System::execScript($batchPath, $chunk);
 			// Log fatal errors...
 			if ($result != 'OK')
 			{
@@ -36,7 +36,7 @@ class forums_BackgroundDeleteTask extends task_SimpleSystemTask
 			do 
 			{
 				$this->plannedTask->ping();
-				$result = f_util_System::execHTTPScript($batchPath, $chunk);
+				$result = f_util_System::execScript($batchPath, $chunk);
 				// Log fatal errors...
 				if (!f_util_StringUtils::beginsWith($result, 'OK'))
 				{

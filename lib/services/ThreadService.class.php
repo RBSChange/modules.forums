@@ -153,7 +153,7 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 			{
 				$plannedTask->ping();
 			}
-			$result = f_util_System::execHTTPScript($batchPath, array($thread->getId()));
+			$result = f_util_System::execScript($batchPath, array($thread->getId()));
 			// Log fatal errors...
 			if ($result != 'OK')
 			{
