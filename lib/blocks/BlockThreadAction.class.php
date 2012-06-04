@@ -14,7 +14,7 @@ class forums_BlockThreadAction extends forums_BlockPostListBaseAction
 		if ($doc instanceof forums_persistentdocument_thread)
 		{
 			$post = $doc->getFirstPost();
-			$description = f_util_StringUtils::shortenString(f_util_StringUtils::htmlToText($post->getTextAsHtml()), 100);
+			$description = f_util_StringUtils::shortenString(f_util_HtmlUtils::htmlToText($post->getTextAsHtml()), 100);
 			return array('threadname' => $doc->getLabel(), 'forumname' => $doc->getForum()->getLabel(), 'threadshortdesc' => $description, 'threadkeywords' => $doc->getKeywords());
 		}
 		return array();

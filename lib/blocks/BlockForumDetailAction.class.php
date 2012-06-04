@@ -14,7 +14,7 @@ class forums_BlockForumDetailAction extends website_BlockAction
 		if ($doc instanceof forums_persistentdocument_forumgroup)
 		{
 			$label = ($doc->getMetatitle()) ? $doc->getMetatitle() : $doc->getLabel();
-			$description = ($doc->getMetadescription()) ? $doc->getMetadescription() : f_util_StringUtils::shortenString(f_util_StringUtils::htmlToText($doc->getDescriptionAsHtml()), 100);
+			$description = ($doc->getMetadescription()) ? $doc->getMetadescription() : f_util_StringUtils::shortenString(f_util_HtmlUtils::htmlToText($doc->getDescriptionAsHtml()), 100);
 			return array('forumname' => $label, 'forumshortdesc' => $description, 'forumkeywords' => $doc->getKeywords());
 		}
 		return array('forumname' => null, 'forumshortdesc' => null, 'forumkeywords' => null);

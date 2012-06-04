@@ -68,11 +68,11 @@ class forums_ViewFeedAction extends change_Action
 		$feedWriter->setTitle($title);
 		if (f_util_ClassUtils::methodExists($parent, 'getRSSDescription'))
 		{
-			$feedWriter->setDescription(f_util_StringUtils::htmlToText($parent->getRSSDescription()));
+			$feedWriter->setDescription(f_util_HtmlUtils::htmlToText($parent->getRSSDescription()));
 		}
 		elseif (f_util_ClassUtils::methodExists($parent, 'getDescriptionAsHtml'))
 		{
-			$feedWriter->setDescription(f_util_StringUtils::htmlToText($parent->getDescriptionAsHtml()));
+			$feedWriter->setDescription(f_util_HtmlUtils::htmlToText($parent->getDescriptionAsHtml()));
 		}
 		else 
 		{
