@@ -23,7 +23,7 @@
 	<dd>${profile/getNbpost | '0'}</dd>
 	<dt>${trans:m.forums.frontoffice.thread-count,ucf}</dt>
 	<dd>${profile/getNbthread | '0'}</dd>
-	<tal:block tal:condition="profile/getSignatureAsHtml">
+	<tal:block tal:condition="profile/getSignature">
 		<dt>${trans:m.forums.document.forumsprofile.signature,ucf}</dt>
 		<dd>${structure profile/getSignatureAsHtml}</dd>
 	</tal:block>

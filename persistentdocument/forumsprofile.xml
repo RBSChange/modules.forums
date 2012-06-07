@@ -3,13 +3,13 @@
 	xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/static/schema/change-document/4.0.xsd"
 	model-version="4.0" extend="modules_users/profile">
 	<properties>
-		<add name="forumMemberTitle" type="modules_forums/title" max-occurs="-1" />
+		<property name="forumMemberTitle" type="modules_forums/title" max-occurs="-1" />
 	</properties>
 	<serializedproperties>
-		<add name="ban" type="DateTime" />
-		<add name="lastAllRead" type="DateTime" />
-		<add name="trackingByForum" type="Object" />
-		<add name="trackingByThread" type="Object" />
-		<add name="signature" type="BBCode" indexed="description" />
+		<property name="ban" type="DateTime" />
+		<property name="lastAllRead" type="DateTime" />
+		<property name="trackingByForum" type="Object" />
+		<property name="trackingByThread" type="Object" />
+		<property name="signature" type="BBCode" indexed="description" />
 	</serializedproperties>
 </document>
