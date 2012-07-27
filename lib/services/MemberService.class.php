@@ -326,10 +326,11 @@ class forums_MemberService extends f_persistentdocument_DocumentService
 		
 	/**
 	 * @param forums_persistentdocument_member $document
-	 * @param string $actionType
+	 * @param string[] $propertiesNames
 	 * @param array $formProperties
+	 * @param integer $parentId
 	 */
-	public function addFormProperties($document, $propertiesNames, &$formProperties)
+	public function addFormProperties($document, $propertiesNames, &$formProperties, $parentId = null)
 	{	
 		$formProperties['websiteId'] = $document->getWebsite()->getId();
 	}

@@ -420,11 +420,12 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 	/**
 	 * @param forums_persistentdocument_thread $document
 	 * @param string $forModuleName
+	 * @param array $allowedSections
 	 * @return array
 	 */
-	public function getResume($document, $forModuleName)
+	public function getResume($document, $forModuleName, $allowedSections = null)
 	{
-		$data = parent::getResume($document, $forModuleName);
+		$data = parent::getResume($document, $forModuleName, $allowedSections);
 		
 		$data['properties']['nbpost'] = strval($document->getNbpost());
 		$data['properties']['path'] = $this->getPathOf($document);
