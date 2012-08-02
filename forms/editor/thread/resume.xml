@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <panel>
-	<section name="properties" labeli18n="m.uixul.bo.doceditor.section.properties" image="{IconsBase}/small/edit-properties.png">
+	<section name="properties" labeli18n="m.uixul.bo.doceditor.section.properties"
+		image="{IconsBase}/small/edit-properties.png">
 		<property name="label" labeli18n="m.uixul.bo.doceditor.property.label" />
 		<property name="author" labeli18n="m.uixul.bo.doceditor.property.author" />
 		<property name="creationdate" labeli18n="m.uixul.bo.doceditor.property.creationdate" />
@@ -8,11 +9,17 @@
 		<property name="path" labeli18n="m.forums.bo.doceditor.property.path" />
 		<property name="nbpost" labeli18n="m.forums.bo.doceditor.property.nbpost" />
 	</section>
-	<section name="history" linkedtab="history" actiontexti18n="m.uixul.bo.doceditor.section.action.view" labeli18n="m.uixul.bo.doceditor.section.history"
-		image="{IconsBase}/small/history.png">
-		<property name="modificationdate" labeli18n="m.uixul.bo.doceditor.property.modificationdate" />
+
+	<section flex="1" name="urlrewriting" linkedtab="redirect"
+		labeli18n="m.uixul.bo.doceditor.section.urlrewriting" image="{IconsBase}/small/urlrewriting.png">
+		<property name="currenturl" labeli18n="m.uixul.bo.doceditor.property.currenturl"
+			class="link" />
 	</section>
-	<section flex="1" name="urlrewriting" linkedtab="redirect" labeli18n="m.uixul.bo.doceditor.section.urlrewriting" image="{IconsBase}/small/urlrewriting.png">
-		<property name="currenturl" labeli18n="m.uixul.bo.doceditor.property.currenturl" class="link" />
+
+	<section name="history" linkedtab="history"
+		actiontexti18n="m.uixul.bo.doceditor.section.action.view" labeli18n="m.uixul.bo.doceditor.section.history"
+		image="{IconsBase}/small/history.png">
+		<property name="modificationdate"
+			labeli18n="m.uixul.bo.doceditor.property.modificationdate" />
 	</section>
 </panel>
