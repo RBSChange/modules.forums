@@ -2,7 +2,7 @@
 <script>
 	<binding fileName="modules/website/persistentdocument/import/website_binding.xml" />
 	
-	<website byDocumentId-attr="">	
+	<documentRef byDocumentId-attr="">
 		<topic label="Membres">
 			<page label="Liste des membres" isIndexPage="true" navigationVisibility="hidden" indexingstatus="false">
 				<tag name="contextual_website_website_modules_forums_memberlist" />
@@ -32,5 +32,5 @@
 				</changecontent>
 			</page>
 		</topic>
-	</website>
+	</documentRef>
 </script>
