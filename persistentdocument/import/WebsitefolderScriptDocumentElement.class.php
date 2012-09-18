@@ -12,9 +12,9 @@ class forums_WebsitefolderScriptDocumentElement extends import_ScriptDocumentEle
 	{
 		if (($website = $this->getComputedAttribute('byWebsite')) !== null)
 		{
-			return forums_WebsitefolderService::getInstance()->getByWebsite($website);
+			return forums_WebsitefolderService::getInstance()->generateForWebsite($website);
 		}
-		return forums_WebsitefolderService::getInstance()->getNewDocumentInstance();
+		throw new Exception('Invalid website');
 	}
 	
 	/**

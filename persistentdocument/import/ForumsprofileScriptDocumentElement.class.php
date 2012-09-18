@@ -3,16 +3,8 @@
  * forums_ForumsprofileScriptDocumentElement
  * @package modules.forums.persistentdocument.import
  */
-class forums_ForumsprofileScriptDocumentElement extends import_ScriptDocumentElement
+class forums_ForumsprofileScriptDocumentElement extends users_ProfileScriptDocumentElement
 {
-	/**
-	 * @return forums_persistentdocument_forumsprofile
-	 */
-	protected function initPersistentDocument()
-	{
-		return forums_ForumsprofileService::getInstance()->getNewDocumentInstance();
-	}
-	
 	/**
 	 * @return forums_persistentdocument_forumsprofilemodel
 	 */
