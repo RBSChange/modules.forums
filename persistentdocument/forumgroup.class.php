@@ -6,7 +6,7 @@
 class forums_persistentdocument_forumgroup extends forums_persistentdocument_forumgroupbase
 {
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getKeywords()
 	{
@@ -14,7 +14,7 @@ class forums_persistentdocument_forumgroup extends forums_persistentdocument_for
 		{
 			return $this->getMetakeywords();
 		}
-		return str_replace(' ', ', ', $this->getLabel()).', '.LocaleService::getInstance()->transFO('m.forums.meta.forum');
+		return str_replace(' ', ', ', $this->getLabel()).', '.LocaleService::getInstance()->trans('m.forums.meta.forum');
 	}
 
 	/**
@@ -40,7 +40,7 @@ class forums_persistentdocument_forumgroup extends forums_persistentdocument_for
 	}
 
 	/**
-	 * @return Integer
+	 * @return integer
 	 */
 	public function getMountParentId()
 	{
@@ -58,7 +58,7 @@ class forums_persistentdocument_forumgroup extends forums_persistentdocument_for
 	}
 
 	/**
-	 * @param Integer $parentId
+	 * @param integer $parentId
 	 */
 	public function setMountParentId($parentId)
 	{
@@ -112,7 +112,7 @@ class forums_persistentdocument_forumgroup extends forums_persistentdocument_for
 	}
 
 	/**
-	 * @return Boolean
+	 * @return boolean
 	 */
 	public function isLocked()
 	{

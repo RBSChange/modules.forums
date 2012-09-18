@@ -6,7 +6,7 @@
 class forums_persistentdocument_ban extends forums_persistentdocument_banbase
 {
 	/**
-	 * @return Boolean
+	 * @return boolean
 	 */
 	public function isActive()
 	{

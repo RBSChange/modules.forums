@@ -1,20 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.forums.bo.blocks.dashboardgeneralstatistics" lcid="fr_FR">
-  <include id="m.forums.bo.blocks.postlistbase"/>
-  <key id="title">statistiques générales sur les forums</key>
-  <key id="website">site web</key>
-  <key id="shop-help">sélectionner le site web dont vous voulez afficher les statistiques</key>
-  <key id="usecharts">utiliser des graphiques</key>
-  <key id="usecharts-help">positionner à 'oui' pour afficher les statistiques sous forme de graphique et positionner à 'non' pour les afficher sous forme de tableau.</key>
-  <key id="columns">colonnes</key>
-  <key id="columns-help">cocher les colonnes à afficher.</key>
-  <key id="statistics-for-website">statistiques sur les forums du site web</key>
-  <key id="global-statistics">statistiques globales</key>
-  <key id="monthly-statistics">statistiques mensuelles</key>
-  <key id="column-forums">forums</key>
-  <key id="column-threads">sujets</key>
-  <key id="column-posts">messages</key>
-  <key id="column-members">membres</key>
-  <key id="column-lastlogin">dernière connexion</key>
-  <key id="column-hasposted">ont posté</key>
+	<include id="m.forums.bo.blocks.postlistbase" />
+	<key id="title">statistiques générales sur les forums</key>
+	<key id="website">site web</key>
+	<key id="shop-help">sélectionner le site web dont vous voulez afficher les statistiques</key>
+	<key id="usecharts">utiliser des graphiques</key>
+	<key id="usecharts-help">positionner à 'oui' pour afficher les statistiques sous forme de graphique et positionner à 'non' pour les afficher sous forme de tableau.</key>
+	<key id="columns">colonnes</key>
+	<key id="columns-help">cocher les colonnes à afficher.</key>
+	<key id="statistics-for-website">statistiques sur les forums du site web</key>
+	<key id="global-statistics">statistiques globales</key>
+	<key id="monthly-statistics">statistiques mensuelles</key>
+	<key id="column-forums">forums</key>
+	<key id="column-threads">sujets</key>
+	<key id="column-posts">messages</key>
+	<key id="column-members">membres</key>
+	<key id="column-lastlogin">dernière connexion</key>
+	<key id="column-hasposted">ont posté</key>
 </i18n>

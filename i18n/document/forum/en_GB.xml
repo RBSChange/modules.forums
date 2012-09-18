@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.forums.document.forum" lcid="en_GB">
-  <include id="m.forums.document.forumgroup"/>
-  <key id="document-name">forum</key>
-  <key id="nbpostperpage">posts per page</key>
-  <key id="nbpostperpage-help">Number of posts displayed per page in the threads. Beware, changing this value on a forum that already contains threads may be detrimental to its referencing.</key>
+	<include id="m.forums.document.forumgroup" />
+	<key id="document-name">forum</key>
+	<key id="nbpostperpage">posts per page</key>
+	<key id="nbpostperpage-help">Number of posts displayed per page in the threads. Beware, changing this value on a forum that already contains threads may be detrimental to its referencing.</key>
 </i18n>

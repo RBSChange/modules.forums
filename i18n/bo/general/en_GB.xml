@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.forums.bo.general" lcid="en_GB">
-  <key id="module-name">forums</key>
-  <key id="tree-root-name">forums</key>
-  <key id="system-folder-name">forums</key>
-  <key id="preserve-posts-description"/>
-  <key id="preserve-posts-button"/>
-  <key id="delete-posts-description"/>
-  <key id="delete-posts-button"/>
-  <key id="cancel-deletion-description"/>
-  <key id="cancel-deletion-button"/>
+	<key id="module-name">forums</key>
+	<key id="tree-root-name">forums</key>
+	<key id="system-folder-name">forums</key>
+	<key id="preserve-posts-description" />
+	<key id="preserve-posts-button" />
+	<key id="delete-posts-description" />
+	<key id="delete-posts-button" />
+	<key id="cancel-deletion-description" />
+	<key id="cancel-deletion-button" />
 </i18n>

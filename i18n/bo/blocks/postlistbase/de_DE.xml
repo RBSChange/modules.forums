@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.forums.bo.blocks.postlistbase" lcid="de_DE">
-  <key id="showgravatars">Avatar anzeigen</key>
-  <key id="showgravatars-help">Avatar anzeigen (www.gravatar.com)</key>
+	<key id="showgravatars">Avatar anzeigen</key>
+	<key id="showgravatars-help">Avatar anzeigen (www.gravatar.com)</key>
 </i18n>

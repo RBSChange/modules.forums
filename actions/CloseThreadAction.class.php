@@ -31,7 +31,7 @@ class forums_CloseThreadAction extends change_Action
 	}
 	
 	/**
-	 * @return Boolean
+	 * @return boolean
 	 */
 	public function isSecure()
 	{

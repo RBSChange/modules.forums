@@ -1,30 +1,13 @@
 <?php
 /**
- * @package modules.forums.lib.services
+ * @package modules.forums
+ * @method forums_ModuleService getInstance()
  */
 class forums_ModuleService extends ModuleBaseService
 {
 	const EXTBOOL_FALSE = 0;
 	const EXTBOOL_TRUE = 1;
 	const EXTBOOL_INHERIT = 2;
-	
-	/**
-	 * Singleton
-	 * @var forums_ModuleService
-	 */
-	private static $instance = null;
-	
-	/**
-	 * @return forums_ModuleService
-	 */
-	public static function getInstance()
-	{
-		if (is_null(self::$instance))
-		{
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}
 	
 	/**
 	 * @param string $permission
@@ -55,7 +38,7 @@ class forums_ModuleService extends ModuleBaseService
 	/**
 	 * @param users_persistentdocument_user $user
 	 * @param website_persistentdocument_website $website
-	 * @return Boolean
+	 * @return boolean
 	 */
 	public function isSuperModerator($user, $website = null)
 	{
@@ -70,7 +53,7 @@ class forums_ModuleService extends ModuleBaseService
 	/**
 	 * @param users_persistentdocument_user $user
 	 * @param website_persistentdocument_website $website
-	 * @return Boolean
+	 * @return boolean
 	 */
 	public function isBanned($user)
 	{
@@ -79,7 +62,7 @@ class forums_ModuleService extends ModuleBaseService
 	}
 	
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getGlobalAllReadDate()
 	{
@@ -87,7 +70,7 @@ class forums_ModuleService extends ModuleBaseService
 	}
 
 	/**
-	 * @param Integer $documentId
+	 * @param integer $documentId
 	 * @return f_persistentdocument_PersistentTreeNode
 	 */
 	public function getParentNodeForPermissions($documentId)
@@ -105,7 +88,7 @@ class forums_ModuleService extends ModuleBaseService
 	}
 	
 	/**
-	 * @return Integer
+	 * @return integer
 	 */
 	public function getRssMaxItemCount()
 	{

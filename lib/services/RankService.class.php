@@ -1,27 +1,10 @@
 <?php
 /**
- * forums_RankService
- * @package forums
+ * @package modules.forums
+ * @method forums_RankService getInstance()
  */
 class forums_RankService extends f_persistentdocument_DocumentService
 {
-	/**
-	 * @var forums_RankService
-	 */
-	private static $instance;
-
-	/**
-	 * @return forums_RankService
-	 */
-	public static function getInstance()
-	{
-		if (self::$instance === null)
-		{
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}
-
 	/**
 	 * @return forums_persistentdocument_rank
 	 */
@@ -38,7 +21,7 @@ class forums_RankService extends f_persistentdocument_DocumentService
 	 */
 	public function createQuery()
 	{
-		return $this->pp->createQuery('modules_forums/rank');
+		return $this->getPersistentProvider()->createQuery('modules_forums/rank');
 	}
 	
 	/**
@@ -49,7 +32,7 @@ class forums_RankService extends f_persistentdocument_DocumentService
 	 */
 	public function createStrictQuery()
 	{
-		return $this->pp->createQuery('modules_forums/rank', false);
+		return $this->getPersistentProvider()->createQuery('modules_forums/rank', false);
 	}
 		
 	/**
@@ -79,7 +62,7 @@ class forums_RankService extends f_persistentdocument_DocumentService
 	
 	/**
 	 * @param forums_persistentdocument_rank $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document (optionnal => can be null !).
+	 * @param integer $parentNodeId Parent node ID where to save the document (optionnal => can be null !).
 	 * @return void
 	 */
 	protected function preSave($document, $parentNodeId = null)
@@ -117,7 +100,7 @@ class forums_RankService extends f_persistentdocument_DocumentService
 
 	/**
 	 * @param forums_persistentdocument_rank $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document.
+	 * @param integer $parentNodeId Parent node ID where to save the document.
 	 * @return void
 	 */
 	protected function postSave($document, $parentNodeId)

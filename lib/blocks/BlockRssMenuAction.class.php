@@ -8,7 +8,7 @@ class forums_BlockRssMenuAction extends website_BlockAction
 	/**
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
-	 * @return String
+	 * @return string
 	 */
 	public function execute($request, $response)
 	{
@@ -78,8 +78,8 @@ class forums_BlockRssMenuAction extends website_BlockAction
 	
 	/**
 	 * @param f_persistentdocument_PersistentDocument $parent
-	 * @param Boolean $recursive
-	 * @param String[] $forTypes
+	 * @param boolean $recursive
+	 * @param string[] $forTypes
 	 */
 	private function addRssFeed($parent, $recursive, $forTypes = array('post', 'thread'))
 	{
@@ -88,7 +88,7 @@ class forums_BlockRssMenuAction extends website_BlockAction
 			$modelName = $parent->getPersistentModel()->getDocumentName();
 			foreach ($forTypes as $type)
 			{
-				$title = LocaleService::getInstance()->getInstance()->transFO('m.forums.frontoffice.' . $type . 's-of-' . $modelName, array('ucf', 'lab')) . ' ' . $parent->getLabelAsHtml();
+				$title = LocaleService::getInstance()->getInstance()->trans('m.forums.frontoffice.' . $type . 's-of-' . $modelName, array('ucf', 'lab')) . ' ' . $parent->getLabelAsHtml();
 				$this->getContext()->addRssFeed($title, LinkHelper::getActionUrl('forums', 'ViewFeed', array('parentref' => $parent->getId(), 'docType' => $type, 'recursive' => $recursive)));
 				$this->links[] = array('title' => $title, 'parentref' => $parent->getId(), 'docType' => $type, 'recursive' => $recursive);
 			}

@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n lcid="en_GB" baseKey="m.forums.document.forumsprofile">
-  <include id="m.users.document.profile"/>
-  <key id="document-name"/>
-  <key id="signature"/>
-  <key id="forummembertitle"/>
-  <key id="forummembertitle-help"/>
-  <key id="rank"/>
+	<include id="m.users.document.profile" />
+	<key id="document-name" />
+	<key id="signature" />
+	<key id="forummembertitle" />
+	<key id="forummembertitle-help" />
+	<key id="rank" />
 </i18n>

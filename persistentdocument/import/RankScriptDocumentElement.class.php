@@ -5,15 +5,15 @@
  */
 class forums_RankScriptDocumentElement extends import_ScriptDocumentElement
 {
-    /**
-     * @return forums_persistentdocument_rank
-     */
-    protected function initPersistentDocument()
-    {
-    	return forums_RankService::getInstance()->getNewDocumentInstance();
-    }
-    
-    /**
+	/**
+	 * @return forums_persistentdocument_rank
+	 */
+	protected function initPersistentDocument()
+	{
+		return forums_RankService::getInstance()->getNewDocumentInstance();
+	}
+	
+	/**
 	 * @return f_persistentdocument_PersistentDocumentModel
 	 */
 	protected function getDocumentModel()

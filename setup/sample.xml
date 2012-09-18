@@ -5,7 +5,6 @@
 	<binding fileName="modules/users/persistentdocument/import/users_binding.xml" />
 	<binding fileName="modules/media/persistentdocument/import/media_binding.xml" />
 	<binding fileName="modules/forums/persistentdocument/import/forums_binding.xml" />
-
 	<rootfolder module="media">
 		<folder byLabel="Medias de l'exemple de forum">
 			<media path="modules/forums/setup/media/sample/new.png" byLabel="Nouveau" id="visual-new" />
@@ -16,46 +15,41 @@
 			<media path="modules/forums/setup/media/sample/medal_gold_1.png" byLabel="Super-modérateur" id="visual-smod" />
 		</folder>
 	</rootfolder>
-	
-	<editablelist listid="modules_users/title" >	
-		<item byLabel="M" id="mr"/>
-		<item byLabel="Mme" id="mm"/>
+	<editablelist listid="modules_users/title">
+		<item byLabel="M" id="mr" />
+		<item byLabel="Mme" id="mm" />
 	</editablelist>
-	
 	<website byTag="default_modules_website_default-website" id="website" />
-	
 	<rank byLabel="Débutant" thresholdMin="0" visual-refid="visual-new" website-refid="website" />
 	<rank byLabel="Confirmé" thresholdMin="5" visual-refid="visual-bronze" website-refid="website" />
 	<rank byLabel="Avancé" thresholdMin="10" visual-refid="visual-silver" website-refid="website" />
 	<rank byLabel="Expert" thresholdMin="20" visual-refid="visual-gold" website-refid="website" />
 	<title byLabel="Modérateur" visual-refid="visual-mod" website-refid="website" id="title-mod" />
 	<title byLabel="Super-modérateur" visual-refid="visual-smod" website-refid="website" id="title-smod" />
-	
 	<group byWebsite-refid="website">
-		<user id="usera" byLogin="forummod1" email="john.smith@rbs.fr" password="abcd123" label="John Smith" >
+		<user id="usera" byLogin="forummod1" email="john.smith@rbs.fr" password="abcd123" label="John Smith">
 			<usersprofile firstname="John" lastname="Smith" titleid-refid="mr" registeredwebsiteid-refid="website" />
 			<forumsprofile forumMemberTitle-refids="title-mod" />
 		</user>
-		<user id="userb" byLogin="forummod2" email="jane.doe@rbs.fr" password="abcd123" label="Jane 123" >
+		<user id="userb" byLogin="forummod2" email="jane.doe@rbs.fr" password="abcd123" label="Jane 123">
 			<usersprofile firstname="Jane" lastname="Doe" titleid-refid="mm" registeredwebsiteid-refid="website" />
 			<forumsprofile forumMemberTitle-refids="title-smod" signatureAsBBCode="[b]Bla[/b], [i]bla[/i] et [big]bla[/big]." />
 		</user>
-		<user id="user1" byLogin="forummember1" email="john.doe@rbs.fr" password="abcd123" label="John 459" >
+		<user id="user1" byLogin="forummember1" email="john.doe@rbs.fr" password="abcd123" label="John 459">
 			<usersprofile firstname="John" lastname="Doe" titleid-refid="mr" registeredwebsiteid-refid="website" displayname="true" />
 		</user>
-		<user id="user2" byLogin="forummember2" email="jack.black@rbs.fr" password="abcd123" label="Jack Black" >
+		<user id="user2" byLogin="forummember2" email="jack.black@rbs.fr" password="abcd123" label="Jack Black">
 			<usersprofile firstname="Jack" lastname="Black" titleid-refid="mr" registeredwebsiteid-refid="website" displayname="true" />
 			<forumsprofile signatureAsBBCode="\o/" />
 		</user>
-		<user id="user3" byLogin="forummember3" email="joe.white@rbs.fr" password="abcd123" label="Joe le blanc" >
+		<user id="user3" byLogin="forummember3" email="joe.white@rbs.fr" password="abcd123" label="Joe le blanc">
 			<usersprofile firstname="Joe" lastname="White" titleid-refid="mr" registeredwebsiteid-refid="website" displayname="true" />
 		</user>
-		<user id="user4" byLogin="forummember4" email="bill.green@rbs.fr" password="abcd123" label="Bill Green" >
+		<user id="user4" byLogin="forummember4" email="bill.green@rbs.fr" password="abcd123" label="Bill Green">
 			<usersprofile firstname="Bill" lastname="Green" titleid-refid="mr" registeredwebsiteid-refid="website" />
 			<forumsprofile signatureAsBBCode="Ma signature." />
 		</user>
 	</group>
-
 	<rootfolder module="forums">
 		<websitefolder byWebsite-refid="website">
 			<permissions>
@@ -84,8 +78,7 @@
 						<post authorid-refid="mod2" textAsBBCode="Pellentesque nisl urna, lacinia eget, sagittis nec, pharetra eu, lectus? Proin pellentesque, ante at sodales egestas; pede est laoreet quam, a posuere lorem diam id neque." />
 					</thread>
 					<thread label="Test des BBCodes" authorid-refid="member1" level="20">
-						<bbcodeattribute name="postText">
-							<![CDATA[[b]Gras, italique, souligné, barré, lien : [/b]
+						<bbcodeattribute name="postText"><![CDATA[[b]Gras, italique, souligné, barré, lien : [/b]
 [quote][nobb]Texte en [b]gras[/b], [i]italique[/i], [u]souligné[/u], [s]barré[/s], [url="http://rbschange.fr"]lien[/url].[/nobb][/quote]
 [quote]Texte en [b]gras[/b], [i]italique[/i], [u]souligné[/u], [s]barré[/s], [url="http://rbschange.fr"]lien[/url].[/quote]
 [b]Indice, exposant, petit, grand, abréviation :[/b]
@@ -129,8 +122,7 @@ Avec title/alt :
 [b]Listes :[/b]
 [quote][nobb][list][item]Item 1[/item][item]Item 2[list][item]Item 2.1[/item][item]Item 2.2[/item][item]Item 2.3[/item][/list][/item][item]Item 3[/item][/list][/nobb][/quote]
 [quote][list][item]Item 1[/item][item]Item 2[list][item]Item 2.1[/item][item]Item 2.2[/item][item]Item 2.3[/item][/list][/item][item]Item 3[/item][/list][/quote]
-Smileys : [nobb]:D[/nobb] :D [nobb];)[/nobb] ;) [nobb]:p[/nobb] :p [nobb]:([/nobb] :( [nobb]:)[/nobb] :) ]]>
-						</bbcodeattribute>
+Smileys : [nobb]:D[/nobb] :D [nobb];)[/nobb] ;) [nobb]:p[/nobb] :p [nobb]:([/nobb] :( [nobb]:)[/nobb] :) ]]></bbcodeattribute>
 						<post authorid-refid="member1" text-attr="postText" />
 					</thread>
 					<thread label="Suspendisse diam mauris 1" authorid-refid="member1">
@@ -250,7 +242,6 @@ Smileys : [nobb]:D[/nobb] :D [nobb];)[/nobb] ;) [nobb]:p[/nobb] :p [nobb]:([/nob
 			</forumgroup>
 		</websitefolder>
 	</rootfolder>
-	
 	<website byTag="default_modules_website_default-website">
 		<topic byLabel="Membres" id="members" />
 		<systemtopic byLabel="Forums" id="forums" />

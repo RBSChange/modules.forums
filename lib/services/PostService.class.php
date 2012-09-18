@@ -1,27 +1,10 @@
 <?php
 /**
- * forums_PostService
  * @package modules.forums
+ * @method forums_ModuleService getInstance()
  */
 class forums_PostService extends f_persistentdocument_DocumentService
 {
-	/**
-	 * @var forums_PostService
-	 */
-	private static $instance;
-	
-	/**
-	 * @return forums_PostService
-	 */
-	public static function getInstance()
-	{
-		if (self::$instance === null)
-		{
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}
-	
 	/**
 	 * @return forums_persistentdocument_post
 	 */
@@ -38,7 +21,7 @@ class forums_PostService extends f_persistentdocument_DocumentService
 	 */
 	public function createQuery()
 	{
-		return $this->pp->createQuery('modules_forums/post');
+		return $this->getPersistentProvider()->createQuery('modules_forums/post');
 	}
 	
 	/**
@@ -49,7 +32,7 @@ class forums_PostService extends f_persistentdocument_DocumentService
 	 */
 	public function createStrictQuery()
 	{
-		return $this->pp->createQuery('modules_forums/post', false);
+		return $this->getPersistentProvider()->createQuery('modules_forums/post', false);
 	}
 	
 	/**
@@ -131,7 +114,7 @@ class forums_PostService extends f_persistentdocument_DocumentService
 	
 	/**
 	 * @param forums_persistentdocument_post $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document.
+	 * @param integer $parentNodeId Parent node ID where to save the document.
 	 * @return void
 	 */
 	protected function preInsert($document, $parentNodeId = null)
@@ -167,7 +150,7 @@ class forums_PostService extends f_persistentdocument_DocumentService
 	
 	/**
 	 * @param forums_persistentdocument_post $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document.
+	 * @param integer $parentNodeId Parent node ID where to save the document.
 	 * @return void
 	 */
 	protected function preSave($document, $parentNodeId = null)
@@ -182,7 +165,7 @@ class forums_PostService extends f_persistentdocument_DocumentService
 	
 	/**
 	 * @param forums_persistentdocument_post $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document.
+	 * @param integer $parentNodeId Parent node ID where to save the document.
 	 * @return void
 	 */
 	protected function postUpdate($document, $parentNodeId = null)
@@ -201,14 +184,14 @@ class forums_PostService extends f_persistentdocument_DocumentService
 			{
 				$thread->setLastPostDate(null);
 			}
-			$this->pp->updateDocument($thread);
+			$this->getPersistentProvider()->updateDocument($thread);
 			unset($document->deleteddateModified);
 		}
 	}
 	
 	/**
 	 * @param forums_persistentdocument_post $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document.
+	 * @param integer $parentNodeId Parent node ID where to save the document.
 	 * @return void
 	 */
 	protected function postInsert($document, $parentNodeId = null)
@@ -222,7 +205,7 @@ class forums_PostService extends f_persistentdocument_DocumentService
 		}
 		
 		$document->setNumber($thread->getNbpost() + 1);
-		$this->pp->updateDocument($document);
+		$this->getPersistentProvider()->updateDocument($document);
 		
 		$thread->setNbpost($thread->getNbpost() + 1);
 		$thread->setModificationdate(date_Calendar::now()->toString());
@@ -231,11 +214,11 @@ class forums_PostService extends f_persistentdocument_DocumentService
 			$thread->setTofollow($document);
 		}
 		$thread->setLastPostDate($document->getCreationdate());
-		$this->pp->updateDocument($thread);
+		$this->getPersistentProvider()->updateDocument($thread);
 		
 		$forum = $thread->getForum();
 		$forum->setNbpost($forum->getNbpost() + 1);
-		$this->pp->updateDocument($forum);
+		$this->getPersistentProvider()->updateDocument($forum);
 	}
 	
 	/**
@@ -315,7 +298,7 @@ class forums_PostService extends f_persistentdocument_DocumentService
 		if (!$user) { return; }		
 		try
 		{
-			$this->tm->beginTransaction();
+			$this->getTransactionManager()->beginTransaction();
 			
 			$profile = forums_ForumsprofileService::getInstance()->getByAccessorId($user->getId(), true);
 			$allReadDate = $profile->getDocumentService()->getAllReadDate($profile);
@@ -364,12 +347,12 @@ class forums_PostService extends f_persistentdocument_DocumentService
 			}
 			$profile->setTrackingByForum($track);
 			
-			$this->pp->updateDocument($profile);
-			$this->tm->commit();
+			$this->getPersistentProvider()->updateDocument($profile);
+			$this->getTransactionManager()->commit();
 		}
 		catch (Exception $e)
 		{
-			$this->tm->rollBack($e);
+			$this->getTransactionManager()->rollBack($e);
 		}
 	}
 }

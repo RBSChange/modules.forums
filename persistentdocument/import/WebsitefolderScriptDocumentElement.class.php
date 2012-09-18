@@ -5,19 +5,19 @@
  */
 class forums_WebsitefolderScriptDocumentElement extends import_ScriptDocumentElement
 {
-    /**
-     * @return forums_persistentdocument_websitefolder
-     */
-    protected function initPersistentDocument()
-    {
-    	if (($website = $this->getComputedAttribute('byWebsite')) !== null)
-    	{
-    		return forums_WebsitefolderService::getInstance()->getByWebsite($website);
-    	}
-    	return forums_WebsitefolderService::getInstance()->getNewDocumentInstance();
-    }
-    
-    /**
+	/**
+	 * @return forums_persistentdocument_websitefolder
+	 */
+	protected function initPersistentDocument()
+	{
+		if (($website = $this->getComputedAttribute('byWebsite')) !== null)
+		{
+			return forums_WebsitefolderService::getInstance()->getByWebsite($website);
+		}
+		return forums_WebsitefolderService::getInstance()->getNewDocumentInstance();
+	}
+	
+	/**
 	 * @return f_persistentdocument_PersistentDocumentModel
 	 */
 	protected function getDocumentModel()

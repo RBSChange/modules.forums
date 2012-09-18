@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <script>
 	<binding fileName="modules/website/persistentdocument/import/website_binding.xml" />
-	
 	<topic byDocumentId-attr="">
 		<page byTag="contextual_website_website_modules_users_userslist">
 			<changecontent for="content-block">
 				<changeblock type="modules_forums_memberlist" />
 			</changecontent>
 		</page>
-			
-		<page byTag="contextual_website_website_modules_forums_memberban" label="Bannir un membre"
-			navigationVisibility="hidden" indexingstatus="false">
+		<page byTag="contextual_website_website_modules_forums_memberban" label="Bannir un membre" navigationVisibility="hidden" indexingstatus="false">
 			<changecontent for="content-block">
 				<changeblock type="modules_forums_memberban" />
 			</changecontent>

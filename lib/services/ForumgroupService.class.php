@@ -1,27 +1,10 @@
 <?php
 /**
- * forums_ForumgroupService
  * @package modules.forums
+ * @method forums_ForumgroupService getInstance()
  */
 class forums_ForumgroupService extends f_persistentdocument_DocumentService
 {
-	/**
-	 * @var forums_ForumgroupService
-	 */
-	private static $instance;
-
-	/**
-	 * @return forums_ForumgroupService
-	 */
-	public static function getInstance()
-	{
-		if (self::$instance === null)
-		{
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}
-
 	/**
 	 * @return forums_persistentdocument_forumgroup
 	 */
@@ -38,7 +21,7 @@ class forums_ForumgroupService extends f_persistentdocument_DocumentService
 	 */
 	public function createQuery()
 	{
-		return $this->pp->createQuery('modules_forums/forumgroup');
+		return $this->getPersistentProvider()->createQuery('modules_forums/forumgroup');
 	}
 	
 	/**
@@ -49,11 +32,11 @@ class forums_ForumgroupService extends f_persistentdocument_DocumentService
 	 */
 	public function createStrictQuery()
 	{
-		return $this->pp->createQuery('modules_forums/forumgroup', false);
+		return $this->getPersistentProvider()->createQuery('modules_forums/forumgroup', false);
 	}
 	
 	/**
-	 * @param Integer $parentId
+	 * @param integer $parentId
 	 * @return forums_persistentdocument_forumgroup[]
 	 */
 	public function getByTopicParentId($parentId)
@@ -65,7 +48,7 @@ class forums_ForumgroupService extends f_persistentdocument_DocumentService
 
 	/**
 	 * @param forums_persistentdocument_forumgroup $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document (optionnal => can be null !).
+	 * @param integer $parentNodeId Parent node ID where to save the document (optionnal => can be null !).
 	 * @return void
 	 */
 	protected function preSave($document, $parentNodeId)
@@ -132,7 +115,7 @@ class forums_ForumgroupService extends f_persistentdocument_DocumentService
 		
 	/**
 	 * @param forums_persistentdocument_forumgroup $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document (optionnal => can be null !).
+	 * @param integer $parentNodeId Parent node ID where to save the document (optionnal => can be null !).
 	 * @return forums_persistentdocument_forumgroup
 	 */
 	protected function getForumgroupParent($document, $parentNodeId)
@@ -178,7 +161,7 @@ class forums_ForumgroupService extends f_persistentdocument_DocumentService
 	
 	/**
 	 * @param forums_persistentdocument_forumgroup $document
-	 * @param Integer $parentNodeId
+	 * @param integer $parentNodeId
 	 */
 	protected function postSave($document, $parentNodeId)
 	{
@@ -197,7 +180,7 @@ class forums_ForumgroupService extends f_persistentdocument_DocumentService
 	
 	/**
 	 * @param forums_persistentdocument_forumgroup $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document (optionnal => can be null !).
+	 * @param integer $parentNodeId Parent node ID where to save the document (optionnal => can be null !).
 	 * @return void
 	 */
 	protected function postUpdate($document, $parentNodeId)
@@ -231,7 +214,7 @@ class forums_ForumgroupService extends f_persistentdocument_DocumentService
 	
 	/**
 	 * @param forums_persistentdocument_forumgroup $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document (optionnal => can be null !).
+	 * @param integer $parentNodeId Parent node ID where to save the document (optionnal => can be null !).
 	 * @return f_persistentdocument_PersistentDocument topic or website
 	 */
 	protected function getMountParent($document, $parentNodeId)
@@ -251,7 +234,7 @@ class forums_ForumgroupService extends f_persistentdocument_DocumentService
 	
 	/**
 	 * @param forums_persistentdocument_forumgroup $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document.
+	 * @param integer $parentNodeId Parent node ID where to save the document.
 	 * @return void
 	 */
 	protected function postInsert($document, $parentNodeId = null)
@@ -266,7 +249,7 @@ class forums_ForumgroupService extends f_persistentdocument_DocumentService
 
 	/**
 	 * @param forums_persistentdocument_forumgroup $document
-	 * @param String $oldPublicationStatus
+	 * @param string $oldPublicationStatus
 	 * @param array<"cause" => String, "modifiedPropertyNames" => array, "oldPropertyValues" => array> $params
 	 * @return void
 	 */
@@ -326,9 +309,9 @@ class forums_ForumgroupService extends f_persistentdocument_DocumentService
 	{
 		$topic = $document->getTopic();
 		$attributes['topicId'] = $topic->getId();
-	    if ($mode & DocumentHelper::MODE_CUSTOM)
+		if ($mode & DocumentHelper::MODE_CUSTOM)
 		{
-	    	$attributes['path'] = $document->getDocumentService()->getPathOf($topic);
+			$attributes['path'] = $document->getDocumentService()->getPathOf($topic);
 		}
 	}
 }

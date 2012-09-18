@@ -32,7 +32,7 @@ class forums_DeletePostAction extends change_Action
 	}
 	
 	/**
-	 * @return Boolean
+	 * @return boolean
 	 */
 	public function isSecure()
 	{

@@ -23,7 +23,7 @@ class forums_BlockThreadAction extends forums_BlockPostListBaseAction
 	/**
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
-	 * @return String
+	 * @return string
 	 */
 	public function execute($request, $response)
 	{
@@ -164,7 +164,7 @@ class forums_BlockThreadAction extends forums_BlockPostListBaseAction
 	/**
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
-	 * @return String
+	 * @return string
 	 */
 	public function executeChooseforum($request, $response)
 	{
@@ -201,7 +201,7 @@ class forums_BlockThreadAction extends forums_BlockPostListBaseAction
 	/**
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
-	 * @return String
+	 * @return string
 	 */
 	public function executeMove($request, $response)
 	{

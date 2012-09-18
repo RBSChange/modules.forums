@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.forums.document.forumgroup.exception" lcid="fr_FR">
-  <key id="cant-move-to-another-website">vous ne pouvez déplacer un forum qu'à l'intérieur d'un même site.</key>
-  <key id="mount-parent-required">vous devez sélectionner un point de montage.</key>
-  <key id="mount-parent-bad-type">le point de montage doit être une rubrique ou un site web.</key>
+	<key id="cant-move-to-another-website">vous ne pouvez déplacer un forum qu'à l'intérieur d'un même site.</key>
+	<key id="mount-parent-required">vous devez sélectionner un point de montage.</key>
+	<key id="mount-parent-bad-type">le point de montage doit être une rubrique ou un site web.</key>
 </i18n>

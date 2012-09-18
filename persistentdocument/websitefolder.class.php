@@ -5,7 +5,7 @@
 class forums_persistentdocument_websitefolder extends forums_persistentdocument_websitefolderbase 
 {
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getLabel()
 	{

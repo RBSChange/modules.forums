@@ -1,22 +1,9 @@
 <?php
-class forums_ListTitlesbywebsiteidService extends BaseService implements list_ListItemsService
+/**
+ * @method forums_ListTitlesbywebsiteidService getInstance()
+ */
+class forums_ListTitlesbywebsiteidService extends change_BaseService implements list_ListItemsService
 {
-	/**
-	 * @var forums_ListTitlesbywebsiteidService
-	 */
-	private static $instance;
-
-	/**
-	 * @return forums_ListTitlesbywebsiteidService
-	 */
-	public static function getInstance()
-	{
-		if (self::$instance === null)
-		{
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}
 	/**
 	 * @return array
 	 */

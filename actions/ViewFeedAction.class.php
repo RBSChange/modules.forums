@@ -59,12 +59,12 @@ class forums_ViewFeedAction extends change_Action
 	/**
 	 * @param rss_FeedWriter $feedWriter
 	 * @param f_persistentdocument_PersistentDocument $parent
-	 * @param String $docType
+	 * @param string $docType
 	 */
 	private function setHeaders($feedWriter, $parent, $docType)
 	{
 		$modelName = $parent->getPersistentModel()->getDocumentName();
-		$title = LocaleService::getInstance()->transFO('m.forums.frontoffice.' . $docType .'s-of-' . $modelName, array('ucf', 'lab')) . ' ' . $parent->getLabelAsHtml();
+		$title = LocaleService::getInstance()->trans('m.forums.frontoffice.' . $docType .'s-of-' . $modelName, array('ucf', 'lab')) . ' ' . $parent->getLabelAsHtml();
 		$feedWriter->setTitle($title);
 		if (f_util_ClassUtils::methodExists($parent, 'getRSSDescription'))
 		{

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<bocks extends="generic">
+<?xml version="1.0" encoding="UTF-8"?>
+<bocks>
 	<tag labeli18n="m.forums.bo.blocks.forumdetail.title" icon="forum">functional_forums_forum-detail</tag>
 	<tag labeli18n="m.forums.bo.blocks.forumcontextuallist.title" icon="list-block">functional_forums_forum-list</tag>
 	<tag labeli18n="m.forums.bo.blocks.thread.title" icon="thread">functional_forums_thread-detail</tag>

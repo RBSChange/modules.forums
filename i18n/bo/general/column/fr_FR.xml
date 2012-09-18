@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.forums.bo.general.column" lcid="fr_FR">
-  <key id="threads">sujets</key>
-  <key id="posts">messages</key>
-  <key id="path">chemin</key>
-  <key id="website">site web</key>
-  <key id="thresholdmin">à partir de</key>
-  <key id="thresholdmax">jusqu'à</key>
+	<key id="threads">sujets</key>
+	<key id="posts">messages</key>
+	<key id="path">chemin</key>
+	<key id="website">site web</key>
+	<key id="thresholdmin">à partir de</key>
+	<key id="thresholdmax">jusqu'à</key>
 </i18n>

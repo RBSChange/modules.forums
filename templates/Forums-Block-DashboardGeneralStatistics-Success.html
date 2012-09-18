@@ -1,0 +1,67 @@
+<div class="dashboard-widget" tal:omit-tag="refresh" refreshURL="${refreshURL}" title="${title}" icon="${icon}" hideGotoModule="${hideGotoModule}">
+	<tal:block tal:condition="forEdition">
+		<div class="title-bar" ><img src="${icon}" /> ${title}</div>
+		<div class="content-block"><div class="content">${trans:m.dashboard.dashboard.dummycontent,ucf}</div></div>
+	</tal:block>
+	<tal:block tal:condition="not:forEdition">
+		<p><strong>${trans:m.forums.bo.blocks.dashboardgeneralstatistics.statistics-for-website,ucf}</strong> 
+		<select onchange="var widget = Dashboard.getWidgetByNode(this); widget.parameters['forumsParam[websiteId]'] = this.options[this.selectedIndex].value; widget.refresh();">
+			<tal:block tal:repeat="website websites">
+				<option tal:condition="php: websiteId == website.getId()" selected="selected" value="${website/getId}">${website/getLabel}</option>
+				<option tal:condition="php: websiteId != website.getId()" value="${website/getId}">${website/getLabel}</option>
+			</tal:block>
+		</select></p>
+		
+		<h2>${trans:m.forums.bo.blocks.dashboardgeneralstatistics.global-statistics,ucf}</h2>
+		<table width="100%">
+			<thead>
+				<tr>
+					<th>${trans:m.forums.bo.blocks.dashboardgeneralstatistics.column-forums,ucf}</th>
+					<th>${trans:m.forums.bo.blocks.dashboardgeneralstatistics.column-threads,ucf}</th>
+					<th>${trans:m.forums.bo.blocks.dashboardgeneralstatistics.column-posts,ucf}</th>
+					<th>${trans:m.forums.bo.blocks.dashboardgeneralstatistics.column-members,ucf}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>${global/forums}</td>
+					<td>${global/threads}</td>
+					<td>${global/posts}</td>
+					<td>${global/users}</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<h2>${trans:m.forums.bo.blocks.dashboardgeneralstatistics.monthly-statistics,ucf}</h2>
+		<table width="100%" tal:condition="widget/lines">
+			<thead>
+				<tr>
+					<th />
+					<th tal:condition="columnsArray/forums">${trans:m.forums.bo.blocks.dashboardgeneralstatistics.column-forums,ucf}</th>
+					<th tal:condition="columnsArray/threads">${trans:m.forums.bo.blocks.dashboardgeneralstatistics.column-threads,ucf}</th>
+					<th tal:condition="columnsArray/posts">${trans:m.forums.bo.blocks.dashboardgeneralstatistics.column-posts,ucf}</th>
+					<th tal:condition="columnsArray/users">${trans:m.forums.bo.blocks.dashboardgeneralstatistics.column-members,ucf}</th>
+					<th tal:condition="columnsArray/lastlogin">${trans:m.forums.bo.blocks.dashboardgeneralstatistics.column-lastlogin,ucf}</th>
+					<th tal:condition="columnsArray/hasposted">${trans:m.forums.bo.blocks.dashboardgeneralstatistics.column-hasposted,ucf}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr tal:repeat="line widget/lines">
+					<td>${line/monthLabel}</td>
+					<td tal:condition="columnsArray/forums">${line/forums}</td>
+					<td tal:condition="columnsArray/threads">${line/threads}</td>
+					<td tal:condition="columnsArray/posts">${line/posts}</td>
+					<td tal:condition="columnsArray/users">${line/users}</td>
+					<td tal:condition="columnsArray/lastlogin">${line/lastlogin}</td>
+					<td tal:condition="columnsArray/hasposted">${line/hasposted}</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<ul class="no-bullet" tal:condition="charts">
+			<li tal:repeat="row charts" style="text-align: center;">
+				<img change:chart="" chart="${row/chart}" width="650" height="150" cacheTime="86400" title="${row/title}" />
+			</li>
+		</ul>
+	</tal:block>
+</div>

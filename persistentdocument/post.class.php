@@ -6,7 +6,7 @@
 class forums_persistentdocument_post extends forums_persistentdocument_postbase implements rss_Item
 {
 	/**
-	 * @return Boolean
+	 * @return boolean
 	 */
 	public function isFirstPostInThread()
 	{
@@ -22,7 +22,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	}
 	
 	/**
-	 * @return Boolean
+	 * @return boolean
 	 */
 	public function isEditable()
 	{
@@ -47,7 +47,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	}
 	
 	/**
-	 * @return Boolean
+	 * @return boolean
 	 */
 	public function isDeletable()
 	{
@@ -73,7 +73,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	}
 	
 	/**
-	 * @return Boolean
+	 * @return boolean
 	 */
 	public function isBanable()
 	{
@@ -97,7 +97,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	}
 
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getAuthorProfile()
 	{
@@ -110,7 +110,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	}
 	
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getAuthorName()
 	{
@@ -119,11 +119,11 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 		{
 			return $user->getLabel();
 		}
-		return LocaleService::getInstance()->transFO('m.forums.frontoffice.unknown', array('ucf'));
+		return LocaleService::getInstance()->trans('m.forums.frontoffice.unknown', array('ucf'));
 	}
 	
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getLastEdithorName()
 	{
@@ -132,11 +132,11 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 		{
 			return $user->getLabel();
 		}
-		return LocaleService::getInstance()->transFO('m.forums.frontoffice.unknown', array('ucf'));
+		return LocaleService::getInstance()->trans('m.forums.frontoffice.unknown', array('ucf'));
 	}
 	
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getSuppressorName()
 	{
@@ -145,11 +145,11 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 		{
 			return $user->getLabel();
 		}
-		return LocaleService::getInstance()->transFO('m.forums.frontoffice.unknown', array('ucf'));
+		return LocaleService::getInstance()->trans('m.forums.frontoffice.unknown', array('ucf'));
 	}
 	
 	/**
-	 * @return Boolean
+	 * @return boolean
 	 */
 	public function wasDeleted()
 	{
@@ -161,7 +161,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	}
 		
 	/**
-	 * @return Boolean
+	 * @return boolean
 	 */
 	public function isAnswer()
 	{
@@ -169,7 +169,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	}
 
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getForumLabel()
 	{
@@ -177,7 +177,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	}
 	
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getForumLabelAsHtml()
 	{
@@ -185,7 +185,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	}
 	
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getThreadLabel()
 	{
@@ -193,7 +193,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	}
 	
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getThreadLabelAsHtml()
 	{
@@ -201,7 +201,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	}
 	
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getPostId()
 	{
@@ -209,7 +209,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	}
 	
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getPostUrlInThread()
 	{
@@ -230,7 +230,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	}
 	
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getPostIdLink($strong = false)
 	{
@@ -258,8 +258,8 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	}
 	
 	/**
-	 * @param Integer $postPerPage
-	 * @return Integer
+	 * @param integer $postPerPage
+	 * @return integer
 	 */
 	public function getPageNumberInThread($postPerPage)
 	{
@@ -358,15 +358,15 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	}
 		
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getRSSLabel()
 	{
-		return $this->getLabel() . ' - ' . LocaleService::getInstance()->transFO('m.forums.frontoffice.in-thread', array('lab')) . ' ' . $this->getThread()->getLabel();
+		return $this->getLabel() . ' - ' . LocaleService::getInstance()->trans('m.forums.frontoffice.in-thread', array('lab')) . ' ' . $this->getThread()->getLabel();
 	}
 	
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getRSSDescription()
 	{
@@ -374,7 +374,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	}
 	
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getRSSGuid()
 	{
@@ -382,7 +382,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	}
 	
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getRSSDate()
 	{
@@ -390,7 +390,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	}
 	
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getAnchor()
 	{

@@ -1,27 +1,10 @@
 <?php
 /**
- * forums_ForumService
  * @package forums
+ * @method forums_ForumService getInstance()
  */
 class forums_ForumService extends forums_ForumgroupService
 {
-	/**
-	 * @var forums_ForumService
-	 */
-	private static $instance;
-	
-	/**
-	 * @return forums_ForumService
-	 */
-	public static function getInstance()
-	{
-		if (self::$instance === null)
-		{
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}
-	
 	/**
 	 * @return forums_persistentdocument_forum
 	 */
@@ -38,7 +21,7 @@ class forums_ForumService extends forums_ForumgroupService
 	 */
 	public function createQuery()
 	{
-		return $this->pp->createQuery('modules_forums/forum');
+		return $this->getPersistentProvider()->createQuery('modules_forums/forum');
 	}
 	
 	/**
@@ -49,7 +32,7 @@ class forums_ForumService extends forums_ForumgroupService
 	 */
 	public function createStrictQuery()
 	{
-		return $this->pp->createQuery('modules_forums/forum', false);
+		return $this->getPersistentProvider()->createQuery('modules_forums/forum', false);
 	}
 	
 	/**
@@ -87,7 +70,7 @@ class forums_ForumService extends forums_ForumgroupService
 
 	/**
 	 * @param forums_persistentdocument_forum $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document (optionnal => can be null !).
+	 * @param integer $parentNodeId Parent node ID where to save the document (optionnal => can be null !).
 	 * @return f_persistentdocument_PersistentDocument topic or website
 	 */
 	protected function getMountParent($document, $parentNodeId)
@@ -97,7 +80,7 @@ class forums_ForumService extends forums_ForumgroupService
 		
 	/**
 	 * @param forums_persistentdocument_forum $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document.
+	 * @param integer $parentNodeId Parent node ID where to save the document.
 	 * @return void
 	 */
 	protected function preInsert($document, $parentNodeId = null)
@@ -110,7 +93,7 @@ class forums_ForumService extends forums_ForumgroupService
 	
 	/**
 	 * @param forums_persistentdocument_forum $document
-	 * @param Integer $destId
+	 * @param integer $destId
 	 */
 	protected function onDocumentMoved($document, $destId)
 	{

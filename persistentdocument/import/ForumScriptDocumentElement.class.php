@@ -5,20 +5,20 @@
  */
 class forums_ForumScriptDocumentElement extends import_ScriptDocumentElement
 {
-    /**
-     * @return forums_persistentdocument_forum
-     */
-    protected function initPersistentDocument()
-    {
-    	$document = forums_ForumService::getInstance()->getNewDocumentInstance();
-    	if (isset($this->attributes['mountParent-refid']))
-    	{
-    		$document->setMountParent($this->getComputedAttribute('mountParent'));
-    	}
-    	return $document;
-    }
-    
-    /**
+	/**
+	 * @return forums_persistentdocument_forum
+	 */
+	protected function initPersistentDocument()
+	{
+		$document = forums_ForumService::getInstance()->getNewDocumentInstance();
+		if (isset($this->attributes['mountParent-refid']))
+		{
+			$document->setMountParent($this->getComputedAttribute('mountParent'));
+		}
+		return $document;
+	}
+	
+	/**
 	 * @return f_persistentdocument_PersistentDocumentModel
 	 */
 	protected function getDocumentModel()

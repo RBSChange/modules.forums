@@ -10,7 +10,6 @@
 		<javascript>
 			<field name="mAddNewTitleButton">null</field>
 			<field name="mAddNewRankButton">null</field>
-			
 			<constructor><![CDATA[
 				var button = this.getElementByAnonId('save_properties');
 				if (button) {button.hidden = true;}
@@ -21,15 +20,14 @@
 				button = this.getElementByAnonId('next_error_property');
 				if (button) {button.hidden = true;}	
 
-				this.mAddNewTitleButton = this.addActionButton('&modules.forums.bo.actions.Create-title;', wToolkit.getIcon('add', 'small'));
+				this.mAddNewTitleButton = this.addActionButton("${trans:m.forums.bo.actions.create-title,ucf,js}", wToolkit.getIcon('add', 'small'));
 				var me = this;
 				this.mAddNewTitleButton.addEventListener('command', function(event) {me.onAddNewTitle();}, true);
 				
-				this.mAddNewRankButton = this.addActionButton('&modules.forums.bo.actions.Create-rank;', wToolkit.getIcon('add', 'small'));
+				this.mAddNewRankButton = this.addActionButton("${trans:m.forums.bo.actions.create-rank,ucf,js}", wToolkit.getIcon('add', 'small'));
 				var me = this;
 				this.mAddNewRankButton.addEventListener('command', function(event) {me.onAddNewRank();}, true);
 			]]></constructor>
-
 			<method name="onAddNewTitle">
 				<parameter name="event" />
 				<body><![CDATA[
@@ -37,7 +35,6 @@
 					module.createDocumentEditor('modules_forums_title', this.mDocumentId);
 				]]></body>
 			</method>
-
 			<method name="onAddNewRank">
 				<parameter name="event" />
 				<body><![CDATA[

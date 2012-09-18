@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-<document xmlns="http://www.rbs.fr/schema/change-document/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/static/schema/change-document/4.0.xsd"
-	model-version="4.0" extend="modules_users/profile">
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://www.rbs.fr/schema/change-document/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/schema/persistentdocument-4.0.xsd" model-version="4.0" extend="modules_users/profile">
 	<properties>
-		<property name="forumMemberTitle" type="modules_forums/title" max-occurs="-1" />
+		<property name="forumMemberTitle" type="DocumentArray" document-type="modules_forums/title" />
 	</properties>
 	<serializedproperties>
 		<property name="ban" type="DateTime" />

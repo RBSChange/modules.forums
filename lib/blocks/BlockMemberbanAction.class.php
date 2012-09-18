@@ -8,7 +8,7 @@ class forums_BlockMemberbanAction extends website_TaggerBlockAction
 	/**
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
-	 * @return String
+	 * @return string
 	 */
 	public function execute($request, $response)
 	{
@@ -47,7 +47,7 @@ class forums_BlockMemberbanAction extends website_TaggerBlockAction
 	}
 	
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getInputViewName()
 	{
@@ -65,7 +65,7 @@ class forums_BlockMemberbanAction extends website_TaggerBlockAction
 	/**
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
-	 * @return String
+	 * @return string
 	 */
 	public function executeSubmit($request, $response, forums_persistentdocument_ban $ban)
 	{

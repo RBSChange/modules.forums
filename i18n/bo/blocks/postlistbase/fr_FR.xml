@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.forums.bo.blocks.postlistbase" lcid="fr_FR">
-  <key id="nbitemperpage">nombre d'éléments par page</key>
-  <key id="nbitemperpage-help">nombre d'éléments par page</key>
-  <key id="showgravatars">Afficher l'avatar</key>
-  <key id="showgravatars-help">Afficher l'avatar (site www.gravatar.com)</key>
-  <key id="avatarssize">taille de l'avatar</key>
-  <key id="avatarssize-help">taille de l'avatar en pixels (l'avatar sera toujours carré)</key>
-  <key id="showsignatures">afficher la signature</key>
-  <key id="showsignatures-help">afficher la signature en dessous des messages (la signature est définie dans le profil du membre)</key>
+	<key id="nbitemperpage">nombre d'éléments par page</key>
+	<key id="nbitemperpage-help">nombre d'éléments par page</key>
+	<key id="showgravatars">Afficher l'avatar</key>
+	<key id="showgravatars-help">Afficher l'avatar (site www.gravatar.com)</key>
+	<key id="avatarssize">taille de l'avatar</key>
+	<key id="avatarssize-help">taille de l'avatar en pixels (l'avatar sera toujours carré)</key>
+	<key id="showsignatures">afficher la signature</key>
+	<key id="showsignatures-help">afficher la signature en dessous des messages (la signature est définie dans le profil du membre)</key>
 </i18n>

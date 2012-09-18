@@ -1,12 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<document xmlns="http://www.rbs.fr/schema/change-document/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/static/schema/change-document/4.0.xsd" 
-	model-version="1.0" icon="forum" extend="modules_forums/forumgroup">
-  <properties>
-    <property name="nbthread" type="Integer" default-value="0"/>
-    <property name="nbpost" type="Integer" default-value="0"/>
-    <property name="nbPostPerPage" type="Integer" default-value="20" min-occurs="1"/>
-    <property name="lockedMode" type="Integer" default-value="0" from-list="modules_forums/modesextended"/>
-    <property name="excludeFromRssMode" type="Integer" default-value="0" from-list="modules_forums/modesextended"/>
-  </properties>
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://www.rbs.fr/schema/change-document/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/schema/persistentdocument-4.0.xsd" model-version="1.0" icon="forum" extend="modules_forums/forumgroup">
+	<properties>
+		<property name="nbthread" type="Integer" default-value="0" />
+		<property name="nbpost" type="Integer" default-value="0" />
+		<property name="nbPostPerPage" type="Integer" default-value="20" required="true" />
+		<property name="lockedMode" type="Integer" default-value="0" from-list="modules_forums/modesextended" />
+		<property name="excludeFromRssMode" type="Integer" default-value="0" from-list="modules_forums/modesextended" />
+	</properties>
 </document>

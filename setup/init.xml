@@ -4,59 +4,41 @@
 	<binding fileName="modules/notification/persistentdocument/import/notification_binding.xml" />
 	<binding fileName="modules/task/persistentdocument/import/task_binding.xml" />
 	<binding fileName="modules/forums/persistentdocument/import/forums_binding.xml" />
-
 	<systemfolder module="list" relatedmodule="forums">
-		<dynamiclist listid="modules_forums/titlesbywebsiteid" label="Titres pour un site"
-			description="Liste des titres que peuvent recevoir les membres des forums d'un site donné." />
-			
-		<staticlist listid="modules_forums/threadlevels" label="Types de sujets"
-			description="Liste des types de sujet des forums.">
-			<staticitem label="&amp;modules.forums.lists.threadlevels.Normal;" value="10" />
-			<staticitem label="&amp;modules.forums.lists.threadlevels.Sticky;" value="20" />
-			<staticitem label="&amp;modules.forums.lists.threadlevels.Announcement;" value="30" />
-			<staticitem label="&amp;modules.forums.lists.threadlevels.Global;" value="40" />
+		<dynamiclist listid="modules_forums/titlesbywebsiteid" label="Titres pour un site" description="Liste des titres que peuvent recevoir les membres des forums d'un site donné." />
+		<staticlist listid="modules_forums/threadlevels" label="Types de sujets" description="Liste des types de sujet des forums.">
+			<staticitem label="m.forums.lists.threadlevels.normal" value="10" />
+			<staticitem label="m.forums.lists.threadlevels.sticky" value="20" />
+			<staticitem label="m.forums.lists.threadlevels.announcement" value="30" />
+			<staticitem label="m.forums.lists.threadlevels.global" value="40" />
 		</staticlist>
-		
-		<staticlist listid="modules_forums/dashboardwebsitestatisticscolums" 
-			label="Colonnes de statistiques"
-			description="Colones disponibles dnas le bloc du tableau de bord affichant les statistiques des forums d'un site web.">
-			<staticitem label="&amp;modules.forums.bo.blocks.dashboardgeneralstatistics.column-forums;" value="forums" />
-			<staticitem label="&amp;modules.forums.bo.blocks.dashboardgeneralstatistics.column-threads;" value="threads" />
-			<staticitem label="&amp;modules.forums.bo.blocks.dashboardgeneralstatistics.column-posts;" value="posts" />
-			<staticitem label="&amp;modules.forums.bo.blocks.dashboardgeneralstatistics.column-members;" value="members" />
-			<staticitem label="&amp;modules.forums.bo.blocks.dashboardgeneralstatistics.column-lastlogin;" value="lastlogin" />
-			<staticitem label="&amp;modules.forums.bo.blocks.dashboardgeneralstatistics.column-hasposted;" value="hasposted" />
+		<staticlist listid="modules_forums/dashboardwebsitestatisticscolums" label="Colonnes de statistiques" description="Colones disponibles dnas le bloc du tableau de bord affichant les statistiques des forums d'un site web.">
+			<staticitem label="m.forums.bo.blocks.dashboardgeneralstatistics.column-forums" value="forums" />
+			<staticitem label="m.forums.bo.blocks.dashboardgeneralstatistics.column-threads" value="threads" />
+			<staticitem label="m.forums.bo.blocks.dashboardgeneralstatistics.column-posts" value="posts" />
+			<staticitem label="m.forums.bo.blocks.dashboardgeneralstatistics.column-members" value="members" />
+			<staticitem label="m.forums.bo.blocks.dashboardgeneralstatistics.column-lastlogin" value="lastlogin" />
+			<staticitem label="m.forums.bo.blocks.dashboardgeneralstatistics.column-hasposted" value="hasposted" />
 		</staticlist>
-		
 		<staticlistupdate listid="modules_users/editprofilepanels">
-			<staticitem label="&amp;modules.forums.frontoffice.Member-informations;" value="forums/EditMemberProfile" />
+			<staticitem label="m.forums.frontoffice.member-informations" value="forums/EditMemberProfile" />
 		</staticlistupdate>
-		
 		<staticlist listid="modules_forums/modeslimited" label="Mode Oui/non">
-			<staticitem label="&amp;modules.forums.lists.modes.No;" value="0" />
-			<staticitem label="&amp;modules.forums.lists.modes.Yes;" value="1" />
+			<staticitem label="m.forums.lists.modes.no" value="0" />
+			<staticitem label="m.forums.lists.modes.yes" value="1" />
 		</staticlist>
-		
 		<staticlist listid="modules_forums/modesextended" label="Mode Oui/non/hérité">
-			<staticitem label="&amp;modules.forums.lists.modes.No;" value="0" />
-			<staticitem label="&amp;modules.forums.lists.modes.Yes;" value="1" />
-			<staticitem label="&amp;modules.forums.lists.modes.Inherit;" value="2" />
+			<staticitem label="m.forums.lists.modes.no" value="0" />
+			<staticitem label="m.forums.lists.modes.yes" value="1" />
+			<staticitem label="m.forums.lists.modes.inherit" value="2" />
 		</staticlist>
 	</systemfolder>
-
 	<systemfolder module="notification" relatedmodule="forums">
-		<attribute name="body">
-			<![CDATA[Bonjour {PSEUDO},<br/>Vous avez été banni du forum jusqu'au {DATE}<br/>Par conséquence vous ne pouvez plus participer aux forums jusqu'à cette date.<br/><br/>{MOTIF}]]>
-		</attribute>
-		<notification label="Bannissement du forum" codename="modules_forums/ban"	availableparameters="PSEUDO,DATE,MOTIF"
-				subject="Bannissement temporaire du forum" header="" body-attr="" footer="" />
-		<attribute name="body">
-			<![CDATA[Bonjour {PSEUDO},<br/><br/>Vous avez choisi de suivre l'évolution du sujet {TOPIC} et il y a {NUM} nouveau(x) message(s).<br/><br/>Vous pouvez le(s) lire en suivant {LINK}.<br/><br/>Pour ne plus recevoir cet email il vous suffit d'arrêter le suivi sur le sujet.]]>
-		</attribute>
-		<notification label="Suivi d'un sujet" codename="modules_forums/follower" availableparameters="PSEUDO,TOPIC,LINK,NUM"
-				subject="Nouveau message sur le forum" header="" body-attr="" footer="" />
+		<attribute name="body"><![CDATA[Bonjour {PSEUDO},<br/>Vous avez été banni du forum jusqu'au {DATE}<br/>Par conséquence vous ne pouvez plus participer aux forums jusqu'à cette date.<br/><br/>{MOTIF}]]></attribute>
+		<notification label="Bannissement du forum" codename="modules_forums/ban" availableparameters="PSEUDO,DATE,MOTIF" subject="Bannissement temporaire du forum" header="" body-attr="" footer="" />
+		<attribute name="body"><![CDATA[Bonjour {PSEUDO},<br/><br/>Vous avez choisi de suivre l'évolution du sujet {TOPIC} et il y a {NUM} nouveau(x) message(s).<br/><br/>Vous pouvez le(s) lire en suivant {LINK}.<br/><br/>Pour ne plus recevoir cet email il vous suffit d'arrêter le suivi sur le sujet.]]></attribute>
+		<notification label="Suivi d'un sujet" codename="modules_forums/follower" availableparameters="PSEUDO,TOPIC,LINK,NUM" subject="Nouveau message sur le forum" header="" body-attr="" footer="" />
 	</systemfolder>
-	
 	<systemfolder module="task" relatedmodule="forums">
 		<plannedtask label="Notifications de suivi des sujets des forums" systemtaskclassname="forums_SendNotificationsToFollowersTask" />
 		<plannedtask label="Suppression différée des forums et membres" systemtaskclassname="forums_BackgroundDeleteTask" />

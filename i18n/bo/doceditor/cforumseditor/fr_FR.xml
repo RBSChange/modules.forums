@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.forums.bo.doceditor.cforumseditor" lcid="fr_FR">
-  <key id="label">libellé</key>
-  <key id="actions">actions</key>
-  <key id="confirm-delete-title">êtes vous sur de vouloir supprimer ce titre ?</key>
-  <key id="confirm-delete-rank">êtes vous sur de vouloir supprimer ce rang ?</key>
-  <key id="threshold-min">à partir de</key>
-  <key id="threshold-max">jusqu'à</key>
+	<key id="label">libellé</key>
+	<key id="actions">actions</key>
+	<key id="confirm-delete-title">êtes vous sur de vouloir supprimer ce titre ?</key>
+	<key id="confirm-delete-rank">êtes vous sur de vouloir supprimer ce rang ?</key>
+	<key id="threshold-min">à partir de</key>
+	<key id="threshold-max">jusqu'à</key>
 </i18n>

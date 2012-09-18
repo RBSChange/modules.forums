@@ -1,28 +1,10 @@
 <?php
 /**
- * forums_ForumsprofileService
  * @package modules.forums
+ * @method forums_ForumsprofileService getInstance()
  */
 class forums_ForumsprofileService extends users_ProfileService
 {
-	/**
-	 * @var forums_ForumsprofileService
-	 */
-	private static $instance;
-
-	/**
-	 * @return forums_ForumsprofileService
-	 */
-	public static function getInstance()
-	{
-		if (self::$instance === null)
-		{
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}
-
-	
 	/**
 	 * @return forums_persistentdocument_forumsprofile
 	 */
@@ -104,7 +86,7 @@ class forums_ForumsprofileService extends users_ProfileService
 	{
 		try
 		{
-			$this->tm->beginTransaction();
+			$this->getTransactionManager()->beginTransaction();
 			
 			$date = $this->getAllReadDate($profile);
 		
@@ -137,12 +119,12 @@ class forums_ForumsprofileService extends users_ProfileService
 				$profile->setTrackingByForum($track);
 			}
 
-			$this->pp->updateDocument($profile);
-			$this->tm->commit();
+			$this->getPersistentProvider()->updateDocument($profile);
+			$this->getTransactionManager()->commit();
 		}
 		catch (Exception $e)
 		{
-			$this->tm->rollBack($e);
+			$this->getTransactionManager()->rollBack($e);
 		}
 	}
 }

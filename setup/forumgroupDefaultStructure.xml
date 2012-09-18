@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <script>
 	<binding fileName="modules/website/persistentdocument/import/website_binding.xml" />
-		
 	<systemtopic byDocumentId-attr="">
 		<page label="Forum" isIndexPage="true" navigationVisibility="hidden" indexingstatus="false" metatitle="Forum {forums_forumDetail.forumname}" description="Forum {forums_forumDetail.forumname} : {forums_forumDetail.forumshortdesc}" keywords="{forums_forumDetail.forumkeywords}">
 			<tag name="functional_forums_forum-detail" />
@@ -10,28 +9,24 @@
 				<changeblock type="modules_forums_forumDetail" __nbitemperpage="10" />
 			</changecontent>
 		</page>
-		
 		<page label="Sujet" navigationVisibility="hidden" indexingstatus="false" metatitle="{forums_thread.threadname} : forum {forums_thread.forumname}" description="Discussion {forums_thread.threadname} sur le forum {forums_thread.forumname}" keywords="{forums_thread.threadkeywords}">
 			<tag name="functional_forums_thread-detail" />
 			<changecontent for="content-block">
 				<changeblock type="modules_forums_thread" />
 			</changecontent>
 		</page>
-		
 		<page label="Nouveau sujet" navigationVisibility="hidden" indexingstatus="false" metatitle="Forum {forums_newthread.forumname} : nouveau sujet">
 			<tag name="functional_forums_thread-new" />
 			<changecontent for="content-block">
 				<changeblock type="modules_forums_newthread" />
 			</changecontent>
 		</page>
-		
 		<page label="Nouveau message" navigationVisibility="hidden" indexingstatus="false" metatitle="Sujet {forums_newpost.threadname} : nouveau message">
 			<tag name="functional_forums_post-new" />
 			<changecontent for="content-block">
 				<changeblock type="modules_forums_newpost" />
 			</changecontent>
 		</page>
-		
 		<page label="Édition d'un message" navigationVisibility="hidden" indexingstatus="false" metatitle="Édition d'un message dans {forums_editpost.threadname}">
 			<tag name="functional_forums_post-edit" />
 			<changecontent for="content-block">

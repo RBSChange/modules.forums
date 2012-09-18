@@ -1,20 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.forums.bo.blocks.dashboardgeneralstatistics" lcid="en_GB">
-  <include id="m.forums.bo.blocks.postlistbase"/>
-  <key id="website">website</key>
-  <key id="columns">columns</key>
-  <key id="column-forums">forums</key>
-  <key id="column-hasposted">have posted</key>
-  <key id="column-lastlogin">last login</key>
-  <key id="column-members">members</key>
-  <key id="column-posts">posts</key>
-  <key id="column-threads">threads</key>
-  <key id="columns-help">Check the columns to display.</key>
-  <key id="global-statistics">global statistics</key>
-  <key id="monthly-statistics">monthly statistics</key>
-  <key id="shop-help">Select the website which you want to display the statistics for.</key>
-  <key id="statistics-for-website">website forum statistics</key>
-  <key id="title">general forum statistics</key>
-  <key id="usecharts">use charts</key>
-  <key id="usecharts-help">Set it to "yes" to display the statistics as a chart. Set it to "no" to display them as a table.</key>
+	<include id="m.forums.bo.blocks.postlistbase" />
+	<key id="website">website</key>
+	<key id="columns">columns</key>
+	<key id="column-forums">forums</key>
+	<key id="column-hasposted">have posted</key>
+	<key id="column-lastlogin">last login</key>
+	<key id="column-members">members</key>
+	<key id="column-posts">posts</key>
+	<key id="column-threads">threads</key>
+	<key id="columns-help">Check the columns to display.</key>
+	<key id="global-statistics">global statistics</key>
+	<key id="monthly-statistics">monthly statistics</key>
+	<key id="shop-help">Select the website which you want to display the statistics for.</key>
+	<key id="statistics-for-website">website forum statistics</key>
+	<key id="title">general forum statistics</key>
+	<key id="usecharts">use charts</key>
+	<key id="usecharts-help">Set it to "yes" to display the statistics as a chart. Set it to "no" to display them as a table.</key>
 </i18n>

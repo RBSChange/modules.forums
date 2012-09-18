@@ -24,7 +24,7 @@
 	<block type="modules_forums_forumcontextuallist" icon="list-block">
 		<parameters>
 			<parameter name="showGlobalMemberActions" type="Boolean" default-value="true" />
-		</parameters>	
+		</parameters>
 	</block>
 	<block type="modules_forums_thread" icon="thread">
 		<parameters>
@@ -88,10 +88,9 @@
 	<!-- Dashboard blocks. -->
 	<block type="modules_forums_DashboardGeneralStatistics" icon="statistics" dashboard="true">
 		<parameters>
-			<parameter name="website" type="modules_website/website" min-occurs="1" />
+			<parameter name="website" type="Document" min-occurs="1" document-type="modules_website/website" />
 			<parameter name="usecharts" type="Boolean" default-value="true" />
-			<parameter name="columns" type="String" default-value="newThreads,newPosts,newMembers" max-occurs="-1"
-				from-list="modules_forums/dashboardwebsitestatisticscolums" fieldtype="checklist" />
+			<parameter name="columns" type="String" default-value="newThreads,newPosts,newMembers" max-occurs="-1" from-list="modules_forums/dashboardwebsitestatisticscolums" fieldtype="checklist" />
 		</parameters>
 	</block>
 </blocks>

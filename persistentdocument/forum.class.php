@@ -6,7 +6,7 @@
 class forums_persistentdocument_forum extends forums_persistentdocument_forumbase
 {
 	/**
-	 * @return Integer
+	 * @return integer
 	 */
 	public function getNbnewpost()
 	{
@@ -31,7 +31,7 @@ class forums_persistentdocument_forum extends forums_persistentdocument_forumbas
 	}
 	
 	/**
-	 * @return Boolean
+	 * @return boolean
 	 */
 	public function isWritable()
 	{

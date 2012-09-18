@@ -156,13 +156,13 @@
 					button.setAttribute('action', 'edit');
 					button.setAttribute('documentId', jsnode.id);
 					button.setAttribute('image', '{IconsBase}/small/edit.png');
-					button.setAttribute('label', "&modules.uixul.bo.actions.Edit;");
+					button.setAttribute('label', "${trans:m.uixul.bo.actions.edit,ucf,js}");
 										
 					var button = cell.appendChild(document.createElement('toolbarbutton'));
 					button.setAttribute('action', 'delete');
 					button.setAttribute('documentId', jsnode.id);
 					button.setAttribute('image', '{IconsBase}/small/delete.png');
-					button.setAttribute('label', "&modules.uixul.bo.actions.Delete;");
+					button.setAttribute('label', "${trans:m.uixul.bo.actions.delete,ucf,js}");
 
 					this.getElementByAnonId('document-rows').appendChild(row);
 				]]></body>
@@ -200,7 +200,7 @@
 			<method name="delete">
 				<parameter name="id" />
 				<body><![CDATA[
-					if (confirm("${trans:m.forums.bo.doceditor.cForumsEditor.Confirm-delete-title,ucf,js}"))
+					if (confirm("${trans:m.forums.bo.doceditor.cforumseditor.confirm-delete-title,ucf,js}"))
 					{
 						var me = this;
 						var callBack = function(result) {me.refresh();};
@@ -265,8 +265,8 @@
 						</xul:columns>
 						<xul:rows anonid="document-rows">
 							<xul:row class="head">
-								<xul:label sortonfield="label" anonid="label" value="${trans:m.forums.bo.doceditor.cForumsEditor.Label,ucf,attr}" />
-								<xul:label anonid="actionsColumn" value="${trans:m.forums.bo.doceditor.cForumsEditor.Actions,ucf,attr}" />
+								<xul:label sortonfield="label" anonid="label" value="${trans:m.forums.bo.doceditor.cforumseditor.label,ucf,attr}" />
+								<xul:label anonid="actionsColumn" value="${trans:m.forums.bo.doceditor.cforumseditor.actions,ucf,attr}" />
 							</xul:row>
 						</xul:rows>
 					</xul:grid>
@@ -435,13 +435,13 @@
 					button.setAttribute('action', 'edit');
 					button.setAttribute('documentId', jsnode.id);
 					button.setAttribute('image', '{IconsBase}/small/edit.png');
-					button.setAttribute('label', "&modules.uixul.bo.actions.Edit;");
+					button.setAttribute('label', "${trans:m.uixul.bo.actions.edit,ucf,js}");
 										
 					var button = cell.appendChild(document.createElement('toolbarbutton'));
 					button.setAttribute('action', 'delete');
 					button.setAttribute('documentId', jsnode.id);
 					button.setAttribute('image', '{IconsBase}/small/delete.png');
-					button.setAttribute('label', "&modules.uixul.bo.actions.Delete;");
+					button.setAttribute('label', "${trans:m.uixul.bo.actions.delete,ucf,js}");
 
 					this.getElementByAnonId('document-rows').appendChild(row);
 				]]></body>
@@ -479,7 +479,7 @@
 			<method name="delete">
 				<parameter name="id" />
 				<body><![CDATA[
-					if (confirm("${trans:m.forums.bo.doceditor.cForumsEditor.Confirm-delete-rank,ucf,js}"))
+					if (confirm("${trans:m.forums.bo.doceditor.cforumseditor.confirm-delete-rank,ucf,js}"))
 					{
 						var me = this;
 						var callBack = function(result) {me.refresh();};
@@ -546,10 +546,10 @@
 						</xul:columns>
 						<xul:rows anonid="document-rows">
 							<xul:row class="head">
-								<xul:label sortonfield="label" anonid="label" value="${trans:m.forums.bo.doceditor.cForumsEditor.Label,ucf,attr}" />
-								<xul:label sortonfield="thresholdMin" anonid="thresholdMin" value="${trans:m.forums.bo.doceditor.cForumsEditor.Threshold-min,ucf,attr}" />
-								<xul:label sortonfield="thresholdMax" anonid="thresholdMax" value="${trans:m.forums.bo.doceditor.cForumsEditor.Threshold-max,ucf,attr}" />
-								<xul:label anonid="actionsColumn" value="${trans:m.forums.bo.doceditor.cForumsEditor.Actions,ucf,attr}" />
+								<xul:label sortonfield="label" anonid="label" value="${trans:m.forums.bo.doceditor.cforumseditor.label,ucf,attr}" />
+								<xul:label sortonfield="thresholdMin" anonid="thresholdMin" value="${trans:m.forums.bo.doceditor.cforumseditor.threshold-min,ucf,attr}" />
+								<xul:label sortonfield="thresholdMax" anonid="thresholdMax" value="${trans:m.forums.bo.doceditor.cforumseditor.threshold-max,ucf,attr}" />
+								<xul:label anonid="actionsColumn" value="${trans:m.forums.bo.doceditor.cforumseditor.actions,ucf,attr}" />
 							</xul:row>
 						</xul:rows>
 					</xul:grid>

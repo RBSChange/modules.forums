@@ -14,7 +14,7 @@ class forums_GetTitlesAction extends change_JSONAction
  	}
 	
 	/**
-	 * @return Boolean by default false
+	 * @return boolean by default false
 	 */
 	protected function isDocumentAction()
 	{

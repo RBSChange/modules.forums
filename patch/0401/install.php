@@ -313,9 +313,9 @@ class forums_patch_0401 extends change_Patch
 		return dirname(__FILE__);
 	}
 	
-    /**
-     * @return false
-     */
+	/**
+	 * @return false
+	 */
 	public function isCodePatch()
 	{
 		return false;

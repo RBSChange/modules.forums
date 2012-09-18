@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.forums.bo.blocks.forum.metas" lcid="en_GB">
-  <key id="forumname">forum name</key>
-  <key id="forumshortdesc">forum short description</key>
-  <key id="forumkeywords">forum keywords</key>
+	<key id="forumname">forum name</key>
+	<key id="forumshortdesc">forum short description</key>
+	<key id="forumkeywords">forum keywords</key>
 </i18n>

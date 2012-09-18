@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.forums.document.post" lcid="en_GB">
-  <include id="m.generic.document.document"/>
-  <key id="document-name">post</key>
-  <key id="text">text</key>
-  <key id="editedby">edited by</key>
-  <key id="editeddate">edited date</key>
-  <key id="deletedby">deleted by</key>
-  <key id="number">number</key>
-  <key id="ip">IP address</key>
-  <key id="thread">subject</key>
-  <key id="answerof">answer to</key>
-  <key id="deleteddate">deletion date</key>
-  <key id="label-patern">post written by {author}</key>
+	<include id="m.generic.document.document" />
+	<key id="document-name">post</key>
+	<key id="text">text</key>
+	<key id="editedby">edited by</key>
+	<key id="editeddate">edited date</key>
+	<key id="deletedby">deleted by</key>
+	<key id="number">number</key>
+	<key id="ip">IP address</key>
+	<key id="thread">subject</key>
+	<key id="answerof">answer to</key>
+	<key id="deleteddate">deletion date</key>
+	<key id="label-patern">post written by {author}</key>
 </i18n>

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.forums.frontoffice.form" lcid="en_GB">
-  <key id="submit">submit</key>
-  <key id="preview">preview</key>
+	<key id="submit">submit</key>
+	<key id="preview">preview</key>
 </i18n>

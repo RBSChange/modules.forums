@@ -23,7 +23,7 @@ class forums_BlockForumAction extends website_BlockAction
 	/**
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
-	 * @return String
+	 * @return string
 	 */
 	public function execute($request, $response)
 	{
@@ -53,7 +53,7 @@ class forums_BlockForumAction extends website_BlockAction
 	/**
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
-	 * @return Integer default 10
+	 * @return integer default 10
 	 */
 	private function getNbItemPerPage($request, $response)
 	{

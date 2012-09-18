@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.forums.frontoffice" lcid="fr_FR">
 	<key id="thislink">ce lien</key>
 	<key id="forums">forums</key>
@@ -107,12 +107,12 @@
 	<key id="log-in">connexion</key>
 	<key id="sub-forums">sous-forums</key>
 	<key id="quote">citer</key>
-	<key id="last-viewed-pagePath">dernière page vue</key>
+	<key id="last-viewed-pagepath">dernière page vue</key>
 	<key id="view-last-post">voir le dernier message</key>
-	<key id="new-post">nouveau message</key>	
+	<key id="new-post">nouveau message</key>
 	<key id="choose-forum">Sélectionnez le forum où déplacer ce sujet.</key>
 	<key id="details">voir les détails</key>
-	<key id="move-thread">déplacer le sujet</key>
+	<!--<key id="move-thread">déplacer le sujet</key>-->
 	<key id="go-to-page">aller à la page</key>
 	<key id="move-thread">déplacement d'un sujet</key>
 	<key id="destination-forum">forum destination</key>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.forums.document.forumgroup" lcid="fr_FR">
 	<include id="m.generic.document.document" />
 	<key id="document-name">groupe de forums</key>

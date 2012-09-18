@@ -1,7 +1,7 @@
 <?php
 /**
- * forums_ThreadService
  * @package modules.forums
+ * @method forums_ThreadService getInstance()
  */
 class forums_ThreadService extends f_persistentdocument_DocumentService
 {
@@ -9,23 +9,6 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 	const LEVEL_STICKY = 20;
 	const LEVEL_ANNOUNCEMENT = 30;
 	const LEVEL_GLOBAL = 40;
-	
-	/**
-	 * @var forums_ThreadService
-	 */
-	private static $instance;
-	
-	/**
-	 * @return forums_ThreadService
-	 */
-	public static function getInstance()
-	{
-		if (self::$instance === null)
-		{
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}
 	
 	/**
 	 * @return forums_persistentdocument_thread
@@ -43,7 +26,7 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 	 */
 	public function createQuery()
 	{
-		return $this->pp->createQuery('modules_forums/thread');
+		return $this->getPersistentProvider()->createQuery('modules_forums/thread');
 	}
 	
 	/**
@@ -54,12 +37,12 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 	 */
 	public function createStrictQuery()
 	{
-		return $this->pp->createQuery('modules_forums/thread', false);
+		return $this->getPersistentProvider()->createQuery('modules_forums/thread', false);
 	}
 	
 	/**
 	 * @param forums_persistentdocument_thread $thread
-	 * @param String $text
+	 * @param string $text
 	 */
 	public function addPost($thread, $text)
 	{
@@ -133,7 +116,7 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 	
 	/**
 	 * @param forums_persistentdocument_thread $thread
-	 * @param String $date
+	 * @param string $date
 	 * @return forums_persistentdocument_post
 	 */
 	public function getFirstUnreadPost($thread, $date)
@@ -148,7 +131,7 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 	
 	/**
 	 * @param forums_persistentdocument_thread $thread
-	 * @return String
+	 * @return string
 	 */
 	public function getUserUrl($thread)
 	{
@@ -300,7 +283,7 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 	
 	/**
 	 * @param forums_persistentdocument_thread $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document.
+	 * @param integer $parentNodeId Parent node ID where to save the document.
 	 * @return void
 	 */
 	protected function preInsert($document, $parentNodeId = null)
@@ -326,7 +309,7 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 	
 	/**
 	 * @param forums_persistentdocument_thread $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document.
+	 * @param integer $parentNodeId Parent node ID where to save the document.
 	 * @return void
 	 */
 	protected function postInsert($document, $parentNodeId = null)
@@ -334,21 +317,21 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 		parent::postInsert($document, $parentNodeId);
 		try
 		{
-			$this->tm->beginTransaction();
+			$this->getTransactionManager()->beginTransaction();
 			$forum = $document->getForum();
 			$forum->setNbthread($forum->getNbthread() + 1);
-			$this->pp->updateDocument($forum);
-			$this->tm->commit();
+			$this->getPersistentProvider()->updateDocument($forum);
+			$this->getTransactionManager()->commit();
 		}
 		catch (Exception $e)
 		{
-			$this->tm->rollBack($e);
+			$this->getTransactionManager()->rollBack($e);
 		}
 	}
 	
 	/**
 	 * @param forums_persistentdocument_thread $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document.
+	 * @param integer $parentNodeId Parent node ID where to save the document.
 	 * @return void
 	 */
 	public function postUpdate($document, $parentNodeId = null)
@@ -386,7 +369,7 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 	{
 		try
 		{
-			$this->tm->beginTransaction();
+			$this->getTransactionManager()->beginTransaction();
 			
 			// Thread count...
 			$query = forums_ThreadService::getInstance()->createQuery()->add(Restrictions::eq('forum', $forum));
@@ -401,12 +384,12 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 			$count = f_util_ArrayUtils::firstElement($query->findColumn('count'));
 			$forum->setNbpost($count);
 			
-			$this->pp->updateDocument($forum);
-			$this->tm->commit();
+			$this->getPersistentProvider()->updateDocument($forum);
+			$this->getTransactionManager()->commit();
 		}
 		catch (Exception $e)
 		{
-			$this->tm->rollBack($e);
+			$this->getTransactionManager()->rollBack($e);
 		}
 	}
 	
@@ -462,7 +445,7 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 		
 		$thread = $params['thread'];		
 		$parameters['TOPIC'] = $thread->getLabelAsHtml();
-		$parameters['LINK'] = '<a class="link" href="' . $thread->getTofollow()->getPostUrlInThread() . '">' . LocaleService::getInstance()->transFO('m.forums.frontoffice.thislink') . '</a>';
+		$parameters['LINK'] = '<a class="link" href="' . $thread->getTofollow()->getPostUrlInThread() . '">' . LocaleService::getInstance()->trans('m.forums.frontoffice.thislink') . '</a>';
 		
 		if (isset($params['user']) && $params['user'] instanceof users_persistentdocument_user)
 		{
@@ -486,7 +469,7 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 	{
 		$query = $this->createQuery();
 		$query->add(Restrictions::eq('followers', $user));
-		$query->setFirstResult(0)->setMaxResults($max - $count);
+		$query->setFirstResult(0)->setMaxResults($max);
 		$threads = $query->find();
 		foreach ($threads as $thread)
 		{

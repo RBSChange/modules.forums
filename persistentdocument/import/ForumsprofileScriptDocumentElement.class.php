@@ -5,15 +5,15 @@
  */
 class forums_ForumsprofileScriptDocumentElement extends import_ScriptDocumentElement
 {
-    /**
-     * @return forums_persistentdocument_forumsprofile
-     */
-    protected function initPersistentDocument()
-    {
-    	return forums_ForumsprofileService::getInstance()->getNewDocumentInstance();
-    }
-    
-    /**
+	/**
+	 * @return forums_persistentdocument_forumsprofile
+	 */
+	protected function initPersistentDocument()
+	{
+		return forums_ForumsprofileService::getInstance()->getNewDocumentInstance();
+	}
+	
+	/**
 	 * @return forums_persistentdocument_forumsprofilemodel
 	 */
 	protected function getDocumentModel()

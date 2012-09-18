@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.forums.lists.threadlevels" lcid="en_GB">
-  <key id="normal">normal</key>
-  <key id="sticky">sticky</key>
-  <key id="announcement">announcement</key>
-  <key id="global">global announcement</key>
+	<key id="normal">normal</key>
+	<key id="sticky">sticky</key>
+	<key id="announcement">announcement</key>
+	<key id="global">global announcement</key>
 </i18n>

@@ -1,27 +1,10 @@
 <?php
 /**
- * forums_WebsitefolderService
  * @package modules.forums
+ * @method forums_WebsitefolderService getInstance()
  */
 class forums_WebsitefolderService extends generic_FolderService
 {
-	/**
-	 * @var forums_WebsitefolderService
-	 */
-	private static $instance;
-
-	/**
-	 * @return forums_WebsitefolderService
-	 */
-	public static function getInstance()
-	{
-		if (self::$instance === null)
-		{
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}
-
 	/**
 	 * @return forums_persistentdocument_websitefolder
 	 */
@@ -38,7 +21,7 @@ class forums_WebsitefolderService extends generic_FolderService
 	 */
 	public function createQuery()
 	{
-		return $this->pp->createQuery('modules_forums/websitefolder');
+		return $this->getPersistentProvider()->createQuery('modules_forums/websitefolder');
 	}
 	
 	/**
@@ -49,7 +32,7 @@ class forums_WebsitefolderService extends generic_FolderService
 	 */
 	public function createStrictQuery()
 	{
-		return $this->pp->createQuery('modules_forums/websitefolder', false);
+		return $this->getPersistentProvider()->createQuery('modules_forums/websitefolder', false);
 	}
 	
 	/**
@@ -79,7 +62,7 @@ class forums_WebsitefolderService extends generic_FolderService
 	
 	/**
 	 * @param forums_persistentdocument_websitefolder $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document (optionnal => can be null !).
+	 * @param integer $parentNodeId Parent node ID where to save the document (optionnal => can be null !).
 	 * @return void
 	 */
 	protected function postSave($document, $parentNodeId = null)

@@ -1,0 +1,11 @@
+<tal:block tal:condition="user">
+	<h1 change:h="">${trans:m.forums.frontoffice.you-not-have-access,ucf}</h1>
+	<tal:block tal:condition="profile/isBanned">
+		<p class="normal">${trans:m.forums.frontoffice.logged-as-and-baned,ucf,lab,name=user/getLabelAsHtml} ${datetime:profile/getUIBan}</p>
+	</tal:block>
+	<p class="normal">${trans:m.forums.frontoffice.logged-as,ucf,name=user/getLabelAsHtml}</p>
+</tal:block>
+<tal:block tal:condition="not: user">
+	<h1 change:h="">${trans:m.forums.frontoffice.restricted-access-must-login,ucf}</h1>
+	<tal:block change:block="" module="users" name="Authentication" />
+</tal:block>

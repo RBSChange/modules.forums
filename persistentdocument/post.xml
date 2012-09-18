@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
-<document xmlns="http://www.rbs.fr/schema/change-document/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/static/schema/change-document/4.0.xsd"
-	model-version="1.0" icon="message" has-url="true" indexable="true" backoffice-indexable="false" publish-on-day-change="false">
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://www.rbs.fr/schema/change-document/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/schema/persistentdocument-4.0.xsd" model-version="1.0" icon="message" has-url="true" indexable="true" backoffice-indexable="false" use-publication-dates="false">
 	<properties>
-		<property name="text" type="BBCode" min-occurs="1" indexed="description"/>
+		<property name="text" type="BBCode" indexed="description" required="true" />
 		<property name="editedby" type="DocumentId" />
 		<property name="editeddate" type="DateTime" />
 		<property name="deletedby" type="DocumentId" />
-		<property name="deleteddate" type="DateTime" indexed="property"/>
+		<property name="deleteddate" type="DateTime" indexed="property" />
 		<property name="number" type="Integer" />
-		<property name="ip" type="String" db-size="20" indexed="none"/>
-		<property name="thread" type="modules_forums/thread" min-occurs="1" tree-node="true" inverse="true" />
-		<property name="answerof" type="modules_forums/post" />
+		<property name="ip" type="String" db-size="20" indexed="none" />
+		<property name="thread" type="Document" tree-node="true" inverse="true" document-type="modules_forums/thread" required="true" />
+		<property name="answerof" type="Document" document-type="modules_forums/post" />
 	</properties>
 </document>

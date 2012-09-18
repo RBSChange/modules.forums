@@ -31,7 +31,7 @@ abstract class forums_BlockPostListBaseAction extends forums_BaseBlockAction
 	}
 	
 	/**
-	 * @return Integer
+	 * @return integer
 	 */
 	protected function getNbItemPerPage()
 	{
@@ -40,7 +40,7 @@ abstract class forums_BlockPostListBaseAction extends forums_BaseBlockAction
 	}
 	
 	/**
-	 * @param String $name
+	 * @param string $name
 	 * @param Mixed $defaultValue
 	 * @return Mixed
 	 */

@@ -32,7 +32,7 @@ class forums_OpenThreadAction extends change_Action
 	}
 	
 	/**
-	 * @return Boolean
+	 * @return boolean
 	 */
 	public function isSecure()
 	{

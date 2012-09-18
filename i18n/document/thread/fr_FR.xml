@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.forums.document.thread" lcid="fr_FR">
-  <key id="document-name">sujet</key>
-  <key id="label">titre</key>
-  <key id="level">niveau</key>
+	<key id="document-name">sujet</key>
+	<key id="label">titre</key>
+	<key id="level">niveau</key>
 </i18n>

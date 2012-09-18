@@ -1,4 +1,6 @@
 <?php
+/* @var $arguments array */
+$arguments = isset($arguments) ? $arguments : array();
 $threadId = $arguments[0];
 $rq = RequestContext::getInstance();
 $rq->setLang($rq->getDefaultLang());
@@ -20,7 +22,7 @@ if ($notif instanceof notification_persistentdocument_notification)
 		}
 		else
 		{
-			$thread->removeFollowers($member);
+			$thread->removeFollowers($user);
 		}
 	}
 }

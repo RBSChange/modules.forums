@@ -7,7 +7,7 @@
 		</resources>
 		<content>
 			<xul:groupbox flex="1">
-				<xul:caption label="${transui:m.forums.document.forumsprofile.document-name,attr,ucf}" />
+				<xul:caption label="${trans:m.forums.document.forumsprofile.document-name,attr,ucf}" />
 				<xul:grid flex="1">
 					<xul:columns>
 						<xul:column />
@@ -16,14 +16,14 @@
 					<xul:rows>
 						<xul:row anonid="row_forumMemberTitle">
 							<xul:clabel id="forums_forumsprofile_forumMemberTitle_label" control="forums_forumsprofile_forumMemberTitle"
-								value="${transui:m.forums.document.forumsprofile.forummembertitle,attr,ucf}" />
+								value="${trans:m.forums.document.forumsprofile.forummembertitle,attr,ucf}" />
 							<xul:cfield name="forumMemberTitle" id="forums_forumsprofile_forumMemberTitle" anonid="field_forumMemberTitle"
 								fieldtype="checklist" listid="modules_forums/titlesbywebsiteid"
-								shorthelp="${transui:m.forums.document.forumsprofile.forummembertitle-help,attr}" />
+								shorthelp="${trans:m.forums.document.forumsprofile.forummembertitle-help,attr}" />
 						</xul:row>
 						<xul:row anonid="row_signature">
 							<xul:clabel id="forums_forumsprofile_signature_label" control="forums_forumsprofile_signature"
-								value="${transui:m.forums.document.forumsprofile.signature,attr,ucf}" />
+								value="${trans:m.forums.document.forumsprofile.signature,attr,ucf}" />
 							<xul:cfield name="signature" id="forums_forumsprofile_signature" anonid="field_signature" fieldtype="bbcode"
 								hidehelp="true" />
 						</xul:row>

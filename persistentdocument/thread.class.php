@@ -6,7 +6,7 @@
 class forums_persistentdocument_thread extends forums_persistentdocument_threadbase implements rss_Item
 {
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getForumLabel()
 	{
@@ -22,7 +22,7 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	}
 	
 	/**
-	 * @return Boolean
+	 * @return boolean
 	 */
 	public function isWriteable()
 	{
@@ -39,7 +39,7 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	}
 	
 	/**
-	 * @return Boolean
+	 * @return boolean
 	 */
 	public function isLocked()
 	{
@@ -51,7 +51,7 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	}
 	
 	/**
-	 * @return Boolean
+	 * @return boolean
 	 */
 	public function isEditable()
 	{
@@ -72,7 +72,7 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	}
 	
 	/**
-	 * @return Boolean
+	 * @return boolean
 	 */
 	public function isClosable()
 	{
@@ -80,7 +80,7 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	}
 	
 	/**
-	 * @return Boolean
+	 * @return boolean
 	 */
 	public function isOpenable()
 	{
@@ -88,7 +88,7 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	}
 	
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getUserUrl()
 	{
@@ -96,7 +96,7 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	}
 	
 	/**
-	 * @return Integer
+	 * @return integer
 	 */
 	public function getNbnewpost()
 	{
@@ -121,7 +121,7 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	}
 	
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getJsPrivateNote()
 	{
@@ -132,7 +132,7 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	}
 	
 	/**
-	 * @return Boolean
+	 * @return boolean
 	 */
 	public function canFollow()
 	{
@@ -145,7 +145,7 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	}
 	
 	/**
-	 * @return Boolean
+	 * @return boolean
 	 */
 	public function canUnfollow()
 	{
@@ -206,11 +206,11 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	}
 
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getKeywords()
 	{
-		return str_replace(' ', ', ', $this->getLabel()).', '.LocaleService::getInstance()->transFO('m.forums.meta.forum');
+		return str_replace(' ', ', ', $this->getLabel()).', '.LocaleService::getInstance()->trans('m.forums.meta.forum');
 	}
 	
 	/**
@@ -222,15 +222,15 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	}
 	
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getRSSLabel()
 	{
-		return $this->getLabelAsHtml() . ' - ' . LocaleService::getInstance()->transFO('m.forums.frontoffice.in-forum', array('lab')) . ' ' . $this->getForum()->getLabelAsHtml();
+		return $this->getLabelAsHtml() . ' - ' . LocaleService::getInstance()->trans('m.forums.frontoffice.in-forum', array('lab')) . ' ' . $this->getForum()->getLabelAsHtml();
 	}
 	
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getRSSDescription()
 	{
@@ -243,7 +243,7 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	}
 	
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getRSSGuid()
 	{
@@ -251,7 +251,7 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	}
 	
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getRSSDate()
 	{
@@ -259,7 +259,7 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	}
 	
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getDescriptionAsHtml()
 	{
@@ -267,11 +267,11 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	}
 	
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getPostFeedLabel()
 	{
 		$ls = LocaleService::getInstance();
-		return $ls->transFO('m.forums.frontoffice.posts-of', array('lab', 'ucf'), array('type' => $ls->transFO($this->getPersistentModel()->getLabelKey()))) . ' ' . $this->getLabel();
+		return $ls->trans('m.forums.frontoffice.posts-of', array('lab', 'ucf'), array('type' => $ls->trans($this->getPersistentModel()->getLabelKey()))) . ' ' . $this->getLabel();
 	}
 }

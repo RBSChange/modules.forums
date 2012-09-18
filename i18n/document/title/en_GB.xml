@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.forums.document.title" lcid="en_GB">
-  <key id="document-name">title</key>
-  <key id="label">label</key>
-  <key id="visual">visual element</key>
-  <key id="description">description</key>
+	<key id="document-name">title</key>
+	<key id="label">label</key>
+	<key id="visual">visual element</key>
+	<key id="description">description</key>
 </i18n>

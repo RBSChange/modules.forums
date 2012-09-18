@@ -1,27 +1,10 @@
 <?php
 /**
- * forums_TitleService
- * @package forums
+ * @package modules.forums
+ * @method forums_TitleService getInstance()
  */
 class forums_TitleService extends f_persistentdocument_DocumentService
 {
-	/**
-	 * @var forums_TitleService
-	 */
-	private static $instance;
-
-	/**
-	 * @return forums_TitleService
-	 */
-	public static function getInstance()
-	{
-		if (self::$instance === null)
-		{
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}
-
 	/**
 	 * @return forums_persistentdocument_title
 	 */
@@ -38,7 +21,7 @@ class forums_TitleService extends f_persistentdocument_DocumentService
 	 */
 	public function createQuery()
 	{
-		return $this->pp->createQuery('modules_forums/title');
+		return $this->getPersistentProvider()->createQuery('modules_forums/title');
 	}
 	
 	/**
@@ -49,7 +32,7 @@ class forums_TitleService extends f_persistentdocument_DocumentService
 	 */
 	public function createStrictQuery()
 	{
-		return $this->pp->createQuery('modules_forums/title', false);
+		return $this->getPersistentProvider()->createQuery('modules_forums/title', false);
 	}
 	
 	/**
@@ -71,7 +54,7 @@ class forums_TitleService extends f_persistentdocument_DocumentService
 
 	/**
 	 * @param forums_persistentdocument_title $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document.
+	 * @param integer $parentNodeId Parent node ID where to save the document.
 	 * @return void
 	 */
 	protected function preInsert($document, $parentNodeId = null)
@@ -93,7 +76,7 @@ class forums_TitleService extends f_persistentdocument_DocumentService
 	
 	/**
 	 * @param forums_persistentdocument_title $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document.
+	 * @param integer $parentNodeId Parent node ID where to save the document.
 	 * @return void
 	 */
 	protected function postSave($document, $parentNodeId = null)

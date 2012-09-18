@@ -9,7 +9,7 @@ class forums_BlockEditMemberProfileAction extends website_BlockAction
 	 * @see website_BlockAction::execute()
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
-	 * @return String
+	 * @return string
 	 */
 	public function execute($request, $response)
 	{
@@ -41,7 +41,7 @@ class forums_BlockEditMemberProfileAction extends website_BlockAction
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
 	 * @param forums_persistentdocument_forumsprofile $profile
-	 * @return String
+	 * @return string
 	 */
 	public function executeSave($request, $response, forums_persistentdocument_forumsprofile $profile)
 	{

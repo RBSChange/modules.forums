@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.forums.document.ban" lcid="en_GB">
-  <key id="document-name">ban</key>
-  <key id="label">label</key>
-  <key id="member">member</key>
-  <key id="from">from</key>
-  <key id="to">to</key>
-  <key id="post">post</key>
-  <key id="by">by</key>
-  <key id="motif">reason</key>
+	<key id="document-name">ban</key>
+	<key id="label">label</key>
+	<key id="member">member</key>
+	<key id="from">from</key>
+	<key id="to">to</key>
+	<key id="post">post</key>
+	<key id="by">by</key>
+	<key id="motif">reason</key>
 </i18n>

@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.forums.meta" lcid="fr_FR">
-  <key id="forum">forum</key>
-  <key id="answerpost">répondre au message dans</key>
-  <key id="answerthepost">répondre au message</key>
-  <key id="newpostin">nouveau message dans</key>
-  <key id="newpost">nouveau message</key>
-  <key id="newpostinforum">nouveau sujet dans le forum</key>
-  <key id="discu">discussion</key>
-  <key id="onforum">sur le forum</key>
+	<key id="forum">forum</key>
+	<key id="answerpost">répondre au message dans</key>
+	<key id="answerthepost">répondre au message</key>
+	<key id="newpostin">nouveau message dans</key>
+	<key id="newpost">nouveau message</key>
+	<key id="newpostinforum">nouveau sujet dans le forum</key>
+	<key id="discu">discussion</key>
+	<key id="onforum">sur le forum</key>
 </i18n>

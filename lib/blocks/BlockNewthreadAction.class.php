@@ -23,7 +23,7 @@ class forums_BlockNewthreadAction extends forums_BlockPostListBaseAction
 	 *
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
-	 * @return String
+	 * @return string
 	 */
 	public function execute($request, $response)
 	{
@@ -46,7 +46,7 @@ class forums_BlockNewthreadAction extends forums_BlockPostListBaseAction
 	}
 	
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getInputViewName()
 	{
@@ -64,7 +64,7 @@ class forums_BlockNewthreadAction extends forums_BlockPostListBaseAction
 	/**
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
-	 * @return String
+	 * @return string
 	 */
 	public function executeSubmit($request, $response, forums_persistentdocument_thread $thread)
 	{
@@ -96,7 +96,7 @@ class forums_BlockNewthreadAction extends forums_BlockPostListBaseAction
 	/**
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
-	 * @return String
+	 * @return string
 	 */
 	public function executePreview($request, $response, forums_persistentdocument_thread $thread)
 	{

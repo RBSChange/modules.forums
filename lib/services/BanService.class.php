@@ -1,27 +1,10 @@
 <?php
 /**
- * forums_BanService
  * @package modules.forums
+ * @method forums_BanService getInstance()
  */
 class forums_BanService extends f_persistentdocument_DocumentService
 {
-	/**
-	 * @var forums_BanService
-	 */
-	private static $instance;
-	
-	/**
-	 * @return forums_BanService
-	 */
-	public static function getInstance()
-	{
-		if (self::$instance === null)
-		{
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}
-
 	/**
 	 * @return forums_persistentdocument_ban
 	 */
@@ -38,7 +21,7 @@ class forums_BanService extends f_persistentdocument_DocumentService
 	 */
 	public function createQuery()
 	{
-		return $this->pp->createQuery('modules_forums/ban');
+		return $this->getPersistentProvider()->createQuery('modules_forums/ban');
 	}
 	
 	/**
@@ -49,7 +32,7 @@ class forums_BanService extends f_persistentdocument_DocumentService
 	 */
 	public function createStrictQuery()
 	{
-		return $this->pp->createQuery('modules_forums/ban', false);
+		return $this->getPersistentProvider()->createQuery('modules_forums/ban', false);
 	}
 	
 	/**
@@ -73,7 +56,7 @@ class forums_BanService extends f_persistentdocument_DocumentService
 	
 	/**
 	 * @param forums_persistentdocument_ban $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document.
+	 * @param integer $parentNodeId Parent node ID where to save the document.
 	 * @return void
 	 */
 	protected function preInsert($document, $parentNodeId)
@@ -83,7 +66,7 @@ class forums_BanService extends f_persistentdocument_DocumentService
 	
 	/**
 	 * @param forums_persistentdocument_ban $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document.
+	 * @param integer $parentNodeId Parent node ID where to save the document.
 	 * @return void
 	 */
 	protected function postInsert($document, $parentNodeId)
@@ -115,7 +98,7 @@ class forums_BanService extends f_persistentdocument_DocumentService
 	{
 		$query = $this->createQuery();
 		$query->add(Restrictions::eq('member', $user));
-		$query->setFirstResult(0)->setMaxResults($max - $count);
+		$query->setFirstResult(0)->setMaxResults($max);
 		$count = $query->delete();
 		if (Framework::isInfoEnabled())
 		{

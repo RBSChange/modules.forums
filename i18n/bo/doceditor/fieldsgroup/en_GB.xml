@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.forums.bo.doceditor.fieldsgroup" lcid="en_GB">
-  <key id="display-preferences">display preferences</key>
-  <key id="metas">data used in the page meta tags</key>
-  <key id="ranks">ranks</key>
-  <key id="titles">titles</key>
+	<key id="display-preferences">display preferences</key>
+	<key id="metas">data used in the page meta tags</key>
+	<key id="ranks">ranks</key>
+	<key id="titles">titles</key>
 </i18n>

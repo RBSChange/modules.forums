@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <perspective>
 	<models>
 		<model name="modules_generic/rootfolder">
@@ -88,7 +88,7 @@
 		<action name="createFolder" single="true" icon="create-folder" labeli18n="m.uixul.bo.actions.create-folder" />
 		<action name="addTopic" permission="Update_rootfolder" icon="add-topic" labeli18n="m.uixul.bo.actions.addtopic" />
 		<action name="openFolder" icon="open-folder" labeli18n="m.uixul.bo.actions.openfolder" />
-		<action name="openTreeNodeOrder" single="true" permission="Order" icon="sort" labeli18n="m.uixul.bo.actions.set-children-order"/>
+		<action name="openTreeNodeOrder" single="true" permission="Order" icon="sort" labeli18n="m.uixul.bo.actions.set-children-order" />
 		<action name="create_" actions="createForum" icon="add" />
 		<action name="createForum" single="true" permission="Insert_forum" group="create_" icon="add" labeli18n="m.forums.bo.actions.create-forum" />
 		<action name="createForumgroup" single="true" permission="Insert_forum" group="create_" icon="add" labeli18n="m.forums.bo.actions.create-forumgroup" />
