@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <script>
 	<binding fileName="modules/website/persistentdocument/import/website_binding.xml" />
-	<topic byDocumentId-attr="">
+	<documentRef byDocumentId-attr="">
 		<page byTag="contextual_website_website_modules_users_userslist">
 			<changecontent for="content-block">
 				<changeblock type="modules_forums_memberlist" />
@@ -12,5 +12,5 @@
 				<changeblock type="modules_forums_memberban" />
 			</changecontent>
 		</page>
-	</topic>
+	</documentRef>
 </script>

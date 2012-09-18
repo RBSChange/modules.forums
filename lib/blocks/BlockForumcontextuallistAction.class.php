@@ -32,12 +32,6 @@ class forums_BlockForumcontextuallistAction extends website_BlockAction
 		$request->setAttribute('hideMemberActions', !$handleMemberActions);
 		$request->setAttribute('currentUrl', LinkHelper::getCurrentUrl());
 		
-		// Mark all posts as read if asked.
-		if ($handleMemberActions && $user !== null && $request->hasParameter('markAllPostsRead'))
-		{
-			$profile->markAllPostsAsRead();
-		}
-		
 		$request->setAttribute('parent', $this->getContext()->getParent());
 		$request->setAttribute('forums', $forums);
 		$request->setAttribute('page', $this->getContext()->getPersistentPage());

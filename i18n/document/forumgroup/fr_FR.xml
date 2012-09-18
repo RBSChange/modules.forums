@@ -21,4 +21,6 @@
 	<key id="metadescription-help">description utilisable dans les métas de page</key>
 	<key id="metakeywords">mots-clés</key>
 	<key id="metakeywords-help">mots-clés utilisable dans les métas de page</key>
+	<key id="flaglist">Liste pour les flags des sujets</key>
+	<key id="flaglist-help">Liste à utiliser pour les forums de ce groupe permettant de définir les flags utilisables sur les sujets</key>
 </i18n>

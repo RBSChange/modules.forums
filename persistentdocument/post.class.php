@@ -378,6 +378,14 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	 */
 	public function getRSSGuid()
 	{
+		return LinkHelper::getPermalink($this);
+	}
+	
+	/**
+	 * @return string
+	 */
+	public function getRSSLink()
+	{
 		return LinkHelper::getDocumentUrl($this);
 	}
 	

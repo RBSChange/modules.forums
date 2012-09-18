@@ -314,4 +314,29 @@ class forums_ForumgroupService extends f_persistentdocument_DocumentService
 			$attributes['path'] = $document->getDocumentService()->getPathOf($topic);
 		}
 	}
+	
+	/**
+	 *
+	 * @param forums_persistentdocument_forumgroup $document
+	 * @return list_persistentdocument_list | null
+	 */
+	public function getFlagListRecursively($document)
+	{
+		$list = $document->getFlagList();
+	
+		// If list is null try to get it on the parent.
+		if ($list == null)
+		{
+				
+			$parent = $document->getDocumentService()->getParentOf($document);
+				
+			if ($parent != null && $parent instanceof forums_persistentdocument_forumgroup)
+			{
+				$list = $document->getDocumentService()->getFlagListRecursively($parent);
+			}
+	
+		}
+	
+		return $list;
+	}
 }

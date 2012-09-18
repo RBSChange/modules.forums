@@ -11,5 +11,6 @@
 		<property name="locked" type="Boolean" default-value="false" />
 		<property name="excludeFromRssMode" type="Integer" default-value="0" from-list="modules_forums/modeslimited" />
 		<property name="excludeFromRss" type="Boolean" />
+		<property name="flagList" type="Document" document-type="modules_list/list" />
 	</properties>
 </document>

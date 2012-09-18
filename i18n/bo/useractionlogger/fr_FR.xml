@@ -12,6 +12,10 @@
 	<key id="log-reactivate-forumgroup">log reactivate forumgroup</key>
 	<key id="delete-forumgroup">delete.forumgroup {documentlabel} {lang}</key>
 	<key id="log-delete-forumgroup">log delete forumgroup</key>
+	<!--<key id="savepermissions-websitefolder">savepermissions.websitefolder {documentlabel}</key>-->
+	<!--<key id="log-savepermissions-websitefolder">log savepermissions websitefolder</key>-->
 	<key id="savepermissions-websitefolder">savepermissions.websitefolder {documentlabel}</key>
 	<key id="log-savepermissions-websitefolder">log savepermissions websitefolder</key>
+	<key id="update-forumgroup">update.forumgroup {lang} {documentlabel}</key>
+	<key id="log-update-forumgroup">log update forumgroup</key>
 </i18n>

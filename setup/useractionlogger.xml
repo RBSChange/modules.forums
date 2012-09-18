@@ -8,4 +8,6 @@
 	<actiondef modulename="forums" actionname="reactivate.forumgroup" label="m.forums.bo.useractionlogger.reactivate-forumgroup" />
 	<actiondef modulename="forums" actionname="delete.forumgroup" label="m.forums.bo.useractionlogger.delete-forumgroup" />
 	<actiondef modulename="forums" actionname="savepermissions.websitefolder" label="m.forums.bo.useractionlogger.savepermissions-websitefolder" />
+	<actiondef modulename="forums" actionname="savepermissions.websitefolder" label="m.forums.bo.useractionlogger.savepermissions-websitefolder" />
+	<actiondef modulename="forums" actionname="update.forumgroup" label="m.forums.bo.useractionlogger.update-forumgroup" />
 </script>

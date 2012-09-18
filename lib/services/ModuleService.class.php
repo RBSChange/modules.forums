@@ -21,6 +21,19 @@ class forums_ModuleService extends ModuleBaseService
 	}
 	
 	/**
+	 * @param f_persistentdocument_PersistentDocument $document
+	 * @return f_persistentdocument_PersistentDocument or null
+	 */
+	public function getVirtualParentForBackoffice($document)
+	{
+		if ($document instanceof forums_persistentdocument_thread)
+		{
+			return $document->getForum();
+		}
+		return null;
+	}
+	
+	/**
 	 * @param users_persistentdocument_user $user
 	 * @param string $permission
 	 * @param f_peristentdocument_PersistentDocument $document

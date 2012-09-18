@@ -1,5 +1,5 @@
 <h1 change:h="">${trans:m.users.fo.member-list,ucf}</h1>
-<table class="normal users-list" cellspacing="0" cellpadding="0">
+<table class="normal users-list">
 	<thead>
 		<tr>
 			<th class="column-avatar" />
@@ -23,8 +23,8 @@
 						</dt>
 						<dd tal:repeat="title forumsprofile/getPublishedForumMemberTitleArray">
 							<strong>${title/getLabel}</strong>
-							<span tal:condition="php: repeat.title.index LT (repeat.title.length - 2)">,</span>
-							<span tal:condition="php: repeat.title.index EQ (repeat.title.length - 2)">${trans:m.forums.frontoffice.and}</span>
+							<span tal:condition="php: repeat.title.index LT (repeat.title.length - 2)" class="punctuation">, </span>
+							<span tal:condition="php: repeat.title.index EQ (repeat.title.length - 2)" class="punctuation">${trans:m.forums.frontoffice.and}</span>
 						</dd>
 					</dl>
 					<p tal:condition="userprofile/getLocation">${trans:m.users.document.usersprofile.location,ucf,lab} ${userprofile/getLocation}</p>

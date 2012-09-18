@@ -78,13 +78,11 @@ class forums_BlockThreadAction extends forums_BlockPostListBaseAction
 		}
 		
 		$itemPerPage = $thread->getForum()->getNbPostPerPage();
-		$postIds = $threadService->getPostIds($thread);
-		$page = $this->getPageNumber($request, $itemPerPage, $postIds);
+		$count = $thread->getNbpost();
+		$page = $this->getPageNumber($thread, $itemPerPage, $count);
 		
-		$posts = $threadService->getPosts($thread, ($itemPerPage * ($page - 1)) + 1, $itemPerPage);
-		$paginator = new paginator_Paginator('forums', $page, $posts, $itemPerPage);
-		$paginator->setItemCount($thread->getNbpost());
-		$paginator->setExcludeParameters(array('postId'));
+		$posts = $threadService->getPosts($thread, ($itemPerPage * ($page - 1)), $itemPerPage);
+		$paginator = new paginator_Paginator('forums', $page, $posts, $itemPerPage, $count, array('postId'));
 
 		$user = users_UserService::getInstance()->getCurrentUser();
 		if ($user !== null && count($posts) > 0)
@@ -127,38 +125,39 @@ class forums_BlockThreadAction extends forums_BlockPostListBaseAction
 	}
 	
 	/**
-	 * @param f_mvc_Request $request
+	 * @param forums_persistentdocument_thread $thread
 	 * @param integer $itemPerPage
-	 * @param integer[] $postIds
+	 * @param integer $count
 	 */
-	protected function getPageNumber($request, $itemPerPage, $postIds)
+	protected function getPageNumber($thread, $itemPerPage, $count)
 	{
-		// If there is a page set, return it.
-		$pageNumber = $request->getParameter('page');
-		if ($pageNumber)
+		$globalRequest = change_Controller::getInstance()->getRequest();
+		if ($globalRequest->hasParameter('postId'))
 		{
-			if (floor(count($postIds) / $itemPerPage) + 1 >= $pageNumber)
+			$postId = $globalRequest->getParameter('postId');
+			$this->getRequest()->setAttribute('currentPostId', $postId);
+			$countBeforePostId = forums_PostService::getInstance()->getPublishedPostCountBeforeId($thread, $postId);
+			$pageNumber = $this->findPage($itemPerPage, $countBeforePostId);
+		}
+		else
+		{
+			$pageNumber = $this->getRequest()->getParameter(paginator_Paginator::PAGEINDEX_PARAMETER_NAME);
+			if ($pageNumber && (floor($count / $itemPerPage) + 1 >= $pageNumber))
 			{
 				return $pageNumber;
 			}
 		}
-
-		// Else look for a comment id.
-		$globalRequest = change_Controller::getInstance()->getRequest();
-		$postId = intval($globalRequest->getParameter('postId'));
-		if ($postId)
-		{
-			foreach ($postIds as $index => $id)
-			{
-				if ($postId == $id)
-				{
-					return 1 + floor($index / $itemPerPage);
-				}
-			}
-		}
-
-		// Else return the first page.
-		return 1;
+		return $pageNumber;
+	}
+	
+	/**
+	 * Find the number of the page for the current comment
+	 * @param integer $itemPerPage
+	 * @param integer $countBeforePostId
+	 */
+	protected function findPage($itemPerPage, $countBeforePostId)
+	{
+		return 1 + floor($countBeforePostId / $itemPerPage);
 	}
 	
 	/**

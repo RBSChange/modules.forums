@@ -1,11 +1,11 @@
 <form change:form="beanClass forums_persistentdocument_ban; beanName ban">
 	<fieldset>
-		<legend>${trans:m.forums.frontoffice.forum-member-ban,ucf}</legend>
+		<legend class="h-1">${trans:m.forums.frontoffice.forum-member-ban,ucf}</legend>
 		<ul change:errors=""></ul>
 		<ol>
 			<li><label>${trans:m.forums.document.ban.member,ucf,lab}</label> <a change:link="document post/getAuthoridInstance">${post/getAuthorName}</a></li>
 			<li><label>${trans:m.forums.document.ban.post,ucf,lab}</label> ${structure post/getPostIdLink}</li>
-			<li><input change:field="name to" required="true"/></li>
+			<li><input change:field="name to; required true" /></li>
 			<li><input change:bbcodeinput="name motifAsBBCode" module-profile="forums" labeled="true" /></li>
 		</ol>
 		<p class="buttons">

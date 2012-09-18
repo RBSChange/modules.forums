@@ -5,20 +5,20 @@
 		<dd>
 			<tal:block tal:condition="item/hasTypeLabel">${item/getTypeLabel}</tal:block>
 			<tal:block tal:condition="not:item/hasTypeLabel">${trans:m.forums.document.post.document-name,ucf}</tal:block>
-			<span> - </span>
+			<span class="separator"> - </span>
 		</dd>
 	</tal:block>
 	<tal:block tal:condition="showDates">
 		<dt>${trans:m.solrsearch.frontoffice.creationdate,ucf}</dt>
-		<dd><tal:block tal:replace="datetime:doc/getCreationdate,from=gmt" /><span> - </span></dd>
+		<dd>${datetime:doc/getCreationdate,from=gmt}<span class="separator"> - </span></dd>
 		<tal:block tal:condition="php: item.getDocument().getCreationdate() < item.getDocument().getModificationdate()">
 			<dt>${trans:m.solrsearch.frontoffice.modificationdate,ucf}</dt>
-			<dd><tal:block tal:replace="datetime:doc/getModificationdate,from=gmt" /><span> - </span></dd>
+			<dd>${datetime:doc/getModificationdate,from=gmt}<span class="separator"> - </span></dd>
 		</tal:block>
 	</tal:block>
 	<tal:block tal:define="thread doc/getThread; forum thread/getForum">
 		<dt>${trans:m.forums.frontoffice.forum,ucf}</dt>
-		<dd><a change:link="document forum">${structure forum/getLabelAsHtml}</a><span> - </span></dd>
+		<dd><a change:link="document forum">${structure forum/getLabelAsHtml}</a><span class="separator"> - </span></dd>
 		<dt>${trans:m.forums.frontoffice.thread,ucf}</dt>
 		<dd><a change:link="document thread">${structure thread/getLabelAsHtml}</a></dd>
 	</tal:block>

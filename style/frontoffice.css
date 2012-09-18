@@ -1,37 +1,29 @@
-.forums-table th
-{
+.modules-forums table.normal th {
 	white-space: nowrap;
 }
-.forums-table td,
-.forums-table .column-bullet img
-{
+.modules-forums table.normal td,
+.modules-forums table.normal .column-bullet img {
 	vertical-align: middle;
 }
-.forums-table .column-bullet
-{
+.modules-forums table.normal .column-bullet {
 	min-width: 30px;
 	text-align: center;
 }
-
-.forums-table .column-label
-{
+.modules-forums table.normal .column-label {
 	width: 100%;
 }
-.forums-table .column-posts,
-.forums-table .column-threads
-{
+.modules-forums table.normal .column-posts,
+.modules-forums table.normal .column-threads {
 	white-space: nowrap;
 	min-width: 75px;
 	text-align: center;
 }
-.forums-table .column-last-post
-{
+.modules-forums table.normal .column-last-post {
 	white-space: nowrap;
 	min-width: 150px;
 	text-align: center;
 }
-.forums-table .column-date
-{
+.modules-forums table.normal .column-date {
 	white-space: nowrap;
 	min-width: 100px;
 	text-align: center;
@@ -45,14 +37,14 @@
 	text-align: center;
 }
 
-.message-list .message-body{
+.message-list .message-body {
 	padding: 12px 0;
 }
-.message-list .author-information{
+.message-list .author-information {
 	width: 180px;
 	float: left;
 }
-.message-list .message-content{
+.message-list .message-content {
 	padding-left: 12px;
 	margin-left: 180px;
 }

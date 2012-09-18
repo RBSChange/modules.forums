@@ -32,6 +32,9 @@
 			<staticitem label="m.forums.lists.modes.yes" value="1" />
 			<staticitem label="m.forums.lists.modes.inherit" value="2" />
 		</staticlist>
+		<valuededitablelist listid="modules_forums/flag" label="m.forums.lists.flag.label" description="m.forums.lists.flag.description">
+			<valueditem label="Resolu" byValue="resolved" />
+		</valuededitablelist>
 	</systemfolder>
 	<systemfolder module="notification" relatedmodule="forums">
 		<attribute name="body"><![CDATA[Bonjour {PSEUDO},<br/>Vous avez été banni du forum jusqu'au {DATE}<br/>Par conséquence vous ne pouvez plus participer aux forums jusqu'à cette date.<br/><br/>{MOTIF}]]></attribute>

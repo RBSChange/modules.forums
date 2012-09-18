@@ -11,7 +11,7 @@
 
 <tal:block tal:condition="forumgroup/mayContainThreads">
 	<h2 change:h="">${trans:m.forums.frontoffice.threads,ucf}</h2>
-	<ul class="inline-list">
+	<ul class="inline-list normal-margin">
 		<li tal:condition="not: forumgroup/isLocked"><a change:link="tag functional_forums_thread-new ; forumsParam[cmpref] forumgroup/getId">${trans:m.forums.frontoffice.newthread,ucf}</a></li>
 	</ul>
 	

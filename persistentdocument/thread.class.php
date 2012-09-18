@@ -6,6 +6,12 @@
 class forums_persistentdocument_thread extends forums_persistentdocument_threadbase implements rss_Item
 {
 	/**
+	 * Store the flag Label
+	 * @var String
+	 */
+	private $flagLabel = null;
+	
+	/**
 	 * @return string
 	 */
 	public function getForumLabel()
@@ -182,15 +188,15 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 		{
 			for ($page = 1; $page < $pageCount; $page++)
 			{
-				$pagination[] = '<a class="link" href="' . LinkHelper::getDocumentUrl($this, null, array('forumsParam[page]' => $page)) . '">' . $page . '</a><span>, </span>';
+				$pagination[] = '<a class="link" href="' . LinkHelper::getDocumentUrl($this, null, array('forumsParam[page]' => $page)) . '">' . $page . '</a><span class="punctuation">, </span>';
 			}
 		}
 		else 
 		{
-			$pagination[] = '<a class="link" href="' . LinkHelper::getDocumentUrl($this, null, array('forumsParam[page]' => 1)) . '">1</a><span> ... </span>';
+			$pagination[] = '<a class="link" href="' . LinkHelper::getDocumentUrl($this, null, array('forumsParam[page]' => 1)) . '">1</a><span class="separator"> ... </span>';
 			for ($page = $pageCount - 2; $page < $pageCount; $page++)
 			{
-				$pagination[] = '<a class="link" href="' . LinkHelper::getDocumentUrl($this, null, array('forumsParam[page]' => $page)) . '">' . $page . '</a><span>, </span>';
+				$pagination[] = '<a class="link" href="' . LinkHelper::getDocumentUrl($this, null, array('forumsParam[page]' => $page)) . '">' . $page . '</a><span class="punctuation">, </span>';
 			}
 		}
 		$pagination[] = '<a class="link" href="' . LinkHelper::getDocumentUrl($this, null, array('forumsParam[page]' => $pageCount)) . '">' . $pageCount . '</a>';
@@ -247,6 +253,14 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	 */
 	public function getRSSGuid()
 	{
+		return LinkHelper::getPermalink($this);
+	}
+	
+	/**
+	 * @return string
+	 */
+	public function getRSSLink()
+	{
 		return LinkHelper::getDocumentUrl($this);
 	}
 	
@@ -273,5 +287,18 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 	{
 		$ls = LocaleService::getInstance();
 		return $ls->trans('m.forums.frontoffice.posts-of', array('lab', 'ucf'), array('type' => $ls->trans($this->getPersistentModel()->getLabelKey()))) . ' ' . $this->getLabel();
+	}
+	
+	/**
+	 * Get the flag label
+	 * @return string
+	 */
+	public function getFlagLabel()
+	{
+		if ($this->flagLabel == null)
+		{
+			$this->flagLabel = $this->getDocumentService()->getFlagLabel($this);
+		}
+		return $this->flagLabel;
 	}
 }

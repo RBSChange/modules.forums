@@ -11,6 +11,7 @@
 		<property name="followers" type="DocumentArray" document-type="modules_users/user" />
 		<property name="tofollow" type="Document" document-type="modules_forums/post" />
 		<property name="lastPostDate" type="DateTime" />
+		<property name="flag" type="String" />
 	</properties>
 	<statuses default="ACTIVE" />
 </document>

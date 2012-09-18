@@ -6,6 +6,12 @@
 class forums_persistentdocument_forumgroup extends forums_persistentdocument_forumgroupbase
 {
 	/**
+	 * Store the flag list on the document instance
+	 * @var list_persistentdocument_list
+	 */
+	private $flagListCached = null;
+	
+	/**
 	 * @return string
 	 */
 	public function getKeywords()
@@ -174,5 +180,25 @@ class forums_persistentdocument_forumgroup extends forums_persistentdocument_for
 	public function getNbpostRecursive()
 	{
 		return $this->getInfosRecursive('nbpostrecursive');
+	}
+	
+	/**
+	 * @return list_persistentdocument_list
+	 */
+	public function getDefaultFlagList()
+	{
+		if ($this->flagListCached == null)
+		{
+			$this->setFlagListCached($this->getDocumentService()->getFlagListRecursively($this));
+		}
+		return $this->flagListCached;
+	}
+	
+	/**
+	 * @param string $flagListCached
+	 */
+	public function setFlagListCached($flagListCached)
+	{
+		$this->flagListCached = $flagListCached;
 	}
 }

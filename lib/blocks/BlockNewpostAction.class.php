@@ -73,7 +73,18 @@ class forums_BlockNewpostAction extends forums_BlockPostListBaseAction
 	 */
 	private function setRequestAttributes($request)
 	{
+		/* @var $thread forums_persistentdocument_thread */
 		$thread = $this->getDocumentParameter();
+		if ($request->hasParameter('thread.flag'))
+		{
+			$thread->setFlag($request->getParameter('thread.flag'));
+		}
+		elseif (!$request->hasParameter('post') && !$request->hasAttribute('post'))
+		{
+			$post = forums_persistentdocument_post::getNewInstance();
+			$post->setThread($thread);
+			$request->setAttribute('post', $post);
+		}
 		$request->setAttribute('thread', $thread);
 		$answerId = $request->getParameter('postid');
 		if ($answerId !== null)

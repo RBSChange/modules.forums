@@ -78,7 +78,7 @@ class forums_BlockEditpostAction extends forums_BlockPostListBaseAction
 		$post->setEditedby(users_UserService::getInstance()->getCurrentUser());
 		$post->setEditeddate(date_Calendar::now()->toString());
 		$post->save();
-		if ($post->isFirstPostInThread())
+		if ($post->getThread()->isModified())
 		{
 			$post->getThread()->save();
 		}

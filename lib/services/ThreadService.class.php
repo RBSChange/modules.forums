@@ -66,7 +66,7 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 		$query->add(Restrictions::eq('thread', $thread->getId()));
 		if ($start !== null)
 		{
-			$query->add(Restrictions::ge('number', $start));
+			$query->setFirstResult($start);
 		}
 		$query->setMaxResults($limit);
 		if ($order == 'desc')
@@ -99,6 +99,20 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 		}
 		$query->setProjection(Projections::property('id'));
 		return $query->findColumn('id');
+	}
+	
+	/**
+	 * @param forums_persistentdocument_thread $thread
+	 * @param integer $postId
+	 */
+	public function getPublishedPostCountBeforeId($thread, $postId)
+	{
+		$query = forums_PostService::getInstance()->createQuery()->add(Restrictions::published());
+		$query->add(Restrictions::eq('thread', $thread));
+		$query->add(Restrictions::lt('id', $postId));
+		$query->setProjection(Projections::rowCount('count'));
+		$row = $query->findUnique();
+		return $row['count'];
 	}
 	
 	/**
@@ -207,16 +221,35 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 	}
 	
 	/**
+	 * Count the number of Thread in a forum
+	 * @param unknown_type $forum
+	 */
+	public function countByForum($forum)
+	{
+		$row = forums_ThreadService::getInstance()->createQuery()->add(Restrictions::published())
+			->add(Restrictions::eq('forum', $forum->getId()))->add(Restrictions::ne('level', self::LEVEL_GLOBAL))
+			->setProjection(Projections::rowCount('count'))->findUnique();
+		return $row['count'];
+	}
+	
+	/**
 	 * @param forums_persistentdocument_forum $forum
+	 * @param integer $offset
+	 * @param integer $limit
 	 * @return forums_persistentdocument_threads[]
 	 */
-	public function getByForum($forum)
+	public function getByForum($forum, $offset = null, $limit = null)
 	{
-		return forums_ThreadService::getInstance()->createQuery()->add(Restrictions::published())
+		$query = forums_ThreadService::getInstance()->createQuery()->add(Restrictions::published())
 			->add(Restrictions::eq('forum', $forum->getId()))
 			->add(Restrictions::ne('level', self::LEVEL_GLOBAL))
-			->addOrder(Order::desc('level'))
-			->addOrder(Order::desc('lastpostdate'))->find();
+			->addOrder(Order::desc('level'))->addOrder(Order::desc('lastpostdate'));
+		if ($offset !== null && $limit !== null)
+		{
+			$query->setFirstResult($offset);
+			$query->setMaxResults($limit);
+		}
+		return $query->find();
 	}
 	
 	/**
@@ -424,14 +457,16 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 	/**
 	 * @param forums_persistentdocument_thread $document
 	 * @param string $forModuleName
+	 * @param array $allowedSections
 	 * @return array
 	 */
-	public function getResume($document, $forModuleName)
+	public function getResume($document, $forModuleName, $allowedSections = null)
 	{
-		$data = parent::getResume($document, $forModuleName);
+		$data = parent::getResume($document, $forModuleName, $allowedSections);
 		
 		$data['properties']['nbpost'] = strval($document->getNbpost());
-
+		$data['properties']['path'] = $this->getPathOf($document);
+		
 		return $data;
 	}
 	
@@ -493,5 +528,41 @@ class forums_ThreadService extends f_persistentdocument_DocumentService
 	{
 		$row = $this->createQuery()->add(Restrictions::eq('authorid', $userId))->setProjection(Projections::rowCount('nb'))->findUnique();
 		return $row['nb'];
+	}
+	
+	/**
+	 * Get the label of flag on the thread
+	 * @param forums_persistentdocument_thread $thread
+	 * @return string
+	 */
+	public function getFlagLabel($thread)
+	{
+		$flagLabel = '';
+		$flag = $thread->getFlag();
+		if ($flag != null)
+		{
+			// Get forum
+			$forum = $thread->getForum();
+				
+			// Get flag list of Forum
+			$list = $forum->getDocumentService()->getFlagListRecursively($forum);
+				
+			// Search item in list
+			if ($list != null)
+			{
+				$item = $list->getItemByValue($flag);
+				if ($item != null)
+				{
+					$flagLabel = $item->getLabel();
+				}
+			}
+				
+			if ($flagLabel == '')
+			{
+				$flagLabel = $flag;
+			}
+	
+		}
+		return $flagLabel;
 	}
 }

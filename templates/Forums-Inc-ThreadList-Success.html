@@ -1,4 +1,4 @@
-<table tal:condition="php: count(threads)" class="normal forums-table" cellspacing="0" cellpadding="0">
+<table tal:condition="php: count(threads)" class="normal forums-table">
 	<thead>
 		<tr>
 			<th class="column-bullet"></th>
@@ -25,9 +25,7 @@
 					</tal:block>
 				</td>
 				<td class="column-label">
-					<strong tal:condition="php: thread.getLevel() == 20">${trans: m.forums.lists.threadlevels.sticky,ucf,lab}</strong>
-					<strong tal:condition="php: thread.getLevel() == 30">${trans: m.forums.lists.threadlevels.announcement,ucf,lab}</strong>
-					<a tal:attributes="href thread/getUserUrl" class="link">${thread/getLabel}</a>
+					<tal:block change:include="module 'forums'; template 'Forums-Inc-ThreadLabel-Success'; type 'html'; thread thread; showLevel 'true'" />
 					<dl class="inline-list" tal:condition="thread/hasPages">
 						<dt>${trans:m.forums.frontoffice.go-to-page,ucf}</dt>
 						<dd tal:repeat="page thread/getPagination">${structure page}</dd>
