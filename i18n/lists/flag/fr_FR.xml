@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<i18n baseKey="m.forums.lists.flag" lcid="fr_FR">
+	<key id="label">Flag pour les threads</key>
+	<key id="description">Liste des flags disponibles pour les theads d'un forum</key>
+</i18n>

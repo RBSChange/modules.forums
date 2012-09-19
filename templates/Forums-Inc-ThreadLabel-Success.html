@@ -1,0 +1,6 @@
+<tal:block tal:condition="showLevel">
+	<tal:block tal:condition="php: thread.getLevel() == 20"><strong>${trans: m.forums.lists.threadlevels.sticky,ucf,lab}</strong> </tal:block>
+	<tal:block tal:condition="php: thread.getLevel() == 30"><strong>${trans: m.forums.lists.threadlevels.announcement,ucf,lab}</strong> </tal:block>
+</tal:block>
+<tal:block tal:condition="thread/getFlag"><strong>[${thread/getFlagLabel}]</strong> </tal:block>
+<a tal:attributes="href thread/getUserUrl" class="link">${structure thread/getLabelAsHtml}</a>
