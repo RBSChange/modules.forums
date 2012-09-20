@@ -137,7 +137,7 @@ class forums_BlockThreadAction extends forums_BlockPostListBaseAction
 			$postId = $globalRequest->getParameter('postId');
 			$this->getRequest()->setAttribute('currentPostId', $postId);
 			$countBeforePostId = forums_PostService::getInstance()->getPublishedPostCountBeforeId($thread, $postId);
-			$pageNumber = $this->findPage($itemPerPage, $countBeforePostId);
+			return $this->findPage($itemPerPage, $countBeforePostId);
 		}
 		else
 		{
@@ -147,7 +147,7 @@ class forums_BlockThreadAction extends forums_BlockPostListBaseAction
 				return $pageNumber;
 			}
 		}
-		return $pageNumber;
+		return 1;
 	}
 	
 	/**
