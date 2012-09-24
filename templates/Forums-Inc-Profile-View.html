@@ -1,6 +1,6 @@
 <h2 change:h="">${trans:m.forums.document.forumsprofile.document-name,ucf}</h2>
 
-<dl class="document-infos">
+<dl class="inline-items">
 	<tal:block tal:define="count profile/getPublishedForumMemberTitleCount" tal:condition="count">
 		<dt>
 			<tal:block tal:condition="php: count == 1">${trans:m.forums.frontoffice.member-title,ucf}</tal:block>
