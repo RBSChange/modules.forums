@@ -5,6 +5,6 @@
 		<field name="description" hidehelp="true" />
 		<field name="lockedMode" />
 		<field name="excludeFromRssMode" />
-		<field name="flagList" allow="[modules_list/list]" />
+		<field name="flagList" moduleselector="list" allow="[modules_list_list]" />
 	</section>
 </panel>
