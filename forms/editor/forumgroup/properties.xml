@@ -8,7 +8,7 @@
 			shorthelp="modules.forums.document.forum.Mount-parent-help" />
 		<field name="lockedMode" />
 		<field name="excludeFromRssMode" />
-		<field name="flagList" allow="[modules_list/list]"/>
+		<field name="flagList" moduleselector="list" allow="[modules_list_list]"/>
 	</section>
 	<section labeli18n="modules.forums.bo.doceditor.fieldsgroup.Metas">
 		<field name="metatitle" class="with-counter" rows="2" />
