@@ -255,13 +255,13 @@ class forums_ForumgroupService extends f_persistentdocument_DocumentService
 	 */
 	protected function publicationStatusChanged($document, $oldPublicationStatus, $params)
 	{
-		// Status transit from ACTIVE to PUBLICATED.
+		// Status transit from ACTIVE to PUBLISHED.
 		if ($document->isPublished())
 		{
 			$document->getTopic()->activate();
 		}
-		// Status transit from PUBLICATED to ACTIVE.
-		else if ($oldPublicationStatus == 'PUBLICATED')
+		// Status transit from PUBLISHED to ACTIVE.
+		else if ($oldPublicationStatus == 'PUBLISHED')
 		{
 			$document->getTopic()->deactivate();
 		}
