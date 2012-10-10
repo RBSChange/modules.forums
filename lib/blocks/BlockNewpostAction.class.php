@@ -27,7 +27,7 @@ class forums_BlockNewpostAction extends forums_BlockPostListBaseAction
 	 * @param forums_persistentdocument_post $post
 	 * @return string
 	 */
-	public function execute($request, $response, forums_persistentdocument_post $post)
+	public function execute($request, $response, forums_persistentdocument_post $post = null)
 	{
 		if ($this->isInBackofficeEdition())
 		{
