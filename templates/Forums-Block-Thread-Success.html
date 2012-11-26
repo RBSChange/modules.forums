@@ -73,6 +73,18 @@
 	</li>
 </ul>
 
+<tal:block tal:condition="thread/isEditable" tal:define="flagList thread/getForum/getDefaultFlagList">
+	<form change:form="" action="${actionurl:'forums', 'MarkThread'}">
+		<fieldset>
+			<legend class="h-2">${trans:m.forums.frontoffice.to-flag-thread,ucf}</legend>
+			<label change:label="name thread.flag">${trans:m.forums.document.thread.flag,ucf}</label>		
+			<input change:selectinput="" listId="${flagList/getListid}" name="thread.flag" value="${thread/getFlag}" labeled="false"/>
+			<input change:hiddeninput="name threadId" value="${thread/getId}"/>
+			<input change:submit="labeli18n m.forums.frontoffice.form.submit"/>
+		</fieldset>
+	</form>
+</tal:block>
+
 <div class="cleaner"></div>
 
 <tal:block change:block="" module="forums" name="RssMenu" parentref="${thread/getId}" />
