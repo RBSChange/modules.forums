@@ -152,4 +152,6 @@
 	<key id="move-thread">déplacement d'un sujet</key>
 	<key id="destination-forum">forum destination</key>
 	<key id="to-flag-thread">étiqueter le sujet</key>
+	<key id="post-deleted-by-author">Message supprimé par son auteur.</key>
+	<key id="post-deleted-by-moderator">Message supprimé par un modérateur.</key>
 </i18n>

@@ -20,11 +20,11 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 		$indexedDoc->setDocumentModel('modules_forums/post');
 		if ($this->isFirstPostInThread())
 		{
-			$indexedDoc->setLabel($this->getThreadLabel());	
+			$indexedDoc->setLabel($this->getThreadLabel());
 		}
 		else
 		{
-			$indexedDoc->setLabel($this->getLabel());	
+			$indexedDoc->setLabel($this->getLabel());
 		}
 		$indexedDoc->setLang($this->getLang());
 		$indexedDoc->setText($this->getFullTextForIndexation());
@@ -129,7 +129,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 		}
 		return false;
 	}
-		
+	
 	/**
 	 * @return String
 	 */
@@ -170,6 +170,19 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	}
 	
 	/**
+	 * @return boolean
+	 */
+	public function wasSuppressedByAuthor()
+	{
+		$member = $this->getDeletedby();
+		if ($member instanceof forums_persistentdocument_member)
+		{
+			return $member->getId() == $this->getPostauthor()->getId();
+		}
+		return false;
+	}
+	
+	/**
 	 * @return Boolean
 	 */
 	public function wasDeleted()
@@ -182,7 +195,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 		$member = forums_MemberService::getInstance()->getCurrentMember();
 		return !forums_ModuleService::getInstance()->hasPermission($member, 'modules_forums.Moderate', $this);
 	}
-		
+	
 	/**
 	 * @return Boolean
 	 */
@@ -190,7 +203,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	{
 		return ($this->getAnswerof() !== null);
 	}
-
+	
 	/**
 	 * @return String
 	 */
@@ -296,7 +309,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	{
 		return $this->getPostNewStatus() == 'new';
 	}
-
+	
 	/**
 	 * @return boolean
 	 */
@@ -304,7 +317,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 	{
 		return $this->getPostNewStatus() == 'seminew';
 	}
-
+	
 	/**
 	 * @return boolean
 	 */
@@ -329,7 +342,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 		}
 		return $this->newStatus;
 	}
-
+	
 	/**
 	 * @return string new|seminew|old
 	 */
@@ -338,7 +351,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 		$ms = forums_MemberService::getInstance();
 		$member = $ms->getCurrentMember();
 		$globalLast = $ms->getAllReadDate($member);
-	
+		
 		// A post without a thread is always new (preview).
 		if ($this->getThread() === null)
 		{
@@ -378,7 +391,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 		// Old.
 		return 'old';
 	}
-		
+	
 	/**
 	 * @return String
 	 */
@@ -427,7 +440,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 		$parser = new website_BBCodeParser();
 		return $parser->convertXmlToHtml($this->getText());
 	}
-
+	
 	/**
 	 * @return string
 	 */
@@ -436,7 +449,7 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 		$parser = new website_BBCodeParser();
 		return $parser->convertXmlToBBCode($this->getText());
 	}
-
+	
 	/**
 	 * @param string $bbcode
 	 */
