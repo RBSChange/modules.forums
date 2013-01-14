@@ -19,8 +19,6 @@ class forums_BlockNewthreadAction extends forums_BlockPostListBaseAction
 	}
 	
 	/**
-	 * @see website_BlockAction::execute()
-	 *
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
 	 * @return string
@@ -68,8 +66,7 @@ class forums_BlockNewthreadAction extends forums_BlockPostListBaseAction
 	 */
 	public function executeSubmit($request, $response, forums_persistentdocument_thread $thread)
 	{
-		$forum = $this->getDocumentParameter();
-		if (!$forum->isWritable())
+		if (!$thread->getForum()->isWritable())
 		{
 			return $this->getForbiddenView();
 		}

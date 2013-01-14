@@ -147,6 +147,14 @@ class forums_persistentdocument_post extends forums_persistentdocument_postbase 
 		}
 		return LocaleService::getInstance()->trans('m.forums.frontoffice.unknown', array('ucf'));
 	}
+
+	/**
+	 * @return boolean
+	 */
+	public function wasSuppressedByAuthor()
+	{
+		return $this->getDeletedby() == $this->getAuthorid();
+	}
 	
 	/**
 	 * @return boolean

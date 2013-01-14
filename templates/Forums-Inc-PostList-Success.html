@@ -3,7 +3,8 @@
 <ul class="document-list message-list">
 	<tal:block tal:repeat="post postListInfo/paginator">
 		<li class="erased" tal:condition="post/wasDeleted" id="post-${post/getId}">
-			<em>${trans: m.forums.frontoffice.deletedpost,ucf}</em>
+			<em tal:condition="post/wasSuppressedByAuthor">${trans: m.forums.frontoffice.post-deleted-by-author,ucf}</em>
+			<em tal:condition="not:post/wasSuppressedByAuthor">${trans: m.forums.frontoffice.post-deleted-by-moderator,ucf}</em>
 		</li>
 		
 		<tal:block tal:condition="not: post/wasDeleted">
@@ -25,7 +26,7 @@
 						<img tal:condition="post/isPostNew" title="${trans:m.forums.frontoffice.new-post,ucf}" change:img="front/has-new-post.png" />
 						${datetime:post/getUICreationdate}
 					</p>
-					<div class="cleaner"></div>					
+					<div class="cleaner"></div>
 				</div>
 				
 				<div class="message-body" tal:define="author post/getAuthoridInstance; authorProfile post/getAuthorProfile">

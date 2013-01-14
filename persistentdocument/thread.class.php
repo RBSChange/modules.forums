@@ -111,7 +111,7 @@ class forums_persistentdocument_thread extends forums_persistentdocument_threadb
 		$profile = ($user) ? $fps->getByAccessorId($user->getId()) : null;
 
 		$last = null;
-		if ($user !== null)
+		if ($profile !== null)
 		{
 			$last = $profile->getLastReadDateByThreadId($this->getId());
 		}
