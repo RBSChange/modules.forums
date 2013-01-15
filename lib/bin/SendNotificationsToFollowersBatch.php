@@ -13,21 +13,25 @@ $num = 1 + ($thread->getNbpost() - $thread->getTofollow()->getNumber());
 if ($notif instanceof notification_persistentdocument_notification)
 {
 	$num = 1 + ($thread->getNbpost() - $thread->getTofollow()->getNumber());
-	$lastAuthorId = $thread->getLastPost()->getAuthorid();
-	foreach ($thread->getFollowersArray() as $user)
+	$lastPost = $thread->getLastPost();
+	if ($lastPost)
 	{
-		if ($user->isPublished())
+		$lastAuthorId = $lastPost->getAuthorid();
+		foreach ($thread->getFollowersArray() as $user)
 		{
-			if ($lastAuthorId != $user->getId())
+			if ($user->isPublished())
 			{
-				$callback = array($ds, 'getNotificationParameters');
-				$params = array('thread' => $thread, 'user' => $user, 'specificParams' => array('NUM' => $num));
-				$user->getDocumentService()->sendNotificationToUserCallback($notif, $user, $callback, $params);
+				if ($lastAuthorId != $user->getId())
+				{
+					$callback = array($ds, 'getNotificationParameters');
+					$params = array('thread' => $thread, 'user' => $user, 'specificParams' => array('NUM' => $num));
+					$user->getDocumentService()->sendNotificationToUserCallback($notif, $user, $callback, $params);
+				}
 			}
-		}
-		else
-		{
-			$thread->removeFollowers($user);
+			else
+			{
+				$thread->removeFollowers($user);
+			}
 		}
 	}
 }
