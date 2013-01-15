@@ -10,22 +10,26 @@ $notif = $ns->getConfiguredByCodeName('modules_forums/follower', $ds->getWebsite
 if ($notif instanceof notification_persistentdocument_notification)
 {
 	$num = 1 + ($thread->getNbpost() - $thread->getTofollow()->getNumber());
-	$lastAuthorId = $thread->getLastPost()->getAuthorid();
-	foreach ($thread->getFollowersArray() as $member)
+	$lastPost = $thread->getLastPost();
+	if ($lastPost)
 	{
-		$user = $member->getUser();
-		if ($user->isPublished())
+		$lastAuthorId = $lastPost->getAuthorid();
+		foreach ($thread->getFollowersArray() as $member)
 		{
-			if ($lastAuthorId != $user->getId())
+			$user = $member->getUser();
+			if ($user->isPublished())
 			{
-				$callback = array($ds, 'getNotificationParameters');
-				$params = array('thread' => $thread, 'member' => $member, 'specificParams' => array('NUM' => $num));
-				$user->getDocumentService()->sendNotificationToUserCallback($notif, $user, $callback, $params);
+				if ($lastAuthorId != $user->getId())
+				{
+					$callback = array($ds, 'getNotificationParameters');
+					$params = array('thread' => $thread, 'member' => $member, 'specificParams' => array('NUM' => $num));
+					$user->getDocumentService()->sendNotificationToUserCallback($notif, $user, $callback, $params);
+				}
 			}
-		}
-		else
-		{
-			$thread->removeFollowers($member);
+			else
+			{
+				$thread->removeFollowers($member);
+			}
 		}
 	}
 }
