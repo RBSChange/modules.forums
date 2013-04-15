@@ -32,6 +32,19 @@ class forums_persistentdocument_forumgroup extends forums_persistentdocument_for
 	{
 		return f_util_StringUtils::htmlToText($this->getDescriptionAsHtml());
 	}
+
+	/**
+	 * @return boolean
+	 */
+	public function canModerate()
+	{
+		$member = forums_MemberService::getInstance()->getCurrentMember();
+		if (forums_ModuleService::getInstance()->hasPermission($member, 'modules_forums.Moderate', $this))
+		{
+			return true;
+		}
+		return false;
+	}
 	
 	/**
 	 * @return String
@@ -225,5 +238,4 @@ class forums_persistentdocument_forumgroup extends forums_persistentdocument_for
 	{
 		$this->flagListCached = $flagListCached;
 	}
-
 }

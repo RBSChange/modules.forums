@@ -17,7 +17,7 @@ class forums_BlockNewthreadAction extends forums_BlockPostListBaseAction
 		}
 		return array();
 	}
-	
+
 	/**
 	 * @see website_BlockAction::execute()
 	 *
@@ -31,20 +31,20 @@ class forums_BlockNewthreadAction extends forums_BlockPostListBaseAction
 		{
 			return website_BlockView::NONE;
 		}
-		
+
 		$forum = $this->getDocumentParameter();
 		if ($forum === null)
 		{
 			return website_BlockView::NONE;
 		}
-		
+
 		if (!$forum->isWritable())
 		{
 			return $this->getForbiddenView();
 		}
 		return $this->getInputViewName();
 	}
-	
+
 	/**
 	 * @return String
 	 */
@@ -52,7 +52,7 @@ class forums_BlockNewthreadAction extends forums_BlockPostListBaseAction
 	{
 		return website_BlockView::SUCCESS;
 	}
-	
+
 	/**
 	 * @return Array
 	 */
@@ -60,27 +60,47 @@ class forums_BlockNewthreadAction extends forums_BlockPostListBaseAction
 	{
 		return array_merge(BeanUtils::getBeanValidationRules('forums_persistentdocument_thread', null, null), BeanUtils::getSubBeanValidationRules('forums_persistentdocument_thread', 'firstPost', null, array('label', 'thread')));
 	}
-	
+
+	/**
+	 * @return string[]
+	 */
+	public function getThreadBeanInclude()
+	{
+		if (Framework::getConfigurationValue('modules/website/useBeanPopulateStrictMode') != 'false')
+		{
+			$include = array('label', 'flag', 'firstPost.textAsBBCode', 'forum');
+			/* @var $forum forums_persistentdocument_forum */
+			$forum = DocumentHelper::getDocumentInstance($this->getRequest()->getParameter('forum'));
+			if ($forum->canModerate())
+			{
+				$include[] = 'level';
+			}
+			return $include;
+		}
+		return null;
+	}
+
 	/**
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
+	 * @param forums_persistentdocument_thread $thread
 	 * @return String
 	 */
 	public function executeSubmit($request, $response, forums_persistentdocument_thread $thread)
 	{
 		$forum = $this->getDocumentParameter();
-		if (!$forum->isWritable())
+		if (!$forum->isWritable() || $forum->isModified())
 		{
 			return $this->getForbiddenView();
 		}
-		
+
 		$post = $thread->getFirstPost();
 		$thread->setFirstPost(null);
 		$thread->save();
-		
+
 		$post->save($thread->getId());
 		$post->getDocumentService()->activate($post->getId());
-		
+
 		$url = LinkHelper::getDocumentUrl($thread);
 		HttpController::getInstance()->redirectToUrl($url);
 	}
@@ -92,10 +112,11 @@ class forums_BlockNewthreadAction extends forums_BlockPostListBaseAction
 	{
 		return array_merge(BeanUtils::getBeanValidationRules('forums_persistentdocument_thread', null, null), BeanUtils::getSubBeanValidationRules('forums_persistentdocument_thread', 'firstPost', null, array('label', 'thread')));
 	}
-	
+
 	/**
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
+	 * @param forums_persistentdocument_thread $thread
 	 * @return String
 	 */
 	public function executePreview($request, $response, forums_persistentdocument_thread $thread)
@@ -105,19 +126,19 @@ class forums_BlockNewthreadAction extends forums_BlockPostListBaseAction
 		{
 			return $this->getForbiddenView();
 		}
-		
+
 		$post = $thread->getFirstPost();
 		$post->setThread($thread);
 		$post->setPostauthor(forums_MemberService::getInstance()->getCurrentMember());
 		$post->setCreationdate(date_Calendar::getInstance()->toString());
 		$request->setAttribute('thread', $thread);
-		
+
 		$postListInfo = array();
 		$postListInfo['displayConfig'] = $this->getDisplayConfig();
 		$postListInfo['displayConfig']['hidePostLink'] = true;
 		$postListInfo['paginator'] = array($post);
 		$request->setAttribute('previewPostInfo', $postListInfo);
-		
+
 		return $this->getInputViewName();
 	}
 }

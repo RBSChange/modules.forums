@@ -6,8 +6,6 @@
 class forums_BlockEditprofileAction extends forums_BaseBlockAction
 {
 	/**
-	 * @see website_BlockAction::execute()
-	 *
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
 	 * @return String
@@ -22,7 +20,7 @@ class forums_BlockEditprofileAction extends forums_BaseBlockAction
 		{
 			return $this->getInputViewName();
 		}
-		
+
 		$member = $this->getDocumentParameter();
 		if ($member === null)
 		{
@@ -33,11 +31,11 @@ class forums_BlockEditprofileAction extends forums_BaseBlockAction
 		{
 			return $this->getForbiddenView();
 		}
-				
+
 		$request->setAttribute('member', $member);
 		return $this->getInputViewName();
 	}
-	
+
 	/**
 	 * @return String
 	 */
@@ -45,7 +43,20 @@ class forums_BlockEditprofileAction extends forums_BaseBlockAction
 	{
 		return website_BlockView::SUCCESS;
 	}
-	
+
+	/**
+	 * @return string[]|null
+	 */
+	public function getMemberBeanInclude()
+	{
+		if (Framework::getConfigurationValue('modules/website/useBeanPopulateStrictMode') != 'false')
+		{
+			return array('user.titleid', 'user.firstname', 'user.lastname', 'displayname', 'country', 'websiteUrl',
+				'signatureAsBBCode');
+		}
+		return null;
+	}
+
 	/**
 	 * @param f_mvc_Request $request
 	 * @param forums_persistentdocument_member $member
@@ -63,27 +74,28 @@ class forums_BlockEditprofileAction extends forums_BaseBlockAction
 		}
 		return $ok;
 	}
-	
+
 	/**
 	 * @return boolean
 	 */
 	public function submitNeedTransaction()
-    {
-    	return true;
-    }
-    
+	{
+		return true;
+	}
+
 	/**
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
 	 * @param forums_persistentdocument_member $member
+	 * @return TemplateObject|String
 	 */
 	public function executeSubmit($request, $response, forums_persistentdocument_member $member)
 	{
-		if (!$member->isEditable())
+		if (!$member->isEditable() || $member->isPropertyModified('user'))
 		{
 			return $this->getForbiddenView();
 		}
-		
+
 		if ($member->isPropertyModified('email'))
 		{
 			$fin = date_Calendar::now()->add(date_Calendar::DAY, 2)->toString();

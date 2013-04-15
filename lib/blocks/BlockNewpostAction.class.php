@@ -137,10 +137,11 @@ class forums_BlockNewpostAction extends forums_BlockPostListBaseAction
 	{
 		return BeanUtils::getBeanValidationRules('forums_persistentdocument_post', null, array('label', 'thread'));
 	}
-	
+
 	/**
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
+	 * @param forums_persistentdocument_post $post
 	 * @return String
 	 */
 	public function executeSubmit($request, $response, forums_persistentdocument_post $post)
@@ -169,16 +170,50 @@ class forums_BlockNewpostAction extends forums_BlockPostListBaseAction
 	{
 		return BeanUtils::getBeanValidationRules('forums_persistentdocument_post', null, array('label', 'thread'));
 	}
-	
+
+	/**
+	 * @return string[]
+	 */
+	public function getPostBeanInclude()
+	{
+		if (Framework::getConfigurationValue('modules/website/useBeanPopulateStrictMode') != 'false')
+		{
+			$include = array('textAsBBCode', 'thread', 'answerof');
+
+			if ($this->getRequest()->hasParameter('thread'))
+			{
+				$threadId = $this->getRequest()->getParameter('thread');
+			}
+			else
+			{
+				$threadId = $this->getRequest()->getParameter('cmpref');
+			}
+
+			/* @var $thread forums_persistentdocument_thread */
+			$thread = DocumentHelper::getDocumentInstance($threadId);
+			if ($thread->isEditable())
+			{
+				$include[] = 'thread.flag';
+			}
+			if ($thread->canModerate())
+			{
+				$include[] = 'thread.level';
+			}
+			return $include;
+		}
+		return null;
+	}
+
 	/**
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
+	 * @param forums_persistentdocument_post $post
 	 * @return String
 	 */
 	public function executePreview($request, $response, forums_persistentdocument_post $post)
 	{
 		$thread = $post->getThread();
-		if (!$thread->isWriteable())
+		if (!$thread->isWriteable() || ($post->getAnswerof() && $post->getAnswerof()->isModified()))
 		{
 			return $this->getForbiddenView();
 		}

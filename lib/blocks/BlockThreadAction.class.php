@@ -19,10 +19,11 @@ class forums_BlockThreadAction extends forums_BlockPostListBaseAction
 		}
 		return array();
 	}
-	
+
 	/**
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
+	 * @throws Exception
 	 * @return String
 	 */
 	public function execute($request, $response)
